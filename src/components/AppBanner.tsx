@@ -1,17 +1,4 @@
-import Link from "next/link";
-import { Text, Button, Box, Stack, useStyleConfig } from "@chakra-ui/react";
-
-function Card(props) {
-  const { variant, children, ...rest } = props;
-
-  const styles = useStyleConfig("Card", { variant });
-
-  return (
-    <Box __css={styles} {...rest}>
-      {children}
-    </Box>
-  );
-}
+import { Text, Stack } from "@chakra-ui/react";
 
 export default function AppBanner() {
   return (
@@ -21,11 +8,6 @@ export default function AppBanner() {
         Go offline and get to ULOSINO quicker by installing the web app. Simply
         select Install in your browser's menu.
       </Text>
-      <Box justify="between">
-        <Link href="/support/app" passHref>
-          <Button size="sm">Learn More</Button>
-        </Link>
-      </Box>
     </Stack>
   );
 }

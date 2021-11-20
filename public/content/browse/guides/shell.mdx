@@ -1,0 +1,166 @@
+---
+title: "Shell & Going Lighter"
+date: "2021-10-07" # Year-Month-Day
+description: "Learn how to use a lightweight Linux distribution of your choice
+  and installing packages and a desktop"
+---
+
+# Using the Shell and Going Lighter
+
+Most operating systems have many features, a complex and deep graphical interface, and quite a large footprint on your disk. In this Guide, we are going to use a lightweight distribution and install a simple window system.
+
+This Guide requires an advanced set of tools and skills. Depending on your familarity and network connection, completing this Guide may take multiple hours.
+
+For this Guide, we are using a set of components:
+
+- <Link href="https://alpinelinux.org">Alpine Linux</Link>, which is our
+  operating system of choice
+- X11, which is our windowing backend[^1] of choice
+- <Link href="https://www.haskell.org/ghcup/#quick-install">ghcup</Link> and stack,
+  which will manage some our <Link href="https://en.wikipedia.org/wiki/Haskell_(programming_language)">
+    Haskell
+  </Link> dependencies
+- <Link href="https://xmonad.org">xmonad</Link>, which is our windowing frontend
+  of choice.
+
+Let's begin:
+
+---
+
+### Terminal Basics
+
+First, login as the `root` user. As traditional in programming and terminal environments, a 'Hello World' string is the first thing you learn:[^2]
+
+```
+$ echo "Hello, World"
+```
+
+In this command, `echo` is a program that prints text. `Hello, World` is passed to the `echo` program as it's imput.
+
+In other programs, a `program action -quiet` structure is used. In this example, `action` is run in `program` with the `-quiet` flag. Flags are like checkbox options applied when executing that command.
+
+---
+
+### Installing Alpine
+
+First, we need the Alpine operating system on our system. Grab either the normal or VM variant of the system and spin up another computer or virtual machine. You can install Alpine from <Link href="https://alpinelinux.org/downloads">it's official website</Link>.
+
+When we boot up the system, you'll be asked to log in. As we are using a lightweight operating system, there is no graphical interface (GUI) out of the box, so we are going to have to use the terminal and Linux shell for now.
+
+To continue we need to setup Alpine - if your using Ethernet, follow on - otherwise refer to the <Link href="https://docs.alpinelinux.org/user-handbook/0.1a/Installing/manual.html">Alpine setup documentation</Link>.
+
+1. Start the setup process by typing `setup-alpine`. This will load a setup wizard.
+2. Select the keyboard layout
+3. Configure an internet connection. This is required for Alpine.
+4. Type `f` when prompted to select a package mirror.
+5. Select a hard disk. Check the capacity shown and judge if it is right.
+6. Type `sys` for a conventional install.
+7. Once installed, type `reboot`. If your using a virtual machine, power off the VM and remove the virtual installation disk (as demonstrated in the <Link href="/support/guides/virtual">Going Virtual</Link> guide).
+
+Now we have installed Alpine. Hike on!
+
+---
+
+### Installing Haskell dependencies
+
+What we really want to do is install a small windowing system for our lightweight OS. As usual in the world of open-source, things depend on other things. So, before we get to our windowing frontend, we're going to install some packages that will make it work.
+
+Our windowing frontend (`xmonad`) is powered by the Haskell programming language. We need to install some Haskell enabling software. To install this software onto our system, we will use the Alpine Package Keeper. Refer to the <Link href="https://docs.alpinelinux.org/user-handbook/0.1a/Working/apk.html">apk documentation</Link> for more details.
+
+Alpine comes with absolutely nothing that it doesn't need. Install some general dependencies:[^2]
+
+```
+$ apk add binutils-gold
+$ apk add curl
+$ apk add gcc
+$ apk add gmp-dev
+$ apk add libc-dev
+$ apk add libffi-dev
+$ apk add ncurses-dev
+$ apk add purl
+$ apk add tar
+$ apk add xz
+```
+
+Now we can install our Haskell dependencies. This can take up to 5 minutes:
+
+1. Type in `curl https://get-ghcup.haskell.org | sh`.
+2. If prompted, skip installation of HLS but install Stack.
+3. As directed, run `source /root/.ghcup/env`.
+
+---
+
+### Installing xmonad
+
+Now we're up to the exciting part. We're at the end of the dependency toolchain and ready to install `xmonad`, our windowing system of choice.
+
+First, let's install X11[^3]. This is one of the oldest windowing systems around, but it is still very competent, which is why many GUIs depend on it to this day.
+
+```
+$ apk add libx11-dev
+$ apk add libxft-dev
+$ apk add libxrandr-dev
+$ apk add libxss-dev
+```
+
+Next, let's prepare our folders. Type into terminal:[^2]
+
+```
+$ apk add nano
+$ mkdir -p ~/.config/xmonad && cd ~/.config/xmonad    // Creates a new folder
+$ nano xmonad.hs
+```
+
+By running that last command, we will open a text editor. In order for `xmonad` to work, we need to type out the following as a configuration file:
+
+```hs
+import XMonad
+
+main :: IO ()
+main = xmonad def
+```
+
+Now we can get to downloading `xmonad`:
+
+```
+$ git clone https://github.com/xmonad/xmonad
+$ git clone https://github.com/xmonad/xmonad-contrib
+```
+
+As a quick tip, you can scroll up through your command history by pressing the Up Arrow at the terminal. In this example, press Arrow Up and simply add `-contrib` to the previous command. Not only does this help with extending very similar commands, but also rerunning them if an error occurs.
+
+---
+
+### Building and running xmonad
+
+We are on the last stretch now.
+
+Up to this point, our installation of `xmonad` is what is called 'source code'. This is the code that the author writes (in Haskell). But it isn't the code that the computer and processor will understand. To get it to that state, and to be able to run `xmonad`, we need to transform it into 'object code'. This is called compilation and it takes the input and rewrites the output in another programming language.
+
+So, let's compile `xmonad`. For this, we are using Stack - if this is not on your system, go back and run the `ghcup` wizard again. Make sure you are in the `/.config/xmonad` folder - to check, you can type `pwd` into the shell.
+
+```
+$ stack init
+$ stack install
+```
+
+To run `xmonad`, you should now be able to use the following:
+
+```
+exec xmonad
+```
+
+If this didn't work, don't worry; the majority of your work is done. Refer to the <Link href="/support/guides/virtual">XMonad installation guide</Link> for more detailed installation information.
+
+---
+
+### Finally
+
+This Guide is finished. You should now have a great window manager running on a lightweight and small OS (at around 1.6 GB)!
+
+Of course, there is a lot more you can play around with. Alpine is a great sandbox for any ideas that may pop into your mind. Give them a shot, keep learning, and lift off!
+
+[^1]: As usual in software development, 'backend' refers to libraries and system providers, while a 'frontend' is what we actually use.
+[^2]: Terminal notation often uses `$` to denote a command and the text following `//` as a comment. Don't type `$` or comments into the terminal.
+[^3]: Version 11 of the X Window Manager has been around for 30 years, so the product is often called X11.
+[^4]: Run `cd / && du -h` to check how large your disk is!

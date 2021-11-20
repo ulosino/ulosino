@@ -2,7 +2,7 @@
 
 module.exports = {
   siteUrl: "https://ulosino.com",
-  changefreq: "daily",
+  changefreq: "weekly",
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [

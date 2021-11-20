@@ -1,24 +1,36 @@
 {
   "short_name": "ULOSINO",
   "name": "ULOSINO",
-  "description": "Open-source OS database",
+  "description": "Open source OS database",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#fafafa",
-  "theme_color": "#4a98a6",
+  "background_color": "#001e38",
+  "theme_color": "#f2cd8a",
   "icons": [
     {
-      "src": "/icons/manifest-icon-192.png",
+      "src": "/brand/manifest-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
-      "src": "/icons/manifest-icon-512.png",
+      "src": "/brand/manifest-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/brand/manifest-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/manifest-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
