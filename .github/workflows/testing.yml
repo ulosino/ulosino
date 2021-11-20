@@ -1,5 +1,5 @@
 name: Cypress Testing
-on: [push, pull_request]
+on: [push]
 
 jobs:
   chrome:
