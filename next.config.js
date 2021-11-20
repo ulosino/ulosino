@@ -33,6 +33,9 @@ module.exports = withPWA({
   // Configuration for Next.js
   reactStrictMode: true,
   pageExtensions: ["jsx", "tsx"],
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   async headers() {
     return [
       {

@@ -7,7 +7,7 @@ const ChakraComponents = {
   h2: (props) => <Heading size="md" {...props} />,
   h3: (props) => <Text textStyle="secondary" {...props} />,
   p: (props) => <Text {...props} my={2} />,
-  hr: (props) => <Divider {...props} my={4} />,
+  hr: (props) => <Divider {...props} py={1} />,
   code: (props) => <Code {...props} />,
 };
 

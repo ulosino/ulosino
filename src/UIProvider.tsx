@@ -4,6 +4,7 @@ import StartNavigation from "src/components/StartNavigation";
 import EndNavigation from "src/components/EndNavigation";
 import LegalNavigation from "./components/LegalNavigation";
 import JSWarning from "src/components/JSWarning";
+import PopulationWarning from "src/components/PopulationWarning";
 
 export default function UIProvider({ children }) {
   return (
@@ -16,6 +17,9 @@ export default function UIProvider({ children }) {
       <noscript>
         <JSWarning />
       </noscript>
+      <Flex display={{ base: "none", sm: "block" }}>
+        <PopulationWarning />
+      </Flex>
       {/* Margin is not used here because of desktop/mobile variability */}
       <Container maxW="container.lg">
         <StartNavigation />

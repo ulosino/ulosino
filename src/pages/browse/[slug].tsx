@@ -85,6 +85,12 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                   <Td>{metadata.descends}</Td>
                 </Tr>
               )}
+              {metadata.platform && (
+                <Tr>
+                  <Td>Platforms</Td>
+                  <Td>{metadata.platform}</Td>
+                </Tr>
+              )}
               {metadata.desktop && (
                 <Tr>
                   <Td>Desktop</Td>
