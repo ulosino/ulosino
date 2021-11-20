@@ -1,0 +1,48 @@
+---
+title: "Going Virtual and Using Virtual Machines"
+date: "2021-10-07" # Year-Month-Day
+description: "Learn how to get distributions running along side Windows, macOS,
+  or another OS"
+---
+
+# Going Virtual
+
+This Guide aims to teach you how to use virtual machine (VM) technology to run an operating system along side the one you're already using.
+
+Virtualisation allows you to try other distributions on your computer without actually installing on disk, boosting productivity and allowing you explore even more of the world of distributions. Running VMs essentially allows you run two or more operating systems at once; to do this you'll need lots of RAM and computational capacity. All you need is the disk image, and the virtualisation software.
+
+For this Guide, we are using the free <Link href="https://www.virtualbox.org">Oracle VirtualBox</Link>.[^1] Get a copy if don't have it already. It works on Windows, Mac, and Linux and is very reliable.
+
+At the end of this Guide, you'll have two OSs on your computer ('host system'). Let's begin.
+
+---
+
+First, grab an `.iso` file of the OS you want to try. As we are emulating the distribution on your system, you'll need a copy that matches the host system. Unlike installing natively, we don't need to work with the `.iso` file - that is handled by the virtualisation software.
+
+Now, we are going to open up VirtualBox and create the machine:
+
+1. Select 'New'.
+2. Name the virtual machine. If you're installing Ubuntu, you might call it 'Ubuntu VM'. This helps when you scale up with more VMs.
+3. Choose where you want the VM to be stored on your system. Typically you don't need to change this, but it is available if neccessary.
+4. Select the operating system and version. This helps with drivers and identification.
+5. Specify how much RAM you want. More RAM means more performance for the VM, but remember to keep some RAM for the host operating system so that it can function correctly. Usually you will want to keep this at `1/2` or `2/3` (VM/Host).
+6. Follow the prompts to adjust the disk for the machine.
+
+At this point the virtual machine has been created. When you press 'Start', you'll notice that nothing will happen. This is because the disk is blank, and so when prompted, import the `.iso` disk image to the VM.
+
+---
+
+When you start it for the first time, it is comparable to booting a system using an 'external' USB stick. If prompted, choose from using the OS:
+
+- Installed. Here is where we are installing onto the target disk (recommended).
+- Live. This will run the OS from the installation disk at a performance hit.
+
+If you choose to install, the system will reboot once finished; but it will reboot into the 'external' disk. Because it is installed on to the VM 'hard drive', we can safely remove this 'external' medium. To do that and use the VM to it's max:
+
+1. Quit the VM and return to the management window.
+2. Select 'Settings'
+3. Select the 'Storage' tab
+4. Remove the attached 'CD'.
+5. Close Settings and Start the VM. It will now start like a regular computer.
+
+[^1]: If you're using GNOME, you can use the built-in GNOME Boxes utility to create basic VMs.

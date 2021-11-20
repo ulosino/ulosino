@@ -1,0 +1,75 @@
+---
+title: "Choosing Your First Distribution"
+date: "2021-10-07" # Year-Month-Day
+description: "Learn some opinionated tips and tricks for choosing a first
+  distribution and how to get it up and running on another system"
+---
+
+# Choosing your 1st
+
+Choosing your first Linux or BSD distribution to use can be a confronting choice with so many choices. This Guide aims to assist through the process.
+
+To begin, let's go through some common mistakes.
+
+- When you start out, stick to Linux distributions. They have the most hardware and software support and with many you'll never have to interact with the terminal.
+- Avoid Alpha, Beta, and Long Term Releases. Use a tested rolling release if you really need to stay on the edge of software (using an untested rolling release distro is not advised)
+- Avoid lightweight distributions for now as many don't ship with graphical user interfaces. Likewise, make sure your distribution has a graphical installer and configuration program (using otherwise is not advised).
+- Avoid 32-bit operating systems (unless neccessary). The performance hit will be significant on 64-bit systems.
+- Avoid specialised operating systems (unless neccessary).
+
+There really is no best distribution to choose. It's all about your preferences, needs, and familiarities. Still, if you need some solid guidance over a good starting distribution, you can consume some now:
+
+- The most broad distributions are also the most welcoming. Try <Link href="/d/fedora">Fedora</Link> or <Link href="/d/ubuntu">Ubuntu</Link>. These share reliability, the easy to use GNOME desktop, are easy and fast to install and setup, and have widely accessible documentation. Fedora instantly supports easy installation of popular programs like Spotify and Discord using the Flatpak system (which is integrated with other repositories). Use Ubuntu if you need maximum hardware support.
+- If you really prefer the Mac experience, try <Link href="/d/elementary">Elementary OS</Link>. It's beginner oriented, uses the Flatpak system, and also won't restrict you once your knowledge improves.
+- If you really prefer the Windows experience, try <Link href="/d/mint">Linux Mint</Link>. It's based on Ubuntu but you may run into problems as it's defaults can be quite opinionated.
+- If you always need the latest software, check out <Link href="/d/tumbleweed">openSUSE Tumbleweed</Link>. It's a tested rolling release (meaning the software is actually tested before being shipped, minimising bugs) and is oriented towards network administators and developers (power-users).
+- If you're looking for some BSD, try <Link href="/d/freebsd">FreeBSD</Link>. It's well rounded.
+
+---
+
+If you've chosen a distribution, let's get it up and running. **Most distributions have specific installation guides. Refer to those instead and use this as general advice.** This explains the process when using an internal or external disk. You can learn about Virtual Machines in the <Link href="/support/guides/virtual">Going Virtual</Link> Guide.
+
+In addition to some form of installation disk (e.g. USB stick), please note some general prerequisites:
+
+- You'll need a fairly fast connection to the Internet. You'll be downloading a large disk image.
+- You'll need a disk flashing utility to make the installation disk bootable. Download <Link href="https://balena.io/etcher">Balena Etcher</Link> if you haven't downloaded one already.
+- Make sure that the target disk (where the OS will go) is large enough. Better safe than sorry.
+
+---
+
+Firstly, grab the `.iso` disk image for the operating system you chose. Make sure that it matches the instruction set of the target computer. This is essentially a full disk packaged into a single file - it is therefore very big and complex. Moving it to the installation disk and opening the file (like a `.zip`) simply won't work.
+
+To make the installation disk actually contain the operating system, we'll need to use the disk flasher. For this Guide, we're using Balena Etcher[^1].
+
+1. Open Etcher and select the `.iso` installation media.
+2. Select the external disk. Etcher out of the box doesn't let you install to the disk you're using currently.
+3. Finally, select Flash. After a couple of minutes, the disk is ready.
+
+---
+
+At this point, remember that the target disk will be copying the contents on the installation disk.
+
+Now, let's go through the process for doing the actual installation:
+
+1. Disconnect the installation disk from the computer you're using.
+2. Connect that to the target computer. If your computer supports Thunderbolt, use that port.
+3. Turn on your target computer and immediately open the boot volume selector.[^2] Common access keys include 'Alt'/'Option'/'Esc'/'F1'/'F10', etc. You may need to hold this key.
+4. Select the installation disk.
+
+If this didn't work, a couple of things might not be set up correctly:
+
+- On some computers, especially newer ones, you might not be able to access disks other than the internal one, or there might be some other type of manufacturer security mechanism in place. This keeps your computer more secure, but we can't do these type of things with those settings in place. Open the BIOS or UEFI menu and play with the settings.
+- Additionally, firmware or disk encryption or security might turn off these features. Try disabling firmware locks, disk encryption, or a combination of these settings.
+- Finally, although rare, there might have simply been issues throughout the process. Try, try and try again.
+
+---
+
+From here, follow the prompts from operating system. If prompted, choose from using the OS:
+
+- Installed. Here is where we are installing onto the target disk (recommended).
+- Live. This will run the OS from the installation disk at a performance hit.
+
+That's it! Remember that one learns best through doing.
+
+[^1]: If you're on a Mac, you may be able to use the built-in Disk Utility.
+[^2]: If the computer has a blank disk, it may load the installation disk automatically.
