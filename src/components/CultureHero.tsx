@@ -37,13 +37,16 @@ export default function CultureHero() {
         <Stack direction="column" spacing={4} ps={14}>
           <Text>
             With live community contributions you're in the loop with the latest
-            on the largest database.
+            on the ULOSINO database.
           </Text>
           <Card>
             <Stack direction="column" spacing={4}>
               <Text>Get your knowledge on ULOSINO with a contribution.</Text>
-              <Link href="#" passHref>
-                <Button leftIcon={<FiChevronRight />} isDisabled>
+              <Link
+                href="https://github.com/ulosino/ulosino/blob/main/CONTRIBUTING.md"
+                passHref
+              >
+                <Button leftIcon={<FiChevronRight />}>
                   Contribution Guide
                 </Button>
               </Link>

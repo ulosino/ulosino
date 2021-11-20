@@ -12,11 +12,11 @@ export default class Document extends NextDocument {
           {/* General metadata */}
           <meta
             name="description"
-            content="ULOSINO is open-source operating system news and information in a modern setting. Embolden your knowledge and connect direct to culture, only on ULOSINO."
+            content="ULOSINO is open source operating system information in a modern setting. Embolden your knowledge and connect direct to culture, only on ULOSINO."
           />
           <meta
             property="og:description"
-            content="ULOSINO, open-source OS news and info anywhere"
+            content="ULOSINO, open source OS info anywhere"
           />
           <meta property="og:type" content="website" />
           <meta property="og:locale" content="en_GB" />
@@ -165,67 +165,67 @@ export default class Document extends NextDocument {
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2732-2048.jpg"
+            href="brand/apple-splash-dark-2732-2048.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2388-1668.jpg"
+            href="brand/apple-splash-dark-2388-1668.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2048-1536.jpg"
+            href="brand/apple-splash-dark-2048-1536.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2224-1668.jpg"
+            href="brand/apple-splash-dark-2224-1668.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2160-1620.jpg"
+            href="brand/apple-splash-dark-2160-1620.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2778-1284.jpg"
+            href="brand/apple-splash-dark-2778-1284.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2532-1170.jpg"
+            href="brand/apple-splash-dark-2532-1170.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2436-1125.jpg"
+            href="brand/apple-splash-dark-2436-1125.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2688-1242.jpg"
+            href="brand/apple-splash-dark-2688-1242.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-1792-828.jpg"
+            href="brand/apple-splash-dark-1792-828.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-2208-1242.jpg"
+            href="brand/apple-splash-dark-2208-1242.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-1334-750.jpg"
+            href="brand/apple-splash-dark-1334-750.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
           <link
             rel="apple-touch-startup-image"
-            href="out/apple-splash-dark-1136-640.jpg"
+            href="brand/apple-splash-dark-1136-640.jpg"
             media="(prefers-color-scheme: dark) and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
         </Head>

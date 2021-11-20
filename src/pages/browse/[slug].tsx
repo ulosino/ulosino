@@ -60,7 +60,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
         </Stack>
         <Stack spacing={2} as="section">
           <Text textStyle="secondary">Information</Text>
-          <Tag variant="solid" bg="brand">
+          <Tag variant="solid" bg="brand" color="black">
             <TagLeftIcon as={FiDatabase} />
             <TagLabel>Distribution</TagLabel>
           </Tag>

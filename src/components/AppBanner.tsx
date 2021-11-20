@@ -6,7 +6,7 @@ export default function AppBanner() {
       <Text textStyle="secondary">Get The App</Text>
       <Text>
         Go offline and get to ULOSINO quicker by installing the web app. Simply
-        select Install in your browser's menu.
+        select 'Install' or 'Add to Home Screen' in your browser's menu.
       </Text>
     </Stack>
   );

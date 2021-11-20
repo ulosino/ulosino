@@ -36,11 +36,26 @@ const AutoComplete = dynamic(() =>
   import("@choc-ui/chakra-autocomplete").then((mod) => mod.AutoComplete)
 );
 
-export default function Home({ distributionData }) {
+export default function Home({
+  distributionData,
+}: {
+  distributionData: {
+    date: string;
+    id: string;
+    title: string;
+    version: string;
+    summary: string;
+    platform: string;
+    startup: string;
+    desktop: string;
+    packagemgr: string;
+    shell: string;
+  }[];
+}) {
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; Open source OS Database</title>
+        <title>ULOSINO &mdash; Open source OS database</title>
       </Head>
 
       <Stack direction="column" spacing={10}>
@@ -116,7 +131,7 @@ export default function Home({ distributionData }) {
               leftIcon={<FiCompass />}
               display={{ base: "flex", md: "none" }}
             >
-              Browse A-Z
+              Browse All
             </Button>
           </Link>
         </Stack>

@@ -33,20 +33,22 @@ export default function Options() {
           <Link href="/browse" passHref>
             <Button leftIcon={<FiCompass />}>Browse &amp; Guides</Button>
           </Link>
-          <Link href="/contribute" passHref>
-            <Button leftIcon={<FiUploadCloud />} isDisabled>
-              Contribution Guide
-            </Button>
+          <Link
+            href="https://github.com/ulosino/ulosino/blob/main/CONTRIBUTING.md"
+            passHref
+          >
+            <Button leftIcon={<FiUploadCloud />}>Contribution Guide</Button>
           </Link>
           <Link href="#" passHref>
             <Button
               leftIcon={<FiTwitter />}
               display={{ base: "flex", md: "none" }}
+              isDisabled
             >
               Twitter
             </Button>
           </Link>
-          <Link href="https://github.com/fernpolo/ulosino" passHref>
+          <Link href="https://github.com/ulosino/ulosino" passHref>
             <Button
               leftIcon={<FiGithub />}
               display={{ base: "flex", md: "none" }}

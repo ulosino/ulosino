@@ -32,7 +32,7 @@ export default function EndNavigation() {
             Twitter
           </Button>
         </Link>
-        <Link href="#" passHref>
+        <Link href="https://github.com/ulosino/ulosino" passHref>
           <Button leftIcon={<FiGithub />} size="sm" variant="ghost">
             GitHub
           </Button>

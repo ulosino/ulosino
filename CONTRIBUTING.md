@@ -19,11 +19,11 @@ When you open a file, it'll show something like this:
 ```
 ---
 # Required metadata
-title: "Blueberry"
-summary: ""
-date: ""
+title: "Blueberry (Demo)"
+summary: "Distribution page demo"
+date: "2021-10-21"
 version: ""
-status: ""
+status: "Active"
 
 # Other metadata
 platform: ""
@@ -34,10 +34,10 @@ packagemgr: ""
 startup: ""
 size: ""
 browser: ""
-licence: ""
+licence: "MIT"
 origin: ""
-website: ""
-repository: ""
+website: "ulosino.com"
+repository: "github.com/ulosino/ulosino"
 ---
 
 Blueberry is a ...
