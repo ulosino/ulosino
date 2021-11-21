@@ -88,6 +88,7 @@ export default function Home({
                     id,
                     title,
                     summary,
+                    version,
                     platform,
                     desktop,
                     startup,
@@ -109,7 +110,12 @@ export default function Home({
                         <Box p={2} mb={2}>
                           <Heading size="md">{title}</Heading>
                           {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack direction={["column", "row"]} spacing={4}>
+                          <Stack
+                            direction="row"
+                            display={{ base: "none", sm: "flex" }}
+                            spacing={4}
+                          >
+                            {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
                             {startup && <Text fontSize="sm">{startup}</Text>}

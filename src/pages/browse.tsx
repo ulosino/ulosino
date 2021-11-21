@@ -203,7 +203,17 @@ export default function Browse({
                           <Heading size="md">{title}</Heading>
                           {summary && <Text fontSize="sm">"{summary}"</Text>}
                           <Stack
-                            direction={["column", "column", "row"]}
+                            direction="row"
+                            display={{ base: "flex", md: "none" }}
+                            spacing={4}
+                          >
+                            {version && <Text fontSize="sm">{version}</Text>}
+                            {platform && <Text fontSize="sm">{platform}</Text>}
+                            {desktop && <Text fontSize="sm">{desktop}</Text>}
+                          </Stack>
+                          <Stack
+                            direction="row"
+                            display={{ base: "none", md: "flex" }}
                             spacing={4}
                           >
                             {version && <Text fontSize="sm">{version}</Text>}
@@ -224,7 +234,17 @@ export default function Browse({
               <TabPanel px={0} pb={0} pt={4}>
                 <Stack direction="column" spacing={2}>
                   {oldestDistributionData.map(
-                    ({ id, title, version, summary, platform, desktop }) => (
+                    ({
+                      id,
+                      title,
+                      version,
+                      summary,
+                      platform,
+                      desktop,
+                      startup,
+                      packagemgr,
+                      shell,
+                    }) => (
                       <Link
                         href={`/browse/${id}`}
                         passHref
@@ -233,10 +253,28 @@ export default function Browse({
                         <Card key={id} variant="button" px={6}>
                           <Heading size="md">{title}</Heading>
                           {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack direction="row" spacing={4}>
+                          <Stack
+                            direction="row"
+                            display={{ base: "flex", md: "none" }}
+                            spacing={4}
+                          >
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
+                          </Stack>
+                          <Stack
+                            direction="row"
+                            display={{ base: "none", md: "flex" }}
+                            spacing={4}
+                          >
+                            {version && <Text fontSize="sm">{version}</Text>}
+                            {platform && <Text fontSize="sm">{platform}</Text>}
+                            {desktop && <Text fontSize="sm">{desktop}</Text>}
+                            {startup && <Text fontSize="sm">{startup}</Text>}
+                            {packagemgr && (
+                              <Text fontSize="sm">{packagemgr}</Text>
+                            )}
+                            {shell && <Text fontSize="sm">{shell}</Text>}
                           </Stack>
                         </Card>
                       </Link>
@@ -247,7 +285,17 @@ export default function Browse({
               <TabPanel px={0} pb={0} pt={4}>
                 <Stack direction="column" spacing={2}>
                   {AZDistributionData.map(
-                    ({ id, title, version, summary, platform, desktop }) => (
+                    ({
+                      id,
+                      title,
+                      version,
+                      summary,
+                      platform,
+                      desktop,
+                      startup,
+                      packagemgr,
+                      shell,
+                    }) => (
                       <Link
                         href={`/browse/${id}`}
                         passHref
@@ -256,10 +304,28 @@ export default function Browse({
                         <Card key={id} variant="button" px={6}>
                           <Heading size="md">{title}</Heading>
                           {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack direction="row" spacing={4}>
+                          <Stack
+                            direction="row"
+                            display={{ base: "flex", md: "none" }}
+                            spacing={4}
+                          >
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
+                          </Stack>
+                          <Stack
+                            direction="row"
+                            display={{ base: "none", md: "flex" }}
+                            spacing={4}
+                          >
+                            {version && <Text fontSize="sm">{version}</Text>}
+                            {platform && <Text fontSize="sm">{platform}</Text>}
+                            {desktop && <Text fontSize="sm">{desktop}</Text>}
+                            {startup && <Text fontSize="sm">{startup}</Text>}
+                            {packagemgr && (
+                              <Text fontSize="sm">{packagemgr}</Text>
+                            )}
+                            {shell && <Text fontSize="sm">{shell}</Text>}
                           </Stack>
                         </Card>
                       </Link>
