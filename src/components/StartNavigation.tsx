@@ -10,7 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FiChevronLeft, FiMoreVertical } from "react-icons/fi";
-import { LargeLogo, SmallLogo } from "src/data/Logo";
+import { LargeLogo, SmallLogo } from "src/components/Logo";
 
 export default function StartNavigation() {
   const router = useRouter();

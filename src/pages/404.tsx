@@ -7,13 +7,15 @@ import { useRouter } from "next/router";
 import {
   Heading,
   Text,
-  Icon,
   Button,
   Box,
   Stack,
   Center,
+  UnorderedList,
+  ListItem,
 } from "@chakra-ui/react";
-import { FiLoader, FiChevronLeft, FiChevronsLeft } from "react-icons/fi";
+import { FiChevronLeft, FiChevronsLeft } from "react-icons/fi";
+import AlertIcon from "src/components/AlertIcon";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -38,19 +40,37 @@ export default function Custom404() {
         <title>ULOSINO &mdash; Page Not Found</title>
       </Head>
 
-      <Center>
+      <Center mt={12}>
         <Card variant="alert">
-          <Stack direction="column" spacing={4}>
-            <Center my={8}>
-              <Icon as={FiLoader} w={24} h={24} />
-            </Center>
-            <Stack direction="column" spacing={6}>
-              <Stack direction="column" spacing={2}>
-                <Heading size="md">Into the oblivion!</Heading>
+          <Stack direction={["column", "row"]} spacing={10}>
+            <Box display="block">
+              <AlertIcon />
+            </Box>
+            <Stack direction="column" spacing={4}>
+              <Text textStyle="secondary">Page Not Found</Text>
+              <Heading size="lg">Into the oblivion!</Heading>
+              <Stack direction="column" spacing={4}>
                 <Text>There is nothing to show at this URL.</Text>
-                <Text>Return Home to search or find something new.</Text>
+                <Card display={{ base: "none", sm: "block" }}>
+                  <Text textStyle="secondary">Troubleshoot</Text>
+                  <UnorderedList fontSize="sm">
+                    <ListItem>
+                      If there was once a page here, it may have been deleted or
+                      renamed.
+                    </ListItem>
+                    <ListItem>
+                      If you typed the page URL directly, check its spelling.
+                      Remove special characters.
+                    </ListItem>
+                    <ListItem>
+                      If you're looking for an OS, the URL should look like
+                      this: "ulosino.com/browse/ubuntu"
+                    </ListItem>
+                  </UnorderedList>
+                </Card>
+                <Text>Return Home to start a search.</Text>
               </Stack>
-              <Stack direction="column" spacing={2}>
+              <Stack direction="column" spacing={2} pt={2}>
                 <Link href="/" passHref>
                   <Button
                     leftIcon={<FiChevronsLeft />}
@@ -68,13 +88,6 @@ export default function Custom404() {
                 >
                   Go Back
                 </Button>
-              </Stack>
-              <Stack direction="column" spacing={2}>
-                <Text fontSize="xs">
-                  Got here through ULOSINO?{" "}
-                  <Link href="/contact">Send Feedback...</Link>
-                </Text>
-                <Text fontSize="xs">Error code: 404</Text>
               </Stack>
             </Stack>
           </Stack>

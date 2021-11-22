@@ -4,10 +4,6 @@ const config: ThemeConfig = {
   useSystemColorMode: true,
 };
 
-//
-// Chakra UI component overrides
-//
-
 export const Button = {
   baseStyle: {
     fontWeight: 600,
@@ -38,13 +34,11 @@ export const Card = {
       bg: "brand",
       color: "gray.800",
     },
-    guides: {
-      bg: "secondary",
-      color: "white",
-    },
-    alert: {
-      bg: "alert",
-    },
+    alert: ({ colorMode }) => ({
+      bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
+      color: "inherit",
+      padding: 8,
+    }),
   },
   defaultProps: {
     variant: "solid",
@@ -63,10 +57,6 @@ export const Table = {
     size: "sm",
   },
 };
-
-//
-// Bring theming together
-//
 
 const UITheme = extendTheme({
   config,

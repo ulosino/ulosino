@@ -1,19 +1,12 @@
 import { GetStaticProps } from "next";
 
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
-import {
-  Heading,
-  Text,
-  Icon,
-  Button,
-  Box,
-  Stack,
-  Center,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import { FiWifiOff, FiRefreshCw, FiChevronLeft } from "react-icons/fi";
+import { Heading, Text, Button, Box, Stack, Center } from "@chakra-ui/react";
+import { FiChevronLeft, FiRefreshCw } from "react-icons/fi";
+import AlertIcon from "src/components/AlertIcon";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -30,7 +23,7 @@ function Card(props) {
 
 import UIProvider from "src/UIProvider";
 
-export default function Offline() {
+export default function Custom500() {
   const router = useRouter();
   return (
     <UIProvider>
@@ -38,22 +31,21 @@ export default function Offline() {
         <title>ULOSINO &mdash; Offline</title>
       </Head>
 
-      <Center>
-        <Card variant="alert" my={4}>
-          <SimpleGrid minChildWidth="240px" spacing={4}>
-            <Box>
-              <Center>
-                <Icon as={FiWifiOff} w={24} h={24} mt={8} />
-              </Center>
+      <Center mt={12}>
+        <Card variant="alert">
+          <Stack direction={["column", "row"]} spacing={10}>
+            <Box display="block">
+              <AlertIcon />
             </Box>
-            <Stack direction="column" spacing={6} mt={2}>
+            <Stack direction="column" spacing={4}>
+              <Text textStyle="secondary">Disconnected From Server</Text>
+              <Heading size="lg">You're offline</Heading>
               <Stack direction="column" spacing={2}>
-                <Heading size="md">Can't connect to server</Heading>
-                <Text>
-                  Check data or network settings and return to ULOSINO.
-                </Text>
+                <Text>There were issues reaching the server.</Text>
+                <Text>Check your data or networking settings.</Text>
+                <Text>Refresh to try again.</Text>
               </Stack>
-              <Stack direction="column" spacing={2}>
+              <Stack direction="column" spacing={2} pt={2}>
                 <Button
                   leftIcon={<FiRefreshCw />}
                   size="lg"
@@ -72,7 +64,7 @@ export default function Offline() {
                 </Button>
               </Stack>
             </Stack>
-          </SimpleGrid>
+          </Stack>
         </Card>
       </Center>
     </UIProvider>

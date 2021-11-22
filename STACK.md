@@ -11,8 +11,7 @@ Distribution pages are stored in the `/public/content/browse` folder. This 'dist
 The actual code, including pages, components, and providers, is stored in `/src`. Inside `/src` is:
 
 - `/src/pages`, which stores Next.js pages;
-- `/src/data`, which stores React components shared across multiple pages but need to be composed (e.g. version strings);
-- `src/components`, which stores general React components shared across multiple pages, and;
+- `src/components`, which stores React components shared across multiple pages, and;
 - Providers, which are at the top level of `/src`.
 
 ## Page types

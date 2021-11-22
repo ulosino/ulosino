@@ -16,7 +16,7 @@ import {
 } from "react-icons/fi";
 
 import UIProvider from "src/UIProvider";
-import Version from "src/data/Version";
+import Version from "src/components/Version";
 
 export default function Options() {
   const router = useRouter();

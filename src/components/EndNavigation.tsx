@@ -8,8 +8,8 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
-import { FiChevronsUp, FiTwitter, FiGithub, FiLifeBuoy } from "react-icons/fi";
-import { GreyLogo } from "src/data/Logo";
+import { FiChevronsUp, FiGithub, FiLifeBuoy } from "react-icons/fi";
+import { GreyLogo } from "src/components/Logo";
 
 import LegalNavigation from "src/components/LegalNavigation";
 
