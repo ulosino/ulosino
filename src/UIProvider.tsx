@@ -30,7 +30,8 @@ export default function UIProvider({ children }) {
       <Container
         maxW="container.lg"
         display={{ base: "none", md: "block" }}
-        my={4}
+        mt={12}
+        mb={4}
       >
         <EndNavigation />
       </Container>

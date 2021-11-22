@@ -23,7 +23,7 @@ import {
 import { FiDatabase } from "react-icons/fi";
 import UIProvider from "src/UIProvider";
 
-// Guides can use the following components if needed
+// Pages can use the following components if needed
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
 
@@ -60,13 +60,18 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
         </Stack>
         <Stack spacing={2} as="section">
           <Text textStyle="secondary">Information</Text>
-          <Tag variant="solid" bg="brand" color="black">
+          <Tag
+            variant="solid"
+            bg="brand"
+            color="black"
+            id="testing-display-distributionTag"
+          >
             <TagLeftIcon as={FiDatabase} />
             <TagLabel>Distribution</TagLabel>
           </Tag>
           <Table>
             <Tbody>
-              {/* Only show the category if the value has any data */}
+              {/* Only show the category if the category has any value */}
               {metadata.status && (
                 <Tr>
                   <Td>Status</Td>
@@ -166,10 +171,7 @@ interface PathProps {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
-  const filePath = path.join(
-    `public/content/browse/distributions`,
-    `${params.slug}.mdx`
-  );
+  const filePath = path.join(`public/content/browse`, `${params.slug}.mdx`);
   const source = fs.readFileSync(filePath);
 
   const { content, data } = matter(source);
@@ -193,20 +195,14 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
 };
 
 export const getStaticPaths = async () => {
-  const pageDataPath = path.join(
-    process.cwd(),
-    "public/content/browse/distributions"
-  );
+  const pageDataPath = path.join(process.cwd(), "public/content/browse");
 
   const pageFilePaths = fs
     .readdirSync(pageDataPath)
-    // Only include md(x) files
     .filter((path) => /\.mdx?$/.test(path));
 
   const paths = pageFilePaths
-    // Remove file extensions for page paths
     .map((path) => path.replace(/\.mdx?$/, ""))
-    // Map the path into the static paths object required by Next.js
     .map((slug) => ({ params: { slug } }));
 
   return {

@@ -1,5 +1,5 @@
 describe("Database Tester", () => {
-  it("Uses the demo to test database search, routing, and metadata", () => {
+  it("Should use the demo to test database search, routing, and metadata", () => {
     cy.visit("/");
 
     // Test search input
@@ -15,21 +15,15 @@ describe("Database Tester", () => {
     // Test remote metadata
     cy.get("button").contains("Browse").click();
     cy.url().should("include", "/browse");
+    cy.get("#testing-display-tabList")
+      .find("button")
+      .contains("Oldest")
+      .click();
     cy.get("#testing-db-distributions").find("h2").contains("Demo");
     cy.get("#testing-db-distributions")
       .find("p")
       .contains("Distribution page demo");
     cy.get("#testing-db-distributions").find("h2").contains("Demo").click();
     cy.url().should("include", "/browse/");
-
-    // Test guides
-    cy.get("button").contains("Browse").click();
-    cy.url().should("include", "/browse");
-    cy.get("#testing-db-guide")
-      .find("h2")
-      .contains("Choosing Your First Distribution")
-      .click();
-    cy.url().should("include", "/browse/guides/choose");
-    cy.get("#testing-db-guideTag").contains("ULOSINO Guide");
   });
 });

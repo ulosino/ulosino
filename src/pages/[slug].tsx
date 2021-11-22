@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 
 import UIProvider from "src/UIProvider";
 
-// Guides can use the following components if needed
+// Pages can use the following components if needed
 const Link = dynamic(() => import("next/link"));
 
 const availableComponents = [Link];

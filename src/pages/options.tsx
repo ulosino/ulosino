@@ -31,7 +31,7 @@ export default function Options() {
         <Stack spacing={2}>
           <Text textStyle="secondary">Navigate</Text>
           <Link href="/browse" passHref>
-            <Button leftIcon={<FiCompass />}>Browse &amp; Guides</Button>
+            <Button leftIcon={<FiCompass />}>Browse Distributions</Button>
           </Link>
           <Link
             href="https://github.com/ulosino/ulosino/blob/main/CONTRIBUTING.md"

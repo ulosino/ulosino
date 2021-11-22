@@ -26,8 +26,6 @@ import {
 
 import UIProvider from "src/UIProvider";
 import CultureHero from "src/components/CultureHero";
-import GuidesHero from "src/components/GuidesHero";
-import ExperienceHero from "src/components/ExperienceHero";
 import About from "src/components/About";
 import AppBanner from "src/components/AppBanner";
 
@@ -143,20 +141,10 @@ export default function Home({
         </Stack>
 
         <SimpleGrid minChildWidth="280px" spacing={10}>
-          {/* Distribution search section */}
-          <Stack direction="column" spacing={10}>
-            <CultureHero />
-            <Box display={{ base: "none", md: "block" }}>
-              <About />
-            </Box>
-          </Stack>
-          <Stack direction="column" spacing={10}>
-            <GuidesHero />
-            <ExperienceHero />
+          <CultureHero />
+          <Stack spacing={10}>
+            <About />
             <AppBanner />
-            <Box display={{ base: "block", md: "none" }}>
-              <About />
-            </Box>
           </Stack>
         </SimpleGrid>
       </Stack>

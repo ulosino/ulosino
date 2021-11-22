@@ -7,9 +7,18 @@ import {
   getNewestDistributions,
   getOldestDistributions,
   getDistributions,
-  getNewestGuides,
-  getGuides,
 } from "src/DBProvider";
+
+import {
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
+
+import dynamic from "next/dynamic";
+const AutoComplete = dynamic(() =>
+  import("@choc-ui/chakra-autocomplete").then((mod) => mod.AutoComplete)
+);
 
 import {
   Heading,
@@ -17,12 +26,12 @@ import {
   Box,
   Stack,
   SimpleGrid,
-  Button,
   Tabs,
   Tab,
   TabList,
   TabPanels,
   TabPanel,
+  FormControl,
 } from "@chakra-ui/react";
 
 import { useStyleConfig } from "@chakra-ui/react";
@@ -44,8 +53,6 @@ export default function Browse({
   newestDistributionData,
   oldestDistributionData,
   AZDistributionData,
-  newestGuidesData,
-  AZGuidesData,
 }: {
   newestDistributionData: {
     date: string;
@@ -83,18 +90,6 @@ export default function Browse({
     packagemgr: string;
     shell: string;
   }[];
-  newestGuidesData: {
-    date: string;
-    id: string;
-    title: string;
-    description: string;
-  }[];
-  AZGuidesData: {
-    date: string;
-    id: string;
-    title: string;
-    description: string;
-  }[];
 }) {
   return (
     <UIProvider>
@@ -107,73 +102,72 @@ export default function Browse({
       </Heading>
 
       <SimpleGrid minChildWidth="280px" spacing={10}>
-        <Stack direction="column" spacing={10} as="section">
-          <Stack direction="column" spacing={2}>
-            <Text textStyle="secondary">Guides</Text>
-            <Tabs variant="line" colorScheme="gray" size="sm" isLazy>
-              <TabList id="testing-display-tabList">
-                <Tab>A-Z</Tab>
-                <Tab>Newest</Tab>
-              </TabList>
-
-              <TabPanels>
-                <TabPanel px={0} pb={0} pt={4}>
-                  <Stack direction="column" spacing={2}>
-                    {AZGuidesData.map(({ id, title, description }) => (
+        <Stack direction="column" spacing={6} as="section">
+          <FormControl>
+            <AutoComplete>
+              <AutoCompleteInput
+                variant="filled"
+                size="lg"
+                borderRadius="xl"
+                placeholder="Find an operating system..."
+                id="testing-db-input"
+              />
+              <AutoCompleteList w="full">
+                {AZDistributionData.map(
+                  ({
+                    id,
+                    title,
+                    summary,
+                    version,
+                    platform,
+                    desktop,
+                    startup,
+                    packagemgr,
+                    shell,
+                  }) => (
+                    <AutoCompleteItem
+                      key={`option-${title}`}
+                      value={title}
+                      maxSuggestions={5}
+                      mx={3}
+                      id="testing-db-item"
+                    >
                       <Link
-                        href={`/browse/guides/${id}`}
+                        href={`/browse/${id}`}
                         passHref
-                        key={`/browse/guides/${id}`}
+                        key={`/browse/${id}`}
                       >
-                        <Card
-                          id="testing-db-guide"
-                          key={id}
-                          variant="button"
-                          px={6}
-                        >
+                        <Box p={2} mb={2}>
                           <Heading size="md">{title}</Heading>
-                          {description && (
-                            <Text fontSize="sm">{description}.</Text>
-                          )}
-                        </Card>
+                          {summary && <Text fontSize="sm">"{summary}"</Text>}
+                          <Stack
+                            direction="row"
+                            display={{ base: "none", sm: "flex" }}
+                            spacing={4}
+                          >
+                            {version && <Text fontSize="sm">{version}</Text>}
+                            {platform && <Text fontSize="sm">{platform}</Text>}
+                            {desktop && <Text fontSize="sm">{desktop}</Text>}
+                            {startup && <Text fontSize="sm">{startup}</Text>}
+                            {packagemgr && (
+                              <Text fontSize="sm">{packagemgr}</Text>
+                            )}
+                            {shell && <Text fontSize="sm">{shell}</Text>}
+                          </Stack>
+                        </Box>
                       </Link>
-                    ))}
-                  </Stack>
-                </TabPanel>
-                <TabPanel px={0} pb={0} pt={4}>
-                  <Stack direction="column" spacing={2}>
-                    {newestGuidesData.map(({ id, title, description }) => (
-                      <Link
-                        href={`/browse/guides/${id}`}
-                        passHref
-                        key={`/browse/guides/${id}`}
-                      >
-                        <Card key={id} variant="button" px={6}>
-                          <Heading size="md" id="testing-display-guide">
-                            {title}
-                          </Heading>
-                          {description && (
-                            <Text fontSize="sm">{description}.</Text>
-                          )}
-                        </Card>
-                      </Link>
-                    ))}
-                  </Stack>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Stack>
-        </Stack>
-
-        <Stack direction="column" spacing={2} as="section">
-          <Text textStyle="secondary">Distributions</Text>
+                    </AutoCompleteItem>
+                  )
+                )}
+              </AutoCompleteList>
+            </AutoComplete>
+          </FormControl>
           <Tabs variant="line" colorScheme="gray" size="sm" isLazy>
-            <TabList>
+            <TabList id="testing-display-tabList">
               <Tab>Newest</Tab>
               <Tab>Oldest</Tab>
               <Tab>A-Z</Tab>
             </TabList>
-
             <TabPanels>
               <TabPanel px={0} pb={0} pt={4}>
                 <Stack direction="column" spacing={2}>
@@ -194,12 +188,7 @@ export default function Browse({
                         passHref
                         key={`/browse/${id}`}
                       >
-                        <Card
-                          id="testing-db-distributions"
-                          key={id}
-                          variant="button"
-                          px={6}
-                        >
+                        <Card key={id} variant="button" px={6}>
                           <Heading size="md">{title}</Heading>
                           {summary && <Text fontSize="sm">"{summary}"</Text>}
                           <Stack
@@ -250,7 +239,12 @@ export default function Browse({
                         passHref
                         key={`/browse/${id}`}
                       >
-                        <Card key={id} variant="button" px={6}>
+                        <Card
+                          key={id}
+                          id="testing-db-distributions"
+                          variant="button"
+                          px={6}
+                        >
                           <Heading size="md">{title}</Heading>
                           {summary && <Text fontSize="sm">"{summary}"</Text>}
                           <Stack
@@ -345,15 +339,11 @@ export const getStaticProps: GetStaticProps = async () => {
   const newestDistributionData = getNewestDistributions();
   const oldestDistributionData = getOldestDistributions();
   const AZDistributionData = getDistributions();
-  const newestGuidesData = getNewestGuides();
-  const AZGuidesData = getGuides();
   return {
     props: {
       newestDistributionData,
       oldestDistributionData,
       AZDistributionData,
-      newestGuidesData,
-      AZGuidesData,
     },
   };
 };
