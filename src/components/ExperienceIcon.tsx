@@ -13,10 +13,10 @@ function Card(props) {
   );
 }
 
-export default function CultureIcon() {
+export default function ExperienceIcon() {
   return (
-    <Card p={2} bg="secondary">
-      <Icon as={FiCompass} color="brand" w={6} h={6} />
+    <Card p={2} bg="brandGlass" shadow="inner">
+      <Icon as={FiCompass} color="secondary" w={6} h={6} />
     </Card>
   );
 }

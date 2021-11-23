@@ -10,7 +10,7 @@ import {
   FiMonitor,
   FiRefreshCw,
   FiMessageCircle,
-  FiTwitter,
+  FiLifeBuoy,
   FiGithub,
   FiUploadCloud,
 } from "react-icons/fi";
@@ -39,13 +39,12 @@ export default function Options() {
           >
             <Button leftIcon={<FiUploadCloud />}>Contribution Guide</Button>
           </Link>
-          <Link href="#" passHref>
+          <Link href="/definitions" passHref>
             <Button
-              leftIcon={<FiTwitter />}
+              leftIcon={<FiLifeBuoy />}
               display={{ base: "flex", md: "none" }}
-              isDisabled
             >
-              Twitter
+              Definitions
             </Button>
           </Link>
           <Link href="https://github.com/ulosino/ulosino" passHref>

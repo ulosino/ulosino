@@ -13,10 +13,10 @@ function Card(props) {
   );
 }
 
-export default function CultureIcon() {
+export default function DatabaseIcon() {
   return (
-    <Card p={2} bg="secondary">
-      <Icon as={FiBookOpen} color="brand" w={6} h={6} />
+    <Card p={2} bg="brandGlass" shadow="inner">
+      <Icon as={FiBookOpen} color="secondary" w={6} h={6} />
     </Card>
   );
 }

@@ -8,10 +8,16 @@ export const Button = {
   baseStyle: {
     fontWeight: 600,
     borderRadius: "xl",
+    shadow: "inner",
   },
   defaultProps: {
     size: "md",
     variant: "outline",
+  },
+  variants: {
+    ghost: {
+      shadow: "none",
+    },
   },
 };
 
@@ -19,6 +25,7 @@ export const Card = {
   baseStyle: {
     padding: 4,
     borderRadius: "xl",
+    shadow: "md",
   },
   variants: {
     solid: ({ colorMode }) => ({
@@ -29,11 +36,12 @@ export const Card = {
       bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
       color: colorMode === "dark" ? "white" : "gray.800",
       cursor: "pointer",
+      shadow: "inner",
     }),
-    brand: {
-      bg: "brand",
-      color: "gray.800",
-    },
+    brand: ({ colorMode }) => ({
+      bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
+      color: "inherit",
+    }),
     alert: ({ colorMode }) => ({
       bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
       color: "inherit",
@@ -65,8 +73,11 @@ const UITheme = extendTheme({
     brand: "rgba(242, 205, 138, 1)",
     secondary: "rgba(0, 30, 56, 1)",
 
+    brandGlass: "rgba(242, 205, 138, 0.5)",
+    secondaryGlass: "rgba(0, 30, 56, 0.5)",
+
     // Other colours
-    alert: "rgba(253, 188, 180, 0.75)",
+    alert: "rgba(253, 188, 180, 0.5)",
   },
   styles: {
     global: {

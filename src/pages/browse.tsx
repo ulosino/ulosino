@@ -106,9 +106,10 @@ export default function Browse({
           <FormControl>
             <AutoComplete>
               <AutoCompleteInput
-                variant="filled"
-                size="lg"
+                variant="outline"
+                size="md"
                 borderRadius="xl"
+                shadow="inner"
                 placeholder="Find an operating system..."
                 id="testing-db-input"
               />
@@ -162,11 +163,13 @@ export default function Browse({
               </AutoCompleteList>
             </AutoComplete>
           </FormControl>
-          <Tabs variant="line" colorScheme="gray" size="sm" isLazy>
+          <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
             <TabList id="testing-display-tabList">
-              <Tab>Newest</Tab>
-              <Tab>Oldest</Tab>
-              <Tab>A-Z</Tab>
+              <Stack direction="row" spacing={4}>
+                <Tab shadow="inner">Newest</Tab>
+                <Tab shadow="inner">Oldest</Tab>
+                <Tab shadow="inner">A-Z</Tab>
+              </Stack>
             </TabList>
             <TabPanels>
               <TabPanel px={0} pb={0} pt={4}>

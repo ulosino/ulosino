@@ -15,8 +15,8 @@ function Card(props) {
 
 export default function CultureIcon() {
   return (
-    <Card p={2} bg="secondary">
-      <Icon as={FiUsers} color="brand" w={6} h={6} />
+    <Card p={2} bg="brandGlass" shadow="inner">
+      <Icon as={FiUsers} color="secondary" w={6} h={6} />
     </Card>
   );
 }

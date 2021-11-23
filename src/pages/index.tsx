@@ -74,9 +74,10 @@ export default function Home({
           <FormControl>
             <AutoComplete>
               <AutoCompleteInput
-                variant="filled"
+                variant="outline"
                 size="lg"
                 borderRadius="xl"
+                shadow="inner"
                 placeholder="Find an operating system..."
                 id="testing-db-input"
               />

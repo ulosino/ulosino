@@ -5,7 +5,7 @@ export default function About() {
     <Stack direction="column" spacing={2}>
       <Text textStyle="secondary">About ULOSINO</Text>
       <Text>
-        ULOSINO is a community-contributed open-source reference for open-source
+        ULOSINO is a community-contributed open source reference for open source
         operating systems. With ULOSINO, you can connect direct to culture and
         browse through the latest, all in a modern setting.
       </Text>

@@ -13,9 +13,9 @@ function Card(props) {
   );
 }
 
-export default function CultureIcon() {
+export default function AlertIcon() {
   return (
-    <Card p={2} bg="alert" rounded="2xl">
+    <Card p={2} bg="alert" shadow="inner" rounded="2xl">
       <Icon as={FiAlertCircle} w={12} h={12} />
     </Card>
   );
