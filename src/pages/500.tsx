@@ -1,19 +1,12 @@
 import { GetStaticProps } from "next";
 
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
-import {
-  Heading,
-  Text,
-  Icon,
-  Button,
-  Box,
-  Stack,
-  Center,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import { FiSlash, FiRefreshCw, FiChevronLeft } from "react-icons/fi";
+import { Heading, Text, Button, Box, Stack, Center } from "@chakra-ui/react";
+import { FiChevronLeft, FiRefreshCw } from "react-icons/fi";
+import AlertIcon from "src/components/AlertIcon";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -35,21 +28,24 @@ export default function Custom500() {
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; Internal Server Error</title>
+        <title>ULOSINO &mdash; Server Error</title>
       </Head>
 
-      <Center>
+      <Center mt={12}>
         <Card variant="alert">
-          <Stack direction="column" spacing={4}>
-            <Center my={8}>
-              <Icon as={FiSlash} w={24} h={24} />
-            </Center>
-            <Stack direction="column" spacing={6}>
+          <Stack direction={["column", "row"]} spacing={10}>
+            <Box display="block">
+              <AlertIcon />
+            </Box>
+            <Stack direction="column" spacing={4}>
+              <Text textStyle="secondary">Server Error</Text>
+              <Heading size="lg">Try again later</Heading>
               <Stack direction="column" spacing={2}>
-                <Heading size="md">Can't download data from server</Heading>
-                <Text>Try again later.</Text>
+                <Text>There is something wrong on our side.</Text>
+                <Text>No further details can be gathered.</Text>
+                <Text>Refresh as the issue is likely temporary.</Text>
               </Stack>
-              <Stack direction="column" spacing={2}>
+              <Stack direction="column" spacing={2} pt={2}>
                 <Button
                   leftIcon={<FiRefreshCw />}
                   size="lg"
@@ -67,7 +63,6 @@ export default function Custom500() {
                   Go Back
                 </Button>
               </Stack>
-              <Text fontSize="xs">Error code: 500</Text>
             </Stack>
           </Stack>
         </Card>

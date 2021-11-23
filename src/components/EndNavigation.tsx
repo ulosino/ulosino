@@ -8,8 +8,8 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
-import { FiChevronsUp, FiTwitter, FiGithub } from "react-icons/fi";
-import { GreyLogo } from "src/data/Logo";
+import { FiChevronsUp, FiGithub, FiLifeBuoy } from "react-icons/fi";
+import { GreyLogo } from "src/components/Logo";
 
 import LegalNavigation from "src/components/LegalNavigation";
 
@@ -19,17 +19,18 @@ export default function EndNavigation() {
       <Center me={12}>
         <GreyLogo />
       </Center>
+      <Link href="#" passHref>
+        <IconButton
+          aria-label="Go back to the top of the page"
+          icon={<FiChevronsUp />}
+          size="sm"
+        />
+      </Link>
+      <Spacer />
       <Stack direction="row" spacing={2}>
-        <Link href="#" passHref>
-          <IconButton
-            aria-label="Go back to the top of the page"
-            icon={<FiChevronsUp />}
-            size="sm"
-          />
-        </Link>
-        <Link href="#" passHref>
-          <Button leftIcon={<FiTwitter />} size="sm" variant="ghost" isDisabled>
-            Twitter
+        <Link href="/definitions" passHref>
+          <Button leftIcon={<FiLifeBuoy />} size="sm" variant="ghost">
+            Definitions
           </Button>
         </Link>
         <Link href="https://github.com/ulosino/ulosino" passHref>

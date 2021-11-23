@@ -6,13 +6,12 @@ This is a reference outline of the ULOSINO stack.
 
 The file structure of the ULOSINO project separates content and code.
 
-Distribution pages and Guides is stored in the `/public/content/browse` folder. It also holds text-heavy files that don't need access to the full React model, like the privacy policy (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` and pages to present the content to the user.
+Distribution pages are stored in the `/public/content/browse` folder. This 'distribution store (`dstore`)' also holds text-heavy files that don't need access to the full React model, like the privacy policy (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` and pages to present the content to the user.
 
 The actual code, including pages, components, and providers, is stored in `/src`. Inside `/src` is:
 
 - `/src/pages`, which stores Next.js pages;
-- `/src/data`, which stores React components shared across multiple pages but need to be composed (e.g. version strings);
-- `src/components`, which stores general React components shared across multiple pages, and;
+- `src/components`, which stores React components shared across multiple pages, and;
 - Providers, which are at the top level of `/src`.
 
 ## Page types

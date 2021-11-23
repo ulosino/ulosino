@@ -6,6 +6,9 @@ import { ChakraProvider } from "@chakra-ui/react";
 import UITheme from "src/UIThemeProvider";
 
 // Import global typography
+import "@fontsource/public-sans/variable.css";
+
+// Import global typography using fixed-axle fonts (compatibility)
 import "@fontsource/public-sans/200.css";
 import "@fontsource/public-sans/400.css";
 import "@fontsource/public-sans/600.css";

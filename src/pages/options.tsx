@@ -10,13 +10,13 @@ import {
   FiMonitor,
   FiRefreshCw,
   FiMessageCircle,
-  FiTwitter,
+  FiLifeBuoy,
   FiGithub,
   FiUploadCloud,
 } from "react-icons/fi";
 
 import UIProvider from "src/UIProvider";
-import Version from "src/data/Version";
+import Version from "src/components/Version";
 
 export default function Options() {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function Options() {
         <Stack spacing={2}>
           <Text textStyle="secondary">Navigate</Text>
           <Link href="/browse" passHref>
-            <Button leftIcon={<FiCompass />}>Browse &amp; Guides</Button>
+            <Button leftIcon={<FiCompass />}>Browse Distributions</Button>
           </Link>
           <Link
             href="https://github.com/ulosino/ulosino/blob/main/CONTRIBUTING.md"
@@ -39,13 +39,12 @@ export default function Options() {
           >
             <Button leftIcon={<FiUploadCloud />}>Contribution Guide</Button>
           </Link>
-          <Link href="#" passHref>
+          <Link href="/definitions" passHref>
             <Button
-              leftIcon={<FiTwitter />}
+              leftIcon={<FiLifeBuoy />}
               display={{ base: "flex", md: "none" }}
-              isDisabled
             >
-              Twitter
+              Definitions
             </Button>
           </Link>
           <Link href="https://github.com/ulosino/ulosino" passHref>
