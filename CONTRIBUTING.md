@@ -19,7 +19,7 @@ When you open a file, it'll show something like this:
 ```
 ---
 # Required metadata
-title: "Blueberry (Demo)"
+title: "Pin Oak (Demo)"
 summary: "Distribution page demo"
 date: "2021-10-21"
 version: ""
@@ -40,7 +40,7 @@ website: "ulosino.com"
 repository: "github.com/ulosino/ulosino"
 ---
 
-Blueberry is a ...
+Pin Oak is a ...
 ```
 
 We want to edit this file.
