@@ -16,7 +16,7 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
-    value: "default-src 'self' ulosino.com *.ulosino.com",
+    value: "default-src 'self' ulosino.com *.ulosino.com *.vercel.app",
   },
 ];
 
