@@ -50,16 +50,22 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
         />
       </Head>
       <Stack spacing={2} mb={4}>
-        <Heading size="3xl">{metadata.title}</Heading>
+        <Heading size="3xl" as="h1">
+          {metadata.title}
+        </Heading>
         {metadata.summary && <Heading size="md">"{metadata.summary}"</Heading>}
       </Stack>
       <Stack direction={["column", "column", "row"]} spacing={10} as="main">
         <Stack spacing={2} as="section">
-          <Text textStyle="secondary">Description</Text>
+          <Text textStyle="secondary" as="h6">
+            Description
+          </Text>
           <MDXRemote {...source} components={components} />
         </Stack>
         <Stack spacing={2} as="section">
-          <Text textStyle="secondary">Information</Text>
+          <Text textStyle="secondary" as="h6">
+            Information
+          </Text>
           <Tag
             variant="solid"
             bg="brand"

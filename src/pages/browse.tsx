@@ -97,7 +97,7 @@ export default function Browse({
         <title>ULOSINO &mdash; Browse</title>
       </Head>
 
-      <Heading size="3xl" mb={4}>
+      <Heading size="3xl" as="h1" mb={4}>
         Browse
       </Heading>
 
