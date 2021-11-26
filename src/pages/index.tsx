@@ -59,7 +59,9 @@ export default function Home({
       <Stack direction="column" spacing={10}>
         <Stack direction="column" spacing={2} mt={20} mb={40} mx={10}>
           <Flex>
-            <Text textStyle="secondary">Start</Text>
+            <Text textStyle="secondary" as="h6">
+              Start
+            </Text>
             <Spacer />
             <Link href="/browse" passHref>
               <Button

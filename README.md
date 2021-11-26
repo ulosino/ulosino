@@ -26,7 +26,7 @@ Contributions to the source are welcomed as well. Reference [STACK.md](https://g
 
 ULOSINO uses semantic versioning.
 
-A 2.x (Yellowstone project) will be released with Next.js 12 and React 18 Concurrency support, pending our dependencies.
+A 2.x is planned using React 18 Concurrency support, pending our dependencies.
 
 ### License
 

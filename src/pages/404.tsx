@@ -47,8 +47,12 @@ export default function Custom404() {
               <AlertIcon />
             </Box>
             <Stack direction="column" spacing={4}>
-              <Text textStyle="secondary">Page Not Found</Text>
-              <Heading size="lg">Into the oblivion!</Heading>
+              <Text textStyle="secondary" as="h1">
+                Page Not Found
+              </Text>
+              <Heading size="lg" as="h3">
+                Into the oblivion!
+              </Heading>
               <Stack direction="column" spacing={4}>
                 <Text>There is nothing to show at this URL.</Text>
                 <Card display={{ base: "none", sm: "block" }}>

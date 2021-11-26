@@ -38,8 +38,12 @@ export default function Custom500() {
               <AlertIcon />
             </Box>
             <Stack direction="column" spacing={4}>
-              <Text textStyle="secondary">Disconnected From Server</Text>
-              <Heading size="lg">You're offline</Heading>
+              <Text textStyle="secondary" as="h1">
+                Disconnected From Server
+              </Text>
+              <Heading size="lg" as="h3">
+                You're offline
+              </Heading>
               <Stack direction="column" spacing={2}>
                 <Text>There were issues reaching the server.</Text>
                 <Text>Check your data or networking settings.</Text>

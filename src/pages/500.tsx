@@ -38,8 +38,12 @@ export default function Custom500() {
               <AlertIcon />
             </Box>
             <Stack direction="column" spacing={4}>
-              <Text textStyle="secondary">Server Error</Text>
-              <Heading size="lg">Try again later</Heading>
+              <Text textStyle="secondary" as="h1">
+                Server Error
+              </Text>
+              <Heading size="lg" as="h3">
+                Try again later
+              </Heading>
               <Stack direction="column" spacing={2}>
                 <Text>There is something wrong on our side.</Text>
                 <Text>No further details can be gathered.</Text>

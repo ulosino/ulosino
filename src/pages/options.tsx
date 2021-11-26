@@ -29,7 +29,9 @@ export default function Options() {
 
       <Stack spacing={4}>
         <Stack spacing={2}>
-          <Text textStyle="secondary">Navigate</Text>
+          <Text textStyle="secondary" as="h6">
+            Navigate
+          </Text>
           <Link href="/browse" passHref>
             <Button leftIcon={<FiCompass />}>Browse Distributions</Button>
           </Link>
@@ -57,7 +59,9 @@ export default function Options() {
           </Link>
         </Stack>
         <Stack spacing={2}>
-          <Text textStyle="secondary">Options</Text>
+          <Text textStyle="secondary" as="h6">
+            Options
+          </Text>
           <Button leftIcon={<FiMonitor />} onClick={toggleColorMode}>
             Toggle {colorMode === "light" ? "Dark" : "Light"} Mode
           </Button>
