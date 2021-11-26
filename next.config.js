@@ -14,13 +14,10 @@ const securityHeaders = [
     key: "Referrer-Policy",
     value: "no-referrer",
   },
-  // Use the CSP when launched (it crashes website)
-  /*
   {
-    key: 'Content-Security-Policy',
-    value: "default-src 'self' ulosino.com *.ulosino.com"
-  }
-  */
+    key: "Content-Security-Policy",
+    value: "default-src 'self' ulosino.com *.ulosino.com",
+  },
 ];
 
 module.exports = withPWA({
