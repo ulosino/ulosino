@@ -17,7 +17,7 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      "script-src 'self' ulosino.com *.ulosino.com *.vercel.app unsafe-eval",
+      "script-src 'self' ulosino.com *.ulosino.com *.vercel.app 'unsafe-eval'",
   },
 ];
 
