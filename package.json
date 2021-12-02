@@ -11,7 +11,7 @@
   "dependencies": {
     "@chakra-ui/react": "^1.6.9",
     "@choc-ui/chakra-autocomplete": "^4.9.1",
-    "@emotion/react": "^11.6.0",
+    "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.3.0",
     "@fontsource/public-sans": "^4.5.0",
     "@types/react": "^17.0.24",
@@ -33,6 +33,6 @@
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-plugin-cypress": "^2.12.1",
-    "next-sitemap": "^1.6.184"
+    "next-sitemap": "^1.6.203"
   }
 }
