@@ -1,0 +1,35 @@
+---
+# Required metadata
+title: "ReactOS"
+summary: "Open source Windows NT rewrite" # 2-7 words that sum up the distribution
+date: "2021-12-02" # Year-Month-Day
+version: "0.4.13"
+status: "Active" # Whether the distro is active, inactive, discontinued (still supported), or legacy (not supported)
+
+# Other metadata - if details unknown or not applicable, leave blank
+platform: "x86"
+descends: ""
+desktop: "ReactOS Explorer" # If the distro does not boot a desktop by default, or doesn't ship one, leave 'desktop' blank
+shell: ""
+packagemgr: ""
+startup: ""
+size: ""
+browser: "Firefox"
+licence: "GPL 2.0"
+origin: "Russia"
+website: "reactos.org"
+repository: "github.com/reactos"
+---
+
+---
+
+<Image
+  src="/images/reactos.png"
+  alt="ReactOS desktop, showing the WinRAR program"
+  width={250}
+  height={400}
+/>
+
+---
+
+[ReactOS](https://reactos.org) is an open source distribution that is a rewrite of the Windows NT platform. It targets the general computing market. First released in 1996 and still in alpha, ReactOS takes a humble approach to recreating the popular Microsoft Windows. The "mission" here is to run "your favourite Windows applications and drivers in an ... environment you can trust." Written in C, React can run most traditional Windows software (i.e. 'desktop' software, not UWP apps) natively, without emulation. This extends to drivers and shell scripts, as they share the NT base. That also means NTFS, lettered drives (`C:\`), the hardware abstraction layer, objects, stop codes, and other typical NT features are shared. On the frontend, a Windows 7 like desktop ("ReactOS Explorer") is presented. ReactOS aims to be a replacement for Windows for those who wish for their system to work like Windows and to run Windows software without emulation or compatibility issues.
