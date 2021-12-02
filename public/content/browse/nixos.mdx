@@ -1,0 +1,24 @@
+---
+# Required metadata
+title: "NixOS"
+summary: "A new approach to the Linux package" # 2-7 words that sum up the distribution
+date: "2021-12-01" # Year-Month-Day
+version: "21.11"
+status: "Active" # Whether the distro is active, inactive, discontinued (still supported), or legacy (not supported)
+
+# Other metadata - if details unknown or not applicable, leave blank
+platform: "x86"
+descends: ""
+desktop: "Plasma" # If the distro does not boot a desktop by default, or doesn't ship one, leave 'desktop' blank
+shell: "bash"
+packagemgr: "nixpkgs"
+startup: "systemd"
+size: ""
+browser: ""
+licence: ""
+origin: ""
+website: "nixos.org"
+repository: ""
+---
+
+[NixOS](https://nixos.org) is an independent Linux distribution. It targets the power-user and developer markets. The main feature here is Nix, a "purely functional package manager" where packages are "treated like values in ... Haskell." Nix scraps the typical package folders like `/usr`, `/opt`, `/bin`, and `/sbin` and replaces it with `/nix/store`, with packages prepended with a cryptographic "package identifier". This "unique" and unconventional approach is the result of a long research phase, allowing features like rollbacks, "garbage collection," and multi-version and multi-user package management. NixOS combines this with the KDE Plasma desktop by default and `systemd` to create a cohesive and usable operating system.

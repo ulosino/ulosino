@@ -1,0 +1,24 @@
+---
+# Required metadata
+title: "oasis"
+summary: "Small opinionated Linux/BSD system" # 2-7 words that sum up the distribution
+date: "2021-12-02" # Year-Month-Day
+version: "Not Versioned"
+status: "Active" # Whether the distro is active, inactive, discontinued (still supported), or legacy (not supported)
+
+# Other metadata - if details unknown or not applicable, leave blank
+platform: "x86"
+descends: ""
+desktop: "" # If the distro does not boot a desktop by default, or doesn't ship one, leave 'desktop' blank
+shell: "oksh"
+packagemgr: ""
+startup: "systemd"
+size: ""
+browser: ""
+licence: ""
+origin: ""
+website: "github.com/oasislinux/oasis/wiki"
+repository: "github.com/oasislinux/oasis"
+---
+
+[oasis](https://github.com/oasislinux/oasis/wiki) is an independent Linux distribution, with considerable BSD characteristics. "An ambitions project," it targets the power-user market. oasis is new to the scene; the "principles" here are "statically linked executables," simple file-based system configuration (within `/etc`), and overall modularity. oasis has no package management by default but "integrates well with OS-agnostic" repositories like `pkgsrc` (from NetBSD) and `nix`. A major feature here is a Lua-powered build system that shifts away from direct maintanence to "considerable up-front packaging cost." Pre-installed software are assorted into "sets" that can be easily managed.
