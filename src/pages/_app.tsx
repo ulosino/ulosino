@@ -1,4 +1,5 @@
 import { AppProps } from "next/app";
+import Script from "next/script";
 
 // Import global providers
 import MDXProvider from "src/MDXProvider";
@@ -17,6 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={UITheme}>
       <MDXProvider>
+        <Script
+          strategy="afterInteractive"
+          data-domain="ulosino.com"
+          src="https://plausible.io/js/plausible.js"
+        />
         <Component {...pageProps} />
       </MDXProvider>
     </ChakraProvider>
