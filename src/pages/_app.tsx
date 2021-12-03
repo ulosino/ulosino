@@ -1,9 +1,9 @@
 import { AppProps } from "next/app";
-import Script from "next/script";
 
 // Import global providers
 import MDXProvider from "src/MDXProvider";
 import { ChakraProvider } from "@chakra-ui/react";
+import PlausibleProvider from "next-plausible";
 import UITheme from "src/UIThemeProvider";
 
 // Import global typography
@@ -16,15 +16,12 @@ import "@fontsource/public-sans/600.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider theme={UITheme}>
-      <MDXProvider>
-        <Script
-          strategy="afterInteractive"
-          data-domain="ulosino.com"
-          src="https://plausible.io/js/plausible.js"
-        />
-        <Component {...pageProps} />
-      </MDXProvider>
-    </ChakraProvider>
+    <PlausibleProvider domain="ulosino.com">
+      <ChakraProvider theme={UITheme}>
+        <MDXProvider>
+          <Component {...pageProps} />
+        </MDXProvider>
+      </ChakraProvider>
+    </PlausibleProvider>
   );
 }

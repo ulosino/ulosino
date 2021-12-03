@@ -1,3 +1,5 @@
+const withPlugins = require("next-compose-plugins");
+const { withPlausibleProxy } = require("next-plausible");
 const withPWA = require("next-pwa");
 
 // Content security options
@@ -21,8 +23,8 @@ const securityHeaders = [
   },
 ];
 
-module.exports = withPWA({
-  // Configuration for next-pwa plugin
+const nextConfig = {
+  // Configuration for the next-pwa plugin
   pwa: {
     dest: "public",
     dynamicStartUrl: "false",
@@ -43,4 +45,6 @@ module.exports = withPWA({
       },
     ];
   },
-});
+};
+
+module.exports = withPlugins([withPlausibleProxy, withPWA], nextConfig);
