@@ -65,6 +65,7 @@ export default function Browse({
     desktop: string;
     packagemgr: string;
     shell: string;
+    descends: string;
   }[];
   oldestDistributionData: {
     date: string;
@@ -77,6 +78,7 @@ export default function Browse({
     desktop: string;
     packagemgr: string;
     shell: string;
+    descends: string;
   }[];
   AZDistributionData: {
     date: string;
@@ -89,6 +91,7 @@ export default function Browse({
     desktop: string;
     packagemgr: string;
     shell: string;
+    descends: string;
   }[];
 }) {
   return (
@@ -103,66 +106,496 @@ export default function Browse({
 
       <SimpleGrid minChildWidth="280px" spacing={10}>
         <Stack direction="column" spacing={6} as="section">
-          <FormControl>
-            <AutoComplete>
-              <AutoCompleteInput
-                variant="outline"
-                size="md"
-                borderRadius="xl"
-                shadow="inner"
-                placeholder="Find an operating system..."
-                id="testing-db-input"
-              />
-              <AutoCompleteList w="full">
-                {AZDistributionData.map(
-                  ({
-                    id,
-                    title,
-                    summary,
-                    version,
-                    platform,
-                    desktop,
-                    startup,
-                    packagemgr,
-                    shell,
-                  }) => (
-                    <AutoCompleteItem
-                      key={`option-${title}`}
-                      value={title}
-                      maxSuggestions={5}
-                      mx={3}
-                      id="testing-db-item"
-                    >
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Box p={2} mb={2}>
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", sm: "flex" }}
-                            spacing={4}
-                          >
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                            {shell && <Text fontSize="sm">{shell}</Text>}
-                          </Stack>
-                        </Box>
-                      </Link>
-                    </AutoCompleteItem>
-                  )
-                )}
-              </AutoCompleteList>
-            </AutoComplete>
-          </FormControl>
+          <Card>
+            <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
+              <TabList id="testing-display-tabList">
+                <Stack direction="row" spacing={4}>
+                  <Tab shadow="inner">Search by Name</Tab>
+                  <Tab shadow="inner">Platform</Tab>
+                  <Tab shadow="inner">Desktop</Tab>
+                  <Tab shadow="inner">Startup Manager</Tab>
+                  <Tab shadow="inner">Package Manager</Tab>
+                  <Tab shadow="inner">Derived OS</Tab>
+                </Stack>
+              </TabList>
+              {/* Search by name */}
+              <TabPanels>
+                <TabPanel px={0} pb={0} pt={4}>
+                  <FormControl>
+                    <AutoComplete>
+                      <AutoCompleteInput
+                        variant="outline"
+                        size="md"
+                        borderRadius="xl"
+                        shadow="inner"
+                        placeholder="Find an operating system..."
+                        id="testing-db-input"
+                      />
+                      <AutoCompleteList w="full">
+                        {AZDistributionData.map(
+                          ({
+                            id,
+                            title,
+                            summary,
+                            version,
+                            platform,
+                            desktop,
+                            startup,
+                            packagemgr,
+                            shell,
+                            descends,
+                          }) => (
+                            <AutoCompleteItem
+                              key={`option-${title}`}
+                              value={title}
+                              maxSuggestions={5}
+                              mx={3}
+                              id="testing-db-item"
+                            >
+                              <Link
+                                href={`/browse/${id}`}
+                                passHref
+                                key={`/browse/${id}`}
+                              >
+                                <Box p={2} mb={2}>
+                                  <Heading size="md">{title}</Heading>
+                                  {summary && (
+                                    <Text fontSize="sm">"{summary}"</Text>
+                                  )}
+                                  <Stack
+                                    direction="row"
+                                    display={{ base: "none", sm: "flex" }}
+                                    spacing={4}
+                                  >
+                                    {version && (
+                                      <Text fontSize="sm">{version}</Text>
+                                    )}
+                                    {platform && (
+                                      <Text fontSize="sm">{platform}</Text>
+                                    )}
+                                    {desktop && (
+                                      <Text fontSize="sm">{desktop}</Text>
+                                    )}
+                                    {startup && (
+                                      <Text fontSize="sm">{startup}</Text>
+                                    )}
+                                    {packagemgr && (
+                                      <Text fontSize="sm">{packagemgr}</Text>
+                                    )}
+                                    {shell && (
+                                      <Text fontSize="sm">{shell}</Text>
+                                    )}
+                                    {descends && (
+                                      <Text fontSize="sm">{descends}</Text>
+                                    )}
+                                  </Stack>
+                                </Box>
+                              </Link>
+                            </AutoCompleteItem>
+                          )
+                        )}
+                      </AutoCompleteList>
+                    </AutoComplete>
+                  </FormControl>
+                </TabPanel>
+                {/* Search by platform */}
+                <TabPanel px={0} pb={0} pt={4}>
+                  <FormControl>
+                    <AutoComplete>
+                      <AutoCompleteInput
+                        variant="outline"
+                        size="md"
+                        borderRadius="xl"
+                        shadow="inner"
+                        placeholder="Filter by platform..."
+                      />
+                      <AutoCompleteList w="full">
+                        {AZDistributionData.map(
+                          ({
+                            id,
+                            title,
+                            summary,
+                            version,
+                            platform,
+                            desktop,
+                            startup,
+                            packagemgr,
+                            shell,
+                            descends,
+                          }) => (
+                            <AutoCompleteItem
+                              key={`option-${platform}`}
+                              value={platform}
+                              maxSuggestions={5}
+                              mx={3}
+                            >
+                              <Link
+                                href={`/browse/${id}`}
+                                passHref
+                                key={`/browse/${id}`}
+                              >
+                                <Box p={2} mb={2}>
+                                  <Heading size="md">{title}</Heading>
+                                  {summary && (
+                                    <Text fontSize="sm">"{summary}"</Text>
+                                  )}
+                                  <Stack
+                                    direction="row"
+                                    display={{ base: "none", sm: "flex" }}
+                                    spacing={4}
+                                  >
+                                    {version && (
+                                      <Text fontSize="sm">{version}</Text>
+                                    )}
+                                    {platform && (
+                                      <Text fontSize="sm" fontWeight="bold">
+                                        {platform}
+                                      </Text>
+                                    )}
+                                    {desktop && (
+                                      <Text fontSize="sm">{desktop}</Text>
+                                    )}
+                                    {startup && (
+                                      <Text fontSize="sm">{startup}</Text>
+                                    )}
+                                    {packagemgr && (
+                                      <Text fontSize="sm">{packagemgr}</Text>
+                                    )}
+                                    {shell && (
+                                      <Text fontSize="sm">{shell}</Text>
+                                    )}
+                                    {descends && (
+                                      <Text fontSize="sm">{descends}</Text>
+                                    )}
+                                  </Stack>
+                                </Box>
+                              </Link>
+                            </AutoCompleteItem>
+                          )
+                        )}
+                      </AutoCompleteList>
+                    </AutoComplete>
+                  </FormControl>
+                </TabPanel>
+                {/* Search by desktop */}
+                <TabPanel px={0} pb={0} pt={4}>
+                  <FormControl>
+                    <AutoComplete>
+                      <AutoCompleteInput
+                        variant="outline"
+                        size="md"
+                        borderRadius="xl"
+                        shadow="inner"
+                        placeholder="Filter by desktop..."
+                      />
+                      <AutoCompleteList w="full">
+                        {AZDistributionData.map(
+                          ({
+                            id,
+                            title,
+                            summary,
+                            version,
+                            platform,
+                            desktop,
+                            startup,
+                            packagemgr,
+                            shell,
+                            descends,
+                          }) => (
+                            <AutoCompleteItem
+                              key={`option-${desktop}`}
+                              value={desktop}
+                              maxSuggestions={5}
+                              mx={3}
+                            >
+                              <Link
+                                href={`/browse/${id}`}
+                                passHref
+                                key={`/browse/${id}`}
+                              >
+                                <Box p={2} mb={2}>
+                                  <Heading size="md">{title}</Heading>
+                                  {summary && (
+                                    <Text fontSize="sm">"{summary}"</Text>
+                                  )}
+                                  <Stack
+                                    direction="row"
+                                    display={{ base: "none", sm: "flex" }}
+                                    spacing={4}
+                                  >
+                                    {version && (
+                                      <Text fontSize="sm">{version}</Text>
+                                    )}
+                                    {platform && (
+                                      <Text fontSize="sm">{platform}</Text>
+                                    )}
+                                    {desktop && (
+                                      <Text fontSize="sm" fontWeight="bold">
+                                        {desktop}
+                                      </Text>
+                                    )}
+                                    {startup && (
+                                      <Text fontSize="sm">{startup}</Text>
+                                    )}
+                                    {packagemgr && (
+                                      <Text fontSize="sm">{packagemgr}</Text>
+                                    )}
+                                    {shell && (
+                                      <Text fontSize="sm">{shell}</Text>
+                                    )}
+                                    {descends && (
+                                      <Text fontSize="sm">{descends}</Text>
+                                    )}
+                                  </Stack>
+                                </Box>
+                              </Link>
+                            </AutoCompleteItem>
+                          )
+                        )}
+                      </AutoCompleteList>
+                    </AutoComplete>
+                  </FormControl>
+                </TabPanel>
+                {/* Search by startup manager */}
+                <TabPanel px={0} pb={0} pt={4}>
+                  <FormControl>
+                    <AutoComplete>
+                      <AutoCompleteInput
+                        variant="outline"
+                        size="md"
+                        borderRadius="xl"
+                        shadow="inner"
+                        placeholder="Filter by startup manager..."
+                      />
+                      <AutoCompleteList w="full">
+                        {AZDistributionData.map(
+                          ({
+                            id,
+                            title,
+                            summary,
+                            version,
+                            platform,
+                            desktop,
+                            startup,
+                            packagemgr,
+                            shell,
+                            descends,
+                          }) => (
+                            <AutoCompleteItem
+                              key={`option-${startup}`}
+                              value={startup}
+                              maxSuggestions={5}
+                              mx={3}
+                            >
+                              <Link
+                                href={`/browse/${id}`}
+                                passHref
+                                key={`/browse/${id}`}
+                              >
+                                <Box p={2} mb={2}>
+                                  <Heading size="md">{title}</Heading>
+                                  {summary && (
+                                    <Text fontSize="sm">"{summary}"</Text>
+                                  )}
+                                  <Stack
+                                    direction="row"
+                                    display={{ base: "none", sm: "flex" }}
+                                    spacing={4}
+                                  >
+                                    {version && (
+                                      <Text fontSize="sm">{version}</Text>
+                                    )}
+                                    {platform && (
+                                      <Text fontSize="sm">{platform}</Text>
+                                    )}
+                                    {desktop && (
+                                      <Text fontSize="sm">{desktop}</Text>
+                                    )}
+                                    {startup && (
+                                      <Text fontSize="sm" fontWeight="bold">
+                                        {startup}
+                                      </Text>
+                                    )}
+                                    {packagemgr && (
+                                      <Text fontSize="sm">{packagemgr}</Text>
+                                    )}
+                                    {shell && (
+                                      <Text fontSize="sm">{shell}</Text>
+                                    )}
+                                    {descends && (
+                                      <Text fontSize="sm">{descends}</Text>
+                                    )}
+                                  </Stack>
+                                </Box>
+                              </Link>
+                            </AutoCompleteItem>
+                          )
+                        )}
+                      </AutoCompleteList>
+                    </AutoComplete>
+                  </FormControl>
+                </TabPanel>
+                {/* Search by package manager */}
+                <TabPanel px={0} pb={0} pt={4}>
+                  <FormControl>
+                    <AutoComplete>
+                      <AutoCompleteInput
+                        variant="outline"
+                        size="md"
+                        borderRadius="xl"
+                        shadow="inner"
+                        placeholder="Filter by package manager..."
+                      />
+                      <AutoCompleteList w="full">
+                        {AZDistributionData.map(
+                          ({
+                            id,
+                            title,
+                            summary,
+                            version,
+                            platform,
+                            desktop,
+                            startup,
+                            packagemgr,
+                            shell,
+                            descends,
+                          }) => (
+                            <AutoCompleteItem
+                              key={`option-${packagemgr}`}
+                              value={packagemgr}
+                              maxSuggestions={5}
+                              mx={3}
+                            >
+                              <Link
+                                href={`/browse/${id}`}
+                                passHref
+                                key={`/browse/${id}`}
+                              >
+                                <Box p={2} mb={2}>
+                                  <Heading size="md">{title}</Heading>
+                                  {summary && (
+                                    <Text fontSize="sm">"{summary}"</Text>
+                                  )}
+                                  <Stack
+                                    direction="row"
+                                    display={{ base: "none", sm: "flex" }}
+                                    spacing={4}
+                                  >
+                                    {version && (
+                                      <Text fontSize="sm">{version}</Text>
+                                    )}
+                                    {platform && (
+                                      <Text fontSize="sm">{platform}</Text>
+                                    )}
+                                    {desktop && (
+                                      <Text fontSize="sm">{desktop}</Text>
+                                    )}
+                                    {startup && (
+                                      <Text fontSize="sm">{startup}</Text>
+                                    )}
+                                    {packagemgr && (
+                                      <Text fontSize="sm" fontWeight="bold">
+                                        {packagemgr}
+                                      </Text>
+                                    )}
+                                    {shell && (
+                                      <Text fontSize="sm">{shell}</Text>
+                                    )}
+                                    {descends && (
+                                      <Text fontSize="sm">{descends}</Text>
+                                    )}
+                                  </Stack>
+                                </Box>
+                              </Link>
+                            </AutoCompleteItem>
+                          )
+                        )}
+                      </AutoCompleteList>
+                    </AutoComplete>
+                  </FormControl>
+                </TabPanel>
+                {/* Search by derived distribution */}
+                <TabPanel px={0} pb={0} pt={4}>
+                  <FormControl>
+                    <AutoComplete>
+                      <AutoCompleteInput
+                        variant="outline"
+                        size="md"
+                        borderRadius="xl"
+                        shadow="inner"
+                        placeholder="Filter by derived operating system..."
+                      />
+                      <AutoCompleteList w="full">
+                        {AZDistributionData.map(
+                          ({
+                            id,
+                            title,
+                            summary,
+                            version,
+                            platform,
+                            desktop,
+                            startup,
+                            packagemgr,
+                            shell,
+                            descends,
+                          }) => (
+                            <AutoCompleteItem
+                              key={`option-${descends}`}
+                              value={descends}
+                              maxSuggestions={5}
+                              mx={3}
+                            >
+                              <Link
+                                href={`/browse/${id}`}
+                                passHref
+                                key={`/browse/${id}`}
+                              >
+                                <Box p={2} mb={2}>
+                                  <Heading size="md">{title}</Heading>
+                                  {summary && (
+                                    <Text fontSize="sm">"{summary}"</Text>
+                                  )}
+                                  <Stack
+                                    direction="row"
+                                    display={{ base: "none", sm: "flex" }}
+                                    spacing={4}
+                                  >
+                                    {version && (
+                                      <Text fontSize="sm">{version}</Text>
+                                    )}
+                                    {platform && (
+                                      <Text fontSize="sm">{platform}</Text>
+                                    )}
+                                    {desktop && (
+                                      <Text fontSize="sm">{desktop}</Text>
+                                    )}
+                                    {startup && (
+                                      <Text fontSize="sm">{startup}</Text>
+                                    )}
+                                    {packagemgr && (
+                                      <Text fontSize="sm">{packagemgr}</Text>
+                                    )}
+                                    {shell && (
+                                      <Text fontSize="sm">{shell}</Text>
+                                    )}
+                                    {descends && (
+                                      <Text fontSize="sm" fontWeight="bold">
+                                        {descends}
+                                      </Text>
+                                    )}
+                                  </Stack>
+                                </Box>
+                              </Link>
+                            </AutoCompleteItem>
+                          )
+                        )}
+                      </AutoCompleteList>
+                    </AutoComplete>
+                  </FormControl>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Card>
           <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
             <TabList id="testing-display-tabList">
               <Stack direction="row" spacing={4}>
@@ -185,6 +618,7 @@ export default function Browse({
                       startup,
                       packagemgr,
                       shell,
+                      descends,
                     }) => (
                       <Link
                         href={`/browse/${id}`}
@@ -216,6 +650,7 @@ export default function Browse({
                               <Text fontSize="sm">{packagemgr}</Text>
                             )}
                             {shell && <Text fontSize="sm">{shell}</Text>}
+                            {descends && <Text fontSize="sm">{descends}</Text>}
                           </Stack>
                         </Card>
                       </Link>
@@ -236,6 +671,7 @@ export default function Browse({
                       startup,
                       packagemgr,
                       shell,
+                      descends,
                     }) => (
                       <Link
                         href={`/browse/${id}`}
@@ -272,6 +708,7 @@ export default function Browse({
                               <Text fontSize="sm">{packagemgr}</Text>
                             )}
                             {shell && <Text fontSize="sm">{shell}</Text>}
+                            {descends && <Text fontSize="sm">{descends}</Text>}
                           </Stack>
                         </Card>
                       </Link>
@@ -292,6 +729,7 @@ export default function Browse({
                       startup,
                       packagemgr,
                       shell,
+                      descends,
                     }) => (
                       <Link
                         href={`/browse/${id}`}
@@ -323,6 +761,7 @@ export default function Browse({
                               <Text fontSize="sm">{packagemgr}</Text>
                             )}
                             {shell && <Text fontSize="sm">{shell}</Text>}
+                            {descends && <Text fontSize="sm">{descends}</Text>}
                           </Stack>
                         </Card>
                       </Link>
