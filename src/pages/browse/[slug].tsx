@@ -38,7 +38,9 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; {metadata.title}</title>
+        <title>
+          ULOSINO &mdash; {metadata.title}: '{metadata.summary}'
+        </title>
         <meta property="og:title" content="{metadata.title} on ULOSINO" />
         <meta
           property="description"
@@ -73,11 +75,23 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
             id="testing-display-distributionTag"
           >
             <TagLeftIcon as={FiDatabase} />
-            <TagLabel>Distribution</TagLabel>
+            <TagLabel>Open source OS</TagLabel>
           </Tag>
           <Table>
             <Tbody>
               {/* Only show the category if the category has any value */}
+              {metadata.website && (
+                <Tr>
+                  <Td>Website</Td>
+                  <Td>{metadata.website}</Td>
+                </Tr>
+              )}
+              {metadata.repository && (
+                <Tr>
+                  <Td>Source Repository</Td>
+                  <Td>{metadata.repository}</Td>
+                </Tr>
+              )}
               {metadata.status && (
                 <Tr>
                   <Td>Status</Td>
@@ -86,7 +100,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
               )}
               {metadata.version && (
                 <Tr>
-                  <Td>Current Version</Td>
+                  <Td>Version</Td>
                   <Td>{metadata.version}</Td>
                 </Tr>
               )}
@@ -104,8 +118,14 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
               )}
               {metadata.desktop && (
                 <Tr>
-                  <Td>Desktop</Td>
+                  <Td>Preinstalled Desktop</Td>
                   <Td>{metadata.desktop}</Td>
+                </Tr>
+              )}
+              {metadata.browser && (
+                <Tr>
+                  <Td>Preinstalled Browser</Td>
+                  <Td>{metadata.browser}</Td>
                 </Tr>
               )}
               {metadata.shell && (
@@ -124,24 +144,6 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                 <Tr>
                   <Td>Startup Manager</Td>
                   <Td>{metadata.startup}</Td>
-                </Tr>
-              )}
-              {metadata.browser && (
-                <Tr>
-                  <Td>Default Browser</Td>
-                  <Td>{metadata.browser}</Td>
-                </Tr>
-              )}
-              {metadata.website && (
-                <Tr>
-                  <Td>Website</Td>
-                  <Td>{metadata.website}</Td>
-                </Tr>
-              )}
-              {metadata.repository && (
-                <Tr>
-                  <Td>Source Repository</Td>
-                  <Td>{metadata.repository}</Td>
                 </Tr>
               )}
               {metadata.size && (

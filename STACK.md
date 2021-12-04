@@ -6,7 +6,7 @@ This is a reference outline of the ULOSINO stack.
 
 The file structure of the ULOSINO project separates content and code.
 
-Distribution pages are stored in the `/public/content/browse` folder. This 'distribution store (`dstore`)' also holds text-heavy files that don't need access to the full React model, like the privacy policy (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` and pages to present the content to the user.
+Distribution pages are stored in the `/public/content/browse` folder. This 'distribution store (`dstore`)' also holds other text-heavy files including the privacy policy (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` to create pages that present the content to the user.
 
 The actual code, including pages, components, and providers, is stored in `/src`. Inside `/src` is:
 
@@ -20,7 +20,7 @@ The ULOSINO stack has two page types.
 
 The first are standard Next.js pages. These are used when the full capacity of Next.js and/or React is needed.
 
-For all other pages, a Next.js dynamic page is used. These pages, called `[slug].tsx`, are (practically) template pages that are created multiple times based on text and metadata imported from Database Content. This enables consistent presentation and the required scalability for distribution pages, Guides, and miscellaneous text-based pages.
+For all other pages, a Next.js dynamic page is used. These pages, called `[slug].tsx`, are (practically) template pages that are created multiple times based on text and metadata imported from Database Content. This enables consistent presentation and the required scalability for distribution pages and miscellaneous text-based pages.
 
 ## Providers
 
@@ -38,7 +38,7 @@ These are the primary providers:
 
 ### UIProvider
 
-`UIProvider.tsx` ('User Interface Provider') wraps around pages and provides the ULOSINO user interface (navigation bar, etc). It isn't applied to `app.tsx` so that pages without the layout (e.g. sign-in page) can be built if needed in the future.
+`UIProvider.tsx` ('User Interface Provider') wraps around pages and provides the ULOSINO user interface (navigation bar, etc). It isn't applied to `app.tsx` so that pages without the layout (e.g. authentication page) can be built if needed in the future. Furthermore, the core elements of the user interface are futher encapsulated into their own components (e.g. `StartNavigation`).
 
 ### UIThemeProvider
 
@@ -59,10 +59,10 @@ The team at ULOSINO aims to build using good code.
 - TypeScript is used wherever possible, and;
 - TypeScript compiles to ES2021.
 
-We encourage you to apply these options to your projects.
+We would encourage you to apply these options to your projects.
 
 ULOSINO uses the MIT license. This allows you to copy or study the ULOSINO stack, even for commercial purposes.
 
 ---
 
-Last revised 7th November, 2021.
+Last revised 4th December, 2021.

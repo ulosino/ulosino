@@ -1,7 +1,6 @@
 import { GetStaticProps } from "next";
 
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { Heading, Text, Button, Box, Stack, Center } from "@chakra-ui/react";
