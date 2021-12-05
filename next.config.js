@@ -1,6 +1,7 @@
 const withPlugins = require("next-compose-plugins");
 const { withPlausibleProxy } = require("next-plausible");
 const withPWA = require("next-pwa");
+const runtimeCaching = require("next-pwa/cache");
 
 // Content security options
 const securityHeaders = [
@@ -28,6 +29,10 @@ const nextConfig = withPWA({
   pwa: {
     dest: "public",
     dynamicStartUrl: "false",
+    register: true,
+    skipWaiting: true,
+    runtimeCaching,
+    buildExcludes: [/middleware-manifest.json$/],
     disable: process.env.NODE_ENV === "development",
   },
   // Configuration for Next.js
