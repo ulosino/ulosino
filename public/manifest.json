@@ -2,6 +2,7 @@
   "short_name": "ULOSINO",
   "name": "ULOSINO",
   "description": "Open source OS database",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

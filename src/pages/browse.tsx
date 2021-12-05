@@ -108,8 +108,12 @@ export default function Browse({
         <Stack direction="column" spacing={6} as="section">
           <Card>
             <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
-              <TabList id="testing-display-tabList">
-                <Stack direction="row" spacing={4}>
+              <TabList>
+                <Stack
+                  direction={["column", "column", "row"]}
+                  spacing={4}
+                  w="full"
+                >
                   <Tab shadow="inner">Search by Name</Tab>
                   <Tab shadow="inner">Platform</Tab>
                   <Tab shadow="inner">Desktop</Tab>
