@@ -23,7 +23,7 @@ const securityHeaders = [
   },
 ];
 
-const nextConfig = {
+const nextConfig = withPWA({
   // Configuration for the next-pwa plugin
   pwa: {
     dest: "public",
@@ -45,6 +45,6 @@ const nextConfig = {
       },
     ];
   },
-};
+});
 
-module.exports = withPlugins([withPlausibleProxy, withPWA], nextConfig);
+module.exports = withPlugins([withPlausibleProxy], nextConfig);

@@ -35,9 +35,9 @@ const AutoComplete = dynamic(() =>
 );
 
 export default function Home({
-  distributionData,
+  AZDistributionData,
 }: {
-  distributionData: {
+  AZDistributionData: {
     date: string;
     id: string;
     title: string;
@@ -48,6 +48,7 @@ export default function Home({
     desktop: string;
     packagemgr: string;
     shell: string;
+    descends: string;
   }[];
 }) {
   return (
@@ -84,7 +85,7 @@ export default function Home({
                 id="testing-db-input"
               />
               <AutoCompleteList w="full">
-                {distributionData.map(
+                {AZDistributionData.map(
                   ({
                     id,
                     title,
@@ -95,6 +96,7 @@ export default function Home({
                     startup,
                     packagemgr,
                     shell,
+                    descends,
                   }) => (
                     <AutoCompleteItem
                       key={`option-${title}`}
@@ -124,6 +126,7 @@ export default function Home({
                               <Text fontSize="sm">{packagemgr}</Text>
                             )}
                             {shell && <Text fontSize="sm">{shell}</Text>}
+                            {descends && <Text fontSize="sm">{descends}</Text>}
                           </Stack>
                         </Box>
                       </Link>
@@ -156,10 +159,10 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const distributionData = getDistributions();
+  const AZDistributionData = getDistributions();
   return {
     props: {
-      distributionData,
+      AZDistributionData,
     },
   };
 };
