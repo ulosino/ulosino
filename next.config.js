@@ -20,7 +20,7 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      "script-src 'self' 'unsafe-eval' ulosino.com *.ulosino.com *.vercel.app plausible.io",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' ulosino.com *.ulosino.com *.vercel.app plausible.io utteranc.es",
   },
 ];
 

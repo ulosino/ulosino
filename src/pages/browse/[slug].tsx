@@ -1,3 +1,8 @@
+// TypeScript is disabled on this page due to Utterance comments
+// This is a known bug and will be patched
+
+// @ts-nocheck
+
 import { GetStaticProps } from "next";
 
 import fs from "fs";
@@ -5,6 +10,7 @@ import path from "path";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
@@ -58,11 +64,29 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
         {metadata.summary && <Heading size="md">"{metadata.summary}"</Heading>}
       </Stack>
       <Stack direction={["column", "column", "row"]} spacing={10} as="main">
-        <Stack spacing={2} as="section">
-          <Text textStyle="secondary" as="h6">
-            Description
-          </Text>
-          <MDXRemote {...source} components={components} />
+        <Stack spacing={10}>
+          <Stack spacing={2} as="section">
+            <Text textStyle="secondary" as="h6">
+              Description
+            </Text>
+            <MDXRemote {...source} components={components} />
+          </Stack>
+          <Stack spacing={2} as="section">
+            <Text textStyle="secondary" as="h6">
+              Discuss {metadata.title}
+            </Text>
+            {/* Using Next.js <Script> moves this frame to the end of the page */}
+            {/* Will be patched to improve performance and SEO */}
+            <script
+              src="https://utteranc.es/client.js"
+              repo="ulosino/ulosino"
+              issue-term="pathname"
+              label="Page Comments"
+              theme="preferred-color-scheme"
+              crossOrigin="anonymous"
+              async
+            ></script>
+          </Stack>
         </Stack>
         <Stack spacing={2} as="section">
           <Text textStyle="secondary" as="h6">
