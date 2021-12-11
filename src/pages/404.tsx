@@ -15,7 +15,7 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import { FiChevronLeft, FiChevronsLeft } from "react-icons/fi";
-import AlertIcon from "src/components/AlertIcon";
+import { AlertIcon } from "src/components/Icons";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -76,18 +76,13 @@ export default function Custom404() {
               </Stack>
               <Stack direction="column" spacing={2} pt={2}>
                 <Link href="/" passHref>
-                  <Button
-                    leftIcon={<FiChevronsLeft />}
-                    size="lg"
-                    variant="solid"
-                  >
+                  <Button leftIcon={<FiChevronsLeft />} size="lg">
                     Go Home
                   </Button>
                 </Link>
                 <Button
                   leftIcon={<FiChevronLeft />}
                   size="sm"
-                  variant="solid"
                   onClick={() => router.back()}
                 >
                   Go Back

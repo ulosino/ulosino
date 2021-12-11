@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { Heading, Text, Button, Box, Stack, Center } from "@chakra-ui/react";
 import { FiChevronLeft, FiRefreshCw } from "react-icons/fi";
-import AlertIcon from "src/components/AlertIcon";
+import { AlertIcon } from "src/components/Icons";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -52,7 +52,6 @@ export default function Custom500() {
                 <Button
                   leftIcon={<FiRefreshCw />}
                   size="lg"
-                  variant="solid"
                   onClick={() => router.reload()}
                 >
                   Try Again
@@ -60,7 +59,6 @@ export default function Custom500() {
                 <Button
                   leftIcon={<FiChevronLeft />}
                   size="sm"
-                  variant="solid"
                   onClick={() => router.back()}
                 >
                   Go Back
