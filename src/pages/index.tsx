@@ -25,9 +25,9 @@ import {
 } from "@choc-ui/chakra-autocomplete";
 
 import UIProvider from "src/UIProvider";
-import CultureHero from "src/components/CultureHero";
+import ExplainerHero from "src/components/ExplainerHero";
+import FlowHero from "src/components/FlowHero";
 import About from "src/components/About";
-import AppBanner from "src/components/AppBanner";
 
 import dynamic from "next/dynamic";
 const AutoComplete = dynamic(() =>
@@ -61,7 +61,7 @@ export default function Home({
         <Stack direction="column" spacing={2} mt={20} mb={40} mx={10}>
           <Flex>
             <Text textStyle="secondary" as="h6">
-              Start
+              Welcome to ULOSINO
             </Text>
             <Spacer />
             <Link href="/browse" passHref>
@@ -70,7 +70,7 @@ export default function Home({
                 size="sm"
                 display={{ base: "none", md: "flex" }}
               >
-                Browse All Distributions
+                Browse All OSs
               </Button>
             </Link>
           </Flex>
@@ -146,12 +146,10 @@ export default function Home({
           </Link>
         </Stack>
 
+        <FlowHero />
         <SimpleGrid minChildWidth="280px" spacing={10}>
-          <CultureHero />
-          <Stack spacing={10}>
-            <About />
-            <AppBanner />
-          </Stack>
+          <ExplainerHero />
+          <About />
         </SimpleGrid>
       </Stack>
     </UIProvider>

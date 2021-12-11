@@ -9,22 +9,16 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FiChevronsUp, FiGithub, FiLifeBuoy } from "react-icons/fi";
-import { GreyLogo } from "src/components/Logo";
 
 import LegalNavigation from "src/components/LegalNavigation";
 
 export default function EndNavigation() {
   return (
     <Flex id="testing-display-footer" as="footer">
-      <Center me={12}>
-        <GreyLogo />
-      </Center>
       <Link href="#" passHref>
-        <IconButton
-          aria-label="Go back to the top of the page"
-          icon={<FiChevronsUp />}
-          size="sm"
-        />
+        <Button leftIcon={<FiChevronsUp />} size="sm">
+          Jump to Top
+        </Button>
       </Link>
       <Spacer />
       <Stack direction="row" spacing={2}>
