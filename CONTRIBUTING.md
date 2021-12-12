@@ -4,7 +4,7 @@ Firstly, a big thanks to you for setting aside your time to contribute! Your con
 
 As a community project, the ULOSINO project thrives and pulses with the work of the community. Read on for comprehensive details on how to contribute to both Database Content and the Source Code.
 
-With ULOSINO, getting a Unix-like OS onto the global stage is very easy. To contribute, you will need a GitHub account.
+With ULOSINO, getting an open source OS onto the global stage is very easy. To contribute, you will need a GitHub account.
 
 Remember that all contributions are bound by the Contribution Code of Conduct, available at CODE_OF_CONDUCT.md.
 

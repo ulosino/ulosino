@@ -14,19 +14,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-import {
-  Tag,
-  TagLabel,
-  TagLeftIcon,
-  Stack,
-  Heading,
-  Text,
-  Table,
-  Tbody,
-  Tr,
-  Td,
-} from "@chakra-ui/react";
-import { FiDatabase } from "react-icons/fi";
+import { Stack, Heading, Text, Table, Tbody, Tr, Td } from "@chakra-ui/react";
 import UIProvider from "src/UIProvider";
 
 // Pages can use the following components if needed
@@ -92,15 +80,6 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
           <Text textStyle="secondary" as="h6">
             Information
           </Text>
-          <Tag
-            variant="solid"
-            bg="brand"
-            color="black"
-            id="testing-display-distributionTag"
-          >
-            <TagLeftIcon as={FiDatabase} />
-            <TagLabel>Open source OS</TagLabel>
-          </Tag>
           <Table>
             <Tbody>
               {/* Only show the category if the category has any value */}
@@ -114,12 +93,6 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                 <Tr>
                   <Td>Source Repository</Td>
                   <Td>{metadata.repository}</Td>
-                </Tr>
-              )}
-              {metadata.status && (
-                <Tr>
-                  <Td>Status</Td>
-                  <Td>{metadata.status}</Td>
                 </Tr>
               )}
               {metadata.version && (

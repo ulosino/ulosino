@@ -2,9 +2,9 @@
 
 [![ULOSINO](./public/brand/git-header.png)]()
 
-ULOSINO is the modern setting for Unix-like operating system information. A community project, ULOSINO aims to let you connect direct to culture.
+ULOSINO is the modern setting for open source operating system information. A community project, ULOSINO aims to let you connect direct to culture.
 
-Ensemble ULOSINO into your flow. Visit [ULOSINO.com](https://ulosino.com) now.
+ULOSINO is The Friendly Flow. Visit [ULOSINO.com](https://ulosino.com) now.
 
 ## Features
 
