@@ -27,7 +27,7 @@ export default function Options() {
         <title>ULOSINO &mdash; Options &amp; Legal</title>
       </Head>
 
-      <Stack spacing={4}>
+      <Stack spacing={8}>
         <Stack spacing={2}>
           <Text textStyle="secondary" as="h6">
             Navigate
@@ -66,15 +66,22 @@ export default function Options() {
             Toggle {colorMode === "light" ? "Dark" : "Light"} Mode
           </Button>
           <Button leftIcon={<FiRefreshCw />} onClick={() => router.reload()}>
-            Force App Refresh
+            Refresh ULOSINO
           </Button>
           <Link href="/contact" passHref>
             <Button leftIcon={<FiMessageCircle />}>Contact ULOSINO</Button>
           </Link>
         </Stack>
-        <Text fontSize="xs" pt={4}>
-          You're using ULOSINO version <Version />.
-        </Text>
+        <Stack direction="row" spacing={2}>
+          <Text fontSize="xs">
+            Version <Version />
+          </Text>
+          <Text fontSize="xs">
+            <Link href="https://github.com/ulosino/ulosino/releases">
+              Changelog
+            </Link>
+          </Text>
+        </Stack>
       </Stack>
     </UIProvider>
   );

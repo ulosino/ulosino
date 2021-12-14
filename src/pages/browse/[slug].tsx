@@ -12,9 +12,22 @@ import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
 import Head from "next/head";
+import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
-import { Stack, Heading, Text, Table, Tbody, Tr, Td } from "@chakra-ui/react";
+import {
+  Stack,
+  Flex,
+  Spacer,
+  Heading,
+  Text,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Button,
+} from "@chakra-ui/react";
+import { FiRefreshCw } from "react-icons/fi";
 import UIProvider from "src/UIProvider";
 
 // Pages can use the following components if needed
@@ -29,6 +42,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
     Link: componentNames.includes("Link") ? Link : null,
     Image: componentNames.includes("Image") ? Image : null,
   };
+  const router = useRouter();
   return (
     <UIProvider>
       <Head>
@@ -60,9 +74,19 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
             <MDXRemote {...source} components={components} />
           </Stack>
           <Stack spacing={2} as="section">
-            <Text textStyle="secondary" as="h6">
-              Discuss {metadata.title}
-            </Text>
+            <Flex>
+              <Text textStyle="secondary" as="h6">
+                Discuss {metadata.title}
+              </Text>
+              <Spacer />
+              <Button
+                leftIcon={<FiRefreshCw />}
+                size="sm"
+                onClick={() => router.reload()}
+              >
+                Refresh
+              </Button>
+            </Flex>
             {/* Using Next.js <Script> moves this frame to the end of the page */}
             {/* Will be patched to improve performance and SEO */}
             <script
