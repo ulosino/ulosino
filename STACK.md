@@ -6,11 +6,11 @@ This is a reference outline of the ULOSINO stack.
 
 The file structure of the ULOSINO project separates content and code.
 
-Distribution pages are stored in the `/public/content/browse` folder. This 'distribution store (`dstore`)' also holds other text-heavy files including the privacy policy (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` to create pages that present the content to the user.
+Distribution pages are stored in 'distribution store (`dstore`)' which is currently located in the `/public/content/browse` folder. Other text-heavy files including the privacy policy are here too (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` to create pages that present the content to the user.
 
 The actual code, including pages, components, and providers, is stored in `/src`. Inside `/src` is:
 
-- `/src/pages`, which stores Next.js pages;
+- `/src/pages`, which stores React components mapped to a URL (Next.js pages);
 - `src/components`, which stores React components shared across multiple pages, and;
 - Providers, which are at the top level of `/src`.
 
@@ -48,11 +48,11 @@ These are the primary providers:
 
 ### Testing
 
-ULOSINO uses Cypress for integration testing. Currently only Database Content and display conformity is tested. Components with ID attributes starting with 'testing-' means that the component is a test subject.
+ULOSINO uses Cypress for integration testing. It forms a part of our CI approach, with our tests running automatically through GitHub Actions. Currently only Database Content, search, and display conformity is tested. Components with ID attributes starting with 'testing-' means that the component is a test subject.
 
 ### Code quality
 
-The team at ULOSINO aims to build using good code.
+The team at ULOSINO aims to use good code.
 
 - The Prettier formatter is applied to all pages, without configuration;
 - React Strict Mode is enabled universally;
@@ -65,4 +65,4 @@ ULOSINO uses the MIT license. This allows you to copy or study the ULOSINO stack
 
 ---
 
-Last revised 4th December, 2021.
+Last revised 18th December, 2021.

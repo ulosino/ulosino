@@ -2,17 +2,15 @@
 
 Firstly, a big thanks to you for setting aside your time to contribute! Your contributions will be warmly welcomed.
 
-As a community project, the ULOSINO project thrives and pulses with the work of the community. Read on for comprehensive details on how to contribute to both Database Content and the Source Code.
-
-With ULOSINO, getting an open source OS onto the global stage is very easy. To contribute, you will need a GitHub account.
+With ULOSINO, getting an open source OS onto the global stage is very easy. To contribute, you will need a GitHub account. Read on for comprehensive details on how to contribute to both Database Content and the Source Code.
 
 Remember that all contributions are bound by the Contribution Code of Conduct, available at CODE_OF_CONDUCT.md.
 
 ## Editing a single file
 
-Often you'll want to update a single distribution page or Guide. Luckily this is easy - you don't even have to leave GitHub!
+Often you'll want to update a single distribution page. Luckily this is easy - you don't even have to leave GitHub!
 
-First, go into the distribution file store, available in `/public/content/browse/distributions`. Then find the file you want and open it.
+First, go into the distribution file store, available in `/public/content/browse/`. Then find the file you want and open it.
 
 When you open a file, it'll show something like this:
 
@@ -23,7 +21,6 @@ title: "Pin Oak (Demo)"
 summary: "Distribution page demo"
 date: "2021-10-21"
 version: ""
-status: "Active"
 
 # Other metadata
 platform: ""
@@ -57,6 +54,10 @@ If you want to contribute to the Source Code of ULOSINO, or make mutiple changes
 
 > **Tip:** If you're creating a new distribution page, it is recommended to duplicate `demo.mdx`. This ensures you have the latest metadata available.
 
+> **Note:** Most discontinued operating systems can be carried on ULOSINO, as long as an official reference is still available. A website or archived GitHub/GitLab repository with a README would fulfill this. Please make it clear (first line) that the OS is discontinued.
+
+Below is a recommended way to do this. There are other ways to do the same thing.
+
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your
    own GitHub account and then
    [clone](https://help.github.com/articles/cloning-a-repository/) it to your local system.
@@ -80,19 +81,21 @@ If you want to contribute to the Source Code of ULOSINO, or make mutiple changes
    ```
 
 5. Finalise by compiling a production build:
+
    ```
    npm run build
    npm run start
+
+   # Testing recommended for large contributions
    npx cypress run    # Separate terminal window
    ```
+
 6. If the build passes, you can proceed to make create a pull request for your fork!
 
 Note these guidelines when making pull requests:
 
 - Make your commit comment as descriptive as possible. Include as much information as you can. Explain anything that the file differentials won’t make apparent.
-- Use your comment to document your pull request. Explain your contribution and link to the relevant issue (if applicable).
 - Make sure the relevant labels are used. In most cases this means applying a contribution 'area' (with 'Source', 'Database Content', or 'Backend') and a 'type' (like 'Bug').
-- Make sure the target of your pull request is the relevant branch. Most PRs should pull to the `main` branch.
 
 ## Issues and bugs
 
@@ -110,4 +113,4 @@ For all issues, remember to use labels and try to be as descriptive as possible 
 
 ---
 
-Last revised 18th November, 2021.
+Last revised 18th December, 2021.

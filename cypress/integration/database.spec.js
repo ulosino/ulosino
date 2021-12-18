@@ -7,10 +7,10 @@ describe("Database Tester", () => {
     cy.get("#testing-db-item").find("h2").contains("Demo").click();
     cy.url().should("include", "/browse/");
 
-    // Test local metadata
+    // Test in-page metadata
     cy.get("h2").contains("Distribution page demo");
-    cy.get("p").contains("This isn't a distro.");
-    cy.get("td").contains("Status");
+    cy.get("p").contains("This isn't an operating system.");
+    cy.get("td").contains("Website");
 
     // Test remote metadata
     cy.get("button").contains("Browse").click();
