@@ -16,7 +16,7 @@ export default class Document extends NextDocument {
           />
           <meta
             property="og:description"
-            content="ULOSINO, open source OS info anywhere"
+            content="The Friendly Flow for open source OS info"
           />
           <meta property="og:type" content="website" />
           <meta property="og:locale" content="en_GB" />
