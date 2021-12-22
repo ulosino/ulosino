@@ -24,7 +24,7 @@ export default function Options() {
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; Options &amp; Legal</title>
+        <title>ULOSINO &mdash; Options</title>
       </Head>
 
       <Stack spacing={10}>
@@ -33,7 +33,7 @@ export default function Options() {
             Navigate
           </Text>
           <Link href="/browse" passHref>
-            <Button leftIcon={<FiCompass />}>Browse Distributions</Button>
+            <Button leftIcon={<FiCompass />}>Browse Operating Systems</Button>
           </Link>
           <Link
             href="https://github.com/ulosino/ulosino/blob/main/CONTRIBUTING.md"
