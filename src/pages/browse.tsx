@@ -109,11 +109,7 @@ export default function Browse({
           <Card>
             <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
               <TabList>
-                <Stack
-                  direction={["column", "column", "row"]}
-                  spacing={4}
-                  w="full"
-                >
+                <Stack direction={["column", "column", "row"]} spacing={4}>
                   <Tab shadow="inner">Search by Name</Tab>
                   <Tab shadow="inner">Platform</Tab>
                   <Tab shadow="inner">Desktop</Tab>
@@ -135,7 +131,7 @@ export default function Browse({
                         placeholder="Find an operating system..."
                         id="testing-db-input"
                       />
-                      <AutoCompleteList w="full">
+                      <AutoCompleteList>
                         {AZDistributionData.map(
                           ({
                             id,
@@ -213,7 +209,7 @@ export default function Browse({
                         shadow="inner"
                         placeholder="Filter by platform..."
                       />
-                      <AutoCompleteList w="full">
+                      <AutoCompleteList>
                         {AZDistributionData.map(
                           ({
                             id,
@@ -292,7 +288,7 @@ export default function Browse({
                         shadow="inner"
                         placeholder="Filter by desktop..."
                       />
-                      <AutoCompleteList w="full">
+                      <AutoCompleteList>
                         {AZDistributionData.map(
                           ({
                             id,
@@ -371,7 +367,7 @@ export default function Browse({
                         shadow="inner"
                         placeholder="Filter by startup manager..."
                       />
-                      <AutoCompleteList w="full">
+                      <AutoCompleteList>
                         {AZDistributionData.map(
                           ({
                             id,
@@ -450,7 +446,7 @@ export default function Browse({
                         shadow="inner"
                         placeholder="Filter by package manager..."
                       />
-                      <AutoCompleteList w="full">
+                      <AutoCompleteList>
                         {AZDistributionData.map(
                           ({
                             id,
@@ -529,7 +525,7 @@ export default function Browse({
                         shadow="inner"
                         placeholder="Filter by derived operating system..."
                       />
-                      <AutoCompleteList w="full">
+                      <AutoCompleteList>
                         {AZDistributionData.map(
                           ({
                             id,

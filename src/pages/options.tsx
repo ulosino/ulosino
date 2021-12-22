@@ -27,7 +27,7 @@ export default function Options() {
         <title>ULOSINO &mdash; Options &amp; Legal</title>
       </Head>
 
-      <Stack spacing={8}>
+      <Stack spacing={10}>
         <Stack spacing={2}>
           <Text textStyle="secondary" as="h6">
             Navigate

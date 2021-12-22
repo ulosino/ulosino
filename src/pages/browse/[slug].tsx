@@ -33,6 +33,7 @@ import UIProvider from "src/UIProvider";
 // Pages can use the following components if needed
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
+const Utterences = dynamic(() => import("src/components/Utterences"));
 
 const availableComponents = [Link, Image];
 
@@ -87,17 +88,11 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                 Refresh
               </Button>
             </Flex>
-            {/* Using Next.js <Script> moves this frame to the end of the page */}
-            {/* Will be patched to improve performance and SEO */}
-            <script
-              src="https://utteranc.es/client.js"
-              repo="ulosino/ulosino"
-              issue-term="pathname"
-              label="Page Comments"
-              theme="preferred-color-scheme"
-              crossOrigin="anonymous"
-              async
-            ></script>
+            <Utterences
+              repo={"ulosino/ulosino"}
+              label={"Page Comments"}
+              type={"pathname"}
+            />
           </Stack>
         </Stack>
         <Stack spacing={2} as="section">
