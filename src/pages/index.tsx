@@ -54,7 +54,7 @@ export default function Home({
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; Open source OS database</title>
+        <title>ULOSINO &mdash; Open source operating system database</title>
       </Head>
 
       <Stack direction="column" spacing={10}>
@@ -84,7 +84,7 @@ export default function Home({
                 placeholder="Find an operating system..."
                 id="testing-db-input"
               />
-              <AutoCompleteList w="full">
+              <AutoCompleteList>
                 {AZDistributionData.map(
                   ({
                     id,
