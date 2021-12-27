@@ -1,3 +1,3 @@
 export default function Version() {
-  return <span>1.2.5</span>;
+  return <span>1.2.6</span>;
 }

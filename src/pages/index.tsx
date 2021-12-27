@@ -16,7 +16,7 @@ import {
   Spacer,
   FormControl,
 } from "@chakra-ui/react";
-import { FiCompass } from "react-icons/fi";
+import { FiCompass, FiTwitter } from "react-icons/fi";
 
 import {
   AutoCompleteInput,
@@ -64,15 +64,26 @@ export default function Home({
               Welcome to ULOSINO
             </Text>
             <Spacer />
-            <Link href="/browse" passHref>
-              <Button
-                leftIcon={<FiCompass />}
-                size="sm"
-                display={{ base: "none", md: "flex" }}
-              >
-                Browse All OSs
-              </Button>
-            </Link>
+            <Stack direction="row" spacing={2}>
+              <Link href="https://twitter.com/ulosino" passHref>
+                <Button
+                  leftIcon={<FiTwitter />}
+                  size="sm"
+                  display={{ base: "none", md: "flex" }}
+                >
+                  @ulosino
+                </Button>
+              </Link>
+              <Link href="/browse" passHref>
+                <Button
+                  leftIcon={<FiCompass />}
+                  size="sm"
+                  display={{ base: "none", md: "flex" }}
+                >
+                  Browse All OSs
+                </Button>
+              </Link>
+            </Stack>
           </Flex>
           <FormControl>
             <AutoComplete>
