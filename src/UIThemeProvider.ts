@@ -99,10 +99,9 @@ const UITheme = extendTheme({
     body: "Public Sans",
   },
   textStyles: {
-    // Smaller subheadings, similar to iOS
     secondary: {
       fontSize: "sm",
-      fontWeight: 200,
+      fontWeight: 600,
       lineHeight: "200%",
       textTransform: "uppercase",
     },

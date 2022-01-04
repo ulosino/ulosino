@@ -16,18 +16,15 @@ import {
   Spacer,
   FormControl,
 } from "@chakra-ui/react";
-import { FiCompass, FiTwitter } from "react-icons/fi";
+import { HiOutlineDatabase } from "react-icons/hi";
+
+import UIProvider from "src/UIProvider";
 
 import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
-
-import UIProvider from "src/UIProvider";
-import ExplainerHero from "src/components/ExplainerHero";
-import FlowHero from "src/components/FlowHero";
-import About from "src/components/About";
 
 import dynamic from "next/dynamic";
 const AutoComplete = dynamic(() =>
@@ -47,8 +44,6 @@ export default function Home({
     startup: string;
     desktop: string;
     packagemgr: string;
-    shell: string;
-    descends: string;
   }[];
 }) {
   return (
@@ -57,33 +52,22 @@ export default function Home({
         <title>ULOSINO &mdash; Open source operating system database</title>
       </Head>
 
-      <Stack direction="column" spacing={10}>
+      <SimpleGrid minChildWidth="280px" spacing={10} mt={16}>
         <Stack direction="column" spacing={2} mt={20} mb={40} mx={10}>
           <Flex>
             <Text textStyle="secondary" as="h6">
-              Welcome to ULOSINO
+              Start
             </Text>
             <Spacer />
-            <Stack direction="row" spacing={2}>
-              <Link href="https://twitter.com/ulosino" passHref>
-                <Button
-                  leftIcon={<FiTwitter />}
-                  size="sm"
-                  display={{ base: "none", md: "flex" }}
-                >
-                  @ulosino
-                </Button>
-              </Link>
-              <Link href="/browse" passHref>
-                <Button
-                  leftIcon={<FiCompass />}
-                  size="sm"
-                  display={{ base: "none", md: "flex" }}
-                >
-                  Browse All OSs
-                </Button>
-              </Link>
-            </Stack>
+            <Link href="/browse" passHref>
+              <Button
+                leftIcon={<HiOutlineDatabase />}
+                size="sm"
+                display={{ base: "none", md: "flex" }}
+              >
+                Browse All OSs
+              </Button>
+            </Link>
           </Flex>
           <FormControl>
             <AutoComplete>
@@ -106,8 +90,6 @@ export default function Home({
                     desktop,
                     startup,
                     packagemgr,
-                    shell,
-                    descends,
                   }) => (
                     <AutoCompleteItem
                       key={`option-${title}`}
@@ -136,8 +118,6 @@ export default function Home({
                             {packagemgr && (
                               <Text fontSize="sm">{packagemgr}</Text>
                             )}
-                            {shell && <Text fontSize="sm">{shell}</Text>}
-                            {descends && <Text fontSize="sm">{descends}</Text>}
                           </Stack>
                         </Box>
                       </Link>
@@ -149,7 +129,7 @@ export default function Home({
           </FormControl>
           <Link href="/browse" passHref>
             <Button
-              leftIcon={<FiCompass />}
+              leftIcon={<HiOutlineDatabase />}
               display={{ base: "flex", md: "none" }}
             >
               Browse All
@@ -157,12 +137,10 @@ export default function Home({
           </Link>
         </Stack>
 
-        <FlowHero />
-        <SimpleGrid minChildWidth="280px" spacing={10}>
-          <ExplainerHero />
-          <About />
-        </SimpleGrid>
-      </Stack>
+        <Stack spacing={10}>
+          <Text>Placeholder</Text>
+        </Stack>
+      </SimpleGrid>
     </UIProvider>
   );
 }

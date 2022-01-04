@@ -10,7 +10,6 @@ import UITheme from "src/UIThemeProvider";
 import "@fontsource/public-sans/variable.css";
 
 // Import global typography using fixed-axle fonts (compatibility)
-import "@fontsource/public-sans/200.css";
 import "@fontsource/public-sans/400.css";
 import "@fontsource/public-sans/600.css";
 

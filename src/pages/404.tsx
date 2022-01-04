@@ -5,16 +5,18 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import {
+  Tag,
   Heading,
   Text,
   Button,
   Box,
   Stack,
-  Center,
-  UnorderedList,
-  ListItem,
+  Flex,
+  Spacer,
+  Container,
+  Icon,
 } from "@chakra-ui/react";
-import { FiChevronLeft, FiChevronsLeft } from "react-icons/fi";
+import { HiChevronLeft, HiArrowLeft, HiCursorClick } from "react-icons/hi";
 import { AlertIcon } from "src/components/Icons";
 
 import { useStyleConfig } from "@chakra-ui/react";
@@ -40,58 +42,52 @@ export default function Custom404() {
         <title>ULOSINO &mdash; Page Not Found</title>
       </Head>
 
-      <Center mt={12}>
-        <Card variant="alert">
-          <Stack direction={["column", "row"]} spacing={10}>
+      <Container maxW="container.sm" mt={16}>
+        <Stack direction="column" spacing={8}>
+          <Flex>
+            <Text textStyle="secondary" as="h6">
+              Page Not Found
+            </Text>
+            <Spacer />
+            <Tag bg="alert" rounded="lg" shadow="md" fontSize="xs">
+              HTTP 404
+            </Tag>
+          </Flex>
+          <Stack direction="row" spacing={8}>
             <Box display="block">
               <AlertIcon />
             </Box>
-            <Stack direction="column" spacing={4}>
-              <Text textStyle="secondary" as="h1">
-                Page Not Found
+            <Stack direction="column" spacing={2}>
+              <Heading size="md">There is nothing to show at this URL.</Heading>
+              <Text>
+                If you typed the URL manually, check it for spelling mistakes.
+                If there was once a page here, it was probably moved or deleted.
               </Text>
-              <Heading size="lg" as="h3">
-                Into the oblivion!
-              </Heading>
-              <Stack direction="column" spacing={4}>
-                <Text>There is nothing to show at this URL.</Text>
-                <Card display={{ base: "none", sm: "block" }}>
-                  <Text textStyle="secondary">Troubleshoot</Text>
-                  <UnorderedList fontSize="sm">
-                    <ListItem>
-                      If there was once a page here, it may have been deleted or
-                      renamed.
-                    </ListItem>
-                    <ListItem>
-                      If you typed the page URL directly, check its spelling.
-                      Remove special characters.
-                    </ListItem>
-                    <ListItem>
-                      If you're looking for an OS, the URL should look like
-                      this: "ulosino.com/browse/ubuntu"
-                    </ListItem>
-                  </UnorderedList>
-                </Card>
-                <Text>Return Home to start a search.</Text>
-              </Stack>
-              <Stack direction="column" spacing={2} pt={2}>
-                <Link href="/" passHref>
-                  <Button leftIcon={<FiChevronsLeft />} size="lg">
-                    Go Home
-                  </Button>
-                </Link>
-                <Button
-                  leftIcon={<FiChevronLeft />}
-                  size="sm"
-                  onClick={() => router.back()}
-                >
-                  Go Back
-                </Button>
-              </Stack>
             </Stack>
           </Stack>
-        </Card>
-      </Center>
+          <Stack direction="row" spacing={8}>
+            <Box display="block">
+              <Card p={2} pb={1} rounded="2xl">
+                <Icon as={HiCursorClick} w={12} h={12} />
+              </Card>
+            </Box>
+            <Stack direction="column" spacing={2} w="full">
+              <Link href="/" passHref>
+                <Button leftIcon={<HiArrowLeft />} size="lg">
+                  Go Home
+                </Button>
+              </Link>
+              <Button
+                leftIcon={<HiChevronLeft />}
+                size="sm"
+                onClick={() => router.back()}
+              >
+                Go Back
+              </Button>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Container>
     </UIProvider>
   );
 }

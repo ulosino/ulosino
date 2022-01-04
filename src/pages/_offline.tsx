@@ -3,8 +3,17 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { Heading, Text, Button, Box, Stack, Center } from "@chakra-ui/react";
-import { FiChevronLeft, FiRefreshCw } from "react-icons/fi";
+import {
+  Tag,
+  Heading,
+  Text,
+  Button,
+  Box,
+  Stack,
+  Container,
+  Icon,
+} from "@chakra-ui/react";
+import { HiChevronLeft, HiOutlineRefresh, HiCursorClick } from "react-icons/hi";
 import { AlertIcon } from "src/components/Icons";
 
 import { useStyleConfig } from "@chakra-ui/react";
@@ -22,52 +31,59 @@ function Card(props) {
 
 import UIProvider from "src/UIProvider";
 
-export default function Custom500() {
+export default function CacheFallback() {
   const router = useRouter();
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; Offline</title>
+        <title>ULOSINO &mdash; Disconnected</title>
       </Head>
 
-      <Center mt={12}>
-        <Card variant="alert">
-          <Stack direction={["column", "row"]} spacing={10}>
+      <Container maxW="container.sm" mt={16}>
+        <Stack direction="column" spacing={8}>
+          <Text textStyle="secondary" as="h6">
+            Disconnected From Server
+          </Text>
+          <Stack direction="row" spacing={8}>
             <Box display="block">
               <AlertIcon />
             </Box>
-            <Stack direction="column" spacing={4}>
-              <Text textStyle="secondary" as="h1">
-                Disconnected From Server
+            <Stack direction="column" spacing={2}>
+              <Heading size="md">You're offline.</Heading>
+              <Text>
+                There were issues downloading data from the server. Check your
+                data or networking settings and get back online.
               </Text>
-              <Heading size="lg" as="h3">
-                You're offline
-              </Heading>
-              <Stack direction="column" spacing={2}>
-                <Text>There were issues reaching the server.</Text>
-                <Text>Check your data or networking settings.</Text>
-                <Text>Refresh to try again.</Text>
-              </Stack>
-              <Stack direction="column" spacing={2} pt={2}>
-                <Button
-                  leftIcon={<FiRefreshCw />}
-                  size="lg"
-                  onClick={() => router.reload()}
-                >
-                  Try Again
-                </Button>
-                <Button
-                  leftIcon={<FiChevronLeft />}
-                  size="sm"
-                  onClick={() => router.back()}
-                >
-                  Go Back
-                </Button>
-              </Stack>
+              <Text fontSize="xs">
+                If you are connected, please hold on as the server may be down.
+              </Text>
             </Stack>
           </Stack>
-        </Card>
-      </Center>
+          <Stack direction="row" spacing={8}>
+            <Box display="block">
+              <Card p={2} pb={1} rounded="2xl">
+                <Icon as={HiCursorClick} w={12} h={12} />
+              </Card>
+            </Box>
+            <Stack direction="column" spacing={2} w="full">
+              <Button
+                leftIcon={<HiOutlineRefresh />}
+                size="lg"
+                onClick={() => router.reload()}
+              >
+                Try Again
+              </Button>
+              <Button
+                leftIcon={<HiChevronLeft />}
+                size="sm"
+                onClick={() => router.back()}
+              >
+                Go Back
+              </Button>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Container>
     </UIProvider>
   );
 }
