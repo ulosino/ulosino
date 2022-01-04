@@ -3,7 +3,6 @@ import { Container, Flex, useColorModeValue } from "@chakra-ui/react";
 import StartNavigation from "src/components/StartNavigation";
 import EndNavigation from "src/components/EndNavigation";
 import LegalNavigation from "./components/LegalNavigation";
-import JSWarning from "src/components/JSWarning";
 
 export default function UIProvider({ children }) {
   return (
@@ -13,9 +12,6 @@ export default function UIProvider({ children }) {
       direction="column"
       bg={useColorModeValue("gray.50", "inherit")}
     >
-      <noscript>
-        <JSWarning />
-      </noscript>
       {/* Margin is not used here because of desktop/mobile variability */}
       <Container maxW="container.lg">
         <StartNavigation />
