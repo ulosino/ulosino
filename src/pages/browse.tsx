@@ -23,6 +23,7 @@ const AutoComplete = dynamic(() =>
 import {
   Heading,
   Text,
+  Badge,
   Box,
   Stack,
   Flex,
@@ -63,6 +64,7 @@ export default function Browse({
     title: string;
     version: string;
     summary: string;
+    category: string;
     platform: string;
     startup: string;
     desktop: string;
@@ -74,6 +76,7 @@ export default function Browse({
     title: string;
     version: string;
     summary: string;
+    category: string;
     platform: string;
     startup: string;
     desktop: string;
@@ -85,6 +88,7 @@ export default function Browse({
     title: string;
     version: string;
     summary: string;
+    category: string;
     platform: string;
     startup: string;
     desktop: string;
@@ -149,6 +153,7 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
@@ -177,6 +182,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -219,6 +225,7 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
@@ -246,6 +253,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -290,6 +298,7 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
@@ -317,6 +326,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -361,6 +371,7 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
@@ -388,6 +399,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -432,6 +444,7 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
@@ -459,6 +472,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -511,6 +525,7 @@ export default function Browse({
                       title,
                       version,
                       summary,
+                      category,
                       platform,
                       desktop,
                       startup,
@@ -529,6 +544,7 @@ export default function Browse({
                             display={{ base: "flex", md: "none" }}
                             spacing={4}
                           >
+                            {category && <Badge>{category}</Badge>}
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -538,6 +554,7 @@ export default function Browse({
                             display={{ base: "none", md: "flex" }}
                             spacing={4}
                           >
+                            <Badge>{category}</Badge>
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -560,6 +577,7 @@ export default function Browse({
                       title,
                       version,
                       summary,
+                      category,
                       platform,
                       desktop,
                       startup,
@@ -578,6 +596,7 @@ export default function Browse({
                             display={{ base: "flex", md: "none" }}
                             spacing={4}
                           >
+                            {category && <Badge>{category}</Badge>}
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -587,6 +606,7 @@ export default function Browse({
                             display={{ base: "none", md: "flex" }}
                             spacing={4}
                           >
+                            <Badge>{category}</Badge>
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -609,6 +629,7 @@ export default function Browse({
                       title,
                       version,
                       summary,
+                      category,
                       platform,
                       desktop,
                       startup,
@@ -632,6 +653,7 @@ export default function Browse({
                             display={{ base: "flex", md: "none" }}
                             spacing={4}
                           >
+                            {category && <Badge>{category}</Badge>}
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -641,6 +663,7 @@ export default function Browse({
                             display={{ base: "none", md: "flex" }}
                             spacing={4}
                           >
+                            <Badge>{category}</Badge>
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}

@@ -8,6 +8,7 @@ import { getDistributions } from "src/DBProvider";
 import {
   Heading,
   Text,
+  Badge,
   Button,
   Box,
   Stack,
@@ -38,8 +39,9 @@ export default function Home({
     date: string;
     id: string;
     title: string;
-    version: string;
     summary: string;
+    category: string;
+    version: string;
     platform: string;
     startup: string;
     desktop: string;
@@ -85,6 +87,7 @@ export default function Home({
                     id,
                     title,
                     summary,
+                    category,
                     version,
                     platform,
                     desktop,
@@ -111,6 +114,7 @@ export default function Home({
                             display={{ base: "none", sm: "flex" }}
                             spacing={4}
                           >
+                            {category && <Badge>{category}</Badge>}
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}

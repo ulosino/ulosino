@@ -26,6 +26,7 @@ import {
   Tr,
   Td,
   Button,
+  Badge,
 } from "@chakra-ui/react";
 import { FiRefreshCw } from "react-icons/fi";
 import UIProvider from "src/UIProvider";
@@ -120,6 +121,14 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                   <Td>{metadata.version}</Td>
                 </Tr>
               )}
+              {metadata.category && (
+                <Tr>
+                  <Td>Category</Td>
+                  <Td>
+                    <Badge>{metadata.category}</Badge>
+                  </Td>
+                </Tr>
+              )}
               {metadata.descends && (
                 <Tr>
                   <Td>Based on</Td>
@@ -142,6 +151,12 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                 <Tr>
                   <Td>Preinstalled Browser</Td>
                   <Td>{metadata.browser}</Td>
+                </Tr>
+              )}
+              {metadata.productivity && (
+                <Tr>
+                  <Td>Preinstalled Productivity Software</Td>
+                  <Td>{metadata.productivity}</Td>
                 </Tr>
               )}
               {metadata.shell && (

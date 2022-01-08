@@ -19,6 +19,7 @@ const AutoComplete = dynamic(() =>
 import {
   Heading,
   Text,
+  Badge,
   Box,
   Stack,
   Flex,
@@ -49,7 +50,6 @@ export default function AdvancedSearch({
     category: string;
     desktop: string;
     browser: string;
-    productivity: string;
     startup: string;
     packagemgr: string;
     shell: string;
@@ -108,7 +108,14 @@ export default function AdvancedSearch({
                     />
                     <AutoCompleteList>
                       {AZDistributionData.map(
-                        ({ id, title, summary, version, platform }) => (
+                        ({
+                          id,
+                          title,
+                          summary,
+                          category,
+                          version,
+                          platform,
+                        }) => (
                           <AutoCompleteItem
                             key={`option-${title}`}
                             value={title}
@@ -131,6 +138,7 @@ export default function AdvancedSearch({
                                   display={{ base: "none", sm: "flex" }}
                                   spacing={4}
                                 >
+                                  {category && <Badge>{category}</Badge>}
                                   {version && (
                                     <Text fontSize="sm">{version}</Text>
                                   )}
@@ -205,7 +213,14 @@ export default function AdvancedSearch({
                     />
                     <AutoCompleteList>
                       {AZDistributionData.map(
-                        ({ id, title, summary, version, platform }) => (
+                        ({
+                          id,
+                          title,
+                          summary,
+                          category,
+                          version,
+                          platform,
+                        }) => (
                           <AutoCompleteItem
                             key={`option-${platform}`}
                             value={platform}
@@ -227,6 +242,7 @@ export default function AdvancedSearch({
                                   display={{ base: "none", sm: "flex" }}
                                   spacing={4}
                                 >
+                                  {category && <Badge>{category}</Badge>}
                                   {version && (
                                     <Text fontSize="sm">{version}</Text>
                                   )}
@@ -260,7 +276,6 @@ export default function AdvancedSearch({
                       shadow="inner"
                       placeholder="Filter by category..."
                       id="testing-db-input"
-                      isDisabled
                     />
                     <AutoCompleteList>
                       {AZDistributionData.map(
@@ -268,13 +283,13 @@ export default function AdvancedSearch({
                           id,
                           title,
                           summary,
+                          category,
                           version,
                           platform,
-                          category,
                         }) => (
                           <AutoCompleteItem
                             key={`option-${category}`}
-                            value={title}
+                            value={category}
                             maxSuggestions={5}
                             mx={3}
                             id="testing-db-item"
@@ -294,6 +309,7 @@ export default function AdvancedSearch({
                                   display={{ base: "none", sm: "flex" }}
                                   spacing={4}
                                 >
+                                  {category && <Badge>{category}</Badge>}
                                   {version && (
                                     <Text fontSize="sm">{version}</Text>
                                   )}
@@ -309,7 +325,7 @@ export default function AdvancedSearch({
                     </AutoCompleteList>
                   </AutoComplete>
                   <FormHelperText>
-                    Search using the category of an operating system.
+                    Search the contents of a specific operating system category.
                   </FormHelperText>
                 </FormControl>
               </TabPanel>
@@ -325,7 +341,6 @@ export default function AdvancedSearch({
               <Stack direction={["column", "column", "row"]} spacing={4}>
                 <Tab shadow="inner">Desktop</Tab>
                 <Tab shadow="inner">Browser</Tab>
-                <Tab shadow="inner">Productivity Software</Tab>
               </Stack>
             </TabList>
             <TabPanels>
@@ -467,83 +482,6 @@ export default function AdvancedSearch({
                   </FormHelperText>
                 </FormControl>
               </TabPanel>
-              {/* Search by productivity software */}
-              {/* 
-              <TabPanel px={0} pb={0} pt={4}>
-                <FormControl>
-                  <AutoComplete>
-                    <AutoCompleteInput
-                      variant="outline"
-                      size="md"
-                      borderRadius="xl"
-                      shadow="inner"
-                      placeholder="Filter by productivity software..."
-                      isDisabled
-                    />
-                    <AutoCompleteList>
-                      {AZDistributionData.map(
-                        ({
-                          id,
-                          title,
-                          summary,
-                          version,
-                          platform,
-                          desktop,
-                          browser,
-                          productivity,
-                        }) => (
-                          <AutoCompleteItem
-                            key={`option-${productivity}`}
-                            value={productivity}
-                            maxSuggestions={5}
-                            mx={3}
-                          >
-                            <Link
-                              href={`/browse/${id}`}
-                              passHref
-                              key={`/browse/${id}`}
-                            >
-                              <Box p={2} mb={2}>
-                                <Heading size="md">{title}</Heading>
-                                {summary && (
-                                  <Text fontSize="sm">"{summary}"</Text>
-                                )}
-                                <Stack
-                                  direction="row"
-                                  display={{ base: "none", sm: "flex" }}
-                                  spacing={4}
-                                >
-                                  {version && (
-                                    <Text fontSize="sm">{version}</Text>
-                                  )}
-                                  {platform && (
-                                    <Text fontSize="sm">{platform}</Text>
-                                  )}
-                                  {desktop && (
-                                    <Text fontSize="sm">{desktop}</Text>
-                                  )}
-                                  {browser && (
-                                    <Text fontSize="sm">{browser}</Text>
-                                  )}
-                                  {productivity && (
-                                    <Text fontSize="sm">{productivity}</Text>
-                                  )}
-                                </Stack>
-                              </Box>
-                            </Link>
-                          </AutoCompleteItem>
-                        )
-                      )}
-                    </AutoCompleteList>
-                  </AutoComplete>
-                  <FormHelperText>
-                    Search for operating systems that use specific preinstalled
-                    office and media software, not including operating system
-                    integrated software, text editors, and format readers.
-                  </FormHelperText>
-                </FormControl>
-              </TabPanel>
-               */}
             </TabPanels>
           </Tabs>
         </Stack>

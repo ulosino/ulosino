@@ -6,7 +6,7 @@ description: "Learn basic lexicon"
 
 # Definitions
 
-When you're using ULOSINO, you might come across some unfamiliar terms. This page defines the lexicon.
+When you're using ULOSINO, you might come across some unfamiliar terms. This page goes through some of the lexicon.
 
 ---
 
@@ -14,32 +14,28 @@ When you're using ULOSINO, you might come across some unfamiliar terms. This pag
 
 **Architecture &amp; Platform (x86, arm, risc, 32-bit, 64-bit)** The architecture of a computer logic platform refers to core design of the CPU or System-on-Chip and it's methods of communications (instruction set). Code is not interoperable between platforms, with rare exceptions. `x86` and `arm` are the most common architectures. Traditional `x86` processors are common in desktop and laptop computers. `arm` systems are low on energy consumption and are very common in mobile devices. 32-bit architectures are legacy platforms that use 32 bits (rather than 64) to store data (binary integers).
 
----
-
 **BSD &amp; Linux** This refers to the BSD-decendents and Linux operating systems respectively. Importantly, Linux is strictly only a kernel and requires packaging with other software to be useful, while BSD is an operating system in itself. Both decended from Unix and are Unix-like, however they aren't interoperable, with exceptions. Apple Inc.'s macOS (and it's decendents) is derived from BSD, but uses mostly proprietary software.
 
----
-
 **Frontend &amp; Backend** In a stack of code, it's often useful to divide the code between what the user works with and doesn't work with. For example, a length converter composes of the user's measurement and unit (frontend) - when the user clicks a "Convert" button, the mathematics behind the conversion produces the output measurement. The backend makes the frontend work, but it's not what the user interacts with (in this case, arithmetic). In an operating system, the frontend usually composes of the user interface (desktop, terminal, login program), while the backend is made up of the kernel, libraries, and shell.
-
----
 
 **Kernel** The kernel is the core of the operating system. It communicates with hardware, schedules processes and handles fatal errors. "Monolithic" kernels (including Linux and the BSD kernel) integrate large masses of code into the kernel, while "microkernels" offload most tasks out of the kernel (into user mode) so that they are modular, at the expense of performance. A "hybrid" model attempts to integrate the best of both concepts.
 
 **Kernel Panic** A kernel panic is a response to (rare) fatal errors (where the system can no longer safely operate). Debugging information may appear on the display (requiring a manual restart) or the system may restart automatically. On Windows, the equivalent is a "bug check" which results in a "stop code" (colloquially known as a "blue screen of death").
 
----
-
 **Operating System (OS)** The operating system is a large software stack, with many utilities, pre-installed software, background tools (daemons), that makes modern software work. You could think of it like the foundation of modern software; the better the foundation, the heavier (bigger and better) the software you use can (and will) be.
-
----
 
 **Packages, Repositories, and Rolling Release** Packages are collections of files that form software, traditionally managed by a package manager. These are hosted on repositories, large database of software. "Rolling release" operating system releases that uses steady releases of individual packages, rather than producing a bundle of updates as a larger OS release.
 
----
-
 **User Interface (Terminal, GUI)** This refers to the way you'll interact with the system (the user interface). In a terminal environment, you'll be using a shell to pass text-based commands to the system. It's often used in lightweight or server operating systems or for administrative work. A GUI (Graphical User Interface) uses visual metaphors like menus, windows, and other such elements. These elements are rendered by a window server.
 
+**Superuser** The superuser (or "root") is an internal user account with full control over the system. It can delete system files, view the contents of user accounts (without passwords), etc. In the terminal shell, a command can run using the superuser by prepending it with `sudo`. Many systems reserve `sudo` to an "administrator" account.
+
 ---
 
-**Superuser** The superuser (or "root") is an internal user account with full control over the system. It can delete system files, view the contents of user accounts (without passwords), etc. In the terminal shell, a command can run using the superuser by prepending it with `sudo`. Many systems reserve `sudo` to an "administrator" account.
+### Category Definitions
+
+Most operating systems on ULOSINO are categorised using these categories:
+
+<CategoryDefinitions />
+
+Categories can be searched using Advanced Search.

@@ -53,6 +53,40 @@ export const Card = {
   },
 };
 
+const Badge = {
+  // The styles all button have in common
+  baseStyle: { px: 4, pt: "0.5", h: "20px" },
+  // Two sizes: sm and md
+  sizes: {
+    sm: {
+      fontSize: "xs",
+      borderRadius: "full",
+    },
+    lg: {
+      fontSize: "md",
+      borderRadius: "xl",
+    },
+  },
+  // Two variants: outline and solid
+  variants: {
+    outline: {
+      border: "1px solid",
+      borderColor: "secondary",
+      color: "inherit",
+    },
+    solid: {
+      bg: "secondary",
+      color: "white",
+      shadow: "md",
+    },
+  },
+  // The default size and variant values
+  defaultProps: {
+    size: "sm",
+    variant: "solid",
+  },
+};
+
 export const Heading = {
   baseStyle: {
     fontWeight: 600,
@@ -109,6 +143,7 @@ const UITheme = extendTheme({
   components: {
     Button,
     Card,
+    Badge,
     Table,
     Heading,
   },
