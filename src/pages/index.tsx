@@ -11,7 +11,7 @@ import {
   Button,
   Box,
   Stack,
-  SimpleGrid,
+  Container,
   Flex,
   Spacer,
   FormControl,
@@ -49,11 +49,11 @@ export default function Home({
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; Open source operating system database</title>
+        <title>ULOSINO &mdash; Open Source Operating System Database</title>
       </Head>
 
-      <SimpleGrid minChildWidth="280px" spacing={10} mt={16}>
-        <Stack direction="column" spacing={2} mt={20} mb={40} mx={10}>
+      <Container maxW="container.sm">
+        <Stack direction="column" spacing={2} mt={16} mx={10}>
           <Flex>
             <Text textStyle="secondary" as="h6">
               Start
@@ -136,11 +136,7 @@ export default function Home({
             </Button>
           </Link>
         </Stack>
-
-        <Stack spacing={10}>
-          <Text>Placeholder</Text>
-        </Stack>
-      </SimpleGrid>
+      </Container>
     </UIProvider>
   );
 }

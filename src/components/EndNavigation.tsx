@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Stack, Flex, Spacer, Center, Button } from "@chakra-ui/react";
-import { HiChevronDoubleUp, HiOutlineSupport, HiCode } from "react-icons/hi";
+import { HiArrowUp, HiOutlineSupport, HiCode } from "react-icons/hi";
 import { FiTwitter } from "react-icons/fi";
 
 import LegalNavigation from "src/components/LegalNavigation";
@@ -10,7 +10,7 @@ export default function EndNavigation() {
   return (
     <Flex id="testing-display-footer" as="footer">
       <Link href="#" passHref>
-        <Button leftIcon={<HiChevronDoubleUp />} size="sm">
+        <Button leftIcon={<HiArrowUp />} size="sm">
           Jump to Top
         </Button>
       </Link>
