@@ -1,6 +1,6 @@
 # ULOSINO
 
-[![ULOSINO](./public/brand/flag.png)]()
+[![ULOSINO](./public/brand/alternative-flag.png)]()
 
 ULOSINO is the modern setting for open source operating system information. Open to community contributions, ULOSINO aims to let you connect direct to culture.
 
