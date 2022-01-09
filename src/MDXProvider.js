@@ -4,7 +4,7 @@ import { Heading, Text, Divider, Code } from "@chakra-ui/react";
 
 const ChakraComponents = {
   h1: (props) => <Heading size="3xl" mb={8} {...props} />,
-  h2: (props) => <Heading size="md" {...props} />,
+  h2: (props) => <Heading size="md" mb={2} {...props} />,
   h3: (props) => <Text textStyle="secondary" {...props} />,
   p: (props) => <Text {...props} my={2} />,
   hr: (props) => <Divider {...props} my={4} />,

@@ -42,9 +42,8 @@ export default function Press() {
               2022 Brand Assets
             </Text>
             <Text fontSize="sm">
-              Even though the images below are free to use, they represent the
-              ULOSINO web service only. Don't modify, redistribute, or sell
-              these brand assets.
+              The brand assets below represent the ULOSINO web service only. Do
+              not modify or sell these images, or use them for something else.
             </Text>
           </Stack>
           <SimpleGrid minChildWidth="280px" spacing={10}>

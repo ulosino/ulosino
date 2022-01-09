@@ -54,9 +54,7 @@ export const Card = {
 };
 
 const Badge = {
-  // The styles all button have in common
   baseStyle: { px: 4, pt: "0.5", h: "20px" },
-  // Two sizes: sm and md
   sizes: {
     sm: {
       fontSize: "xs",
@@ -67,23 +65,41 @@ const Badge = {
       borderRadius: "xl",
     },
   },
-  // Two variants: outline and solid
   variants: {
-    outline: {
-      border: "1px solid",
-      borderColor: "secondary",
-      color: "inherit",
-    },
     solid: {
       bg: "secondary",
       color: "white",
       shadow: "md",
     },
   },
-  // The default size and variant values
   defaultProps: {
     size: "sm",
     variant: "solid",
+  },
+};
+
+export const Tabs = {
+  defaultProps: {
+    variant: "solid-rounded",
+    colorScheme: "gray",
+    size: "sm",
+  },
+};
+
+// Not working, applied manually
+/*
+export const Tab = {
+  defaultProps: {
+    shadow: "inner",
+  },
+};
+*/
+
+export const TabPanel = {
+  defaultProps: {
+    px: 0,
+    pb: 0,
+    pt: 4,
   },
 };
 
@@ -144,6 +160,7 @@ const UITheme = extendTheme({
     Button,
     Card,
     Badge,
+    Tabs,
     Table,
     Heading,
   },

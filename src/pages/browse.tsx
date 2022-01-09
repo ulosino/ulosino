@@ -110,7 +110,7 @@ export default function Browse({
               Search &amp; List
             </Button>
           </Link>
-          <Link href="/browse/advanced" passHref>
+          <Link href="/search" passHref>
             <Button leftIcon={<HiOutlineSearch />} size="sm">
               Advanced Search
             </Button>
@@ -124,9 +124,13 @@ export default function Browse({
             Make a Search
           </Text>
           <Card>
-            <Tabs variant="soft-rounded" colorScheme="gray" size="sm">
+            <Tabs>
               <TabList>
-                <Stack direction={["column", "column", "row"]} spacing={4}>
+                <Stack
+                  direction={["column", "column", "row"]}
+                  spacing={4}
+                  w="full"
+                >
                   <Tab shadow="inner">Search by Name</Tab>
                   <Tab shadow="inner">Platform</Tab>
                   <Tab shadow="inner">Desktop</Tab>
@@ -508,9 +512,9 @@ export default function Browse({
           <Text textStyle="secondary" as="h6">
             All Operating Systems
           </Text>
-          <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
+          <Tabs isLazy>
             <TabList id="testing-display-tabList">
-              <Stack direction="row" spacing={4}>
+              <Stack direction="row" spacing={4} w="full">
                 <Tab shadow="inner">Alphabetical</Tab>
                 <Tab shadow="inner">Newest</Tab>
                 <Tab shadow="inner">Oldest</Tab>

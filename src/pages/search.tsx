@@ -63,7 +63,7 @@ export default function AdvancedSearch({
       </Head>
 
       <Flex direction={["column", "column", "row"]} mb={8}>
-        <Heading size="3xl">Browse</Heading>
+        <Heading size="3xl">Advanced Search</Heading>
         <Spacer />
         <Stack direction={["column", "column", "row"]} spacing={4} pt={4}>
           <Link href="/browse" passHref>
@@ -71,7 +71,7 @@ export default function AdvancedSearch({
               Search &amp; List
             </Button>
           </Link>
-          <Link href="/browse/advanced" passHref>
+          <Link href="/search" passHref>
             <Button leftIcon={<HiOutlineSearch />} size="sm" isActive>
               Advanced Search
             </Button>
@@ -84,9 +84,13 @@ export default function AdvancedSearch({
           <Text textStyle="secondary" as="h6">
             Search by Name, Platform, and Category
           </Text>
-          <Tabs variant="soft-rounded" colorScheme="gray" size="sm">
+          <Tabs>
             <TabList>
-              <Stack direction={["column", "column", "row"]} spacing={4}>
+              <Stack
+                direction={["column", "column", "row"]}
+                spacing={4}
+                w="full"
+              >
                 <Tab shadow="inner">Name</Tab>
                 <Tab shadow="inner">Summary</Tab>
                 <Tab shadow="inner">Platform</Tab>
@@ -336,9 +340,13 @@ export default function AdvancedSearch({
           <Text textStyle="secondary" as="h6">
             Search by Preinstalled Software
           </Text>
-          <Tabs variant="soft-rounded" colorScheme="gray" size="sm">
+          <Tabs>
             <TabList>
-              <Stack direction={["column", "column", "row"]} spacing={4}>
+              <Stack
+                direction={["column", "column", "row"]}
+                spacing={4}
+                w="full"
+              >
                 <Tab shadow="inner">Desktop</Tab>
                 <Tab shadow="inner">Browser</Tab>
               </Stack>
@@ -489,9 +497,13 @@ export default function AdvancedSearch({
           <Text textStyle="secondary" as="h6">
             Search by System Features
           </Text>
-          <Tabs variant="soft-rounded" colorScheme="gray" size="sm">
+          <Tabs>
             <TabList>
-              <Stack direction={["column", "column", "row"]} spacing={4}>
+              <Stack
+                direction={["column", "column", "row"]}
+                spacing={4}
+                w="full"
+              >
                 <Tab shadow="inner">Derived OS</Tab>
                 <Tab shadow="inner">Shell</Tab>
                 <Tab shadow="inner">Startup Manager</Tab>
