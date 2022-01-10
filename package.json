@@ -6,8 +6,7 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "cypress": "cypress run",
-    "serve:lhci": "NODE_ENV=production npm run start"
+    "cypress": "cypress run"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.7.3",
