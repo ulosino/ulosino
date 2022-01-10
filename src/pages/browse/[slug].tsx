@@ -34,7 +34,7 @@ import UIProvider from "src/UIProvider";
 // Pages can use the following components if needed
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
-const Utterences = dynamic(() => import("src/components/Utterences"));
+const Utterances = dynamic(() => import("src/UtterancesProvider"));
 
 const availableComponents = [Link, Image];
 
@@ -89,7 +89,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                 Refresh
               </Button>
             </Flex>
-            <Utterences
+            <Utterances
               repo={"ulosino/ulosino"}
               label={"Page Comments"}
               type={"pathname"}

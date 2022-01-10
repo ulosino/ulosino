@@ -1,3 +1,5 @@
+// Provides a global user interface; imported on most pages but not applied to app.tsx (global)
+
 import { Container, Flex, useColorModeValue } from "@chakra-ui/react";
 
 import {

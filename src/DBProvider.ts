@@ -1,3 +1,5 @@
+// Provides access, routing, and sorting to our Database Content (currently only OS Pages)
+
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";

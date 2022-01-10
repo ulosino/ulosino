@@ -1,3 +1,5 @@
+// Provides global theming (Chakra UI)
+
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
 const config: ThemeConfig = {
