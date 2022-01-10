@@ -18,4 +18,4 @@ jobs:
       - name: Run Lighthouse CI Checks
         run: |
           npm install -g @lhci/cli@0.8.x
-          lhci autorun
+          lhci autorun --startServerCommand "npm run build"
