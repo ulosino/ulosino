@@ -52,7 +52,6 @@ export default function NavigationMenu() {
         icon={<HiMenu />}
         aria-label="Show the ULOSINO navigation menu"
         onClick={onOpen}
-        mt={8}
       />
       <Modal
         isOpen={isOpen}
