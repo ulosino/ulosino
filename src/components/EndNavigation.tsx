@@ -1,3 +1,5 @@
+// Navigation/footer at the end of the page, only visible on Desktop
+
 import Link from "next/link";
 
 import { Stack, Flex, Spacer, Center, Button } from "@chakra-ui/react";
@@ -26,7 +28,7 @@ export default function EndNavigation() {
             GitHub
           </Button>
         </Link>
-        <Link href="https://github.com/ulosino/ulosino" passHref>
+        <Link href="https://twitter.com/ulosino" passHref>
           <Button leftIcon={<FiTwitter />} size="sm" variant="ghost">
             Twitter
           </Button>

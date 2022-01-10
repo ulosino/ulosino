@@ -1,3 +1,5 @@
+// Navigation at the top of the page
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -9,8 +11,9 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
-import { FiChevronLeft, FiMoreVertical } from "react-icons/fi";
+import { FiChevronLeft } from "react-icons/fi";
 import { LargeLogo, SmallLogo } from "src/components/Logo";
+import NavigationMenu from "src/components/NavigationMenu";
 
 export default function StartNavigation() {
   const router = useRouter();
@@ -39,16 +42,7 @@ export default function StartNavigation() {
           </Center>
         </Link>
         <Spacer />
-        <Link href="/options" passHref>
-          <IconButton
-            aria-label="Open Options"
-            title="Open Options"
-            icon={<FiMoreVertical />}
-            size="lg"
-            variant="ghost"
-            mt={2}
-          />
-        </Link>
+        <NavigationMenu />
       </Flex>
       <Flex display={{ base: "none", sm: "flex" }} mb={12}>
         <Link href="/" passHref>
@@ -72,14 +66,7 @@ export default function StartNavigation() {
           </Link>
         </Stack>
         <Spacer />
-        <Link href="/options" passHref>
-          <IconButton
-            aria-label="Open Options"
-            title="Open Options"
-            icon={<FiMoreVertical />}
-            mt={8}
-          />
-        </Link>
+        <NavigationMenu />
       </Flex>
     </nav>
   );

@@ -17,8 +17,17 @@ const CategoryDefinitions = dynamic(
 );
 const CopyrightHeader = dynamic(() => import("src/components/CopyrightHeader"));
 const PrivacyHeader = dynamic(() => import("src/components/PrivacyHeader"));
+const VersionTroubleshoot = dynamic(
+  () => import("src/components/VersionTroubleshoot")
+);
 
-const availableComponents = [Link, CategoryDefinitions];
+const availableComponents = [
+  Link,
+  CategoryDefinitions,
+  CopyrightHeader,
+  PrivacyHeader,
+  VersionTroubleshoot,
+];
 
 export default function MDXHostPage({ source, metadata, componentNames }) {
   const components = {
@@ -32,6 +41,9 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
       : null,
     PrivacyHeader: componentNames.includes("PrivacyHeader")
       ? PrivacyHeader
+      : null,
+    VersionTroubleshoot: componentNames.includes("VersionTroubleshoot")
+      ? VersionTroubleshoot
       : null,
   };
   return (
@@ -62,6 +74,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
     /<CategoryDefinitions/.test(content) ? "CategoryDefinitions" : null,
     /<CopyrightHeader/.test(content) ? "CopyrightHeader" : null,
     /<PrivacyHeader/.test(content) ? "PrivacyHeader" : null,
+    /<VersionTroubleshoot/.test(content) ? "VersionTroubleshoot" : null,
   ].filter(Boolean);
 
   const mdxSource = await serialize(content, {

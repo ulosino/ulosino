@@ -1,3 +1,6 @@
+// Heading for the Copyright Notice, including links to other legal and adminstrative pages
+// These pages are based on Markdown
+
 import Link from "next/link";
 import { Heading, Stack, Flex, Spacer, Button } from "@chakra-ui/react";
 import { HiOutlineScale, HiOutlineNewspaper } from "react-icons/hi";

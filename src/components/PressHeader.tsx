@@ -1,3 +1,7 @@
+// Heading for the Press page, including links to other legal and adminstrative pages
+// This page is specifically based on .tsx but is stored here for consistency with other pages in this series
+// i.e for the Press page only, this could be implemented like the Browse and Search pages
+
 import Link from "next/link";
 import { Heading, Stack, Flex, Spacer, Button } from "@chakra-ui/react";
 import { HiOutlineScale, HiOutlineNewspaper } from "react-icons/hi";

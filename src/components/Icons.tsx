@@ -1,3 +1,6 @@
+// Consistent iconography for error pages and marketing features
+// Allows for easy updates of icons if neccessary
+
 import { Icon, Center, useStyleConfig } from "@chakra-ui/react";
 import { HiUserGroup, HiDatabase, HiExclamationCircle } from "react-icons/hi";
 

@@ -1,3 +1,6 @@
+// Table to give meanings to our category system
+// Shown on the Definitions page, which is Markdown based
+
 import { Table, Thead, Tbody, Th, Tr, Td, Badge } from "@chakra-ui/react";
 
 export default function CategoryDefinitions() {

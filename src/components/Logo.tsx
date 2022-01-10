@@ -1,3 +1,5 @@
+// ULOSINO brand iconography
+
 import { Icon } from "@chakra-ui/react";
 
 export const LargeLogo = (props) => (

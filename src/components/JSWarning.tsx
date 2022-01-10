@@ -1,3 +1,5 @@
+// Warning to users who don't use JavaScript
+
 import { Box, Container, Stack, Icon, Text } from "@chakra-ui/react";
 import { HiExclamationCircle } from "react-icons/hi";
 
