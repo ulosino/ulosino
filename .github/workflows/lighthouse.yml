@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   lhci:
-    name: Lighthouse
+    name: Lighthouse CI Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
