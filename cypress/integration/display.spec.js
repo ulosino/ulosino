@@ -1,7 +1,8 @@
 describe("Display Tester", () => {
   it("Should test colour mode and mobile interface (CSS)", () => {
     // Test the colour mode toggle
-    cy.visit("/options");
+    cy.visit("/");
+    cy.get("#testing-display-menu").click();
     cy.get("button").contains("Toggle").click();
     cy.get("body").should("have.class", "chakra-ui-dark");
 
