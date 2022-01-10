@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "cypress": "cypress run",
-    "serve:lhci": " npm run build && npm run start"
+    "serve:lhci": "NODE_ENV=production npm run start"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.7.3",
