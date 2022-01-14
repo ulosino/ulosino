@@ -97,7 +97,7 @@ export default function NavigationMenu() {
                       <Icon as={HiChevronRight} w={4} h={4} mt={1} />
                     </Flex>
                     <Text fontSize="xs">
-                      Make a search or browse all on ULOSINO.
+                      Make a search or browse all of ULOSINO.
                     </Text>
                   </Card>
                 </Link>

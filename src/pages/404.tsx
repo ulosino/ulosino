@@ -16,7 +16,11 @@ import {
   Container,
   Icon,
 } from "@chakra-ui/react";
-import { HiChevronLeft, HiArrowLeft, HiCursorClick } from "react-icons/hi";
+import {
+  HiChevronLeft,
+  HiArrowNarrowLeft,
+  HiCursorClick,
+} from "react-icons/hi";
 import { AlertIcon } from "src/components/Icons";
 
 import { useStyleConfig } from "@chakra-ui/react";
@@ -73,7 +77,7 @@ export default function Custom404() {
             </Box>
             <Stack direction="column" spacing={2} w="full">
               <Link href="/" passHref>
-                <Button leftIcon={<HiArrowLeft />} size="lg">
+                <Button leftIcon={<HiArrowNarrowLeft />} size="lg">
                   Go Home
                 </Button>
               </Link>
