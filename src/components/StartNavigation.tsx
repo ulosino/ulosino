@@ -1,3 +1,5 @@
+// Navigation at the top of the page
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -8,49 +10,22 @@ import {
   Center,
   IconButton,
   Button,
+  Box,
 } from "@chakra-ui/react";
-import { FiChevronLeft, FiMoreVertical } from "react-icons/fi";
+import { FiChevronLeft } from "react-icons/fi";
 import { LargeLogo, SmallLogo } from "src/components/Logo";
 
-export default function StartNavigation() {
-  const router = useRouter();
+import dynamic from "next/dynamic";
+import Loading from "src/components/Loading";
+const NavigationMenu = dynamic(() => import("src/components/NavigationMenu"), {
+  loading: () => <Loading />,
+});
+
+// For desktop, includes links to Home and Browse pages, and access to <NavigationMenu>
+export function StartNavigationDesktop() {
   return (
     <nav>
-      <Flex display={{ base: "flex", sm: "none" }} mb={8}>
-        <IconButton
-          aria-label="Go Back"
-          title="Go Back"
-          onClick={() => router.back()}
-          icon={<FiChevronLeft />}
-          size="lg"
-          variant="ghost"
-          mt={2}
-        />
-        <Spacer />
-        <Link href="/" passHref>
-          <Center
-            cursor="pointer"
-            id="testing-display-logoSm"
-            bg="secondary"
-            roundedBottom="2xl"
-            p={4}
-          >
-            <SmallLogo />
-          </Center>
-        </Link>
-        <Spacer />
-        <Link href="/options" passHref>
-          <IconButton
-            aria-label="Open Options"
-            title="Open Options"
-            icon={<FiMoreVertical />}
-            size="lg"
-            variant="ghost"
-            mt={2}
-          />
-        </Link>
-      </Flex>
-      <Flex display={{ base: "none", sm: "flex" }} mb={12}>
+      <Flex>
         <Link href="/" passHref>
           <Center
             cursor="pointer"
@@ -72,15 +47,44 @@ export default function StartNavigation() {
           </Link>
         </Stack>
         <Spacer />
-        <Link href="/options" passHref>
-          <IconButton
-            aria-label="Open Options"
-            title="Open Options"
-            icon={<FiMoreVertical />}
-            mt={8}
-          />
-        </Link>
+        <Box pt={8}>
+          <NavigationMenu />
+        </Box>
       </Flex>
     </nav>
+  );
+}
+
+// For mobile, only includes access to <NavigationMenu>
+export function StartNavigationMobile() {
+  const router = useRouter();
+  return (
+    <Flex>
+      <IconButton
+        aria-label="Go Back"
+        title="Go Back"
+        onClick={() => router.back()}
+        icon={<FiChevronLeft />}
+        size="lg"
+        variant="ghost"
+        mt={4}
+      />
+      <Spacer />
+      <Link href="/" passHref>
+        <Center
+          cursor="pointer"
+          id="testing-display-logoSm"
+          bg="secondary"
+          roundedBottom="2xl"
+          p={4}
+        >
+          <SmallLogo />
+        </Center>
+      </Link>
+      <Spacer />
+      <Box pt={4}>
+        <NavigationMenu />
+      </Box>
+    </Flex>
   );
 }

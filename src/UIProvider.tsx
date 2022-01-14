@@ -1,9 +1,13 @@
+// Provides a global user interface; imported on most pages but not applied to app.tsx (global)
+
 import { Container, Flex, useColorModeValue } from "@chakra-ui/react";
 
-import StartNavigation from "src/components/StartNavigation";
+import {
+  StartNavigationDesktop,
+  StartNavigationMobile,
+} from "src/components/StartNavigation";
 import EndNavigation from "src/components/EndNavigation";
 import LegalNavigation from "./components/LegalNavigation";
-import JSWarning from "src/components/JSWarning";
 
 export default function UIProvider({ children }) {
   return (
@@ -13,16 +17,26 @@ export default function UIProvider({ children }) {
       direction="column"
       bg={useColorModeValue("gray.50", "inherit")}
     >
-      <noscript>
-        <JSWarning />
-      </noscript>
-      {/* Margin is not used here because of desktop/mobile variability */}
-      <Container maxW="container.lg">
-        <StartNavigation />
+      {/* Start of page navigation */}
+      <Container
+        maxW="container.lg"
+        display={{ base: "none", md: "block" }}
+        mb={12}
+      >
+        <StartNavigationDesktop />
       </Container>
+      <Container
+        maxW="container.lg"
+        display={{ base: "block", md: "none" }}
+        mb={8}
+      >
+        <StartNavigationMobile />
+      </Container>
+      {/* Page Container */}
       <Container maxW="container.lg" flex="1" mb={8}>
         {children}
       </Container>
+      {/* End of page navigation and footer */}
       <Container
         maxW="container.lg"
         display={{ base: "none", md: "block" }}

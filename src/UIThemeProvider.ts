@@ -1,3 +1,5 @@
+// Provides global theming (Chakra UI)
+
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
 const config: ThemeConfig = {
@@ -53,6 +55,56 @@ export const Card = {
   },
 };
 
+const Badge = {
+  baseStyle: { px: 4, pt: "0.5", h: "20px" },
+  sizes: {
+    sm: {
+      fontSize: "xs",
+      borderRadius: "full",
+    },
+    lg: {
+      fontSize: "md",
+      borderRadius: "xl",
+    },
+  },
+  variants: {
+    solid: {
+      bg: "secondary",
+      color: "white",
+      shadow: "md",
+    },
+  },
+  defaultProps: {
+    size: "sm",
+    variant: "solid",
+  },
+};
+
+export const Tabs = {
+  defaultProps: {
+    variant: "solid-rounded",
+    colorScheme: "gray",
+    size: "sm",
+  },
+};
+
+// Not working, applied manually
+/*
+export const Tab = {
+  defaultProps: {
+    shadow: "inner",
+  },
+};
+*/
+
+export const TabPanel = {
+  defaultProps: {
+    px: 0,
+    pb: 0,
+    pt: 4,
+  },
+};
+
 export const Heading = {
   baseStyle: {
     fontWeight: 600,
@@ -75,6 +127,20 @@ const UITheme = extendTheme({
 
     brandGlass: "rgba(242, 205, 138, 0.5)",
     secondaryGlass: "rgba(0, 30, 56, 0.5)",
+
+    // Here, the brand colour replaces the Chakra default
+    blue: {
+      50: "rgba(242, 205, 138, 1)",
+      100: "rgba(242, 205, 138, 1)",
+      200: "rgba(242, 205, 138, 1)",
+      300: "rgba(242, 205, 138, 1)",
+      400: "rgba(242, 205, 138, 1)",
+      500: "rgba(242, 205, 138, 1)",
+      600: "rgba(242, 205, 138, 1)",
+      700: "rgba(242, 205, 138, 1)",
+      800: "rgba(242, 205, 138, 1)",
+      900: "rgba(242, 205, 138, 1)",
+    },
 
     // Other colours
     alert: "rgba(253, 188, 180, 0.5)",
@@ -99,10 +165,9 @@ const UITheme = extendTheme({
     body: "Public Sans",
   },
   textStyles: {
-    // Smaller subheadings, similar to iOS
     secondary: {
       fontSize: "sm",
-      fontWeight: 200,
+      fontWeight: 600,
       lineHeight: "200%",
       textTransform: "uppercase",
     },
@@ -110,6 +175,8 @@ const UITheme = extendTheme({
   components: {
     Button,
     Card,
+    Badge,
+    Tabs,
     Table,
     Heading,
   },

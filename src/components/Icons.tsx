@@ -1,5 +1,8 @@
+// Consistent iconography for error pages and marketing features
+// Allows for easy updates of icons if neccessary
+
 import { Icon, Center, useStyleConfig } from "@chakra-ui/react";
-import { FiUsers, FiDatabase, FiAlertCircle } from "react-icons/fi";
+import { HiUserGroup, HiDatabase, HiExclamationCircle } from "react-icons/hi";
 
 function Card(props) {
   const { variant, children, ...rest } = props;
@@ -14,19 +17,19 @@ function Card(props) {
 }
 
 export const CultureIcon = () => (
-  <Card p={2} bg="brandGlass" shadow="inner">
-    <Icon as={FiUsers} color="secondary" w={6} h={6} />
+  <Card p={2} bg="brandGlass">
+    <Icon as={HiUserGroup} color="secondary" w={6} h={6} />
   </Card>
 );
 
 export const DatabaseIcon = () => (
-  <Card p={2} bg="brandGlass" shadow="inner">
-    <Icon as={FiDatabase} color="secondary" w={6} h={6} />
+  <Card p={2} bg="brandGlass">
+    <Icon as={HiDatabase} color="secondary" w={6} h={6} />
   </Card>
 );
 
 export const AlertIcon = () => (
-  <Card p={2} bg="alert" shadow="inner" rounded="2xl">
-    <Icon as={FiAlertCircle} w={12} h={12} />
+  <Card p={2} bg="alert" rounded="2xl">
+    <Icon as={HiExclamationCircle} w={12} h={12} />
   </Card>
 );

@@ -8,7 +8,7 @@ describe("Database Tester", () => {
     cy.url().should("include", "/browse/");
 
     // Test in-page metadata
-    cy.get("h2").contains("Distribution page demo");
+    cy.get("h2").contains("Operating system page demo");
     cy.get("p").contains("This isn't an operating system.");
     cy.get("td").contains("Website");
 
@@ -22,7 +22,7 @@ describe("Database Tester", () => {
     cy.get("#testing-db-distributions").find("h2").contains("Demo");
     cy.get("#testing-db-distributions")
       .find("p")
-      .contains("Distribution page demo");
+      .contains("Operating system page demo");
     cy.get("#testing-db-distributions").find("h2").contains("Demo").click();
     cy.url().should("include", "/browse/");
   });

@@ -23,9 +23,12 @@ const AutoComplete = dynamic(() =>
 import {
   Heading,
   Text,
+  Badge,
   Box,
   Stack,
-  SimpleGrid,
+  Flex,
+  Spacer,
+  Button,
   Tabs,
   Tab,
   TabList,
@@ -33,6 +36,7 @@ import {
   TabPanel,
   FormControl,
 } from "@chakra-ui/react";
+import { HiOutlineDatabase, HiOutlineSearch } from "react-icons/hi";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -60,12 +64,11 @@ export default function Browse({
     title: string;
     version: string;
     summary: string;
+    category: string;
     platform: string;
     startup: string;
     desktop: string;
     packagemgr: string;
-    shell: string;
-    descends: string;
   }[];
   oldestDistributionData: {
     date: string;
@@ -73,12 +76,11 @@ export default function Browse({
     title: string;
     version: string;
     summary: string;
+    category: string;
     platform: string;
     startup: string;
     desktop: string;
     packagemgr: string;
-    shell: string;
-    descends: string;
   }[];
   AZDistributionData: {
     date: string;
@@ -86,12 +88,11 @@ export default function Browse({
     title: string;
     version: string;
     summary: string;
+    category: string;
     platform: string;
     startup: string;
     desktop: string;
     packagemgr: string;
-    shell: string;
-    descends: string;
   }[];
 }) {
   return (
@@ -100,26 +101,45 @@ export default function Browse({
         <title>ULOSINO &mdash; Browse</title>
       </Head>
 
-      <Heading size="3xl" as="h1" mb={4}>
-        Browse
-      </Heading>
+      <Flex direction={["column", "column", "row"]} mb={8}>
+        <Heading size="3xl">Browse</Heading>
+        <Spacer />
+        <Stack direction={["column", "column", "row"]} spacing={4} pt={4}>
+          <Link href="/browse" passHref>
+            <Button leftIcon={<HiOutlineDatabase />} size="sm" isActive>
+              Search &amp; List
+            </Button>
+          </Link>
+          <Link href="/search" passHref>
+            <Button leftIcon={<HiOutlineSearch />} size="sm">
+              Advanced Search
+            </Button>
+          </Link>
+        </Stack>
+      </Flex>
 
-      <SimpleGrid minChildWidth="280px" spacing={10}>
-        <Stack direction="column" spacing={6} as="section">
+      <Stack direction="column" spacing={10}>
+        <Stack direction="column" spacing={2}>
+          <Text textStyle="secondary" as="h6">
+            Make a Search
+          </Text>
           <Card>
-            <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
+            <Tabs>
               <TabList>
-                <Stack direction={["column", "column", "row"]} spacing={4}>
+                <Stack
+                  direction={["column", "column", "row"]}
+                  spacing={4}
+                  w="full"
+                >
                   <Tab shadow="inner">Search by Name</Tab>
                   <Tab shadow="inner">Platform</Tab>
                   <Tab shadow="inner">Desktop</Tab>
                   <Tab shadow="inner">Startup Manager</Tab>
                   <Tab shadow="inner">Package Manager</Tab>
-                  <Tab shadow="inner">Derived OS</Tab>
                 </Stack>
               </TabList>
-              {/* Search by name */}
               <TabPanels>
+                {/* Search by name */}
                 <TabPanel px={0} pb={0} pt={4}>
                   <FormControl>
                     <AutoComplete>
@@ -137,13 +157,12 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
                             startup,
                             packagemgr,
-                            shell,
-                            descends,
                           }) => (
                             <AutoCompleteItem
                               key={`option-${title}`}
@@ -167,6 +186,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -181,12 +201,6 @@ export default function Browse({
                                     )}
                                     {packagemgr && (
                                       <Text fontSize="sm">{packagemgr}</Text>
-                                    )}
-                                    {shell && (
-                                      <Text fontSize="sm">{shell}</Text>
-                                    )}
-                                    {descends && (
-                                      <Text fontSize="sm">{descends}</Text>
                                     )}
                                   </Stack>
                                 </Box>
@@ -215,13 +229,12 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
                             startup,
                             packagemgr,
-                            shell,
-                            descends,
                           }) => (
                             <AutoCompleteItem
                               key={`option-${platform}`}
@@ -244,6 +257,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -260,12 +274,6 @@ export default function Browse({
                                     )}
                                     {packagemgr && (
                                       <Text fontSize="sm">{packagemgr}</Text>
-                                    )}
-                                    {shell && (
-                                      <Text fontSize="sm">{shell}</Text>
-                                    )}
-                                    {descends && (
-                                      <Text fontSize="sm">{descends}</Text>
                                     )}
                                   </Stack>
                                 </Box>
@@ -294,13 +302,12 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
                             startup,
                             packagemgr,
-                            shell,
-                            descends,
                           }) => (
                             <AutoCompleteItem
                               key={`option-${desktop}`}
@@ -323,6 +330,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -339,12 +347,6 @@ export default function Browse({
                                     )}
                                     {packagemgr && (
                                       <Text fontSize="sm">{packagemgr}</Text>
-                                    )}
-                                    {shell && (
-                                      <Text fontSize="sm">{shell}</Text>
-                                    )}
-                                    {descends && (
-                                      <Text fontSize="sm">{descends}</Text>
                                     )}
                                   </Stack>
                                 </Box>
@@ -373,13 +375,12 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
                             startup,
                             packagemgr,
-                            shell,
-                            descends,
                           }) => (
                             <AutoCompleteItem
                               key={`option-${startup}`}
@@ -402,6 +403,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -418,12 +420,6 @@ export default function Browse({
                                     )}
                                     {packagemgr && (
                                       <Text fontSize="sm">{packagemgr}</Text>
-                                    )}
-                                    {shell && (
-                                      <Text fontSize="sm">{shell}</Text>
-                                    )}
-                                    {descends && (
-                                      <Text fontSize="sm">{descends}</Text>
                                     )}
                                   </Stack>
                                 </Box>
@@ -452,13 +448,12 @@ export default function Browse({
                             id,
                             title,
                             summary,
+                            category,
                             version,
                             platform,
                             desktop,
                             startup,
                             packagemgr,
-                            shell,
-                            descends,
                           }) => (
                             <AutoCompleteItem
                               key={`option-${packagemgr}`}
@@ -481,6 +476,7 @@ export default function Browse({
                                     display={{ base: "none", sm: "flex" }}
                                     spacing={4}
                                   >
+                                    {category && <Badge>{category}</Badge>}
                                     {version && (
                                       <Text fontSize="sm">{version}</Text>
                                     )}
@@ -498,91 +494,6 @@ export default function Browse({
                                         {packagemgr}
                                       </Text>
                                     )}
-                                    {shell && (
-                                      <Text fontSize="sm">{shell}</Text>
-                                    )}
-                                    {descends && (
-                                      <Text fontSize="sm">{descends}</Text>
-                                    )}
-                                  </Stack>
-                                </Box>
-                              </Link>
-                            </AutoCompleteItem>
-                          )
-                        )}
-                      </AutoCompleteList>
-                    </AutoComplete>
-                  </FormControl>
-                </TabPanel>
-                {/* Search by derived distribution */}
-                <TabPanel px={0} pb={0} pt={4}>
-                  <FormControl>
-                    <AutoComplete>
-                      <AutoCompleteInput
-                        variant="outline"
-                        size="md"
-                        borderRadius="xl"
-                        shadow="inner"
-                        placeholder="Filter by derived operating system..."
-                      />
-                      <AutoCompleteList>
-                        {AZDistributionData.map(
-                          ({
-                            id,
-                            title,
-                            summary,
-                            version,
-                            platform,
-                            desktop,
-                            startup,
-                            packagemgr,
-                            shell,
-                            descends,
-                          }) => (
-                            <AutoCompleteItem
-                              key={`option-${descends}`}
-                              value={descends}
-                              maxSuggestions={5}
-                              mx={3}
-                            >
-                              <Link
-                                href={`/browse/${id}`}
-                                passHref
-                                key={`/browse/${id}`}
-                              >
-                                <Box p={2} mb={2}>
-                                  <Heading size="md">{title}</Heading>
-                                  {summary && (
-                                    <Text fontSize="sm">"{summary}"</Text>
-                                  )}
-                                  <Stack
-                                    direction="row"
-                                    display={{ base: "none", sm: "flex" }}
-                                    spacing={4}
-                                  >
-                                    {version && (
-                                      <Text fontSize="sm">{version}</Text>
-                                    )}
-                                    {platform && (
-                                      <Text fontSize="sm">{platform}</Text>
-                                    )}
-                                    {desktop && (
-                                      <Text fontSize="sm">{desktop}</Text>
-                                    )}
-                                    {startup && (
-                                      <Text fontSize="sm">{startup}</Text>
-                                    )}
-                                    {packagemgr && (
-                                      <Text fontSize="sm">{packagemgr}</Text>
-                                    )}
-                                    {shell && (
-                                      <Text fontSize="sm">{shell}</Text>
-                                    )}
-                                    {descends && (
-                                      <Text fontSize="sm" fontWeight="bold">
-                                        {descends}
-                                      </Text>
-                                    )}
                                   </Stack>
                                 </Box>
                               </Link>
@@ -596,29 +507,33 @@ export default function Browse({
               </TabPanels>
             </Tabs>
           </Card>
-          <Tabs variant="soft-rounded" colorScheme="gray" size="sm" isLazy>
+        </Stack>
+        <Stack direction="column" spacing={2}>
+          <Text textStyle="secondary" as="h6">
+            All Operating Systems
+          </Text>
+          <Tabs isLazy>
             <TabList id="testing-display-tabList">
-              <Stack direction="row" spacing={4}>
+              <Stack direction="row" spacing={4} w="full">
+                <Tab shadow="inner">Alphabetical</Tab>
                 <Tab shadow="inner">Newest</Tab>
                 <Tab shadow="inner">Oldest</Tab>
-                <Tab shadow="inner">A-Z</Tab>
               </Stack>
             </TabList>
             <TabPanels>
               <TabPanel px={0} pb={0} pt={4}>
                 <Stack direction="column" spacing={2}>
-                  {newestDistributionData.map(
+                  {AZDistributionData.map(
                     ({
                       id,
                       title,
                       version,
                       summary,
+                      category,
                       platform,
                       desktop,
                       startup,
                       packagemgr,
-                      shell,
-                      descends,
                     }) => (
                       <Link
                         href={`/browse/${id}`}
@@ -633,6 +548,7 @@ export default function Browse({
                             display={{ base: "flex", md: "none" }}
                             spacing={4}
                           >
+                            {category && <Badge>{category}</Badge>}
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -642,6 +558,7 @@ export default function Browse({
                             display={{ base: "none", md: "flex" }}
                             spacing={4}
                           >
+                            <Badge>{category}</Badge>
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -649,8 +566,58 @@ export default function Browse({
                             {packagemgr && (
                               <Text fontSize="sm">{packagemgr}</Text>
                             )}
-                            {shell && <Text fontSize="sm">{shell}</Text>}
-                            {descends && <Text fontSize="sm">{descends}</Text>}
+                          </Stack>
+                        </Card>
+                      </Link>
+                    )
+                  )}
+                </Stack>
+              </TabPanel>
+              <TabPanel px={0} pb={0} pt={4}>
+                <Stack direction="column" spacing={2}>
+                  {newestDistributionData.map(
+                    ({
+                      id,
+                      title,
+                      version,
+                      summary,
+                      category,
+                      platform,
+                      desktop,
+                      startup,
+                      packagemgr,
+                    }) => (
+                      <Link
+                        href={`/browse/${id}`}
+                        passHref
+                        key={`/browse/${id}`}
+                      >
+                        <Card key={id} variant="button" px={6}>
+                          <Heading size="md">{title}</Heading>
+                          {summary && <Text fontSize="sm">"{summary}"</Text>}
+                          <Stack
+                            direction="row"
+                            display={{ base: "flex", md: "none" }}
+                            spacing={4}
+                          >
+                            {category && <Badge>{category}</Badge>}
+                            {version && <Text fontSize="sm">{version}</Text>}
+                            {platform && <Text fontSize="sm">{platform}</Text>}
+                            {desktop && <Text fontSize="sm">{desktop}</Text>}
+                          </Stack>
+                          <Stack
+                            direction="row"
+                            display={{ base: "none", md: "flex" }}
+                            spacing={4}
+                          >
+                            <Badge>{category}</Badge>
+                            {version && <Text fontSize="sm">{version}</Text>}
+                            {platform && <Text fontSize="sm">{platform}</Text>}
+                            {desktop && <Text fontSize="sm">{desktop}</Text>}
+                            {startup && <Text fontSize="sm">{startup}</Text>}
+                            {packagemgr && (
+                              <Text fontSize="sm">{packagemgr}</Text>
+                            )}
                           </Stack>
                         </Card>
                       </Link>
@@ -666,12 +633,11 @@ export default function Browse({
                       title,
                       version,
                       summary,
+                      category,
                       platform,
                       desktop,
                       startup,
                       packagemgr,
-                      shell,
-                      descends,
                     }) => (
                       <Link
                         href={`/browse/${id}`}
@@ -691,6 +657,7 @@ export default function Browse({
                             display={{ base: "flex", md: "none" }}
                             spacing={4}
                           >
+                            {category && <Badge>{category}</Badge>}
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -700,6 +667,7 @@ export default function Browse({
                             display={{ base: "none", md: "flex" }}
                             spacing={4}
                           >
+                            <Badge>{category}</Badge>
                             {version && <Text fontSize="sm">{version}</Text>}
                             {platform && <Text fontSize="sm">{platform}</Text>}
                             {desktop && <Text fontSize="sm">{desktop}</Text>}
@@ -707,61 +675,6 @@ export default function Browse({
                             {packagemgr && (
                               <Text fontSize="sm">{packagemgr}</Text>
                             )}
-                            {shell && <Text fontSize="sm">{shell}</Text>}
-                            {descends && <Text fontSize="sm">{descends}</Text>}
-                          </Stack>
-                        </Card>
-                      </Link>
-                    )
-                  )}
-                </Stack>
-              </TabPanel>
-              <TabPanel px={0} pb={0} pt={4}>
-                <Stack direction="column" spacing={2}>
-                  {AZDistributionData.map(
-                    ({
-                      id,
-                      title,
-                      version,
-                      summary,
-                      platform,
-                      desktop,
-                      startup,
-                      packagemgr,
-                      shell,
-                      descends,
-                    }) => (
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Card key={id} variant="button" px={6}>
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "flex", md: "none" }}
-                            spacing={4}
-                          >
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                          </Stack>
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", md: "flex" }}
-                            spacing={4}
-                          >
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                            {shell && <Text fontSize="sm">{shell}</Text>}
-                            {descends && <Text fontSize="sm">{descends}</Text>}
                           </Stack>
                         </Card>
                       </Link>
@@ -772,7 +685,7 @@ export default function Browse({
             </TabPanels>
           </Tabs>
         </Stack>
-      </SimpleGrid>
+      </Stack>
     </UIProvider>
   );
 }

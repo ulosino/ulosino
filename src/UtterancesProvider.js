@@ -1,3 +1,4 @@
+// Provides Utterances comments to browse/[slug].tsx (OS pages)
 // Forked from https://github.com/b6pzeusbc54tvhw5jgpyw8pwz2x6gs/react-utterances/blob/master/packages/component/src/ReactUtterances.js
 
 import React, { Component } from "react";
@@ -47,7 +48,7 @@ const getAttrValue = (type, specificTerm, issueNumber) => {
   }
 };
 
-class Utterences extends Component {
+class Utterances extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
@@ -134,7 +135,7 @@ export const identifierTypes = {
   },
 };
 
-Utterences.propTypes = {
+Utterances.propTypes = {
   type: PropTypes.string.isRequired,
   repo: PropTypes.string.isRequired,
   specificTerm: PropTypes.string,
@@ -143,4 +144,4 @@ Utterences.propTypes = {
   debug: PropTypes.bool,
 };
 
-export default Utterences;
+export default Utterances;

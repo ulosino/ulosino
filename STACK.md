@@ -6,7 +6,7 @@ This is a reference outline of the ULOSINO stack.
 
 The file structure of the ULOSINO project separates content and code.
 
-Distribution pages are stored in 'distribution store (`dstore`)' which is currently located in the `/public/content/browse` folder. Other text-heavy files including the privacy policy are here too (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` to create pages that present the content to the user.
+Operating system pages are stored in 'operating system page store (`dstore`)' which is currently located in the `/public/content/browse` folder. Other text-heavy files including the privacy policy are here too (these are at the top level `/public/content` folder). Collectively, this 'Database Content' is imported/processed by `DBProvider` to create pages that present the content to the user.
 
 The actual code, including pages, components, and providers, is stored in `/src`. Inside `/src` is:
 
@@ -43,6 +43,10 @@ These are the primary providers:
 ### UIThemeProvider
 
 `UIThemeProvider.ts` ('User Interface Theme Provider') is the global theming file. It's imported on `app.tsx` and `document.tsx`.
+
+### UtterancesProvider
+
+`UtterancesProvider` provides comments to OS Pages, using the Utterances utility and GitHub issues. It's imported on `browse/[slug].tsx`.
 
 ## Other details
 
