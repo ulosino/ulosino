@@ -67,7 +67,7 @@ export function StartNavigationMobile() {
         icon={<FiChevronLeft />}
         size="lg"
         variant="ghost"
-        pt={4}
+        mt={4}
       />
       <Spacer />
       <Link href="/" passHref>

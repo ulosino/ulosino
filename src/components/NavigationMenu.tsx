@@ -20,6 +20,7 @@ import {
   ModalFooter,
   useDisclosure,
   useColorMode,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import {
   HiMenu,
@@ -46,10 +47,20 @@ function Card(props) {
 export default function NavigationMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const buttonVariant = useBreakpointValue({
+    base: "ghost",
+    md: "outline",
+  });
+  const buttonSize = useBreakpointValue({
+    base: "lg",
+    md: "md",
+  });
   return (
     <>
       <IconButton
         icon={<HiMenu />}
+        variant={buttonVariant}
+        size={buttonSize}
         aria-label="Show the ULOSINO navigation menu"
         onClick={onOpen}
         id="testing-display-menu"

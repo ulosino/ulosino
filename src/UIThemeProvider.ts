@@ -128,6 +128,20 @@ const UITheme = extendTheme({
     brandGlass: "rgba(242, 205, 138, 0.5)",
     secondaryGlass: "rgba(0, 30, 56, 0.5)",
 
+    // Here, the brand colour replaces the Chakra default
+    blue: {
+      50: "rgba(242, 205, 138, 1)",
+      100: "rgba(242, 205, 138, 1)",
+      200: "rgba(242, 205, 138, 1)",
+      300: "rgba(242, 205, 138, 1)",
+      400: "rgba(242, 205, 138, 1)",
+      500: "rgba(242, 205, 138, 1)",
+      600: "rgba(242, 205, 138, 1)",
+      700: "rgba(242, 205, 138, 1)",
+      800: "rgba(242, 205, 138, 1)",
+      900: "rgba(242, 205, 138, 1)",
+    },
+
     // Other colours
     alert: "rgba(253, 188, 180, 0.5)",
   },
