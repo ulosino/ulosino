@@ -52,30 +52,30 @@ These are the primary providers:
 
 `title`, `summary`, `date`, `platform` and `version` are required for sorting. All other metadata fields will be hidden if they have no value. Updated with version 1.4.0.
 
-| Metadata            | Meaning                                                                                                                 |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `title`             | Name of the OS                                                                                                          |
-| `summary`           | Short description of the OS (2-7 words)                                                                                 |
-| `date`              | Date of writing. Year-Month-Date format                                                                                 |
-| `version`           | Version of the OS when written (or written on)                                                                          |
-| `category`          | Category of the OS. See below for more information                                                                      |
-| `platform`          | Popular available platforms, separated by commas                                                                        |
-| `descends`          | The OS that the OS of writing is based on (e.g. Xubuntu/Ubuntu)                                                         |
-| `desktop`           | Name of the preinstalled GUI. To be left blank if none is present, or if the OS boots its CLI by default                |
-| `shell`             | Name of the default shell (e.g. `bash`)                                                                                 |
-| `packagemgr`        | Name of the default package manager. Excludes cross-OS application delivery platforms (e.g. `flatpak`, `snap`)          |
-| `startup`           | Name of the default startup manager (e.g. `systemd`)                                                                    |
-| `size`              | Approximated size of the OS                                                                                             |
-| `browser`           | Name of the preinstalled web browser (e.g. Firefox)                                                                     |
-| `productivity`      | Name of the preinstalled office software suite (e.g. LibreOffice)                                                       |
-| `licence`           | Name of the licence used by the OS (e.g. MIT)                                                                           |
-| `origin`            | Name of the region of origin (e.g. France, Australia, Hong Kong). Excludes states within a federation (e.g. California) |
-| `website`           | Full URL to the OS's website                                                                                            |
-| `repository`        | Full URL to the OS's public source repository                                                                           |
-| `donate`            | Full URL to a funding section of the OS's website. Introduced with Tempo                                                |
-| `donate-github`     | Full URL to the OS's GitHub Sponsor page. Introduced with Tempo                                                         |
-| `donate-patreon`    | Full URL to the OS's Patreon page. Introduced with Tempo                                                                |
-| `donate-collective` | Full URL to the OS's Open Collective page. Introduced with Tempo                                                        |
+| Metadata           | Meaning                                                                                                                 |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `title`            | Name of the OS                                                                                                          |
+| `summary`          | Short description of the OS (2-7 words)                                                                                 |
+| `date`             | Date of writing. Year-Month-Date format                                                                                 |
+| `version`          | Version of the OS when written (or written on)                                                                          |
+| `category`         | Category of the OS. See below for more information                                                                      |
+| `platform`         | Popular available platforms, separated by commas                                                                        |
+| `descends`         | The OS that the OS of writing is based on (e.g. Xubuntu/Ubuntu)                                                         |
+| `desktop`          | Name of the preinstalled GUI. To be left blank if none is present, or if the OS boots its CLI by default                |
+| `shell`            | Name of the default shell (e.g. `bash`)                                                                                 |
+| `packagemgr`       | Name of the default package manager. Excludes cross-OS application delivery platforms (e.g. `flatpak`, `snap`)          |
+| `startup`          | Name of the default startup manager (e.g. `systemd`)                                                                    |
+| `size`             | Approximated size of the OS                                                                                             |
+| `browser`          | Name of the preinstalled web browser (e.g. Firefox)                                                                     |
+| `productivity`     | Name of the preinstalled office software suite (e.g. LibreOffice)                                                       |
+| `licence`          | Name of the licence used by the OS (e.g. MIT)                                                                           |
+| `origin`           | Name of the region of origin (e.g. France, Australia, Hong Kong). Excludes states within a federation (e.g. California) |
+| `website`          | Full URL to the OS's website                                                                                            |
+| `repository`       | Full URL to the OS's public source repository                                                                           |
+| `donate`           | Full URL to a funding section of the OS's website. Introduced with Tempo                                                |
+| `donateGithub`     | Full URL to the OS's GitHub Sponsor page. Introduced with Tempo                                                         |
+| `donatePatreon`    | Full URL to the OS's Patreon page. Introduced with Tempo                                                                |
+| `donateCollective` | Full URL to the OS's Open Collective page. Introduced with Tempo                                                        |
 
 ## Category definitions
 

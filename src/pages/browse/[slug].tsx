@@ -13,12 +13,20 @@ import {
   Stack,
   Heading,
   Text,
+  Badge,
   Button,
   Table,
   Tbody,
   Tr,
   Td,
-  Badge,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { HiOutlineCash, HiOutlineGlobe, HiOutlineCode } from "react-icons/hi";
 
@@ -38,6 +46,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
     Link: componentNames.includes("Link") ? Link : null,
     Image: componentNames.includes("Image") ? Image : null,
   };
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <UIProvider>
       <Head>
@@ -73,14 +82,99 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
           <Stack spacing={2} as="section">
             <DiscussionModal />
             {metadata.donate && (
-              <Link href={metadata.donate} passHref>
-                <Button leftIcon={<HiOutlineCash />}>
+              <>
+                <Button
+                  leftIcon={<HiOutlineCash />}
+                  aria-label="Show donation options for this operating system"
+                  onClick={onOpen}
+                >
                   Donate
-                  <Badge ms={4} bg="brand" color="gray.800" pt={1}>
+                  <Badge ms={2} bg="brand" color="gray.800" pt={1}>
                     Tempo
                   </Badge>
                 </Button>
-              </Link>
+                <Modal
+                  isOpen={isOpen}
+                  onClose={onClose}
+                  isCentered
+                  motionPreset="scale"
+                  size="sm"
+                  scrollBehavior="inside"
+                >
+                  <ModalOverlay />
+                  <ModalContent rounded="2xl">
+                    <ModalHeader>Donate to {metadata.title}</ModalHeader>
+                    <ModalCloseButton rounded="xl" />
+                    <ModalBody>
+                      <Stack direction="column" spacing={8}>
+                        <Stack direction="column" spacing={2}>
+                          <Text textStyle="secondary" as="h6">
+                            Visit OS Website
+                          </Text>
+                          {metadata.donate && (
+                            <Link href={metadata.donate} passHref>
+                              <Button leftIcon={<HiOutlineCash />}>
+                                See Donation Options
+                              </Button>
+                            </Link>
+                          )}
+                        </Stack>
+                        <Stack direction="column" spacing={2}>
+                          <Text textStyle="secondary" as="h6">
+                            Quick Donation Options
+                          </Text>
+                          {(metadata.donateCollective && (
+                            <Link href={metadata.donateCollective} passHref>
+                              <Button leftIcon={<HiOutlineCash />}>
+                                Donate through Open Collective
+                              </Button>
+                            </Link>
+                          )) ?? (
+                            <Button leftIcon={<HiOutlineCash />} isDisabled>
+                              Donate through Open Collective
+                            </Button>
+                          )}
+                          {(metadata.donateGithub && (
+                            <Link href={metadata.donateGithub} passHref>
+                              <Button leftIcon={<HiOutlineCash />}>
+                                Donate through GitHub Sponsors
+                              </Button>
+                            </Link>
+                          )) ?? (
+                            <Button leftIcon={<HiOutlineCash />} isDisabled>
+                              Donate through GitHub Sponsors
+                            </Button>
+                          )}
+                          {(metadata.donatePatreon && (
+                            <Link href={metadata.donatePatreon} passHref>
+                              <Button leftIcon={<HiOutlineCash />}>
+                                Donate through Patreon
+                              </Button>
+                            </Link>
+                          )) ?? (
+                            <Button leftIcon={<HiOutlineCash />} isDisabled>
+                              Donate through Patreon
+                            </Button>
+                          )}
+                        </Stack>
+                        <Stack direction="column" spacing={2}>
+                          <Badge bg="brand" color="gray.800" w={210}>
+                            Powered by ULOSINO Tempo
+                          </Badge>
+                        </Stack>
+                        <Text fontSize="xs">
+                          Tempo, the ULOSINO donation hub. Not available for all
+                          donation platforms or for all OSs. ULOSINO does not
+                          receive commission when you use these links.
+                        </Text>
+                      </Stack>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button onClick={onClose}>Done</Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+              </>
             )}
             {metadata.website && (
               <Link href={metadata.website} passHref>
