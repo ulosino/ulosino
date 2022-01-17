@@ -8,7 +8,6 @@ import {
   IconButton,
   Box,
   Stack,
-  SimpleGrid,
   Flex,
   Spacer,
   Modal,
