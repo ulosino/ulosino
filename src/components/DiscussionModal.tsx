@@ -31,6 +31,7 @@ export default function DiscussionModal() {
         isCentered
         motionPreset="scale"
         size="sm"
+        scrollBehavior="inside"
       >
         <ModalOverlay />
         <ModalContent rounded="2xl">
@@ -41,6 +42,7 @@ export default function DiscussionModal() {
               repo={"ulosino/ulosino"}
               label={"Page Comments"}
               type={"pathname"}
+              theme={"preferred-color-scheme"}
             />
           </ModalBody>
           <ModalFooter>

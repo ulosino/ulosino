@@ -24,7 +24,7 @@ import {
 import {
   HiMenu,
   HiChevronRight,
-  HiCode,
+  HiOutlineCode,
   HiOutlineChatAlt2,
   HiOutlineColorSwatch,
 } from "react-icons/hi";
@@ -130,7 +130,11 @@ export default function NavigationMenu() {
                     </Button>
                   </Link>
                   <Link href="https://github.com/ulosino/ulosino" passHref>
-                    <Button leftIcon={<HiCode />} size="sm" onClick={onClose}>
+                    <Button
+                      leftIcon={<HiOutlineCode />}
+                      size="sm"
+                      onClick={onClose}
+                    >
                       GitHub &amp; Source
                     </Button>
                   </Link>

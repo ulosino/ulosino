@@ -20,7 +20,7 @@ import {
   Td,
   Badge,
 } from "@chakra-ui/react";
-import { HiOutlineCash } from "react-icons/hi";
+import { HiOutlineCash, HiOutlineGlobe, HiOutlineCode } from "react-icons/hi";
 
 import UIProvider from "src/UIProvider";
 
@@ -71,13 +71,27 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
         </Stack>
         <Stack spacing={10}>
           <Stack spacing={2} as="section">
-            <Button leftIcon={<HiOutlineCash />}>
-              Donate
-              <Badge ms={4} bg="brand" color="gray.800" pt={1}>
-                Tempo
-              </Badge>
-            </Button>
             <DiscussionModal />
+            {metadata.donate && (
+              <Link href={metadata.donate} passHref>
+                <Button leftIcon={<HiOutlineCash />}>
+                  Donate
+                  <Badge ms={4} bg="brand" color="gray.800" pt={1}>
+                    Tempo
+                  </Badge>
+                </Button>
+              </Link>
+            )}
+            {metadata.website && (
+              <Link href={metadata.website} passHref>
+                <Button leftIcon={<HiOutlineGlobe />}>Visit Website</Button>
+              </Link>
+            )}
+            {metadata.repository && (
+              <Link href={metadata.repository} passHref>
+                <Button leftIcon={<HiOutlineCode />}>Browse Source</Button>
+              </Link>
+            )}
           </Stack>
           <Stack spacing={2} as="section">
             <Text textStyle="secondary" as="h6">
@@ -85,19 +99,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
             </Text>
             <Table>
               <Tbody>
-                {/* Only show the category if the category has any value */}
-                {metadata.website && (
-                  <Tr>
-                    <Td>Website</Td>
-                    <Td>{metadata.website}</Td>
-                  </Tr>
-                )}
-                {metadata.repository && (
-                  <Tr>
-                    <Td>Source Repository</Td>
-                    <Td>{metadata.repository}</Td>
-                  </Tr>
-                )}
+                {/* These are only shown the category if the category has any value */}
                 {metadata.version && (
                   <Tr>
                     <Td>Version</Td>

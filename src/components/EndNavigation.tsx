@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { Stack, Flex, Spacer, Center, Button } from "@chakra-ui/react";
-import { HiArrowUp, HiOutlineSupport, HiCode } from "react-icons/hi";
+import { HiArrowUp, HiOutlineSupport, HiOutlineCode } from "react-icons/hi";
 import { FiTwitter } from "react-icons/fi";
 
 import LegalNavigation from "src/components/LegalNavigation";
@@ -24,7 +24,7 @@ export default function EndNavigation() {
           </Button>
         </Link>
         <Link href="https://github.com/ulosino/ulosino" passHref>
-          <Button leftIcon={<HiCode />} size="sm" variant="ghost">
+          <Button leftIcon={<HiOutlineCode />} size="sm" variant="ghost">
             GitHub
           </Button>
         </Link>
