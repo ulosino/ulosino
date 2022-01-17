@@ -190,7 +190,12 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
             )}
             {metadata.website && (
               <Link href={metadata.website} passHref>
-                <Button leftIcon={<HiOutlineGlobe />}>Visit Website</Button>
+                <Button
+                  leftIcon={<HiOutlineGlobe />}
+                  id="testing-db-websiteLinkButton"
+                >
+                  Visit Website
+                </Button>
               </Link>
             )}
             {metadata.repository && (
