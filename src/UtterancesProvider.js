@@ -11,6 +11,7 @@ const validTypeList = [
   "url",
   "title",
   "label",
+  "theme",
   "og:title",
   "issue-number",
   "issue-term",
@@ -41,6 +42,8 @@ const getAttrValue = (type, specificTerm, issueNumber) => {
     return "og:title";
   } else if (type === "label") {
     return "label";
+  } else if (type === "theme") {
+    return "theme";
   } else if (type === "issue-term") {
     return specificTerm;
   } else if (type === "issue-number") {
@@ -56,7 +59,7 @@ class Utterances extends Component {
   }
 
   componentDidMount() {
-    const { repo, type, label, specificTerm, issueNumber } = this.props;
+    const { repo, type, label, theme, specificTerm, issueNumber } = this.props;
     const attrName = getAttrName(type);
     const value = getAttrValue(type, specificTerm, issueNumber);
     if (type === "issue-term" && !value) {
@@ -75,6 +78,7 @@ class Utterances extends Component {
     scriptEl.async = true;
     scriptEl.setAttribute("repo", repo);
     scriptEl.setAttribute("label", label);
+    scriptEl.setAttribute("theme", theme);
     scriptEl.setAttribute("crossorigin", "anonymous");
     scriptEl.setAttribute(attrName, value);
     scriptEl.onload = () => this.setState({ pending: false });
@@ -124,6 +128,10 @@ export const identifierTypes = {
   label: {
     attrValue: "label",
     summary: "Issue label contains issue label",
+  },
+  theme: {
+    attrValue: "theme",
+    summary: "Issue theme contains theme",
   },
   "issue-number": {
     attrValue: -1,

@@ -8,16 +8,10 @@ import {
   IconButton,
   Box,
   Stack,
-  SimpleGrid,
   Flex,
   Spacer,
-  Modal,
-  ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   useDisclosure,
   useColorMode,
   useBreakpointValue,
@@ -25,7 +19,7 @@ import {
 import {
   HiMenu,
   HiChevronRight,
-  HiCode,
+  HiOutlineCode,
   HiOutlineChatAlt2,
   HiOutlineColorSwatch,
 } from "react-icons/hi";
@@ -43,6 +37,24 @@ function Card(props) {
     </Box>
   );
 }
+
+import dynamic from "next/dynamic";
+// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
+const Modal = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.Modal)
+);
+const ModalOverlay = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalOverlay)
+);
+const ModalHeader = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalHeader)
+);
+const ModalBody = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalBody)
+);
+const ModalFooter = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalFooter)
+);
 
 export default function NavigationMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -71,6 +83,7 @@ export default function NavigationMenu() {
         isCentered
         motionPreset="scale"
         size="sm"
+        scrollBehavior="inside"
       >
         <ModalOverlay />
         <ModalContent rounded="2xl">
@@ -131,7 +144,11 @@ export default function NavigationMenu() {
                     </Button>
                   </Link>
                   <Link href="https://github.com/ulosino/ulosino" passHref>
-                    <Button leftIcon={<HiCode />} size="sm" onClick={onClose}>
+                    <Button
+                      leftIcon={<HiOutlineCode />}
+                      size="sm"
+                      onClick={onClose}
+                    >
                       GitHub &amp; Source
                     </Button>
                   </Link>

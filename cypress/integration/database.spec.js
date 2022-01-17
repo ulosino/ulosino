@@ -10,7 +10,13 @@ describe("Database Tester", () => {
     // Test in-page metadata
     cy.get("h2").contains("Operating system page demo");
     cy.get("p").contains("This isn't an operating system.");
-    cy.get("td").contains("Website");
+    cy.get("td").contains("Licence");
+
+    // Test in-page buttons where metadata forms the href
+    cy.get("#testing-db-websiteLinkButton")
+      .contains("Visit Website")
+      .should("have.attr", "href")
+      .and("include", "ulosino.com");
 
     // Test remote metadata
     cy.get("button").contains("Browse").click();
