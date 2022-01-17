@@ -1,18 +1,30 @@
 import {
   Button,
-  Modal,
-  ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HiOutlineChatAlt2 } from "react-icons/hi";
 
 import dynamic from "next/dynamic";
 const Utterances = dynamic(() => import("src/UtterancesProvider"));
+
+// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
+const Modal = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.Modal)
+);
+const ModalOverlay = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalOverlay)
+);
+const ModalHeader = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalHeader)
+);
+const ModalBody = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalBody)
+);
+const ModalFooter = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalFooter)
+);
 
 export default function DiscussionModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();

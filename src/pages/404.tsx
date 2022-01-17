@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import {
-  Tag,
+  Badge,
   Heading,
   Text,
   Button,
@@ -53,9 +53,7 @@ export default function Custom404() {
               Page Not Found
             </Text>
             <Spacer />
-            <Tag bg="alert" rounded="lg" shadow="md" fontSize="xs">
-              HTTP 404
-            </Tag>
+            <Badge variant="alert">HTTP 404</Badge>
           </Flex>
           <Stack direction="row" spacing={8}>
             <Box display="block">

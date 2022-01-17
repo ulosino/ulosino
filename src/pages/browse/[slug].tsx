@@ -19,13 +19,8 @@ import {
   Tbody,
   Tr,
   Td,
-  Modal,
-  ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HiOutlineCash, HiOutlineGlobe, HiOutlineCode } from "react-icons/hi";
@@ -33,6 +28,23 @@ import { HiOutlineCash, HiOutlineGlobe, HiOutlineCode } from "react-icons/hi";
 import UIProvider from "src/UIProvider";
 
 const DiscussionModal = dynamic(() => import("src/components/DiscussionModal"));
+
+// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
+const Modal = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.Modal)
+);
+const ModalOverlay = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalOverlay)
+);
+const ModalHeader = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalHeader)
+);
+const ModalBody = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalBody)
+);
+const ModalFooter = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalFooter)
+);
 
 // Pages can use the following components if needed
 const Link = dynamic(() => import("next/link"));

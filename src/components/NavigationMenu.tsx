@@ -10,13 +10,8 @@ import {
   Stack,
   Flex,
   Spacer,
-  Modal,
-  ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   useDisclosure,
   useColorMode,
   useBreakpointValue,
@@ -42,6 +37,24 @@ function Card(props) {
     </Box>
   );
 }
+
+import dynamic from "next/dynamic";
+// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
+const Modal = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.Modal)
+);
+const ModalOverlay = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalOverlay)
+);
+const ModalHeader = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalHeader)
+);
+const ModalBody = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalBody)
+);
+const ModalFooter = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.ModalFooter)
+);
 
 export default function NavigationMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -70,6 +83,7 @@ export default function NavigationMenu() {
         isCentered
         motionPreset="scale"
         size="sm"
+        scrollBehavior="inside"
       >
         <ModalOverlay />
         <ModalContent rounded="2xl">

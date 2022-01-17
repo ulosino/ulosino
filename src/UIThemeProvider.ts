@@ -56,7 +56,7 @@ export const Card = {
 };
 
 const Badge = {
-  baseStyle: { px: 4, pt: "0.5", h: "20px" },
+  baseStyle: { px: 4, pt: "0.5", h: "20px", shadow: "md" },
   sizes: {
     sm: {
       fontSize: "xs",
@@ -71,7 +71,10 @@ const Badge = {
     solid: {
       bg: "secondary",
       color: "white",
-      shadow: "md",
+    },
+    alert: {
+      bg: "alert",
+      color: "gray.800",
     },
   },
   defaultProps: {

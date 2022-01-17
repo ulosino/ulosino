@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import {
-  Tag,
+  Badge,
   Heading,
   Text,
   Button,
@@ -48,9 +48,7 @@ export default function Custom500() {
               Server Error
             </Text>
             <Spacer />
-            <Tag bg="alert" rounded="lg" shadow="md" fontSize="xs">
-              HTTP 500
-            </Tag>
+            <Badge variant="alert">HTTP 500</Badge>
           </Flex>
           <Stack direction="row" spacing={8}>
             <Box display="block">
