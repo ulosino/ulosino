@@ -157,15 +157,15 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                               Donate through GitHub Sponsors
                             </Button>
                           )}
-                          {(metadata.donatePatreon && (
-                            <Link href={metadata.donatePatreon} passHref>
+                          {(metadata.donateLibera && (
+                            <Link href={metadata.donateLibera} passHref>
                               <Button leftIcon={<HiOutlineCash />}>
-                                Donate through Patreon
+                                Donate through Liberapay
                               </Button>
                             </Link>
                           )) ?? (
                             <Button leftIcon={<HiOutlineCash />} isDisabled>
-                              Donate through Patreon
+                              Donate through Liberapay
                             </Button>
                           )}
                         </Stack>
@@ -176,8 +176,9 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                         </Stack>
                         <Text fontSize="xs">
                           Tempo, the ULOSINO donation hub. Not available for all
-                          donation platforms or for all OSs. ULOSINO does not
-                          receive commission when you use these links.
+                          OSs. Payments are facilitated by third parties.
+                          ULOSINO does not receive commission. General advice
+                          only.
                         </Text>
                       </Stack>
                     </ModalBody>

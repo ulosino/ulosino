@@ -9,7 +9,6 @@ import { HiOutlineChatAlt2 } from "react-icons/hi";
 import dynamic from "next/dynamic";
 const Utterances = dynamic(() => import("src/UtterancesProvider"));
 
-// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
 const Modal = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.Modal)
 );
@@ -47,7 +46,7 @@ export default function DiscussionModal() {
       >
         <ModalOverlay />
         <ModalContent rounded="2xl">
-          <ModalHeader>Discuss this OS</ModalHeader>
+          <ModalHeader>Comments</ModalHeader>
           <ModalCloseButton rounded="xl" />
           <ModalBody>
             <Utterances
