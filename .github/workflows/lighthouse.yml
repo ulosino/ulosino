@@ -1,0 +1,17 @@
+name: Lighthouse Performance CI
+on: push
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Audit URL Performance using Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v8
+        with:
+          urls: |
+            https://ulosino.com/
+            https://ulosino.com/browse
+            https://ulosino.com/browse/demo
+          budgetPath: ../.github/ciconfig/lighthouse/budget.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
