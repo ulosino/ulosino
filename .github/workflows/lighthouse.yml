@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm ci
       - name: Build Application and Start Server
         run: npm run build && npm run start
       - name: Audit Application Performance using Lighthouse CI
