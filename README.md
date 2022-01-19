@@ -12,6 +12,7 @@ ULOSINO is The Friendly Flow. Go to [ULOSINO.com](https://ulosino.com) now.
 - Browse at night with responsive **dark mode**
 - Take ULOSINO anywhere, even off-the-grid, with **offline compatibility**
 - **Search by name, platform, desktop, and more**, efficiently and quickly
+- **Make a donation** with ULOSINO Tempo, the community capital hub
 - Community contributions, bringing **up-and-coming operating systems** on the same playing field
 
 And more!
