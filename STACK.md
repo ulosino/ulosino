@@ -74,7 +74,7 @@ These are the primary providers:
 | `repository`       | Full URL to the OS's public source repository                                                                           |
 | `donate`           | Full URL to a funding section of the OS's website. Introduced with Tempo                                                |
 | `donateGithub`     | Full URL to the OS's GitHub Sponsor page. Introduced with Tempo                                                         |
-| `donatePatreon`    | Full URL to the OS's Patreon page. Introduced with Tempo                                                                |
+| `donateLibera`     | Full URL to the OS's LiberaPay page. Introduced with Tempo                                                              |
 | `donateCollective` | Full URL to the OS's Open Collective page. Introduced with Tempo                                                        |
 
 ## Category definitions

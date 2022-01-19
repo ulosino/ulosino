@@ -8,9 +8,9 @@ Remember that all contributions are bound by the Contribution Code of Conduct, a
 
 ## Editing a single file
 
-Often you'll want to update a single distribution page. Luckily this is easy - you don't even have to leave GitHub!
+Often you'll want to update a single operating system page. Luckily this is easy - you don't even have to leave GitHub!
 
-First, go into the distribution file store, available in `/public/content/browse/`. Then find the file you want and open it.
+First, go into the OS file store, available in `/public/content/browse/`. Then find the file you want and open it.
 
 When you open a file, it'll show something like this:
 
@@ -48,11 +48,13 @@ We want to edit this file.
 
 > **Note:** Empty metadata categories in the 'other' section will be hidden. View the demo page (code above) to see this in action.
 
+> **Note for Tempo:** Quick Donation Options that are not applicable need to be left blank and commented out.
+
 ## Larger contributions
 
 If you want to contribute to the Source Code of ULOSINO, or make mutiple changes to Database Content, you'll need to make a repository fork so that you can work with the stack on your computer.
 
-> **Tip:** If you're creating a new distribution page, it is recommended to duplicate `demo.mdx`. This ensures you have the latest metadata available.
+> **Tip:** If you're creating a new OS page, it is recommended to duplicate `demo.mdx`. This ensures you have the latest metadata available. Reference `STACK.md` for up-to-date definitions.
 
 > **Note:** Most discontinued operating systems can be carried on ULOSINO, as long as an official reference is still available. A website or archived GitHub/GitLab repository with a README would fulfill this. Please make it clear (first line) that the OS is discontinued.
 
@@ -61,13 +63,10 @@ Below is a recommended way to do this. There are other ways to do the same thing
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your
    own GitHub account and then
    [clone](https://help.github.com/articles/cloning-a-repository/) it to your local system.
-
 2. Open the terminal and create your new branch:
-
    ```
    git checkout -b BRANCH_NAME
    ```
-
 3. Install dependencies:
 
    ```
@@ -85,12 +84,18 @@ Below is a recommended way to do this. There are other ways to do the same thing
    ```
    npm run build
    npm run start
-
-   # Testing recommended for large contributions
-   npx cypress run    # Separate terminal window
    ```
 
-6. If the build passes, you can proceed to make create a pull request for your fork!
+6. If you're making a large edit, be sure to run our tests (in a different terminal window with `npm run start` running):
+
+   ```
+   npx cypress open
+
+   # Fallback:
+   npx cypress run
+   ```
+
+7. If the build passes, you can proceed to make create a pull request for your fork!
 
 Note these guidelines when making pull requests:
 
@@ -113,4 +118,4 @@ For all issues, remember to use labels and try to be as descriptive as possible 
 
 ---
 
-Last revised 18th December, 2021.
+Last revised 19th January, 2022.
