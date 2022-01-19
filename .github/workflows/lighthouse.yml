@@ -5,13 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Audit URL Performance using Lighthouse CI
+      - name: Build Application and Start Server
+        run: npm run build && npm run start
+      - name: Audit Application Performance using Lighthouse CI
         uses: treosh/lighthouse-ci-action@v8
         with:
           urls: |
-            https://ulosino.com/
-            https://ulosino.com/browse
-            https://ulosino.com/browse/demo
+            http://localhost:3000
+            http://localhost:3000/browse
+            http://localhost:3000/browse/demo
           budgetPath: ../.github/ciconfig/lighthouse/budget.json
           uploadArtifacts: true
           temporaryPublicStorage: true
