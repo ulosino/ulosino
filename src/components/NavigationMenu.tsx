@@ -19,6 +19,7 @@ import {
 import {
   HiMenu,
   HiChevronRight,
+  HiArrowNarrowRight,
   HiOutlineCode,
   HiOutlineChatAlt2,
   HiOutlineColorSwatch,
@@ -123,6 +124,18 @@ export default function NavigationMenu() {
                     </Flex>
                     <Text fontSize="xs">
                       Make a search from the full ULOSINO metadata collection.
+                    </Text>
+                  </Card>
+                </Link>
+                <Link href="https://guides.ulosino.com" passHref>
+                  <Card onClick={onClose} variant="button">
+                    <Flex mb={1}>
+                      <Heading size="md">ULOSINO Guides</Heading>
+                      <Spacer />
+                      <Icon as={HiArrowNarrowRight} w={4} h={4} mt={1} />
+                    </Flex>
+                    <Text fontSize="xs">
+                      Learn about operating system concepts with ULOSINO Guides.
                     </Text>
                   </Card>
                 </Link>
