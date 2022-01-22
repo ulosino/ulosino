@@ -22,7 +22,7 @@ And more!
 1. Database Content is edited, in the Markdown format, as a part of a commit, and;
 2. Then the new revision, with all of the Database Content is processed by the Source Code and delivered to visitors.
 
-Read through [CONTRIBUTING.md](https://github.com/ulosino/ulosino/blob/main/CONTRIBUTING.md) for more details.
+Read through [CONTRIBUTING.md](https://github.com/ulosino/.github/blob/main/CONTRIBUTING.md) for more details.
 
 ULOSINO, as a whole stack, is divided into Database Content (`/public`) and the Source Code (`/src`), which live together on a modern Next.js application.
 
@@ -32,4 +32,4 @@ Contributions to the source are welcomed as well. Reference [STACK.md](https://g
 
 ULOSINO is available for copy or study under the MIT Licence.
 
-Read through the [Contribution Code of Conduct](https://github.com/ulosino/ulosino/blob/main/CODE_OF_CONDUCT.md) before contributing.
+Read through the [Contribution Code of Conduct](https://github.com/ulosino/.github/blob/main/CODE_OF_CONDUCT.md) before contributing.
