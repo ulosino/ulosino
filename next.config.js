@@ -1,5 +1,3 @@
-const withPlugins = require("next-compose-plugins");
-const { withPlausibleProxy } = require("next-plausible");
 const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
 
@@ -20,11 +18,11 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' ulosino.com *.ulosino.com *.vercel.app plausible.io utteranc.es",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' ulosino.com *.ulosino.com *.vercel.app utteranc.es",
   },
 ];
 
-const nextConfig = withPWA({
+module.exports = withPWA({
   // Configuration for the next-pwa plugin
   pwa: {
     dest: "public",
@@ -50,6 +48,16 @@ const nextConfig = withPWA({
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/tree.js",
+        destination: "https://cdn.splitbee.io/sb.js",
+      },
+      {
+        source: "/_oak/:slug",
+        destination: "https://hive.splitbee.io/:slug",
+      },
+    ];
+  },
 });
-
-module.exports = withPlugins([withPlausibleProxy], nextConfig);
