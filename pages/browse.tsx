@@ -4,10 +4,10 @@ import Head from "next/head";
 import Link from "next/link";
 
 import {
-  getNewestDistributions,
-  getOldestDistributions,
-  getDistributions,
-} from "providers/DBProvider";
+  getNewestOSPages,
+  getOldestOSPages,
+  getOSPages,
+} from "providers/OSPageProvider";
 
 import {
   AutoCompleteInput,
@@ -54,11 +54,11 @@ function Card(props) {
 import UIProvider from "providers/UIProvider";
 
 export default function Browse({
-  newestDistributionData,
-  oldestDistributionData,
-  AZDistributionData,
+  newestOSPageData,
+  oldestOSPageData,
+  AZOSPageData,
 }: {
-  newestDistributionData: {
+  newestOSPageData: {
     date: string;
     id: string;
     title: string;
@@ -70,7 +70,7 @@ export default function Browse({
     desktop: string;
     packagemgr: string;
   }[];
-  oldestDistributionData: {
+  oldestOSPageData: {
     date: string;
     id: string;
     title: string;
@@ -82,7 +82,7 @@ export default function Browse({
     desktop: string;
     packagemgr: string;
   }[];
-  AZDistributionData: {
+  AZOSPageData: {
     date: string;
     id: string;
     title: string;
@@ -152,7 +152,7 @@ export default function Browse({
                         id="testing-db-input"
                       />
                       <AutoCompleteList>
-                        {AZDistributionData.map(
+                        {AZOSPageData.map(
                           ({
                             id,
                             title,
@@ -224,7 +224,7 @@ export default function Browse({
                         placeholder="Filter by platform..."
                       />
                       <AutoCompleteList>
-                        {AZDistributionData.map(
+                        {AZOSPageData.map(
                           ({
                             id,
                             title,
@@ -297,7 +297,7 @@ export default function Browse({
                         placeholder="Filter by desktop..."
                       />
                       <AutoCompleteList>
-                        {AZDistributionData.map(
+                        {AZOSPageData.map(
                           ({
                             id,
                             title,
@@ -370,7 +370,7 @@ export default function Browse({
                         placeholder="Filter by startup manager..."
                       />
                       <AutoCompleteList>
-                        {AZDistributionData.map(
+                        {AZOSPageData.map(
                           ({
                             id,
                             title,
@@ -443,7 +443,7 @@ export default function Browse({
                         placeholder="Filter by package manager..."
                       />
                       <AutoCompleteList>
-                        {AZDistributionData.map(
+                        {AZOSPageData.map(
                           ({
                             id,
                             title,
@@ -523,7 +523,7 @@ export default function Browse({
             <TabPanels>
               <TabPanel px={0} pb={0} pt={4}>
                 <Stack direction="column" spacing={2}>
-                  {AZDistributionData.map(
+                  {AZOSPageData.map(
                     ({
                       id,
                       title,
@@ -575,7 +575,7 @@ export default function Browse({
               </TabPanel>
               <TabPanel px={0} pb={0} pt={4}>
                 <Stack direction="column" spacing={2}>
-                  {newestDistributionData.map(
+                  {newestOSPageData.map(
                     ({
                       id,
                       title,
@@ -627,7 +627,7 @@ export default function Browse({
               </TabPanel>
               <TabPanel px={0} pb={0} pt={4}>
                 <Stack direction="column" spacing={2}>
-                  {oldestDistributionData.map(
+                  {oldestOSPageData.map(
                     ({
                       id,
                       title,
@@ -646,7 +646,7 @@ export default function Browse({
                       >
                         <Card
                           key={id}
-                          id="testing-db-distributions"
+                          id="testing-db-OSPages"
                           variant="button"
                           px={6}
                         >
@@ -691,14 +691,14 @@ export default function Browse({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const newestDistributionData = getNewestDistributions();
-  const oldestDistributionData = getOldestDistributions();
-  const AZDistributionData = getDistributions();
+  const newestOSPageData = getNewestOSPages();
+  const oldestOSPageData = getOldestOSPages();
+  const AZOSPageData = getOSPages();
   return {
     props: {
-      newestDistributionData,
-      oldestDistributionData,
-      AZDistributionData,
+      newestOSPageData,
+      oldestOSPageData,
+      AZOSPageData,
     },
   };
 };

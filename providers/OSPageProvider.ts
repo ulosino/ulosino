@@ -1,17 +1,20 @@
-// Provides access, routing, and sorting to our Database Content (currently only OS Pages)
+// Provides access, routing, and sorting to our OS Pages (Markdown format)
 
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const dStore = path.join(process.cwd(), "public/content/browse");
+// The location of the operating system Markdown files
+// After `content/`, this should match the URL i.e. `ulosino.com/browse`
+const OSPageStore = path.join(process.cwd(), "public/content/browse");
 
-export function getNewestDistributions() {
-  const fileNames = fs.readdirSync(dStore);
+// Get OS Pages and sort them by date, newest first
+export function getNewestOSPages() {
+  const fileNames = fs.readdirSync(OSPageStore);
   const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.mdx$/, "");
 
-    const fullPath = path.join(dStore, fileName);
+    const fullPath = path.join(OSPageStore, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const matterResult = matter(fileContents);
 
@@ -29,12 +32,13 @@ export function getNewestDistributions() {
   });
 }
 
-export function getOldestDistributions() {
-  const fileNames = fs.readdirSync(dStore);
+// Get OS Pages and sort them by date, oldest first
+export function getOldestOSPages() {
+  const fileNames = fs.readdirSync(OSPageStore);
   const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.mdx$/, "");
 
-    const fullPath = path.join(dStore, fileName);
+    const fullPath = path.join(OSPageStore, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const matterResult = matter(fileContents);
 
@@ -52,12 +56,13 @@ export function getOldestDistributions() {
   });
 }
 
-export function getDistributions() {
-  const fileNames = fs.readdirSync(dStore);
+// Get OS Pages and sort them in alphabetical order
+export function getOSPages() {
+  const fileNames = fs.readdirSync(OSPageStore);
   const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.mdx$/, "");
 
-    const fullPath = path.join(dStore, fileName);
+    const fullPath = path.join(OSPageStore, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const matterResult = matter(fileContents);
 
@@ -76,7 +81,7 @@ export function getDistributions() {
 }
 
 export function getDistributionIds() {
-  const fileNames = fs.readdirSync(dStore);
+  const fileNames = fs.readdirSync(OSPageStore);
   return fileNames.map((fileName) => {
     return {
       params: {

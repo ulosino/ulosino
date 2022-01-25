@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import { getDistributions } from "providers/DBProvider";
+import { getOSPages } from "providers/OSPageProvider";
 
 import {
   Heading,
@@ -47,9 +47,9 @@ const AutoComplete = dynamic(() =>
 );
 
 export default function Home({
-  AZDistributionData,
+  AZOSPageData,
 }: {
-  AZDistributionData: {
+  AZOSPageData: {
     date: string;
     id: string;
     title: string;
@@ -119,7 +119,7 @@ export default function Home({
                     id="testing-db-input"
                   />
                   <AutoCompleteList>
-                    {AZDistributionData.map(
+                    {AZOSPageData.map(
                       ({
                         id,
                         title,
@@ -218,10 +218,10 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const AZDistributionData = getDistributions();
+  const AZOSPageData = getOSPages();
   return {
     props: {
-      AZDistributionData,
+      AZOSPageData,
     },
   };
 };
