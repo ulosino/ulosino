@@ -15,19 +15,11 @@ const Link = dynamic(() => import("next/link"));
 const CategoryDefinitions = dynamic(
   () => import("components/CategoryDefinitions")
 );
-const CopyrightHeader = dynamic(() => import("components/CopyrightHeader"));
-const PrivacyHeader = dynamic(() => import("components/PrivacyHeader"));
 const VersionTroubleshoot = dynamic(
   () => import("components/VersionTroubleshoot")
 );
 
-const availableComponents = [
-  Link,
-  CategoryDefinitions,
-  CopyrightHeader,
-  PrivacyHeader,
-  VersionTroubleshoot,
-];
+const availableComponents = [Link, CategoryDefinitions, VersionTroubleshoot];
 
 export default function MDXHostPage({ source, metadata, componentNames }) {
   const components = {
@@ -35,12 +27,6 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
     Link: componentNames.includes("Link") ? Link : null,
     CategoryDefinitions: componentNames.includes("CategoryDefinitions")
       ? CategoryDefinitions
-      : null,
-    CopyrightHeader: componentNames.includes("CopyrightHeader")
-      ? CopyrightHeader
-      : null,
-    PrivacyHeader: componentNames.includes("PrivacyHeader")
-      ? PrivacyHeader
       : null,
     VersionTroubleshoot: componentNames.includes("VersionTroubleshoot")
       ? VersionTroubleshoot
@@ -72,8 +58,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
   const componentNames = [
     /<Link/.test(content) ? "Link" : null,
     /<CategoryDefinitions/.test(content) ? "CategoryDefinitions" : null,
-    /<CopyrightHeader/.test(content) ? "CopyrightHeader" : null,
-    /<PrivacyHeader/.test(content) ? "PrivacyHeader" : null,
     /<VersionTroubleshoot/.test(content) ? "VersionTroubleshoot" : null,
   ].filter(Boolean);
 
