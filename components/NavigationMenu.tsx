@@ -122,7 +122,7 @@ export default function NavigationMenu() {
                       <Icon as={HiChevronRight} w={4} h={4} mt={1} />
                     </Flex>
                     <Text fontSize="xs">
-                      Make a search from the full ULOSINO metadata collection.
+                      Make a search from our full metadata collection.
                     </Text>
                   </Card>
                 </Link>
@@ -134,7 +134,19 @@ export default function NavigationMenu() {
                       <Icon as={HiArrowNarrowRight} w={4} h={4} mt={1} />
                     </Flex>
                     <Text fontSize="xs">
-                      Learn about operating system concepts with ULOSINO Guides.
+                      Learn operating system concepts and definitions.
+                    </Text>
+                  </Card>
+                </Link>
+                <Link href="https://matches.ulosino.com" passHref>
+                  <Card onClick={onClose} variant="button">
+                    <Flex mb={1}>
+                      <Heading size="md">ULOSINO Matches</Heading>
+                      <Spacer />
+                      <Icon as={HiArrowNarrowRight} w={4} h={4} mt={1} />
+                    </Flex>
+                    <Text fontSize="xs">
+                      Find an OS that matches your preferences.
                     </Text>
                   </Card>
                 </Link>

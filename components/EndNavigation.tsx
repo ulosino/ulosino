@@ -18,11 +18,6 @@ export default function EndNavigation() {
       </Link>
       <Spacer />
       <Stack direction="row" spacing={2}>
-        <Link href="/definitions" passHref>
-          <Button leftIcon={<HiOutlineSupport />} size="sm" variant="ghost">
-            Definitions
-          </Button>
-        </Link>
         <Link href="https://github.com/ulosino/ulosino" passHref>
           <Button leftIcon={<HiOutlineCode />} size="sm" variant="ghost">
             GitHub

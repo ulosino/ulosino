@@ -12,22 +12,16 @@ import UIProvider from "providers/UIProvider";
 
 // Pages can use the following components if needed
 const Link = dynamic(() => import("next/link"));
-const CategoryDefinitions = dynamic(
-  () => import("components/CategoryDefinitions")
-);
 const VersionTroubleshoot = dynamic(
   () => import("components/VersionTroubleshoot")
 );
 
-const availableComponents = [Link, CategoryDefinitions, VersionTroubleshoot];
+const availableComponents = [Link, VersionTroubleshoot];
 
 export default function MDXHostPage({ source, metadata, componentNames }) {
   const components = {
     ...availableComponents,
     Link: componentNames.includes("Link") ? Link : null,
-    CategoryDefinitions: componentNames.includes("CategoryDefinitions")
-      ? CategoryDefinitions
-      : null,
     VersionTroubleshoot: componentNames.includes("VersionTroubleshoot")
       ? VersionTroubleshoot
       : null,
@@ -57,7 +51,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
 
   const componentNames = [
     /<Link/.test(content) ? "Link" : null,
-    /<CategoryDefinitions/.test(content) ? "CategoryDefinitions" : null,
     /<VersionTroubleshoot/.test(content) ? "VersionTroubleshoot" : null,
   ].filter(Boolean);
 
