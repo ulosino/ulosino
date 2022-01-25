@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import { getDistributions } from "src/DBProvider";
+import { getDistributions } from "providers/DBProvider";
 
 import {
   AutoCompleteInput,
@@ -35,7 +35,7 @@ import {
 } from "@chakra-ui/react";
 import { HiOutlineDatabase, HiOutlineSearch } from "react-icons/hi";
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
 export default function AdvancedSearch({
   AZDistributionData,

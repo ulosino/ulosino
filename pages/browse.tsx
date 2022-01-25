@@ -7,7 +7,7 @@ import {
   getNewestDistributions,
   getOldestDistributions,
   getDistributions,
-} from "src/DBProvider";
+} from "providers/DBProvider";
 
 import {
   AutoCompleteInput,
@@ -51,7 +51,7 @@ function Card(props) {
   );
 }
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
 export default function Browse({
   newestDistributionData,

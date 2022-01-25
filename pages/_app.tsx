@@ -1,16 +1,16 @@
 import { AppProps } from "next/app";
 
 // Import global providers
-import MDXProvider from "src/MDXProvider";
+import MDXProvider from "providers/MDXProvider";
 import { ChakraProvider } from "@chakra-ui/react";
-import UITheme from "src/UIThemeProvider";
+import UITheme from "providers/UIThemeProvider";
 
 // Import global analytics
 import splitbee from "@splitbee/web";
 import { useEffect } from "react";
 
 // Import global components
-import JSWarning from "src/components/JSWarning";
+import JSWarning from "components/JSWarning";
 
 // Import global typography
 import "@fontsource/public-sans/variable.css";

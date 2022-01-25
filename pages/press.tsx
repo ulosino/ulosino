@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Text, Icon, Box, Stack, SimpleGrid, Divider } from "@chakra-ui/react";
 import { HiOutlineCalendar, HiOutlineGlobe } from "react-icons/hi";
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
-import PressHeader from "src/components/PressHeader";
+import PressHeader from "components/PressHeader";
 
 import Image from "next/image";
 import Logo from "/public/brand/app-logo.png";

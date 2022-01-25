@@ -5,17 +5,16 @@ import { Container, Flex, useColorModeValue } from "@chakra-ui/react";
 import {
   StartNavigationDesktop,
   StartNavigationMobile,
-} from "src/components/StartNavigation";
+} from "components/StartNavigation";
 
 import dynamic from "next/dynamic";
-import Loading from "src/components/Loading";
-const EndNavigation = dynamic(() => import("src/components/EndNavigation"), {
+import Loading from "components/Loading";
+const EndNavigation = dynamic(() => import("components/EndNavigation"), {
   loading: () => <Loading />,
 });
-const LegalNavigation = dynamic(
-  () => import("src/components/LegalNavigation"),
-  { loading: () => <Loading /> }
-);
+const LegalNavigation = dynamic(() => import("components/LegalNavigation"), {
+  loading: () => <Loading />,
+});
 
 export default function UIProvider({ children }) {
   return (

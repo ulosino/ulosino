@@ -25,9 +25,9 @@ import {
 } from "@chakra-ui/react";
 import { HiOutlineCash, HiOutlineGlobe, HiOutlineCode } from "react-icons/hi";
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
-const DiscussionModal = dynamic(() => import("src/components/DiscussionModal"));
+const DiscussionModal = dynamic(() => import("components/DiscussionModal"));
 
 // Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
 const Modal = dynamic(() =>

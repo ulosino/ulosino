@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import { getDistributions } from "src/DBProvider";
+import { getDistributions } from "providers/DBProvider";
 
 import {
   Heading,
@@ -33,7 +33,7 @@ function Card(props) {
   );
 }
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
 import {
   AutoCompleteInput,

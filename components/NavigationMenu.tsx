@@ -40,7 +40,6 @@ function Card(props) {
 }
 
 import dynamic from "next/dynamic";
-// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
 const Modal = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.Modal)
 );

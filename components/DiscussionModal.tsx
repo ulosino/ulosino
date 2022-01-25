@@ -7,7 +7,7 @@ import {
 import { HiOutlineChatAlt2 } from "react-icons/hi";
 
 import dynamic from "next/dynamic";
-const Utterances = dynamic(() => import("src/UtterancesProvider"));
+const Utterances = dynamic(() => import("providers/UtterancesProvider"));
 
 const Modal = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.Modal)

@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { Stack, Text } from "@chakra-ui/react";
 
-import Version from "src/components/Version";
+import Version from "components/Version";
 
 export default function VersionTroubleshoot() {
   return (

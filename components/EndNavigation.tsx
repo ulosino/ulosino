@@ -6,7 +6,7 @@ import { Stack, Flex, Spacer, Center, Button } from "@chakra-ui/react";
 import { HiArrowUp, HiOutlineSupport, HiOutlineCode } from "react-icons/hi";
 import { FiTwitter } from "react-icons/fi";
 
-import LegalNavigation from "src/components/LegalNavigation";
+import LegalNavigation from "components/LegalNavigation";
 
 export default function EndNavigation() {
   return (

@@ -8,17 +8,17 @@ import { serialize } from "next-mdx-remote/serialize";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
 // Pages can use the following components if needed
 const Link = dynamic(() => import("next/link"));
 const CategoryDefinitions = dynamic(
-  () => import("src/components/CategoryDefinitions")
+  () => import("components/CategoryDefinitions")
 );
-const CopyrightHeader = dynamic(() => import("src/components/CopyrightHeader"));
-const PrivacyHeader = dynamic(() => import("src/components/PrivacyHeader"));
+const CopyrightHeader = dynamic(() => import("components/CopyrightHeader"));
+const PrivacyHeader = dynamic(() => import("components/PrivacyHeader"));
 const VersionTroubleshoot = dynamic(
-  () => import("src/components/VersionTroubleshoot")
+  () => import("components/VersionTroubleshoot")
 );
 
 const availableComponents = [
