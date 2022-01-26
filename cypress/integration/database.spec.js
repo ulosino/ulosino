@@ -25,11 +25,11 @@ describe("Database Tester", () => {
       .find("button")
       .contains("Oldest")
       .click();
-    cy.get("#testing-db-distributions").find("h2").contains("Demo");
-    cy.get("#testing-db-distributions")
+    cy.get("#testing-db-OSPages").find("h2").contains("Demo");
+    cy.get("#testing-db-OSPages")
       .find("p")
       .contains("Operating system page demo");
-    cy.get("#testing-db-distributions").find("h2").contains("Demo").click();
+    cy.get("#testing-db-OSPages").find("h2").contains("Demo").click();
     cy.url().should("include", "/browse/");
   });
 });

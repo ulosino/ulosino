@@ -12,7 +12,7 @@ describe("Display Tester", () => {
       .find("button")
       .contains("Oldest")
       .click();
-    cy.get("#testing-db-distributions").should("be.visible");
+    cy.get("#testing-db-OSPages").should("be.visible");
 
     // Test navbar and footer visibility in portrait
     cy.viewport("iphone-x");
