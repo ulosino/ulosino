@@ -1,5 +1,7 @@
 import { GetStaticProps } from "next";
 
+import Link from "next/link";
+
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -47,15 +49,13 @@ const ModalFooter = dynamic(() =>
 );
 
 // Pages can use the following components if needed
-const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
 
-const availableComponents = [Link, Image];
+const availableComponents = [Image];
 
 export default function MDXHostPage({ source, metadata, componentNames }) {
   const components = {
     ...availableComponents,
-    Link: componentNames.includes("Link") ? Link : null,
     Image: componentNames.includes("Image") ? Image : null,
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -313,10 +313,9 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
 
   const { content, data } = matter(source);
 
-  const componentNames = [
-    /<Link/.test(content) ? "Link" : null,
-    /<Image/.test(content) ? "Image" : null,
-  ].filter(Boolean);
+  const componentNames = [/<Image/.test(content) ? "Image" : null].filter(
+    Boolean
+  );
 
   const mdxSource = await serialize(content, {
     scope: data,
