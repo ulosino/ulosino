@@ -18,9 +18,9 @@ export default function EndNavigation() {
       </Link>
       <Spacer />
       <Stack direction="row" spacing={2}>
-        <Link href="https://github.com/ulosino/ulosino" passHref>
+        <Link href="https://github.com/ulosino" passHref>
           <Button leftIcon={<HiOutlineCode />} size="sm" variant="ghost">
-            GitHub
+            GitHub &amp; Source
           </Button>
         </Link>
         <Link href="https://twitter.com/ulosino" passHref>

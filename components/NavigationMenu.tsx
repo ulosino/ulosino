@@ -167,7 +167,7 @@ export default function NavigationMenu() {
                       Twitter
                     </Button>
                   </Link>
-                  <Link href="https://github.com/ulosino/ulosino" passHref>
+                  <Link href="https://github.com/ulosino" passHref>
                     <Button
                       leftIcon={<HiOutlineCode />}
                       size="sm"
