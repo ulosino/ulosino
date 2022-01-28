@@ -8,8 +8,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     steps:
-      - name: Print System Specification
-        run: node -p 'os.cpus()'
+      # Cache our dependencies and Next.js files
+      # Reference https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows
       - name: Set Persistent Cache
         uses: actions/cache@v2
         with:
@@ -17,10 +17,13 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
       - name: Checkout
         uses: actions/checkout@v2
+
+      # Run Cypress integration tests, with a build and start of the production server
       - name: Run Cypress
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
-          start: npm start
+          start: npm run start
