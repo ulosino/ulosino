@@ -2,6 +2,9 @@
 
 [![ULOSINO](./public/brand/alternative-flag.png)]()
 
+[![Cypress Testing](https://github.com/ulosino/ulosino/actions/workflows/testing.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/testing.yml)
+[![Lighthouse Performance CI](https://github.com/ulosino/ulosino/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/lighthouse.yml)
+
 ULOSINO is the modern setting for open source operating system information. Open to community contributions, ULOSINO aims to let you connect direct to culture.
 
 ULOSINO is The Friendly Flow. Go to [ULOSINO.com](https://ulosino.com) now.
