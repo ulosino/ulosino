@@ -13,8 +13,8 @@ jobs:
         uses: treosh/lighthouse-ci-action@v2
         with:
           urls: |
-            https://www.ulosino.com/
-            https://www.ulosino.com/browse/
+            https://www.ulosino.com
+            https://www.ulosino.com/browse
             https://www.ulosino.com/browse/elementary
             https://www.ulosino.com/search
             https://www.ulosino.com/privacy
