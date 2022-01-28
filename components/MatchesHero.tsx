@@ -1,4 +1,4 @@
-// Navigation/footer at the end of the page, only visible on Desktop
+// Ad for Matches, displayed on the Browse page
 
 import Link from "next/link";
 
