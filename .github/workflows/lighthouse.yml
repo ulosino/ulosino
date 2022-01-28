@@ -1,4 +1,4 @@
-name: Lighthouse Desktop CI
+name: Lighthouse Performance CI
 on: [push]
 
 jobs:
@@ -11,25 +11,28 @@ jobs:
       - name: Print System Specification
         run: node -p 'os.cpus()'
 
-      - name: Set Persistent Cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
-      - name: Run Lighthouse CI
+      - name: Run Lighthouse CI for Mobile
         uses: treosh/lighthouse-ci-action@v2
         with:
           urls: |
-            http:localhost:3000
-            http:localhost:3000/browse
-            http:localhost:3000/browse/elementary
-            http:localhost:3000/search
-            http:localhost:3000/privacy
+            https://www.ulosino.com
+            https://www.ulosino.com/browse
+            https://www.ulosino.com/browse/elementary
+            https://www.ulosino.com/search
+            https://www.ulosino.com/privacy
+          runs: 1
+          configPath: ".github/ciconfig/lighthouse/mobile-config.json"
+          uploadArtifacts: true
+
+      - name: Run Lighthouse CI for Desktop
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          urls: |
+            https://www.ulosino.com
+            https://www.ulosino.com/browse
+            https://www.ulosino.com/browse/elementary
+            https://www.ulosino.com/search
+            https://www.ulosino.com/privacy
           runs: 1
           configPath: ".github/ciconfig/lighthouse/desktop-config.json"
           uploadArtifacts: true
-          build: npm run build
-          start: npm run start
