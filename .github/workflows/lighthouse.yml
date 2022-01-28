@@ -1,0 +1,38 @@
+name: Lighthouse Performance CI
+on:
+  release:
+    types: [published]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Run checks on mobile
+      - name: Run Lighthouse CI for Mobile
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          urls: |
+            https://www.ulosino.com
+            https://www.ulosino.com/browse
+            https://www.ulosino.com/browse/elementary
+            https://www.ulosino.com/search
+            https://www.ulosino.com/privacy
+          runs: 1
+          uploadArtifacts: true
+
+      # Run checks on desktop, using our config file
+      - name: Run Lighthouse CI for Desktop
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          urls: |
+            https://www.ulosino.com
+            https://www.ulosino.com/browse
+            https://www.ulosino.com/browse/elementary
+            https://www.ulosino.com/search
+            https://www.ulosino.com/privacy
+          runs: 1
+          configPath: ".github/ciconfig/lighthouse/desktop-config.json"
+          uploadArtifacts: true
