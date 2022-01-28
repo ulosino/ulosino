@@ -1,5 +1,4 @@
 name: Lighthouse Desktop CI
-
 on: [push]
 
 jobs:
@@ -9,15 +8,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Build project and start production server
+        run: |
+          npm ci
+          npm run build
+          npm run start
+
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v2
         with:
           urls: |
-            https://www.ulosino.com
-            https://www.ulosino.com/browse
-            https://www.ulosino.com/browse/elementary
-            https://www.ulosino.com/search
-            https://www.ulosino.com/privacy
+            localhost:3000
+            localhost:3000/browse
+            localhost:3000/browse/elementary
+            localhost:3000/search
+            localhost:3000/privacy
           runs: 1
           configPath: ".github/ciconfig/lighthouse/desktop-config.json"
           uploadArtifacts: true
