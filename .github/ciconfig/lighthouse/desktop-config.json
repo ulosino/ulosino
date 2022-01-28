@@ -2,7 +2,10 @@
   "ci": {
     "collect": {
       "settings": {
-        "formFactor": "desktop"
+        "formFactor": "desktop",
+        "throttling": "constants.throttling.desktopDense4G",
+        "screenEmulation": "constants.screenEmulationMetrics.desktop",
+        "emulatedUserAgent": "constants.userAgents.desktop"
       }
     }
   }
