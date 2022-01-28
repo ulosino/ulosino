@@ -1,5 +1,7 @@
 name: Lighthouse Performance CI
-on: [push]
+on:
+  release:
+    types: [published]
 
 jobs:
   lighthouse:
