@@ -64,6 +64,7 @@ jobs:
 
       - name: Build project and start production server
       - run:
+        npm ci
         npm run build
         npm run start
 
