@@ -4,9 +4,6 @@
       "settings": {
         "emulatedFormFactor": "desktop"
       }
-    },
-    "assert": {
-      "preset": "lighthouse:recommended"
     }
   }
 }
