@@ -126,18 +126,6 @@ export default function NavigationMenu() {
                     </Text>
                   </Card>
                 </Link>
-                <Link href="https://guides.ulosino.com" passHref>
-                  <Card onClick={onClose} variant="button">
-                    <Flex mb={1}>
-                      <Heading size="md">ULOSINO Guides</Heading>
-                      <Spacer />
-                      <Icon as={HiArrowNarrowRight} w={4} h={4} mt={1} />
-                    </Flex>
-                    <Text fontSize="xs">
-                      Learn operating system concepts and definitions.
-                    </Text>
-                  </Card>
-                </Link>
                 <Link href="https://matches.ulosino.com" passHref>
                   <Card onClick={onClose} variant="button">
                     <Flex mb={1}>
@@ -147,6 +135,18 @@ export default function NavigationMenu() {
                     </Flex>
                     <Text fontSize="xs">
                       Find an OS that matches your preferences.
+                    </Text>
+                  </Card>
+                </Link>
+                <Link href="https://guides.ulosino.com" passHref>
+                  <Card onClick={onClose} variant="button">
+                    <Flex mb={1}>
+                      <Heading size="md">ULOSINO Guides</Heading>
+                      <Spacer />
+                      <Icon as={HiArrowNarrowRight} w={4} h={4} mt={1} />
+                    </Flex>
+                    <Text fontSize="xs">
+                      Learn operating system concepts and definitions.
                     </Text>
                   </Card>
                 </Link>

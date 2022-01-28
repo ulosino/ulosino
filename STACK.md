@@ -22,9 +22,9 @@ Operating system pages are stored in 'operating system page store (`OSPageStore`
 
 Let's follow the journey of our demo page:
 
-1. Next.js checks if something can be found at the `/browse` folder using the path defined in our dynamic page (`/browse/[slug].tsx`). The demo is stored at `public/content/browse/demo`, so the MDX stored in `public/content/browse` is found and collected by the dynamic page.
+1. Next.js checks if something can be found at the `/browse` folder using the path defined in our dynamic page (`/browse/[slug].tsx`). The demo is stored at `/public/content/browse/demo`, so the MDX stored in `/public/content/browse` is found and collected by the dynamic page.
 2. The `<MDXRemote>` component fetches the contents of the MDX stored at `/public/content/browse/demo`. It becomes children of the `<MDXRemote>` component.
-3. The `gray-matter` package collects the frontmatter also at `public/content/browse/demo` and inserts wherever the `{metadata.[METADATA-FIELD]}` object is found.
+3. The `gray-matter` package collects the frontmatter also at `/public/content/browse/demo` and inserts wherever the `{metadata.[METADATA-FIELD]}` object is found.
 4. Next.js builds this page. At this stage it transcompiles from TypeScript into JavaScript (specifically the EsmaScript 2021 standard).
 5. This is repeated for all MDX pages in `/public/content/browse`.
 
@@ -39,7 +39,7 @@ For the frontend and user presentation:
 
 Hybrid:
 
-- `/providers`, which is a mix of the traditional `lib` or `util` folders, and important components (like `UIProvider`).
+- `/providers`, which is a mix of the traditional `/lib` or `/util` folders, and important components (like `UIProvider`).
 
 For the backend:
 
