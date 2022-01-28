@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "settings": {
-        "emulatedFormFactor": "desktop"
+        "formFactor": "desktop"
       }
     }
   }
