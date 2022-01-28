@@ -62,9 +62,10 @@ jobs:
       #    and modify them (or add more) to build your code if your project
       #    uses a compiled language
 
-      - with:
-        build: npm run build
-        start: npm start
+      - name: Build project and start production server
+      - run:
+        npm run build
+        npm run start
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
