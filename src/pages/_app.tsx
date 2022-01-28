@@ -3,8 +3,11 @@ import { AppProps } from "next/app";
 // Import global providers
 import MDXProvider from "src/MDXProvider";
 import { ChakraProvider } from "@chakra-ui/react";
-import PlausibleProvider from "next-plausible";
 import UITheme from "src/UIThemeProvider";
+
+// Import global analytics
+import splitbee from "@splitbee/web";
+import { useEffect } from "react";
 
 // Import global components
 import JSWarning from "src/components/JSWarning";
@@ -17,16 +20,21 @@ import "@fontsource/public-sans/400.css";
 import "@fontsource/public-sans/600.css";
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    splitbee.init({
+      disableCookie: true,
+      scriptUrl: "/tree.js",
+      apiUrl: "/_oak",
+    });
+  }, []);
   return (
-    <PlausibleProvider domain="ulosino.com">
-      <ChakraProvider theme={UITheme}>
-        <MDXProvider>
-          <noscript>
-            <JSWarning />
-          </noscript>
-          <Component {...pageProps} />
-        </MDXProvider>
-      </ChakraProvider>
-    </PlausibleProvider>
+    <ChakraProvider theme={UITheme}>
+      <MDXProvider>
+        <noscript>
+          <JSWarning />
+        </noscript>
+        <Component {...pageProps} />
+      </MDXProvider>
+    </ChakraProvider>
   );
 }
