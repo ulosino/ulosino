@@ -40,10 +40,14 @@ export const Card = {
       cursor: "pointer",
       shadow: "inner",
     }),
-    brand: ({ colorMode }) => ({
-      bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
+    brand: {
+      bg: "brand",
       color: "inherit",
-    }),
+    },
+    secondary: {
+      bg: "secondary",
+      color: "inherit",
+    },
     alert: ({ colorMode }) => ({
       bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
       color: "inherit",

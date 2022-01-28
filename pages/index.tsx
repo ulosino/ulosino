@@ -86,7 +86,7 @@ export default function Home({
           py={searchCardPaddingY}
           borderStartRadius={searchCardBorderRadius}
           borderEndRadius={searchCardBorderEndRadius}
-          bg="secondary"
+          variant="secondary"
         >
           <DarkMode>
             <Stack direction="column" spacing={2}>

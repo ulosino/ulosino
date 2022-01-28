@@ -16,6 +16,10 @@ import {
 } from "@choc-ui/chakra-autocomplete";
 
 import dynamic from "next/dynamic";
+import Loading from "components/Loading";
+const MatchesHero = dynamic(() => import("components/MatchesHero"), {
+  loading: () => <Loading />,
+});
 const AutoComplete = dynamic(() =>
   import("@choc-ui/chakra-autocomplete").then((mod) => mod.AutoComplete)
 );
@@ -107,7 +111,7 @@ export default function Browse({
         <Stack direction={["column", "column", "row"]} spacing={4} pt={4}>
           <Link href="/browse" passHref>
             <Button leftIcon={<HiOutlineDatabase />} size="sm" isActive>
-              Search &amp; List
+              Browse &amp; List
             </Button>
           </Link>
           <Link href="/search" passHref>
@@ -508,6 +512,9 @@ export default function Browse({
             </Tabs>
           </Card>
         </Stack>
+
+        <MatchesHero />
+
         <Stack direction="column" spacing={2}>
           <Text textStyle="secondary" as="h6">
             All Operating Systems

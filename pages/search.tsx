@@ -68,7 +68,7 @@ export default function AdvancedSearch({
         <Stack direction={["column", "column", "row"]} spacing={4} pt={4}>
           <Link href="/browse" passHref>
             <Button leftIcon={<HiOutlineDatabase />} size="sm">
-              Search &amp; List
+              Browse &amp; List
             </Button>
           </Link>
           <Link href="/search" passHref>
