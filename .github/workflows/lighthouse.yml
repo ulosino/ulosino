@@ -23,11 +23,11 @@ jobs:
         uses: treosh/lighthouse-ci-action@v2
         with:
           urls: |
-            localhost:3000
-            localhost:3000/browse
-            localhost:3000/browse/elementary
-            localhost:3000/search
-            localhost:3000/privacy
+            http:localhost:3000
+            http:localhost:3000/browse
+            http:localhost:3000/browse/elementary
+            http:localhost:3000/search
+            http:localhost:3000/privacy
           runs: 1
           configPath: ".github/ciconfig/lighthouse/desktop-config.json"
           uploadArtifacts: true
