@@ -35,5 +35,5 @@ jobs:
             https://www.ulosino.com/search
             https://www.ulosino.com/privacy
           runs: 1
-          configPath: ".github/ciconfig/lighthouse/desktop-config.json"
+          configPath: ".github/lighthouse/desktop-config.json"
           uploadArtifacts: true
