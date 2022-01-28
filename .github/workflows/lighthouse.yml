@@ -21,7 +21,6 @@ jobs:
             https://www.ulosino.com/search
             https://www.ulosino.com/privacy
           runs: 1
-          configPath: ".github/ciconfig/lighthouse/mobile-config.json"
           uploadArtifacts: true
 
       - name: Run Lighthouse CI for Desktop
@@ -34,4 +33,5 @@ jobs:
             https://www.ulosino.com/search
             https://www.ulosino.com/privacy
           runs: 1
+          configPath: ".github/ciconfig/lighthouse/desktop-config.json"
           uploadArtifacts: true
