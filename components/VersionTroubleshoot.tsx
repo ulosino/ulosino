@@ -6,11 +6,13 @@ import { Stack, Text } from "@chakra-ui/react";
 
 import Version from "components/Version";
 
-console.info("Deployment details printed below, if available");
-console.log(process.env.NEXT_PUBLIC_VERCEL_ENV);
-console.log(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA);
-console.log(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE);
-console.info("End deployment information log");
+console.debug("Vercel environment details (production/preview)");
+console.debug(process.env.NEXT_PUBLIC_VERCEL_ENV);
+console.debug(process.env.NEXT_PUBLIC_VERCEL_URL);
+console.debug("Vercel deployment Git details (commit, branch, commit message)");
+console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA);
+console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF);
+console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE);
 
 export default function VersionTroubleshoot() {
   return (
