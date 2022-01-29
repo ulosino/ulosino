@@ -13,11 +13,11 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { FiChevronLeft } from "react-icons/fi";
-import { LargeLogo, SmallLogo } from "src/components/Logo";
+import { LargeLogo, SmallLogo } from "components/Logo";
 
 import dynamic from "next/dynamic";
-import Loading from "src/components/Loading";
-const NavigationMenu = dynamic(() => import("src/components/NavigationMenu"), {
+import Loading from "components/Loading";
+const NavigationMenu = dynamic(() => import("components/NavigationMenu"), {
   loading: () => <Loading />,
 });
 

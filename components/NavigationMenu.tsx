@@ -40,7 +40,6 @@ function Card(props) {
 }
 
 import dynamic from "next/dynamic";
-// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
 const Modal = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.Modal)
 );
@@ -123,7 +122,19 @@ export default function NavigationMenu() {
                       <Icon as={HiChevronRight} w={4} h={4} mt={1} />
                     </Flex>
                     <Text fontSize="xs">
-                      Make a search from the full ULOSINO metadata collection.
+                      Make a search from our full metadata collection.
+                    </Text>
+                  </Card>
+                </Link>
+                <Link href="https://matches.ulosino.com" passHref>
+                  <Card onClick={onClose} variant="button">
+                    <Flex mb={1}>
+                      <Heading size="md">ULOSINO Matches</Heading>
+                      <Spacer />
+                      <Icon as={HiArrowNarrowRight} w={4} h={4} mt={1} />
+                    </Flex>
+                    <Text fontSize="xs">
+                      Find an OS that matches your preferences.
                     </Text>
                   </Card>
                 </Link>
@@ -135,7 +146,7 @@ export default function NavigationMenu() {
                       <Icon as={HiArrowNarrowRight} w={4} h={4} mt={1} />
                     </Flex>
                     <Text fontSize="xs">
-                      Learn about operating system concepts with ULOSINO Guides.
+                      Learn operating system concepts and definitions.
                     </Text>
                   </Card>
                 </Link>
@@ -156,7 +167,7 @@ export default function NavigationMenu() {
                       Twitter
                     </Button>
                   </Link>
-                  <Link href="https://github.com/ulosino/ulosino" passHref>
+                  <Link href="https://github.com/ulosino" passHref>
                     <Button
                       leftIcon={<HiOutlineCode />}
                       size="sm"

@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import { getDistributions } from "src/DBProvider";
+import { getOSPages } from "providers/OSPageProvider";
 
 import {
   AutoCompleteInput,
@@ -35,12 +35,12 @@ import {
 } from "@chakra-ui/react";
 import { HiOutlineDatabase, HiOutlineSearch } from "react-icons/hi";
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
 export default function AdvancedSearch({
-  AZDistributionData,
+  AZOSPageData,
 }: {
-  AZDistributionData: {
+  AZOSPageData: {
     date: string;
     id: string;
     title: string;
@@ -68,7 +68,7 @@ export default function AdvancedSearch({
         <Stack direction={["column", "column", "row"]} spacing={4} pt={4}>
           <Link href="/browse" passHref>
             <Button leftIcon={<HiOutlineDatabase />} size="sm">
-              Search &amp; List
+              Browse &amp; List
             </Button>
           </Link>
           <Link href="/search" passHref>
@@ -111,7 +111,7 @@ export default function AdvancedSearch({
                       id="testing-db-input"
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -175,7 +175,7 @@ export default function AdvancedSearch({
                       id="testing-db-input"
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(({ id, title, summary }) => (
+                      {AZOSPageData.map(({ id, title, summary }) => (
                         <AutoCompleteItem
                           key={`option-${summary}`}
                           value={summary}
@@ -216,7 +216,7 @@ export default function AdvancedSearch({
                       placeholder="Filter by platform..."
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -282,7 +282,7 @@ export default function AdvancedSearch({
                       id="testing-db-input"
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -364,7 +364,7 @@ export default function AdvancedSearch({
                       placeholder="Filter by desktop..."
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -431,7 +431,7 @@ export default function AdvancedSearch({
                       placeholder="Filter by browser..."
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -523,7 +523,7 @@ export default function AdvancedSearch({
                       placeholder="Filter by derived operating system..."
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -599,7 +599,7 @@ export default function AdvancedSearch({
                       placeholder="Filter by shell..."
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -677,7 +677,7 @@ export default function AdvancedSearch({
                       placeholder="Filter by startup manager..."
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -754,7 +754,7 @@ export default function AdvancedSearch({
                       placeholder="Filter by package manager..."
                     />
                     <AutoCompleteList>
-                      {AZDistributionData.map(
+                      {AZOSPageData.map(
                         ({
                           id,
                           title,
@@ -829,10 +829,10 @@ export default function AdvancedSearch({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const AZDistributionData = getDistributions();
+  const AZOSPageData = getOSPages();
   return {
     props: {
-      AZDistributionData,
+      AZOSPageData,
     },
   };
 };

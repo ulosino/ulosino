@@ -16,7 +16,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { HiChevronLeft, HiOutlineRefresh, HiCursorClick } from "react-icons/hi";
-import { AlertIcon } from "src/components/Icons";
+import { AlertIcon } from "components/Icons";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -31,7 +31,7 @@ function Card(props) {
   );
 }
 
-import UIProvider from "src/UIProvider";
+import UIProvider from "providers/UIProvider";
 
 export default function Custom500() {
   const router = useRouter();
