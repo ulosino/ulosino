@@ -10,14 +10,6 @@ export default class Document extends NextDocument {
           <meta charSet="utf-8" />
 
           {/* General metadata */}
-          <meta
-            name="description"
-            content="ULOSINO is open source operating system information in a modern setting. Embolden your knowledge and connect direct to culture, only on ULOSINO."
-          />
-          <meta
-            property="og:description"
-            content="The Friendly Flow for open source OS info"
-          />
           <meta property="og:type" content="website" />
           <meta property="og:locale" content="en_GB" />
 
