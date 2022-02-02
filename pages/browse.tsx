@@ -3,11 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import {
-  getNewestOSPages,
-  getOldestOSPages,
-  getOSPages,
-} from "providers/OSPageProvider";
+import { getNewestOSPages, getOSPages } from "providers/OSPageProvider";
 
 import {
   AutoCompleteInput,
@@ -39,6 +35,7 @@ import {
   TabPanels,
   TabPanel,
   FormControl,
+  useBoolean,
 } from "@chakra-ui/react";
 import { HiOutlineDatabase, HiOutlineSearch } from "react-icons/hi";
 
@@ -59,22 +56,9 @@ import UIProvider from "providers/UIProvider";
 
 export default function Browse({
   newestOSPageData,
-  oldestOSPageData,
   AZOSPageData,
 }: {
   newestOSPageData: {
-    date: string;
-    id: string;
-    title: string;
-    version: string;
-    summary: string;
-    category: string;
-    platform: string;
-    startup: string;
-    desktop: string;
-    packagemgr: string;
-  }[];
-  oldestOSPageData: {
     date: string;
     id: string;
     title: string;
@@ -99,6 +83,7 @@ export default function Browse({
     packagemgr: string;
   }[];
 }) {
+  const [marketplace, setMarketplace] = useBoolean();
   return (
     <UIProvider>
       <Head>
@@ -519,12 +504,17 @@ export default function Browse({
           <Text textStyle="secondary" as="h6">
             All Operating Systems
           </Text>
+          <Button onClick={setMarketplace.toggle}>
+            Toggle Marketplace Features{" "}
+            <Badge ms={2} pt={1}>
+              Pre-release
+            </Badge>
+          </Button>
           <Tabs isLazy>
             <TabList id="testing-display-tabList">
               <Stack direction="row" spacing={4} w="full">
                 <Tab shadow="inner">Alphabetical</Tab>
                 <Tab shadow="inner">Newest</Tab>
-                <Tab shadow="inner">Oldest</Tab>
               </Stack>
             </TabList>
             <TabPanels>
@@ -542,40 +532,67 @@ export default function Browse({
                       startup,
                       packagemgr,
                     }) => (
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Card key={id} variant="button" px={6}>
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "flex", md: "none" }}
-                            spacing={4}
+                      <Flex>
+                        <Box flex={1} me={4}>
+                          <Link
+                            href={`/browse/${id}`}
+                            passHref
+                            key={`/browse/${id}`}
                           >
-                            {category && <Badge>{category}</Badge>}
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                          </Stack>
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", md: "flex" }}
-                            spacing={4}
-                          >
-                            <Badge>{category}</Badge>
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                          </Stack>
-                        </Card>
-                      </Link>
+                            <Card key={id} variant="button" px={6}>
+                              <Heading size="md">{title}</Heading>
+                              {summary && (
+                                <Text fontSize="sm">"{summary}"</Text>
+                              )}
+                              <Stack
+                                direction="row"
+                                display={{ base: "flex", md: "none" }}
+                                spacing={4}
+                              >
+                                {category && <Badge>{category}</Badge>}
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                              </Stack>
+                              <Stack
+                                direction="row"
+                                display={{ base: "none", md: "flex" }}
+                                spacing={4}
+                              >
+                                <Badge>{category}</Badge>
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                                {startup && (
+                                  <Text fontSize="sm">{startup}</Text>
+                                )}
+                                {packagemgr && (
+                                  <Text fontSize="sm">{packagemgr}</Text>
+                                )}
+                              </Stack>
+                            </Card>
+                          </Link>
+                        </Box>
+                        {marketplace ? (
+                          ""
+                        ) : (
+                          <Card>
+                            <Text>Marketplace</Text>
+                          </Card>
+                        )}
+                      </Flex>
                     )
                   )}
                 </Stack>
@@ -594,97 +611,67 @@ export default function Browse({
                       startup,
                       packagemgr,
                     }) => (
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Card key={id} variant="button" px={6}>
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "flex", md: "none" }}
-                            spacing={4}
+                      <Flex>
+                        <Box flex={1} me={4}>
+                          <Link
+                            href={`/browse/${id}`}
+                            passHref
+                            key={`/browse/${id}`}
                           >
-                            {category && <Badge>{category}</Badge>}
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                          </Stack>
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", md: "flex" }}
-                            spacing={4}
-                          >
-                            <Badge>{category}</Badge>
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                          </Stack>
-                        </Card>
-                      </Link>
-                    )
-                  )}
-                </Stack>
-              </TabPanel>
-              <TabPanel px={0} pb={0} pt={4}>
-                <Stack direction="column" spacing={2}>
-                  {oldestOSPageData.map(
-                    ({
-                      id,
-                      title,
-                      version,
-                      summary,
-                      category,
-                      platform,
-                      desktop,
-                      startup,
-                      packagemgr,
-                    }) => (
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Card
-                          key={id}
-                          id="testing-db-OSPages"
-                          variant="button"
-                          px={6}
-                        >
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "flex", md: "none" }}
-                            spacing={4}
-                          >
-                            {category && <Badge>{category}</Badge>}
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                          </Stack>
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", md: "flex" }}
-                            spacing={4}
-                          >
-                            <Badge>{category}</Badge>
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                          </Stack>
-                        </Card>
-                      </Link>
+                            <Card key={id} variant="button" px={6}>
+                              <Heading size="md">{title}</Heading>
+                              {summary && (
+                                <Text fontSize="sm">"{summary}"</Text>
+                              )}
+                              <Stack
+                                direction="row"
+                                display={{ base: "flex", md: "none" }}
+                                spacing={4}
+                              >
+                                {category && <Badge>{category}</Badge>}
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                              </Stack>
+                              <Stack
+                                direction="row"
+                                display={{ base: "none", md: "flex" }}
+                                spacing={4}
+                              >
+                                <Badge>{category}</Badge>
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                                {startup && (
+                                  <Text fontSize="sm">{startup}</Text>
+                                )}
+                                {packagemgr && (
+                                  <Text fontSize="sm">{packagemgr}</Text>
+                                )}
+                              </Stack>
+                            </Card>
+                          </Link>
+                        </Box>
+                        {marketplace ? (
+                          ""
+                        ) : (
+                          <Card>
+                            <Text>Marketplace</Text>
+                          </Card>
+                        )}
+                      </Flex>
                     )
                   )}
                 </Stack>
@@ -699,12 +686,10 @@ export default function Browse({
 
 export const getStaticProps: GetStaticProps = async () => {
   const newestOSPageData = getNewestOSPages();
-  const oldestOSPageData = getOldestOSPages();
   const AZOSPageData = getOSPages();
   return {
     props: {
       newestOSPageData,
-      oldestOSPageData,
       AZOSPageData,
     },
   };
