@@ -28,6 +28,7 @@ import {
   Stack,
   Flex,
   Spacer,
+  IconButton,
   Button,
   Tabs,
   Tab,
@@ -35,9 +36,42 @@ import {
   TabPanels,
   TabPanel,
   FormControl,
+  PopoverHeader,
   useBoolean,
 } from "@chakra-ui/react";
-import { HiOutlineDatabase, HiOutlineSearch } from "react-icons/hi";
+import {
+  HiOutlineCog,
+  HiOutlineDatabase,
+  HiOutlineSearch,
+} from "react-icons/hi";
+
+// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
+const Popover = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.Popover)
+);
+const PopoverTrigger = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverTrigger)
+);
+const PopoverContent = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverContent)
+);
+// const PopoverHeader = dynamic(() =>
+//   import("@chakra-ui/react").then((mod) => mod.PopoverHeader)
+// );
+const PopoverArrow = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverArrow)
+);
+const PopoverCloseButton = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverCloseButton)
+);
+const PopoverBody = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverBody)
+);
+const PopoverFooter = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverFooter)
+);
+
+import { useRef } from "react";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -69,6 +103,10 @@ export default function Browse({
     startup: string;
     desktop: string;
     packagemgr: string;
+    donate: any;
+    donateCollective: any;
+    donateGithub: any;
+    donateLibera: any;
   }[];
   AZOSPageData: {
     date: string;
@@ -81,9 +119,14 @@ export default function Browse({
     startup: string;
     desktop: string;
     packagemgr: string;
+    donate: any;
+    donateCollective: any;
+    donateGithub: any;
+    donateLibera: any;
   }[];
 }) {
   const [marketplace, setMarketplace] = useBoolean();
+  const initialFocusRef = useRef();
   return (
     <UIProvider>
       <Head>
@@ -501,15 +544,42 @@ export default function Browse({
         <MatchesHero />
 
         <Stack direction="column" spacing={2}>
-          <Text textStyle="secondary" as="h6">
-            All Operating Systems
-          </Text>
-          <Button onClick={setMarketplace.toggle}>
-            Toggle Marketplace Features{" "}
-            <Badge ms={2} pt={1}>
-              Pre-release
-            </Badge>
-          </Button>
+          <Flex>
+            <Text textStyle="secondary" as="h6">
+              All Operating Systems
+            </Text>
+            <Spacer />
+            <Popover isLazy closeOnBlur={true} closeOnEsc={true}>
+              <PopoverTrigger>
+                <IconButton
+                  size="sm"
+                  icon={<HiOutlineCog />}
+                  aria-label="Open or hide Browse page display preferences"
+                />
+              </PopoverTrigger>
+              <PopoverContent>
+                <PopoverHeader pt={4} fontWeight="bold" border="0">
+                  Show Tempo &amp; Marketplace Options
+                </PopoverHeader>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverBody>
+                  Tempo on Browse is in a pre-release phase.
+                </PopoverBody>
+                <PopoverFooter
+                  border="0"
+                  d="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  pb={4}
+                >
+                  <Button ref={initialFocusRef} onClick={setMarketplace.toggle}>
+                    {marketplace ? "Disable" : "Enable"}
+                  </Button>
+                </PopoverFooter>
+              </PopoverContent>
+            </Popover>
+          </Flex>
           <Tabs isLazy>
             <TabList id="testing-display-tabList">
               <Stack direction="row" spacing={4} w="full">
@@ -531,8 +601,9 @@ export default function Browse({
                       desktop,
                       startup,
                       packagemgr,
+                      donate,
                     }) => (
-                      <Flex>
+                      <Flex key={id}>
                         <Box flex={1} me={4}>
                           <Link
                             href={`/browse/${id}`}
@@ -586,11 +657,98 @@ export default function Browse({
                           </Link>
                         </Box>
                         {marketplace ? (
-                          ""
-                        ) : (
                           <Card>
-                            <Text>Marketplace</Text>
+                            <Stack direction="column" spacing={2}>
+                              {donate ? (
+                                <Popover
+                                  isLazy
+                                  closeOnBlur={true}
+                                  closeOnEsc={true}
+                                >
+                                  <PopoverTrigger>
+                                    <Button size="sm">
+                                      Donate
+                                      <Badge
+                                        ms={2}
+                                        bg="brand"
+                                        color="gray.800"
+                                        pt={1}
+                                      >
+                                        Tempo
+                                      </Badge>
+                                    </Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent>
+                                    <PopoverHeader fontWeight="semibold">
+                                      Donate to {title}
+                                    </PopoverHeader>
+                                    <PopoverArrow />
+                                    <PopoverCloseButton />
+                                    <PopoverBody>
+                                      <Stack direction="column" spacing={4}>
+                                        <Stack direction="column" spacing={2}>
+                                          <Button ref={initialFocusRef}>
+                                            See Donation Options
+                                          </Button>
+                                          <Button>
+                                            Donate through Open Collective
+                                          </Button>
+                                          <Button>
+                                            Donate through GitHub Sponsors
+                                          </Button>
+                                          <Button>
+                                            Donate through LiberaPay
+                                          </Button>
+                                        </Stack>
+                                        <Text fontSize="xs">
+                                          Tempo, the ULOSINO donation hub. Not
+                                          available for all OSs. Payments are
+                                          facilitated by third parties. ULOSINO
+                                          does not receive commission. General
+                                          advice only.
+                                        </Text>
+                                      </Stack>
+                                    </PopoverBody>
+                                  </PopoverContent>
+                                </Popover>
+                              ) : (
+                                <Button size="sm" isDisabled>
+                                  Donate
+                                  <Badge
+                                    ms={2}
+                                    bg="brand"
+                                    color="gray.800"
+                                    pt={1}
+                                  >
+                                    Tempo
+                                  </Badge>
+                                </Button>
+                              )}
+                              <Popover
+                                isLazy
+                                closeOnBlur={true}
+                                closeOnEsc={true}
+                              >
+                                <PopoverTrigger>
+                                  <Button size="sm" isDisabled>
+                                    Get Flow API Details
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                  <PopoverHeader fontWeight="semibold">
+                                    Flow API Address
+                                  </PopoverHeader>
+                                  <PopoverArrow />
+                                  <PopoverCloseButton />
+                                  <PopoverBody>
+                                    <Text>Under development</Text>
+                                  </PopoverBody>
+                                </PopoverContent>
+                              </Popover>
+                            </Stack>
                           </Card>
+                        ) : (
+                          ""
                         )}
                       </Flex>
                     )
@@ -610,8 +768,9 @@ export default function Browse({
                       desktop,
                       startup,
                       packagemgr,
+                      donate,
                     }) => (
-                      <Flex>
+                      <Flex key={id}>
                         <Box flex={1} me={4}>
                           <Link
                             href={`/browse/${id}`}
@@ -665,11 +824,98 @@ export default function Browse({
                           </Link>
                         </Box>
                         {marketplace ? (
-                          ""
-                        ) : (
                           <Card>
-                            <Text>Marketplace</Text>
+                            <Stack direction="column" spacing={2}>
+                              {donate ? (
+                                <Popover
+                                  isLazy
+                                  closeOnBlur={true}
+                                  closeOnEsc={true}
+                                >
+                                  <PopoverTrigger>
+                                    <Button size="sm">
+                                      Donate
+                                      <Badge
+                                        ms={2}
+                                        bg="brand"
+                                        color="gray.800"
+                                        pt={1}
+                                      >
+                                        Tempo
+                                      </Badge>
+                                    </Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent>
+                                    <PopoverHeader fontWeight="semibold">
+                                      Donate to {title}
+                                    </PopoverHeader>
+                                    <PopoverArrow />
+                                    <PopoverCloseButton />
+                                    <PopoverBody>
+                                      <Stack direction="column" spacing={4}>
+                                        <Stack direction="column" spacing={2}>
+                                          <Button ref={initialFocusRef}>
+                                            See Donation Options
+                                          </Button>
+                                          <Button>
+                                            Donate through Open Collective
+                                          </Button>
+                                          <Button>
+                                            Donate through GitHub Sponsors
+                                          </Button>
+                                          <Button>
+                                            Donate through LiberaPay
+                                          </Button>
+                                        </Stack>
+                                        <Text fontSize="xs">
+                                          Tempo, the ULOSINO donation hub. Not
+                                          available for all OSs. Payments are
+                                          facilitated by third parties. ULOSINO
+                                          does not receive commission. General
+                                          advice only.
+                                        </Text>
+                                      </Stack>
+                                    </PopoverBody>
+                                  </PopoverContent>
+                                </Popover>
+                              ) : (
+                                <Button size="sm" isDisabled>
+                                  Donate
+                                  <Badge
+                                    ms={2}
+                                    bg="brand"
+                                    color="gray.800"
+                                    pt={1}
+                                  >
+                                    Tempo
+                                  </Badge>
+                                </Button>
+                              )}
+                              <Popover
+                                isLazy
+                                closeOnBlur={true}
+                                closeOnEsc={true}
+                              >
+                                <PopoverTrigger>
+                                  <Button size="sm" isDisabled>
+                                    Get Flow API Details
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                  <PopoverHeader fontWeight="semibold">
+                                    Flow API Address
+                                  </PopoverHeader>
+                                  <PopoverArrow />
+                                  <PopoverCloseButton />
+                                  <PopoverBody>
+                                    <Text>Under development</Text>
+                                  </PopoverBody>
+                                </PopoverContent>
+                              </Popover>
+                            </Stack>
                           </Card>
+                        ) : (
+                          ""
                         )}
                       </Flex>
                     )
