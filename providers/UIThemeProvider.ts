@@ -90,7 +90,7 @@ const Badge = {
 export const Tabs = {
   defaultProps: {
     variant: "solid-rounded",
-    colorScheme: "blue",
+    colorScheme: "yellow",
     size: "sm",
   },
 };

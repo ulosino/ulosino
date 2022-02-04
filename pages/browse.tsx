@@ -130,6 +130,15 @@ export default function Browse({
     <UIProvider>
       <Head>
         <title>ULOSINO &mdash; Browse</title>
+        <meta property="og:title" content="ULOSINO &mdash; Browse ULOSINO" />
+        <meta
+          name="description"
+          content="Browse through ULOSINO's wide selection of open source operating systems, like Linux and BSD. Take advantage of our leading search options, or browse alphabetically."
+        />
+        <meta
+          property="og:description"
+          content="Browse through ULOSINO's wide selection of open source operating systems, like Linux and BSD."
+        />
       </Head>
 
       <Flex direction={["column", "column", "row"]} mb={8}>

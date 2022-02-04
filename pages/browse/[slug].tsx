@@ -68,7 +68,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
         </title>
         <meta property="og:title" content="{metadata.title} on ULOSINO" />
         <meta
-          property="description"
+          name="description"
           content="'{metadata.summary}' &mdash; {metadata.title} on ULOSINO"
         />
         <meta

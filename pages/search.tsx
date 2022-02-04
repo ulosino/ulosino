@@ -60,6 +60,18 @@ export default function AdvancedSearch({
     <UIProvider>
       <Head>
         <title>ULOSINO &mdash; Advanced Operating System Search</title>
+        <meta
+          property="og:title"
+          content="ULOSINO &mdash; Advanced Operating System Search"
+        />
+        <meta
+          name="description"
+          content="Search through ULOSINO's vast collection of metadata to find exactly what you're looking for."
+        />
+        <meta
+          property="og:description"
+          content="Search through ULOSINO's vast collection of metadata."
+        />
       </Head>
 
       <Flex direction={["column", "column", "row"]} mb={8}>

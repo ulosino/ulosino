@@ -81,6 +81,18 @@ export default function Home({
     <UIProvider>
       <Head>
         <title>ULOSINO &mdash; Open Source Operating System Database</title>
+        <meta
+          property="og:title"
+          content="ULOSINO &mdash; Open Source Operating System Database"
+        />
+        <meta
+          name="description"
+          content="ULOSINO is The Friendly Flow for open source operating system discovery. Search and discover Linux and BSD-based OSs faster and easier when the power of ULOSINO is in your flow."
+        />
+        <meta
+          property="og:description"
+          content="ULOSINO is The Friendly Flow for open source operating system discovery. Search and discover Linux and BSD-based OSs in a modern setting."
+        />
       </Head>
 
       <Stack direction="column" spacing={16}>

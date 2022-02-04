@@ -152,12 +152,7 @@ export default function NavigationMenu() {
                 </Link>
               </Stack>
               <Stack direction="column" spacing={2}>
-                {/* Mobile-only social links to compensate for hidden footer */}
-                <Stack
-                  direction="column"
-                  spacing={2}
-                  display={{ base: "flex", md: "none" }}
-                >
+                <Stack direction="column" spacing={2}>
                   <Link href="https://twitter.com/ulosino" passHref>
                     <Button
                       leftIcon={<FiTwitter />}
@@ -176,9 +171,6 @@ export default function NavigationMenu() {
                       GitHub &amp; Source
                     </Button>
                   </Link>
-                </Stack>
-                {/* External navigation and preferences */}
-                <Stack direction="column" spacing={2} display="flex">
                   <Link href="/contact" passHref>
                     <Button
                       leftIcon={<HiOutlineChatAlt2 />}

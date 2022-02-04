@@ -28,7 +28,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
     <UIProvider>
       <Head>
         <title>ULOSINO &mdash; {metadata.title}</title>
-        <meta property="og:title" content="{metadata.title} on ULOSINO" />
+        <meta name="og:title" content="{metadata.title} on ULOSINO" />
       </Head>
       <MDXRemote {...source} components={components} />
     </UIProvider>
