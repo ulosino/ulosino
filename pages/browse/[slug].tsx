@@ -47,6 +47,7 @@ const ModalBody = dynamic(() =>
 const ModalFooter = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.ModalFooter)
 );
+const TempoDisclaimer = dynamic(() => import("components/TempoDisclaimer"));
 
 // Pages can use the following components if needed
 const Image = dynamic(() => import("next/image"));
@@ -138,34 +139,34 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                           {(metadata.donateCollective && (
                             <Link href={metadata.donateCollective} passHref>
                               <Button leftIcon={<HiOutlineCash />}>
-                                Donate through Open Collective
+                                Donate with Open Collective
                               </Button>
                             </Link>
                           )) ?? (
                             <Button leftIcon={<HiOutlineCash />} isDisabled>
-                              Donate through Open Collective
+                              Donate with Open Collective
                             </Button>
                           )}
                           {(metadata.donateGithub && (
                             <Link href={metadata.donateGithub} passHref>
                               <Button leftIcon={<HiOutlineCash />}>
-                                Donate through GitHub Sponsors
+                                Donate with GitHub Sponsors
                               </Button>
                             </Link>
                           )) ?? (
                             <Button leftIcon={<HiOutlineCash />} isDisabled>
-                              Donate through GitHub Sponsors
+                              Donate with GitHub Sponsors
                             </Button>
                           )}
                           {(metadata.donateLibera && (
                             <Link href={metadata.donateLibera} passHref>
                               <Button leftIcon={<HiOutlineCash />}>
-                                Donate through Liberapay
+                                Donate with Liberapay
                               </Button>
                             </Link>
                           )) ?? (
                             <Button leftIcon={<HiOutlineCash />} isDisabled>
-                              Donate through Liberapay
+                              Donate with Liberapay
                             </Button>
                           )}
                         </Stack>
@@ -174,12 +175,7 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
                             Powered by ULOSINO Tempo
                           </Badge>
                         </Stack>
-                        <Text fontSize="xs">
-                          Tempo, the ULOSINO donation hub. Not available for all
-                          OSs. Payments are facilitated by third parties.
-                          ULOSINO does not receive commission. General advice
-                          only.
-                        </Text>
+                        <TempoDisclaimer />
                       </Stack>
                     </ModalBody>
                     <ModalFooter>

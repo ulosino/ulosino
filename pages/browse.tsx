@@ -43,6 +43,7 @@ import {
   HiOutlineCog,
   HiOutlineDatabase,
   HiOutlineSearch,
+  HiOutlineCash,
 } from "react-icons/hi";
 
 // Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
@@ -70,8 +71,7 @@ const PopoverBody = dynamic(() =>
 const PopoverFooter = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.PopoverFooter)
 );
-
-import { useRef } from "react";
+const TempoDisclaimer = dynamic(() => import("components/TempoDisclaimer"));
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -126,7 +126,6 @@ export default function Browse({
   }[];
 }) {
   const [marketplace, setMarketplace] = useBoolean();
-  const initialFocusRef = useRef();
   return (
     <UIProvider>
       <Head>
@@ -559,7 +558,7 @@ export default function Browse({
               </PopoverTrigger>
               <PopoverContent>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
-                  Show Tempo &amp; Marketplace Options
+                  Show Tempo on Browse
                 </PopoverHeader>
                 <PopoverArrow />
                 <PopoverCloseButton />
@@ -573,7 +572,7 @@ export default function Browse({
                   justifyContent="space-between"
                   pb={4}
                 >
-                  <Button ref={initialFocusRef} onClick={setMarketplace.toggle}>
+                  <Button onClick={setMarketplace.toggle}>
                     {marketplace ? "Disable" : "Enable"}
                   </Button>
                 </PopoverFooter>
@@ -602,6 +601,9 @@ export default function Browse({
                       startup,
                       packagemgr,
                       donate,
+                      donateCollective,
+                      donateGithub,
+                      donateLibera,
                     }) => (
                       <Flex key={id}>
                         <Box flex={1} me={4}>
@@ -687,26 +689,68 @@ export default function Browse({
                                     <PopoverBody>
                                       <Stack direction="column" spacing={4}>
                                         <Stack direction="column" spacing={2}>
-                                          <Button ref={initialFocusRef}>
-                                            See Donation Options
-                                          </Button>
-                                          <Button>
-                                            Donate through Open Collective
-                                          </Button>
-                                          <Button>
-                                            Donate through GitHub Sponsors
-                                          </Button>
-                                          <Button>
-                                            Donate through LiberaPay
-                                          </Button>
+                                          {donate && (
+                                            <Link href={donate} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                See Donation Options
+                                              </Button>
+                                            </Link>
+                                          )}
+                                          {(donateCollective && (
+                                            <Link
+                                              href={donateCollective}
+                                              passHref
+                                            >
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Open Collective
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Open Collective
+                                            </Button>
+                                          )}
+                                          {(donateGithub && (
+                                            <Link href={donateGithub} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with GitHub Sponsors
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with GitHub Sponsors
+                                            </Button>
+                                          )}
+                                          {(donateLibera && (
+                                            <Link href={donateLibera} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Liberapay
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Liberapay
+                                            </Button>
+                                          )}
                                         </Stack>
-                                        <Text fontSize="xs">
-                                          Tempo, the ULOSINO donation hub. Not
-                                          available for all OSs. Payments are
-                                          facilitated by third parties. ULOSINO
-                                          does not receive commission. General
-                                          advice only.
-                                        </Text>
+                                        <TempoDisclaimer />
                                       </Stack>
                                     </PopoverBody>
                                   </PopoverContent>
@@ -731,7 +775,7 @@ export default function Browse({
                               >
                                 <PopoverTrigger>
                                   <Button size="sm" isDisabled>
-                                    Get Flow API Details
+                                    Show Flow API Code
                                   </Button>
                                 </PopoverTrigger>
                                 <PopoverContent>
@@ -769,6 +813,9 @@ export default function Browse({
                       startup,
                       packagemgr,
                       donate,
+                      donateCollective,
+                      donateGithub,
+                      donateLibera,
                     }) => (
                       <Flex key={id}>
                         <Box flex={1} me={4}>
@@ -854,26 +901,68 @@ export default function Browse({
                                     <PopoverBody>
                                       <Stack direction="column" spacing={4}>
                                         <Stack direction="column" spacing={2}>
-                                          <Button ref={initialFocusRef}>
-                                            See Donation Options
-                                          </Button>
-                                          <Button>
-                                            Donate through Open Collective
-                                          </Button>
-                                          <Button>
-                                            Donate through GitHub Sponsors
-                                          </Button>
-                                          <Button>
-                                            Donate through LiberaPay
-                                          </Button>
+                                          {donate && (
+                                            <Link href={donate} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                See Donation Options
+                                              </Button>
+                                            </Link>
+                                          )}
+                                          {(donateCollective && (
+                                            <Link
+                                              href={donateCollective}
+                                              passHref
+                                            >
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Open Collective
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Open Collective
+                                            </Button>
+                                          )}
+                                          {(donateGithub && (
+                                            <Link href={donateGithub} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with GitHub Sponsors
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with GitHub Sponsors
+                                            </Button>
+                                          )}
+                                          {(donateLibera && (
+                                            <Link href={donateLibera} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Liberapay
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Liberapay
+                                            </Button>
+                                          )}
                                         </Stack>
-                                        <Text fontSize="xs">
-                                          Tempo, the ULOSINO donation hub. Not
-                                          available for all OSs. Payments are
-                                          facilitated by third parties. ULOSINO
-                                          does not receive commission. General
-                                          advice only.
-                                        </Text>
+                                        <TempoDisclaimer />
                                       </Stack>
                                     </PopoverBody>
                                   </PopoverContent>
@@ -898,7 +987,7 @@ export default function Browse({
                               >
                                 <PopoverTrigger>
                                   <Button size="sm" isDisabled>
-                                    Get Flow API Details
+                                    Show Flow API Code
                                   </Button>
                                 </PopoverTrigger>
                                 <PopoverContent>
