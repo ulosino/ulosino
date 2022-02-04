@@ -90,19 +90,17 @@ const Badge = {
 export const Tabs = {
   defaultProps: {
     variant: "solid-rounded",
-    colorScheme: "gray",
+    colorScheme: "blue",
     size: "sm",
   },
 };
 
-// Not working, applied manually
-/*
-export const Tab = {
-  defaultProps: {
-    shadow: "inner",
-  },
-};
-*/
+// export const Tab = {
+//   defaultProps: {
+//     shadow: "inner",
+//     color: "white",
+//   },
+// };
 
 export const TabPanel = {
   defaultProps: {
@@ -135,8 +133,8 @@ const UITheme = extendTheme({
     brandGlass: "rgba(242, 205, 138, 0.5)",
     secondaryGlass: "rgba(0, 30, 56, 0.5)",
 
-    // Here, the brand colour replaces the Chakra default
-    blue: {
+    // Here, brand colours replaces Chakra defaults
+    yellow: {
       50: "rgba(242, 205, 138, 1)",
       100: "rgba(242, 205, 138, 1)",
       200: "rgba(242, 205, 138, 1)",
@@ -147,6 +145,18 @@ const UITheme = extendTheme({
       700: "rgba(242, 205, 138, 1)",
       800: "rgba(242, 205, 138, 1)",
       900: "rgba(242, 205, 138, 1)",
+    },
+    blue: {
+      50: "rgba(0, 30, 56, 1)",
+      100: "rgba(0, 30, 56, 1)",
+      200: "rgba(0, 30, 56, 1)",
+      300: "rgba(0, 30, 56, 1)",
+      400: "rgba(0, 30, 56, 1)",
+      500: "rgba(0, 30, 56, 1)",
+      600: "rgba(0, 30, 56, 1)",
+      700: "rgba(0, 30, 56, 1)",
+      800: "rgba(0, 30, 56, 1)",
+      900: "rgba(0, 30, 56, 1)",
     },
 
     // Other colours

@@ -119,7 +119,7 @@ export default function Home({
                       borderColor="gray.700"
                       borderRadius="xl"
                       shadow="inner"
-                      focusBorderColor="pink.400"
+                      focusBorderColor="yellow.400"
                       placeholder="Find an operating system..."
                       id="testing-db-input"
                     />

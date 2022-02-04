@@ -554,6 +554,7 @@ export default function Browse({
                   size="sm"
                   icon={<HiOutlineCog />}
                   aria-label="Open or hide Browse page display preferences"
+                  display={{ base: "none", md: "flex" }}
                 />
               </PopoverTrigger>
               <PopoverContent>
@@ -659,7 +660,7 @@ export default function Browse({
                           </Link>
                         </Box>
                         {marketplace ? (
-                          <Card>
+                          <Card display={{ base: "none", md: "flex" }}>
                             <Stack direction="column" spacing={2}>
                               {donate ? (
                                 <Popover
@@ -871,7 +872,7 @@ export default function Browse({
                           </Link>
                         </Box>
                         {marketplace ? (
-                          <Card>
+                          <Card display={{ base: "none", md: "flex" }}>
                             <Stack direction="column" spacing={2}>
                               {donate ? (
                                 <Popover
