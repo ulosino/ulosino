@@ -622,7 +622,12 @@ export default function Browse({
                             passHref
                             key={`/browse/${id}`}
                           >
-                            <Card key={id} variant="button" px={6}>
+                            <Card
+                              key={id}
+                              id="testing-db-OSPages"
+                              variant="button"
+                              px={6}
+                            >
                               <Heading size="md">{title}</Heading>
                               {summary && (
                                 <Text fontSize="sm">"{summary}"</Text>
@@ -834,7 +839,12 @@ export default function Browse({
                             passHref
                             key={`/browse/${id}`}
                           >
-                            <Card key={id} variant="button" px={6}>
+                            <Card
+                              key={id}
+                              id="testing-display-newOSPages"
+                              variant="button"
+                              px={6}
+                            >
                               <Heading size="md">{title}</Heading>
                               {summary && (
                                 <Text fontSize="sm">"{summary}"</Text>

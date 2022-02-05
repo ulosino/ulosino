@@ -21,15 +21,9 @@ describe("Database Tester", () => {
     // Test remote metadata
     cy.get("button").contains("Browse").click();
     cy.url().should("include", "/browse");
-    cy.get("#testing-display-tabList")
-      .find("button")
-      .contains("Oldest")
-      .click();
-    cy.get("#testing-db-OSPages").find("h2").contains("Demo");
-    cy.get("#testing-db-OSPages")
-      .find("p")
-      .contains("Operating system page demo");
-    cy.get("#testing-db-OSPages").find("h2").contains("Demo").click();
+    cy.get("#testing-db-OSPages").find("h2").contains("Alpine Linux");
+    cy.get("#testing-db-OSPages").find("p").contains("Haven for power users");
+    cy.get("#testing-db-OSPages").find("h2").contains("Alpine Linux").click();
     cy.url().should("include", "/browse/");
   });
 });
