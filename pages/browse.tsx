@@ -37,6 +37,8 @@ import {
   TabPanel,
   FormControl,
   PopoverHeader,
+  MenuButton,
+  MenuItem,
   useBoolean,
 } from "@chakra-ui/react";
 import {
@@ -46,7 +48,7 @@ import {
   HiOutlineCash,
 } from "react-icons/hi";
 
-// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
+// Dynamically import Tempo on Browse components
 const Popover = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.Popover)
 );
@@ -56,9 +58,6 @@ const PopoverTrigger = dynamic(() =>
 const PopoverContent = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.PopoverContent)
 );
-// const PopoverHeader = dynamic(() =>
-//   import("@chakra-ui/react").then((mod) => mod.PopoverHeader)
-// );
 const PopoverArrow = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.PopoverArrow)
 );
@@ -68,8 +67,9 @@ const PopoverCloseButton = dynamic(() =>
 const PopoverBody = dynamic(() =>
   import("@chakra-ui/react").then((mod) => mod.PopoverBody)
 );
-const PopoverFooter = dynamic(() =>
-  import("@chakra-ui/react").then((mod) => mod.PopoverFooter)
+const Menu = dynamic(() => import("@chakra-ui/react").then((mod) => mod.Menu));
+const MenuList = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.MenuList)
 );
 const TempoDisclaimer = dynamic(() => import("components/TempoDisclaimer"));
 
@@ -557,37 +557,20 @@ export default function Browse({
               All Operating Systems
             </Text>
             <Spacer />
-            <Popover isLazy closeOnBlur={true} closeOnEsc={true}>
-              <PopoverTrigger>
-                <IconButton
-                  size="sm"
-                  icon={<HiOutlineCog />}
-                  aria-label="Open or hide Browse page display preferences"
-                  display={{ base: "none", md: "flex" }}
-                />
-              </PopoverTrigger>
-              <PopoverContent>
-                <PopoverHeader pt={4} fontWeight="bold" border="0">
-                  Show Tempo on Browse
-                </PopoverHeader>
-                <PopoverArrow />
-                <PopoverCloseButton />
-                <PopoverBody>
-                  Tempo on Browse is in a pre-release phase.
-                </PopoverBody>
-                <PopoverFooter
-                  border="0"
-                  d="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  pb={4}
-                >
-                  <Button onClick={setMarketplace.toggle}>
-                    {marketplace ? "Disable" : "Enable"}
-                  </Button>
-                </PopoverFooter>
-              </PopoverContent>
-            </Popover>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                icon={<HiOutlineCog />}
+                size="sm"
+                aria-label="Open or close Browse page display options menu"
+                display={{ base: "none", md: "flex" }}
+              />
+              <MenuList>
+                <MenuItem onClick={setMarketplace.toggle}>
+                  {marketplace ? "Hide" : "Show"} Tempo on Browse
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
           <Tabs isLazy>
             <TabList id="testing-display-tabList">
@@ -616,7 +599,7 @@ export default function Browse({
                       donateLibera,
                     }) => (
                       <Flex key={id}>
-                        <Box flex={1} me={4}>
+                        <Box flex={1}>
                           <Link
                             href={`/browse/${id}`}
                             passHref
@@ -674,7 +657,7 @@ export default function Browse({
                           </Link>
                         </Box>
                         {marketplace ? (
-                          <Card display={{ base: "none", md: "flex" }}>
+                          <Card display={{ base: "none", md: "flex" }} ms={4}>
                             <Stack direction="column" spacing={2}>
                               {donate ? (
                                 <Popover
@@ -783,27 +766,9 @@ export default function Browse({
                                   </Badge>
                                 </Button>
                               )}
-                              <Popover
-                                isLazy
-                                closeOnBlur={true}
-                                closeOnEsc={true}
-                              >
-                                <PopoverTrigger>
-                                  <Button size="sm" isDisabled>
-                                    Show Flow API Code
-                                  </Button>
-                                </PopoverTrigger>
-                                <PopoverContent>
-                                  <PopoverHeader fontWeight="semibold">
-                                    Flow API Address
-                                  </PopoverHeader>
-                                  <PopoverArrow />
-                                  <PopoverCloseButton />
-                                  <PopoverBody>
-                                    <Text>Under development</Text>
-                                  </PopoverBody>
-                                </PopoverContent>
-                              </Popover>
+                              <Button size="sm" isDisabled>
+                                Copy Flow API Code
+                              </Button>
                             </Stack>
                           </Card>
                         ) : (
@@ -833,7 +798,7 @@ export default function Browse({
                       donateLibera,
                     }) => (
                       <Flex key={id}>
-                        <Box flex={1} me={4}>
+                        <Box flex={1}>
                           <Link
                             href={`/browse/${id}`}
                             passHref
@@ -891,7 +856,7 @@ export default function Browse({
                           </Link>
                         </Box>
                         {marketplace ? (
-                          <Card display={{ base: "none", md: "flex" }}>
+                          <Card display={{ base: "none", md: "flex" }} ms={4}>
                             <Stack direction="column" spacing={2}>
                               {donate ? (
                                 <Popover
@@ -1000,27 +965,9 @@ export default function Browse({
                                   </Badge>
                                 </Button>
                               )}
-                              <Popover
-                                isLazy
-                                closeOnBlur={true}
-                                closeOnEsc={true}
-                              >
-                                <PopoverTrigger>
-                                  <Button size="sm" isDisabled>
-                                    Show Flow API Code
-                                  </Button>
-                                </PopoverTrigger>
-                                <PopoverContent>
-                                  <PopoverHeader fontWeight="semibold">
-                                    Flow API Address
-                                  </PopoverHeader>
-                                  <PopoverArrow />
-                                  <PopoverCloseButton />
-                                  <PopoverBody>
-                                    <Text>Under development</Text>
-                                  </PopoverBody>
-                                </PopoverContent>
-                              </Popover>
+                              <Button size="sm" isDisabled>
+                                Copy Flow API Code
+                              </Button>
                             </Stack>
                           </Card>
                         ) : (
