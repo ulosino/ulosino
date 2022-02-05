@@ -3,11 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import {
-  getNewestOSPages,
-  getOldestOSPages,
-  getOSPages,
-} from "providers/OSPageProvider";
+import { getNewestOSPages, getOSPages } from "providers/OSPageProvider";
 
 import {
   AutoCompleteInput,
@@ -32,6 +28,7 @@ import {
   Stack,
   Flex,
   Spacer,
+  IconButton,
   Button,
   Tabs,
   Tab,
@@ -39,8 +36,42 @@ import {
   TabPanels,
   TabPanel,
   FormControl,
+  PopoverHeader,
+  MenuButton,
+  MenuItem,
+  useBoolean,
 } from "@chakra-ui/react";
-import { HiOutlineDatabase, HiOutlineSearch } from "react-icons/hi";
+import {
+  HiOutlineCog,
+  HiOutlineDatabase,
+  HiOutlineSearch,
+  HiOutlineCash,
+} from "react-icons/hi";
+
+// Dynamically import Tempo on Browse components
+const Popover = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.Popover)
+);
+const PopoverTrigger = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverTrigger)
+);
+const PopoverContent = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverContent)
+);
+const PopoverArrow = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverArrow)
+);
+const PopoverCloseButton = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverCloseButton)
+);
+const PopoverBody = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.PopoverBody)
+);
+const Menu = dynamic(() => import("@chakra-ui/react").then((mod) => mod.Menu));
+const MenuList = dynamic(() =>
+  import("@chakra-ui/react").then((mod) => mod.MenuList)
+);
+const TempoDisclaimer = dynamic(() => import("components/TempoDisclaimer"));
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -59,7 +90,6 @@ import UIProvider from "providers/UIProvider";
 
 export default function Browse({
   newestOSPageData,
-  oldestOSPageData,
   AZOSPageData,
 }: {
   newestOSPageData: {
@@ -73,18 +103,10 @@ export default function Browse({
     startup: string;
     desktop: string;
     packagemgr: string;
-  }[];
-  oldestOSPageData: {
-    date: string;
-    id: string;
-    title: string;
-    version: string;
-    summary: string;
-    category: string;
-    platform: string;
-    startup: string;
-    desktop: string;
-    packagemgr: string;
+    donate: any;
+    donateCollective: any;
+    donateGithub: any;
+    donateLibera: any;
   }[];
   AZOSPageData: {
     date: string;
@@ -97,12 +119,26 @@ export default function Browse({
     startup: string;
     desktop: string;
     packagemgr: string;
+    donate: any;
+    donateCollective: any;
+    donateGithub: any;
+    donateLibera: any;
   }[];
 }) {
+  const [marketplace, setMarketplace] = useBoolean();
   return (
     <UIProvider>
       <Head>
         <title>ULOSINO &mdash; Browse</title>
+        <meta property="og:title" content="ULOSINO &mdash; Browse ULOSINO" />
+        <meta
+          name="description"
+          content="Browse through ULOSINO's wide selection of open source operating systems, like Linux and BSD. Take advantage of our leading search options, or browse alphabetically."
+        />
+        <meta
+          property="og:description"
+          content="Browse through ULOSINO's wide selection of open source operating systems, like Linux and BSD."
+        />
       </Head>
 
       <Flex direction={["column", "column", "row"]} mb={8}>
@@ -516,15 +552,31 @@ export default function Browse({
         <MatchesHero />
 
         <Stack direction="column" spacing={2}>
-          <Text textStyle="secondary" as="h6">
-            All Operating Systems
-          </Text>
+          <Flex>
+            <Text textStyle="secondary" as="h6">
+              All Operating Systems
+            </Text>
+            <Spacer />
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                icon={<HiOutlineCog />}
+                size="sm"
+                aria-label="Open or close Browse page display options menu"
+                display={{ base: "none", md: "flex" }}
+              />
+              <MenuList>
+                <MenuItem onClick={setMarketplace.toggle}>
+                  {marketplace ? "Hide" : "Show"} Tempo on Browse
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
           <Tabs isLazy>
             <TabList id="testing-display-tabList">
               <Stack direction="row" spacing={4} w="full">
                 <Tab shadow="inner">Alphabetical</Tab>
                 <Tab shadow="inner">Newest</Tab>
-                <Tab shadow="inner">Oldest</Tab>
               </Stack>
             </TabList>
             <TabPanels>
@@ -541,41 +593,188 @@ export default function Browse({
                       desktop,
                       startup,
                       packagemgr,
+                      donate,
+                      donateCollective,
+                      donateGithub,
+                      donateLibera,
                     }) => (
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Card key={id} variant="button" px={6}>
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "flex", md: "none" }}
-                            spacing={4}
+                      <Flex key={id}>
+                        <Box flex={1}>
+                          <Link
+                            href={`/browse/${id}`}
+                            passHref
+                            key={`/browse/${id}`}
                           >
-                            {category && <Badge>{category}</Badge>}
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                          </Stack>
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", md: "flex" }}
-                            spacing={4}
-                          >
-                            <Badge>{category}</Badge>
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                          </Stack>
-                        </Card>
-                      </Link>
+                            <Card
+                              key={id}
+                              id="testing-db-OSPages"
+                              variant="button"
+                              px={6}
+                            >
+                              <Heading size="md">{title}</Heading>
+                              {summary && (
+                                <Text fontSize="sm">"{summary}"</Text>
+                              )}
+                              <Stack
+                                direction="row"
+                                display={{ base: "flex", md: "none" }}
+                                spacing={4}
+                              >
+                                {category && <Badge>{category}</Badge>}
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                              </Stack>
+                              <Stack
+                                direction="row"
+                                display={{ base: "none", md: "flex" }}
+                                spacing={4}
+                              >
+                                <Badge>{category}</Badge>
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                                {startup && (
+                                  <Text fontSize="sm">{startup}</Text>
+                                )}
+                                {packagemgr && (
+                                  <Text fontSize="sm">{packagemgr}</Text>
+                                )}
+                              </Stack>
+                            </Card>
+                          </Link>
+                        </Box>
+                        {marketplace ? (
+                          <Card display={{ base: "none", md: "flex" }} ms={4}>
+                            <Stack direction="column" spacing={2}>
+                              {donate ? (
+                                <Popover
+                                  isLazy
+                                  closeOnBlur={true}
+                                  closeOnEsc={true}
+                                >
+                                  <PopoverTrigger>
+                                    <Button size="sm">
+                                      Donate
+                                      <Badge
+                                        ms={2}
+                                        bg="brand"
+                                        color="gray.800"
+                                        pt={1}
+                                      >
+                                        Tempo
+                                      </Badge>
+                                    </Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent>
+                                    <PopoverHeader fontWeight="semibold">
+                                      Donate to {title}
+                                    </PopoverHeader>
+                                    <PopoverArrow />
+                                    <PopoverCloseButton />
+                                    <PopoverBody>
+                                      <Stack direction="column" spacing={4}>
+                                        <Stack direction="column" spacing={2}>
+                                          {donate && (
+                                            <Link href={donate} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                See Donation Options
+                                              </Button>
+                                            </Link>
+                                          )}
+                                          {(donateCollective && (
+                                            <Link
+                                              href={donateCollective}
+                                              passHref
+                                            >
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Open Collective
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Open Collective
+                                            </Button>
+                                          )}
+                                          {(donateGithub && (
+                                            <Link href={donateGithub} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with GitHub Sponsors
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with GitHub Sponsors
+                                            </Button>
+                                          )}
+                                          {(donateLibera && (
+                                            <Link href={donateLibera} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Liberapay
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Liberapay
+                                            </Button>
+                                          )}
+                                        </Stack>
+                                        <TempoDisclaimer />
+                                      </Stack>
+                                    </PopoverBody>
+                                  </PopoverContent>
+                                </Popover>
+                              ) : (
+                                <Button size="sm" isDisabled>
+                                  Donate
+                                  <Badge
+                                    ms={2}
+                                    bg="brand"
+                                    color="gray.800"
+                                    pt={1}
+                                  >
+                                    Tempo
+                                  </Badge>
+                                </Button>
+                              )}
+                              <Button size="sm" isDisabled>
+                                Copy Flow API Code
+                              </Button>
+                            </Stack>
+                          </Card>
+                        ) : (
+                          ""
+                        )}
+                      </Flex>
                     )
                   )}
                 </Stack>
@@ -593,98 +792,188 @@ export default function Browse({
                       desktop,
                       startup,
                       packagemgr,
+                      donate,
+                      donateCollective,
+                      donateGithub,
+                      donateLibera,
                     }) => (
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Card key={id} variant="button" px={6}>
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "flex", md: "none" }}
-                            spacing={4}
+                      <Flex key={id}>
+                        <Box flex={1}>
+                          <Link
+                            href={`/browse/${id}`}
+                            passHref
+                            key={`/browse/${id}`}
                           >
-                            {category && <Badge>{category}</Badge>}
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                          </Stack>
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", md: "flex" }}
-                            spacing={4}
-                          >
-                            <Badge>{category}</Badge>
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                          </Stack>
-                        </Card>
-                      </Link>
-                    )
-                  )}
-                </Stack>
-              </TabPanel>
-              <TabPanel px={0} pb={0} pt={4}>
-                <Stack direction="column" spacing={2}>
-                  {oldestOSPageData.map(
-                    ({
-                      id,
-                      title,
-                      version,
-                      summary,
-                      category,
-                      platform,
-                      desktop,
-                      startup,
-                      packagemgr,
-                    }) => (
-                      <Link
-                        href={`/browse/${id}`}
-                        passHref
-                        key={`/browse/${id}`}
-                      >
-                        <Card
-                          key={id}
-                          id="testing-db-OSPages"
-                          variant="button"
-                          px={6}
-                        >
-                          <Heading size="md">{title}</Heading>
-                          {summary && <Text fontSize="sm">"{summary}"</Text>}
-                          <Stack
-                            direction="row"
-                            display={{ base: "flex", md: "none" }}
-                            spacing={4}
-                          >
-                            {category && <Badge>{category}</Badge>}
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                          </Stack>
-                          <Stack
-                            direction="row"
-                            display={{ base: "none", md: "flex" }}
-                            spacing={4}
-                          >
-                            <Badge>{category}</Badge>
-                            {version && <Text fontSize="sm">{version}</Text>}
-                            {platform && <Text fontSize="sm">{platform}</Text>}
-                            {desktop && <Text fontSize="sm">{desktop}</Text>}
-                            {startup && <Text fontSize="sm">{startup}</Text>}
-                            {packagemgr && (
-                              <Text fontSize="sm">{packagemgr}</Text>
-                            )}
-                          </Stack>
-                        </Card>
-                      </Link>
+                            <Card
+                              key={id}
+                              id="testing-display-newOSPages"
+                              variant="button"
+                              px={6}
+                            >
+                              <Heading size="md">{title}</Heading>
+                              {summary && (
+                                <Text fontSize="sm">"{summary}"</Text>
+                              )}
+                              <Stack
+                                direction="row"
+                                display={{ base: "flex", md: "none" }}
+                                spacing={4}
+                              >
+                                {category && <Badge>{category}</Badge>}
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                              </Stack>
+                              <Stack
+                                direction="row"
+                                display={{ base: "none", md: "flex" }}
+                                spacing={4}
+                              >
+                                <Badge>{category}</Badge>
+                                {version && (
+                                  <Text fontSize="sm">{version}</Text>
+                                )}
+                                {platform && (
+                                  <Text fontSize="sm">{platform}</Text>
+                                )}
+                                {desktop && (
+                                  <Text fontSize="sm">{desktop}</Text>
+                                )}
+                                {startup && (
+                                  <Text fontSize="sm">{startup}</Text>
+                                )}
+                                {packagemgr && (
+                                  <Text fontSize="sm">{packagemgr}</Text>
+                                )}
+                              </Stack>
+                            </Card>
+                          </Link>
+                        </Box>
+                        {marketplace ? (
+                          <Card display={{ base: "none", md: "flex" }} ms={4}>
+                            <Stack direction="column" spacing={2}>
+                              {donate ? (
+                                <Popover
+                                  isLazy
+                                  closeOnBlur={true}
+                                  closeOnEsc={true}
+                                >
+                                  <PopoverTrigger>
+                                    <Button size="sm">
+                                      Donate
+                                      <Badge
+                                        ms={2}
+                                        bg="brand"
+                                        color="gray.800"
+                                        pt={1}
+                                      >
+                                        Tempo
+                                      </Badge>
+                                    </Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent>
+                                    <PopoverHeader fontWeight="semibold">
+                                      Donate to {title}
+                                    </PopoverHeader>
+                                    <PopoverArrow />
+                                    <PopoverCloseButton />
+                                    <PopoverBody>
+                                      <Stack direction="column" spacing={4}>
+                                        <Stack direction="column" spacing={2}>
+                                          {donate && (
+                                            <Link href={donate} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                See Donation Options
+                                              </Button>
+                                            </Link>
+                                          )}
+                                          {(donateCollective && (
+                                            <Link
+                                              href={donateCollective}
+                                              passHref
+                                            >
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Open Collective
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Open Collective
+                                            </Button>
+                                          )}
+                                          {(donateGithub && (
+                                            <Link href={donateGithub} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with GitHub Sponsors
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with GitHub Sponsors
+                                            </Button>
+                                          )}
+                                          {(donateLibera && (
+                                            <Link href={donateLibera} passHref>
+                                              <Button
+                                                leftIcon={<HiOutlineCash />}
+                                              >
+                                                Donate with Liberapay
+                                              </Button>
+                                            </Link>
+                                          )) ?? (
+                                            <Button
+                                              leftIcon={<HiOutlineCash />}
+                                              isDisabled
+                                            >
+                                              Donate with Liberapay
+                                            </Button>
+                                          )}
+                                        </Stack>
+                                        <TempoDisclaimer />
+                                      </Stack>
+                                    </PopoverBody>
+                                  </PopoverContent>
+                                </Popover>
+                              ) : (
+                                <Button size="sm" isDisabled>
+                                  Donate
+                                  <Badge
+                                    ms={2}
+                                    bg="brand"
+                                    color="gray.800"
+                                    pt={1}
+                                  >
+                                    Tempo
+                                  </Badge>
+                                </Button>
+                              )}
+                              <Button size="sm" isDisabled>
+                                Copy Flow API Code
+                              </Button>
+                            </Stack>
+                          </Card>
+                        ) : (
+                          ""
+                        )}
+                      </Flex>
                     )
                   )}
                 </Stack>
@@ -699,12 +988,10 @@ export default function Browse({
 
 export const getStaticProps: GetStaticProps = async () => {
   const newestOSPageData = getNewestOSPages();
-  const oldestOSPageData = getOldestOSPages();
   const AZOSPageData = getOSPages();
   return {
     props: {
       newestOSPageData,
-      oldestOSPageData,
       AZOSPageData,
     },
   };

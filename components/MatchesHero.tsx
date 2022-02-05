@@ -20,7 +20,7 @@ function Card(props) {
 
 export default function MatchesHero() {
   return (
-    <Card variant="brand">
+    <Card variant="brand" color="gray.800">
       <LightMode>
         <SimpleGrid minChildWidth="240px" spacing={10}>
           <Box>

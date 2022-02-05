@@ -1,3 +1,5 @@
+// Modal that embeds Utterances comments
+
 import {
   Button,
   ModalContent,

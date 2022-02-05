@@ -11,6 +11,7 @@ import { useEffect } from "react";
 
 // Import global components
 import JSWarning from "components/JSWarning";
+import ErrorBoundary from "components/ErrorBoundary";
 
 // Import global typography
 import "@fontsource/public-sans/variable.css";
@@ -33,7 +34,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <noscript>
           <JSWarning />
         </noscript>
-        <Component {...pageProps} />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
       </MDXProvider>
     </ChakraProvider>
   );

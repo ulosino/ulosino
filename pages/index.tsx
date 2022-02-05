@@ -80,7 +80,19 @@ export default function Home({
   return (
     <UIProvider>
       <Head>
-        <title>ULOSINO &mdash; Open Source Operating System Database</title>
+        <title>ULOSINO &mdash; Discover Open Source Operating Systems</title>
+        <meta
+          property="og:title"
+          content="ULOSINO &mdash; Discover Open Source OSs"
+        />
+        <meta
+          name="description"
+          content="ULOSINO is The Friendly Flow for open source operating system discovery. Search and discover Linux and BSD-based OSs faster and easier when the power of ULOSINO is in your flow."
+        />
+        <meta
+          property="og:description"
+          content="ULOSINO is The Friendly Flow for open source operating system discovery. Search and discover Linux and BSD-based OSs in a modern setting."
+        />
       </Head>
 
       <Stack direction="column" spacing={16}>
@@ -119,7 +131,6 @@ export default function Home({
                       borderColor="gray.700"
                       borderRadius="xl"
                       shadow="inner"
-                      focusBorderColor="pink.400"
                       placeholder="Find an operating system..."
                       id="testing-db-input"
                     />
