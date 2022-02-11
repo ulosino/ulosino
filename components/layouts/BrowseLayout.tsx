@@ -1,13 +1,21 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+
+// This wraps around our Browse series of pages, implementing a sidebar to navigate between the Browse pages
+
+// Types
 import type { ReactElement } from "react";
 
+// Links and routing
 import Link from "next/link";
 
+// Chakra UI, icons, and other design imports
 import { Flex, Stack, Box, Button } from "@chakra-ui/react";
 
+// Begin wrapping component
 export default function BrowseLayout({ children }: { children: ReactElement }) {
   return (
-    <Flex direction="row">
-      <Stack direction="column" spacing={2}>
+    <Flex direction={{ base: "column", md: "row" }}>
+      <Stack direction="column" spacing={2} mb={10}>
         <Link href="/browse" passHref>
           <Button as="a">OS List &amp; Tempo</Button>
         </Link>

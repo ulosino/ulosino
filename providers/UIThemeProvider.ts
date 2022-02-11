@@ -1,4 +1,6 @@
-// Provides global theming (Chakra UI)
+// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+
+// The UIThemeProvider provides global theming for Chakra UI
 
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
@@ -194,4 +196,5 @@ const UITheme = extendTheme({
   },
 });
 
+// This is imported by Application Kit (general) and _document.tsx (colour mode only)
 export default UITheme;

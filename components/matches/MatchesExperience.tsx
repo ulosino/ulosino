@@ -1,3 +1,12 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+
+// This is the Matches interface, supplying the switches and result cards
+
+// Dynamic loading
+import dynamic from "next/dynamic";
+import Loading from "components/Loading";
+
+// Chakra UI, icons, and other design imports
 import {
   Text,
   Icon,
@@ -9,7 +18,6 @@ import {
   useBoolean,
   useBreakpointValue,
 } from "@chakra-ui/react";
-
 import {
   HiLibrary,
   HiDesktopComputer,
@@ -17,11 +25,20 @@ import {
   HiTemplate,
   HiAcademicCap,
 } from "react-icons/hi";
+import { useStyleConfig } from "@chakra-ui/react";
+function Card(props: { [x: string]: any; variant: string; children: any }) {
+  const { variant, children, ...rest } = props;
 
-import dynamic from "next/dynamic";
-import Loading from "components/Loading";
+  const styles = useStyleConfig("Card", { variant });
 
-// OS cards
+  return (
+    <Box __css={styles} {...rest}>
+      {children}
+    </Box>
+  );
+}
+
+// First party components
 const AlpineCard = dynamic(() => import("components/matches/cards/Alpine"), {
   loading: () => <Loading />,
 });
@@ -100,19 +117,6 @@ const KDENeonCard = dynamic(() => import("components/matches/cards/KDENeon"), {
 const ManjaroCard = dynamic(() => import("components/matches/cards/Manjaro"), {
   loading: () => <Loading />,
 });
-
-import { useStyleConfig } from "@chakra-ui/react";
-function Card(props: { [x: string]: any; variant: string; children: any }) {
-  const { variant, children, ...rest } = props;
-
-  const styles = useStyleConfig("Card", { variant });
-
-  return (
-    <Box __css={styles} {...rest}>
-      {children}
-    </Box>
-  );
-}
 
 export default function MatchesExperience() {
   // Quiz preferences

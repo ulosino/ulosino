@@ -1,15 +1,13 @@
-// ULOSINO brand iconography
+// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
 
-import { Icon, IconProps, OmitCommonProps } from "@chakra-ui/react";
-import { SVGProps } from "react";
+// This has the ULOSINO logo
 
-export default function Logo(
-  props: JSX.IntrinsicAttributes &
-    OmitCommonProps<SVGProps<SVGSVGElement>, keyof IconProps> &
-    IconProps & { as?: "svg" }
-) {
+import { Icon } from "@chakra-ui/react";
+
+// Begin component
+export default function Logo() {
   return (
-    <Icon w={8} h={8} {...props}>
+    <Icon w={8} h={8}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
         <path
           fill="#f2cd8a"

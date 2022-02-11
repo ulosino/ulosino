@@ -1,6 +1,14 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+
+// The main layout implements the header and footer. It's opt-in by page
+
+// Types
 import type { ReactElement } from "react";
 
+// Links and routing
 import Link from "next/link";
+
+// Chakra UI, icons, and other design imports
 import {
   Flex,
   Spacer,
@@ -12,9 +20,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+// First-party components
 import Logo from "components/Logo";
 import BackButton from "components/layouts/BackButton";
 
+// Begin wrapping component
 export default function Layout({ children }: { children: ReactElement }) {
   const [backButton, setBackButton] = useBoolean();
   const [advancedSearch, setAdvancedSearch] = useBoolean();

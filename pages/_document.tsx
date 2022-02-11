@@ -1,4 +1,7 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
+
 import { ColorModeScript } from "@chakra-ui/react";
 import UITheme from "providers/UIThemeProvider";
 
@@ -224,8 +227,11 @@ export default class Document extends NextDocument {
             media="(prefers-color-scheme: dark) and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           />
         </Head>
+
         <body>
+          {/* Chakra UI colour mode applying script */}
           <ColorModeScript initialColorMode={UITheme.config.initialColorMode} />
+          {/* The DOM */}
           <Main />
           <NextScript />
         </body>
