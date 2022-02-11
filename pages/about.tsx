@@ -2,25 +2,22 @@ import type { ReactElement } from "react";
 
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
-import BrowseLayout from "components/layouts/BrowseLayout";
 
 import { Stack, Heading, Text } from "@chakra-ui/react";
 
-export default function Browse() {
+export default function About() {
   return (
     <Stack direction="column" spacing={5}>
-      <Heading size="xl">Operating System List</Heading>
-      <Text>Test</Text>
+      <Heading size="xl">About</Heading>
+      <Text>To complete</Text>
     </Stack>
   );
 }
 
-Browse.getLayout = function getLayout(page: ReactElement) {
+About.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>
-        <BrowseLayout>{page}</BrowseLayout>
-      </Layout>
+      <Layout>{page}</Layout>
     </ApplicationKit>
   );
 };

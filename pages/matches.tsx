@@ -4,18 +4,21 @@ import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 
+import MatchesExperience from "components/matches/MatchesExperience";
+
 import { Stack, Heading, Text } from "@chakra-ui/react";
 
-export default function Browse() {
+export default function Matches() {
   return (
     <Stack direction="column" spacing={5}>
-      <Heading size="xl">Operating System List</Heading>
-      <Text>Test</Text>
+      <Heading size="xl">ULOSINO Matches</Heading>
+      <Text>Find an OS that matches your preferences, quickly and easily.</Text>
+      <MatchesExperience />
     </Stack>
   );
 }
 
-Browse.getLayout = function getLayout(page: ReactElement) {
+Matches.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
       <Layout>

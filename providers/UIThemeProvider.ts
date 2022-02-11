@@ -30,11 +30,11 @@ export const Card = {
     shadow: "md",
   },
   variants: {
-    solid: ({ colorMode }) => ({
+    solid: ({ colorMode }: { colorMode: string }) => ({
       bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
       color: "inherit",
     }),
-    button: ({ colorMode }) => ({
+    button: ({ colorMode }: { colorMode: string }) => ({
       bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
       color: colorMode === "dark" ? "white" : "gray.800",
       cursor: "pointer",
@@ -48,7 +48,7 @@ export const Card = {
       bg: "secondary",
       color: "inherit",
     },
-    alert: ({ colorMode }) => ({
+    alert: ({ colorMode }: { colorMode: string }) => ({
       bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
       color: "inherit",
       padding: 8,
@@ -166,11 +166,6 @@ const UITheme = extendTheme({
     global: {
       body: {
         fontFamily: "Public Sans",
-      },
-      // Next.js <Link> does not style links
-      a: {
-        textDecoration: "underline",
-        cursor: "pointer",
       },
       b: {
         fontWeight: 600,
