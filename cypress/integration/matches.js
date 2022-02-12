@@ -1,5 +1,7 @@
-describe("Matches Tester", () => {
-  it("Should play with the buttons to find the right Match", () => {
+// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+
+describe("ULOSINO Matches Testing", () => {
+  it("Should test the Matches experience; switching buttons to find the correct Match", () => {
     cy.visit("/matches");
 
     // Test Linux Mint card (visible by default)
@@ -7,12 +9,11 @@ describe("Matches Tester", () => {
       .find("h2")
       .contains("Linux Mint")
       .should("be.visible");
-
     cy.get("#testing-mintInfoCard")
       .should("have.attr", "href")
       .and("include", "browse/mint");
 
-    // Test switching
+    // Test preference switching
     cy.get("#testing-switchButton")
       .contains("Switch to macOS style interfaces")
       .click();
@@ -22,7 +23,6 @@ describe("Matches Tester", () => {
       .find("h2")
       .contains("elementary OS")
       .should("be.visible");
-
     cy.get("#testing-elementaryInfoCard")
       .should("have.attr", "href")
       .and("include", "/browse/elementary");

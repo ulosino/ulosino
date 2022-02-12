@@ -35,13 +35,19 @@ export default function Layout({ children }: { children: ReactElement }) {
       direction="column"
       bg={useColorModeValue("gray.50", "inherit")}
     >
-      <Container maxW="container.lg" as="nav">
+      <Container maxW="container.lg" as="header">
         <Flex mt={2} mb={10}>
-          <Center display={{ base: "flex", md: "none" }}>
+          <Center
+            display={{ base: "flex", md: "none" }}
+            id="testing-headerBackButtonMobile"
+          >
             <BackButton />
           </Center>
           {backButton ? (
-            <Center>
+            <Center
+              display={{ base: "none", md: "flex" }}
+              id="testing-headerBackButtonDesktop"
+            >
               <BackButton />
             </Center>
           ) : (
@@ -50,17 +56,21 @@ export default function Layout({ children }: { children: ReactElement }) {
           <Link href="/" passHref>
             <Center
               cursor="pointer"
-              id="testing-display-logoLg"
               bg="secondary"
               rounded="2xl"
               p={3}
               shadow="md"
               as="a"
+              id="testing-headerLogoLink"
             >
               <Logo />
             </Center>
           </Link>
-          <Center display={{ base: "none", md: "flex" }}>
+          <Center
+            display={{ base: "none", md: "flex" }}
+            as="nav"
+            id="testing-headerLinks"
+          >
             <Stack direction="row" spacing={2} mx={10}>
               <Link href="/" passHref>
                 <Button variant="ghost" as="a">
@@ -69,13 +79,13 @@ export default function Layout({ children }: { children: ReactElement }) {
               </Link>
               {advancedSearch ? (
                 <Link href="/search" passHref>
-                  <Button variant="ghost" as="a">
+                  <Button variant="ghost" as="a" id="testing-headerSearchLink">
                     Advanced Search
                   </Button>
                 </Link>
               ) : (
                 <Link href="/browse" passHref>
-                  <Button variant="ghost" as="a">
+                  <Button variant="ghost" as="a" id="testing-headerBrowseLink">
                     Browse
                   </Button>
                 </Link>
@@ -100,6 +110,7 @@ export default function Layout({ children }: { children: ReactElement }) {
             direction="row"
             spacing={2}
             display={{ base: "none", md: "block" }}
+            id="testing-footerGeneralLinks"
           >
             <Link href="https://github.com/ulosino" passHref>
               <Button variant="ghost" size="sm" as="a">
@@ -111,19 +122,25 @@ export default function Layout({ children }: { children: ReactElement }) {
                 Twitter
               </Button>
             </Link>
-            <Button variant="ghost" size="sm" onClick={setBackButton.toggle}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={setBackButton.toggle}
+              id="testing-footerBackButtonDesktopSwitch"
+            >
               {backButton ? "Hide" : "Show"} Back
             </Button>
             <Button
               variant="ghost"
               size="sm"
               onClick={setAdvancedSearch.toggle}
+              id="testing-footerBrowseButtonSwitch"
             >
               Prefer {advancedSearch ? "Browse" : "Search"}
             </Button>
           </Stack>
           <Spacer />
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} id="testing-footerLegalLinks">
             <Link href="/licence" passHref>
               <Button variant="ghost" size="sm" isDisabled>
                 Licence

@@ -15,7 +15,14 @@ import { Flex, Stack, Box, Button } from "@chakra-ui/react";
 export default function BrowseLayout({ children }: { children: ReactElement }) {
   return (
     <Flex direction={{ base: "column", md: "row" }}>
-      <Stack direction="column" spacing={2} mb={10}>
+      <Stack
+        direction="column"
+        spacing={2}
+        mb={10}
+        me={10}
+        as="nav"
+        id="testing-browseSeriesSidebar"
+      >
         <Link href="/browse" passHref>
           <Button as="a">OS List &amp; Tempo</Button>
         </Link>
@@ -26,7 +33,7 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
           <Button as="a">Matches</Button>
         </Link>
       </Stack>
-      <Box flex={1} ms={10}>
+      <Box flex={1} as="main">
         {children}
       </Box>
     </Flex>
