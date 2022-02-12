@@ -16,6 +16,7 @@ import {
   Center,
   Container,
   Button,
+  IconButton,
   useBoolean,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -23,6 +24,7 @@ import {
 // First-party components
 import Logo from "components/Logo";
 import BackButton from "components/layouts/BackButton";
+import { HiOutlineMenu } from "react-icons/hi";
 
 // Begin wrapping component
 export default function Layout({ children }: { children: ReactElement }) {
@@ -38,14 +40,14 @@ export default function Layout({ children }: { children: ReactElement }) {
       <Container maxW="container.lg" as="header">
         <Flex mt={2} mb={10}>
           <Center
-            display={{ base: "flex", md: "none" }}
+            display={{ base: "flex", sm: "none" }}
             id="testing-headerBackButtonMobile"
           >
             <BackButton />
           </Center>
           {backButton ? (
             <Center
-              display={{ base: "none", md: "flex" }}
+              display={{ base: "none", sm: "flex" }}
               id="testing-headerBackButtonDesktop"
             >
               <BackButton />
@@ -67,7 +69,7 @@ export default function Layout({ children }: { children: ReactElement }) {
             </Center>
           </Link>
           <Center
-            display={{ base: "none", md: "flex" }}
+            display={{ base: "none", sm: "flex" }}
             as="nav"
             id="testing-headerLinks"
           >
@@ -98,7 +100,18 @@ export default function Layout({ children }: { children: ReactElement }) {
             </Stack>
           </Center>
           <Spacer />
-          <Center></Center>
+          <Center display={{ base: "flex", sm: "none" }}>
+            <Link href="/options" passHref>
+              <IconButton
+                icon={<HiOutlineMenu />}
+                variant="ghost"
+                as="a"
+                aria-label="Open Options and navigation"
+                title="Open Options"
+                id="testing-headerOptionsLink"
+              />
+            </Link>
+          </Center>
         </Flex>
       </Container>
       <Container maxW="container.lg" flex={1} as="main">
@@ -109,7 +122,7 @@ export default function Layout({ children }: { children: ReactElement }) {
           <Stack
             direction="row"
             spacing={2}
-            display={{ base: "none", md: "block" }}
+            display={{ base: "none", sm: "block" }}
             id="testing-footerGeneralLinks"
           >
             <Link href="https://github.com/ulosino" passHref>

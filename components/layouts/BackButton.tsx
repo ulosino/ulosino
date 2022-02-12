@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 // Chakra UI, icons, and other design imports
 import { IconButton } from "@chakra-ui/react";
-import { HiChevronLeft } from "react-icons/hi";
+import { HiOutlineChevronLeft } from "react-icons/hi";
 
 // Begin component
 export default function BackButton() {
@@ -18,7 +18,7 @@ export default function BackButton() {
       aria-label="Go Back"
       title="Go Back"
       onClick={() => router.back()}
-      icon={<HiChevronLeft />}
+      icon={<HiOutlineChevronLeft />}
       variant="ghost"
       me={4}
     />

@@ -3,13 +3,9 @@ on: [push]
 
 jobs:
   chrome:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     timeout-minutes: 10
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
 
     steps:
       # Cache our dependencies and Next.js files
@@ -34,13 +30,9 @@ jobs:
           start: npm run start
 
   firefox:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     timeout-minutes: 10
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
 
     steps:
       # Cache our dependencies and Next.js files

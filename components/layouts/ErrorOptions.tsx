@@ -9,7 +9,11 @@ import { useRouter } from "next/router";
 
 // Chakra UI, icons, and other design imports
 import { Stack, Button } from "@chakra-ui/react";
-import { HiRefresh, HiChevronDoubleLeft, HiChevronLeft } from "react-icons/hi";
+import {
+  HiOutlineChevronLeft,
+  HiOutlineChevronDoubleLeft,
+  HiOutlineRefresh,
+} from "react-icons/hi";
 
 // Begin component
 export default function ErrorOptions() {
@@ -21,15 +25,15 @@ export default function ErrorOptions() {
       as="nav"
       id="testing-errorPageActions"
     >
-      <Button leftIcon={<HiChevronLeft />} onClick={router.back}>
+      <Button leftIcon={<HiOutlineChevronLeft />} onClick={router.back}>
         Go Back
       </Button>
       <Link href="/" passHref>
-        <Button leftIcon={<HiChevronDoubleLeft />} as="a">
+        <Button leftIcon={<HiOutlineChevronDoubleLeft />} as="a">
           Go Home
         </Button>
       </Link>
-      <Button leftIcon={<HiRefresh />} onClick={router.reload}>
+      <Button leftIcon={<HiOutlineRefresh />} onClick={router.reload}>
         Try Again
       </Button>
     </Stack>

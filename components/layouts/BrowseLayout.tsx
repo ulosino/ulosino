@@ -20,6 +20,7 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
         spacing={2}
         mb={10}
         me={10}
+        display={{ base: "none", sm: "flex" }}
         as="nav"
         id="testing-browseSeriesSidebar"
       >

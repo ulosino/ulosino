@@ -13,13 +13,14 @@ describe("Browse Display Testing", () => {
     cy.visit("/matches");
     cy.get("#testing-browseSeriesSidebar").should("be.visible");
 
-    // Test sidebar visibility, across all pages, on mobile
+    // Test sidebar existence, across all pages, on mobile
+    // The sidebar isn't visible on mobile
     cy.viewport("iphone-x");
     cy.visit("/browse");
-    cy.get("#testing-browseSeriesSidebar").should("be.visible");
+    cy.get("#testing-browseSeriesSidebar").should("not.be.visible");
     cy.visit("/search");
-    cy.get("#testing-browseSeriesSidebar").should("be.visible");
+    cy.get("#testing-browseSeriesSidebar").should("not.be.visible");
     cy.visit("/matches");
-    cy.get("#testing-browseSeriesSidebar").should("be.visible");
+    cy.get("#testing-browseSeriesSidebar").should("not.be.visible");
   });
 });
