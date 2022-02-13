@@ -20,7 +20,7 @@ export default function ErrorPage() {
     <Stack direction="column" spacing={5}>
       <Heading size="xl">Something went wrong</Heading>
       <Text>No further details are available.</Text>
-      <Text>Go Home to make a search and discover something new</Text>
+      <Text>Go Home to make a search and discover something new.</Text>
       <Text fontSize="xs">There's no error code available.</Text>
     </Stack>
   );

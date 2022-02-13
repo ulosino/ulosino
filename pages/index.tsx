@@ -4,15 +4,23 @@
 import type { ReactElement } from "react";
 
 // Chakra UI, icons, and other design imports
-import { Heading } from "@chakra-ui/react";
+import { Stack, Heading, Text } from "@chakra-ui/react";
 
 // First party components
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
+import { NoJSWarningHome } from "components/NoJSWarning";
 
 // Begin page
 export default function Home() {
-  return <Heading size="xl">Hi</Heading>;
+  return (
+    <Stack direction="column" spacing={5}>
+      <Heading size="xl">Hi</Heading>
+      <noscript>
+        <NoJSWarningHome />
+      </noscript>
+    </Stack>
+  );
 }
 
 // Apply persistent layout, wrapping page

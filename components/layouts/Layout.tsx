@@ -57,12 +57,14 @@ export default function Layout({ children }: { children: ReactElement }) {
           )}
           <Link href="/" passHref>
             <Center
-              cursor="pointer"
               bg="secondary"
               rounded="2xl"
-              p={3}
               shadow="md"
+              p={3}
+              cursor="pointer"
               as="a"
+              aria-label="Go Home"
+              title="Go Home"
               id="testing-headerLogoLink"
             >
               <Logo />

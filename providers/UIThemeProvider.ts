@@ -37,8 +37,13 @@ export const Card = {
       color: "inherit",
     }),
     button: ({ colorMode }: { colorMode: string }) => ({
-      bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
-      color: colorMode === "dark" ? "white" : "gray.800",
+      bg: colorMode === "dark" ? "whiteAlpha.800" : "whiteAlpha.300",
+      color: colorMode === "dark" ? "gray.400" : "inherit",
+      _hover: {
+        bg: colorMode === "dark" ? "gray.900" : "gray.100",
+        color: colorMode === "dark" ? "gray.200" : "gray.900",
+      },
+      transition: ".15s ease",
       cursor: "pointer",
       shadow: "inner",
     }),
@@ -162,13 +167,10 @@ const UITheme = extendTheme({
     },
 
     // Other colours
-    alert: "rgba(253, 188, 180, 0.5)",
+    alert: "rgba(255, 228, 225, 1)",
   },
   styles: {
     global: {
-      body: {
-        fontFamily: "Public Sans",
-      },
       b: {
         fontWeight: 600,
       },

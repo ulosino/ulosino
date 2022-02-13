@@ -10,6 +10,7 @@ import { Stack, Heading, Text } from "@chakra-ui/react";
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
+import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 import MatchesExperience from "components/matches/MatchesExperience";
 
 // Begin page
@@ -17,6 +18,9 @@ export default function Matches() {
   return (
     <Stack direction="column" spacing={5}>
       <Heading size="xl">ULOSINO Matches</Heading>
+      <noscript>
+        <NoJSWarningFeaturesDisabled />
+      </noscript>
       <Text>Find an OS that matches your preferences, quickly and easily.</Text>
       <MatchesExperience />
     </Stack>
