@@ -165,9 +165,6 @@ const UITheme = extendTheme({
       800: "rgba(0, 30, 56, 1)",
       900: "rgba(0, 30, 56, 1)",
     },
-
-    // Other colours
-    alert: "rgba(255, 228, 225, 1)",
   },
   styles: {
     global: {

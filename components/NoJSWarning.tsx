@@ -44,7 +44,7 @@ export function NoJSWarningHome() {
 // This is shown where features are disabled, e.g. Matches
 export function NoJSWarningFeaturesDisabled() {
   return (
-    <Card variant="solid" bg="alert">
+    <Card variant="solid">
       <Stack direction="row" spacing={4}>
         <Center>
           <Icon

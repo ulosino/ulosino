@@ -3,8 +3,12 @@
 // Types
 import type { ReactElement } from "react";
 
+import { useEffect } from "react";
+
 // Chakra UI, icons, and other design imports
-import { Stack, Heading, Text } from "@chakra-ui/react";
+import { Stack, Heading, Text, createStandaloneToast } from "@chakra-ui/react";
+import UITheme from "providers/UIThemeProvider";
+const toast = createStandaloneToast({ theme: UITheme });
 
 // First party components
 import ApplicationKit from "components/ApplicationKit";
@@ -15,6 +19,19 @@ import MatchesExperience from "components/matches/MatchesExperience";
 
 // Begin page
 export default function Matches() {
+  // Show web app installation banner
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      toast({
+        title: "Go offline with the ULOSINO web app",
+        description: "Simply select 'Install ULOSINO' in your browser's menu.",
+        status: "info",
+        position: "top-right",
+        duration: 7000,
+        isClosable: true,
+      });
+    });
+  });
   return (
     <Stack direction="column" spacing={5}>
       <Heading size="xl">ULOSINO Matches</Heading>
