@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function KDENeonCard() {
   return (
     <Link href="/browse/neon" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">KDE neon</Heading>
         <Text fontSize="sm">"Frontrunner of the KDE ecosystem"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

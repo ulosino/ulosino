@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function FreeBSDCard() {
   return (
     <Link href="/browse/freebsd" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">FreeBSD</Heading>
         <Text fontSize="sm">"All-field OS with an innovative stance"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function ArchCard() {
   return (
     <Link href="/browse/antix" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Arch Linux</Heading>
         <Text fontSize="sm">"'Openness' for the competent"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

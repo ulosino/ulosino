@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function SolusCard() {
   return (
     <Link href="/browse/solus" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Solus</Heading>
         <Text fontSize="sm">"Solid multi-purpose independent distro"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

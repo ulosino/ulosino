@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function AlpineCard() {
   return (
     <Link href="/browse/alpine" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Alpine Linux</Heading>
         <Text fontSize="sm">"Haven for power users"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

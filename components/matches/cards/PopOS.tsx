@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function PopOSCard() {
   return (
     <Link href="/browse/popos" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Pop!_OS</Heading>
         <Text fontSize="sm">"Making STEM pop"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

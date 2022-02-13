@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function ZorinCard() {
   return (
     <Link href="/browse/zorin-core" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Zorin OS</Heading>
         <Text fontSize="sm">"Welcoming for beginners from Windows"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

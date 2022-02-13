@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function GardenCard() {
   return (
     <Link href="/browse/garden" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Garden Linux</Heading>
         <Text fontSize="sm">"Small cloud-oriented Linux"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

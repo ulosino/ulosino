@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function GhostBSDCard() {
   return (
     <Link href="/browse/ghostbsd" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">GhostBSD</Heading>
         <Text fontSize="sm">"BSD ready out-of-the-box"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function UbuntuMateCard() {
   return (
     <Link href="/browse/ubuntu-mate" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Ubuntu MATE</Heading>
         <Text fontSize="sm">"Ubuntu with the traditional experience"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

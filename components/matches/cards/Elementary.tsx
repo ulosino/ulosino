@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function ElementaryCard() {
   return (
     <Link href="/browse/elementary" passHref>
-      <Card variant="button" id="testing-elementaryInfoCard">
+      <Card variant="button" as="a" id="testing-elementaryInfoCard">
         <Heading size="md">elementary OS</Heading>
         <Text fontSize="sm">"Attractive and ready for average computing"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

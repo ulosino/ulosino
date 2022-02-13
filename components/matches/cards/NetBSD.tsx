@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function NetBSDCard() {
   return (
     <Link href="/browse/netbsd" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">NetBSD</Heading>
         <Text fontSize="sm">"Widely ported BSD"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

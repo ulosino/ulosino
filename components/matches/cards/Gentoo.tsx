@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function GentooCard() {
   return (
     <Link href="/browse/gentoo" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Gentoo</Heading>
         <Text fontSize="sm">
           "Ideal for servers and mission-critical applications"

@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function NitruxCard() {
   return (
     <Link href="/browse/nitrux" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Nitrux</Heading>
         <Text fontSize="sm">
           "Contemporary desktop OS, fresh take on Debian"

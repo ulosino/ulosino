@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function LinuxMintCard() {
   return (
     <Link href="/browse/mint" passHref>
-      <Card variant="button" id="testing-mintInfoCard">
+      <Card variant="button" as="a" id="testing-mintInfoCard">
         <Heading size="md">Linux Mint</Heading>
         <Text fontSize="sm">"Beginner-oriented OS, similar to Windows"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

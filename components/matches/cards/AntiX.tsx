@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function AntiXCard() {
   return (
     <Link href="/browse/antix" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">antiX</Heading>
         <Text fontSize="sm">"Modern features for older systems"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

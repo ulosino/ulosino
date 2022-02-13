@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function Q4OSCard() {
   return (
     <Link href="/browse/q4os" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Q4OS</Heading>
         <Text fontSize="sm">
           "Traditional experience, low system requirements"

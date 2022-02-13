@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function UbuntuCard() {
   return (
     <Link href="/browse/ubuntu" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Ubuntu</Heading>
         <Text fontSize="sm">"Commercial, widely supported Linux"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>

@@ -22,7 +22,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 export default function ManjaroCard() {
   return (
     <Link href="/browse/manjaro" passHref>
-      <Card variant="button">
+      <Card variant="button" as="a">
         <Heading size="md">Manjaro</Heading>
         <Text fontSize="sm">"Rolling-release with many uses"</Text>
         <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
