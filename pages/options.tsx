@@ -7,23 +7,22 @@ import type { ReactElement } from "react";
 import Link from "next/link";
 
 // Chakra UI, icons, and other design imports
-import { Stack, Button, Text, useColorMode } from "@chakra-ui/react";
+import { Stack, Button, Text } from "@chakra-ui/react";
 import {
   HiOutlineHome,
   HiOutlineDatabase,
   HiOutlineSearch,
   HiOutlineSparkles,
-  HiOutlineColorSwatch,
 } from "react-icons/hi";
 import { FiTwitter, FiGithub } from "react-icons/fi";
 
 // First party components
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
+import ColourModeSwitcher from "components/ColourModeSwitcher";
 
 // Begin page
 export default function Options() {
-  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Stack direction="column" spacing={10}>
       <Stack direction="column" spacing={2} as="nav">
@@ -67,13 +66,7 @@ export default function Options() {
         <Text textStyle="secondary" as="h6">
           Session Preferences
         </Text>
-        <Button
-          leftIcon={<HiOutlineColorSwatch />}
-          onClick={toggleColorMode}
-          id="testing-colourSchemeToggle"
-        >
-          Toggle {colorMode === "light" ? "Dark" : "Light"} Mode
-        </Button>
+        <ColourModeSwitcher />
       </Stack>
     </Stack>
   );

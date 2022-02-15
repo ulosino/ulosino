@@ -2,6 +2,7 @@
 
 // This has the ULOSINO logo
 
+// Chakra UI, icons, and other design imports
 import { Icon } from "@chakra-ui/react";
 
 // Begin component
