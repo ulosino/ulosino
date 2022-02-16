@@ -19,6 +19,7 @@ import {
   IconButton,
   useBoolean,
   useColorModeValue,
+  LightMode,
 } from "@chakra-ui/react";
 
 // First-party components
@@ -27,7 +28,13 @@ import BackButton from "components/layouts/BackButton";
 import { HiOutlineMenu } from "react-icons/hi";
 
 // Begin wrapping component
-export default function Layout({ children }: { children: ReactElement }) {
+export default function Layout({
+  children,
+  isBasicLayout,
+}: {
+  children: ReactElement;
+  isBasicLayout: boolean;
+}) {
   const [backButton, setBackButton] = useBoolean();
   const [advancedSearch, setAdvancedSearch] = useBoolean();
   return (
@@ -70,37 +77,50 @@ export default function Layout({ children }: { children: ReactElement }) {
               <Logo />
             </Center>
           </Link>
-          <Center
-            display={{ base: "none", sm: "flex" }}
-            as="nav"
-            id="testing-headerLinks"
-          >
-            <Stack direction="row" spacing={2} mx={10}>
-              <Link href="/" passHref>
-                <Button variant="ghost" as="a">
-                  Home
-                </Button>
-              </Link>
-              {advancedSearch ? (
-                <Link href="/search" passHref>
-                  <Button variant="ghost" as="a" id="testing-headerSearchLink">
-                    Advanced Search
+          {isBasicLayout ? (
+            ""
+          ) : (
+            <Center
+              display={{ base: "none", sm: "flex" }}
+              as="nav"
+              id="testing-headerLinks"
+            >
+              <Stack direction="row" spacing={2} mx={10}>
+                <Link href="/" passHref>
+                  <Button variant="ghost" as="a">
+                    Home
                   </Button>
                 </Link>
-              ) : (
-                <Link href="/browse" passHref>
-                  <Button variant="ghost" as="a" id="testing-headerBrowseLink">
-                    Browse
+                {advancedSearch ? (
+                  <Link href="/search" passHref>
+                    <Button
+                      variant="ghost"
+                      as="a"
+                      id="testing-headerSearchLink"
+                    >
+                      Advanced Search
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href="/browse" passHref>
+                    <Button
+                      variant="ghost"
+                      as="a"
+                      id="testing-headerBrowseLink"
+                    >
+                      Browse
+                    </Button>
+                  </Link>
+                )}
+                <Link href="/about" passHref>
+                  <Button variant="ghost" as="a">
+                    About
                   </Button>
                 </Link>
-              )}
-              <Link href="/about" passHref>
-                <Button variant="ghost" as="a">
-                  About
-                </Button>
-              </Link>
-            </Stack>
-          </Center>
+              </Stack>
+            </Center>
+          )}
+
           <Spacer />
           <Center display={{ base: "flex", sm: "none" }}>
             <Link href="/options" passHref>
@@ -121,39 +141,41 @@ export default function Layout({ children }: { children: ReactElement }) {
       </Container>
       <Container maxW="container.lg" as="footer">
         <Flex mt={10} mb={5}>
-          <Stack
-            direction="row"
-            spacing={2}
-            display={{ base: "none", sm: "block" }}
-            id="testing-footerGeneralLinks"
-          >
-            <Link href="https://github.com/ulosino" passHref>
-              <Button variant="ghost" size="sm" as="a">
-                GitHub
-              </Button>
-            </Link>
-            <Link href="https://twitter.com/ulosino" passHref>
-              <Button variant="ghost" size="sm" as="a">
-                Twitter
-              </Button>
-            </Link>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={setBackButton.toggle}
-              id="testing-footerBackButtonDesktopSwitch"
+          {isBasicLayout ? (
+            ""
+          ) : (
+            <Stack
+              direction="row"
+              spacing={2}
+              display={{ base: "none", sm: "block" }}
+              id="testing-footerGeneralLinks"
             >
-              {backButton ? "Hide" : "Show"} Back
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={setAdvancedSearch.toggle}
-              id="testing-footerBrowseButtonSwitch"
-            >
-              Prefer {advancedSearch ? "Browse" : "Search"}
-            </Button>
-          </Stack>
+              <Link href="https://github.com/ulosino" passHref>
+                <Button variant="ghost" size="sm" as="a">
+                  GitHub
+                </Button>
+              </Link>
+              <Link href="https://twitter.com/ulosino" passHref>
+                <Button variant="ghost" size="sm" as="a">
+                  Twitter
+                </Button>
+              </Link>
+              <Button
+                size="sm"
+                onClick={setBackButton.toggle}
+                id="testing-footerBackButtonDesktopSwitch"
+              >
+                {backButton ? "Hide" : "Show"} Back
+              </Button>
+              <Button
+                size="sm"
+                onClick={setAdvancedSearch.toggle}
+                id="testing-footerBrowseButtonSwitch"
+              >
+                Prefer {advancedSearch ? "Browse" : "Search"}
+              </Button>
+            </Stack>
+          )}
           <Spacer />
           <Stack direction="row" spacing={2} id="testing-footerLegalLinks">
             <Link href="/licence" passHref>

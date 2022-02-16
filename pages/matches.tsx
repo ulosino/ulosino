@@ -21,7 +21,7 @@ import MatchesExperience from "components/matches/MatchesExperience";
 export default function Matches() {
   // Show web app installation banner
   useEffect(() => {
-    window.addEventListener("beforeinstallprompt", (e) => {
+    window.addEventListener("beforeinstallprompt", () => {
       toast({
         title: "Go offline with the ULOSINO web app",
         description: "Simply select 'Install ULOSINO' in your browser's menu.",
@@ -48,7 +48,7 @@ export default function Matches() {
 Matches.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>
+      <Layout isBasicLayout={false}>
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
     </ApplicationKit>

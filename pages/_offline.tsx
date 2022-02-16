@@ -20,7 +20,6 @@ export default function OfflineFallback() {
       <Text>
         Check your data and networking settings and then return to ULOSINO.
       </Text>
-      <Text fontSize="xs">There's no error code available.</Text>
     </Stack>
   );
 }
@@ -29,8 +28,8 @@ export default function OfflineFallback() {
 OfflineFallback.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>
-        <ErrorLayout>{page}</ErrorLayout>
+      <Layout isBasicLayout={false}>
+        <ErrorLayout is404={true}>{page}</ErrorLayout>
       </Layout>
     </ApplicationKit>
   );

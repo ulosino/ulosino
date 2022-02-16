@@ -16,7 +16,7 @@ import {
 } from "react-icons/hi";
 
 // Begin component
-export default function ErrorOptions() {
+export default function ErrorOptions({ is404 }: { is404: boolean }) {
   const router = useRouter();
   return (
     <Stack
@@ -33,9 +33,13 @@ export default function ErrorOptions() {
           Go Home
         </Button>
       </Link>
-      <Button leftIcon={<HiOutlineRefresh />} onClick={router.reload}>
-        Try Again
-      </Button>
+      {is404 ? (
+        <Button leftIcon={<HiOutlineRefresh />} onClick={router.reload}>
+          Try Again
+        </Button>
+      ) : (
+        ""
+      )}
     </Stack>
   );
 }

@@ -25,7 +25,7 @@ export default function Browse() {
 Browse.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>
+      <Layout isBasicLayout={false}>
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
     </ApplicationKit>

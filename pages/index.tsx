@@ -4,7 +4,7 @@
 import type { ReactElement } from "react";
 
 // Chakra UI, icons, and other design imports
-import { Stack, Heading, Text } from "@chakra-ui/react";
+import { Stack, Heading } from "@chakra-ui/react";
 
 // First party components
 import ApplicationKit from "components/ApplicationKit";
@@ -27,7 +27,7 @@ export default function Home() {
 Home.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>{page}</Layout>
+      <Layout isBasicLayout={false}>{page}</Layout>
     </ApplicationKit>
   );
 };

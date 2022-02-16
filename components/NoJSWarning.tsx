@@ -33,9 +33,7 @@ export function NoJSWarningHome() {
             title="Exclamation circle indicating an error"
           />
         </Center>
-        <Text>
-          Upgrade your browser or enable JavaScript to enable advanced features
-        </Text>
+        <Text>Upgrade your browser or enable JavaScript to use ULOSINO</Text>
       </Stack>
     </Card>
   );

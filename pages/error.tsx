@@ -21,7 +21,6 @@ export default function ErrorPage() {
       <Heading size="xl">Something went wrong</Heading>
       <Text>No further details are available.</Text>
       <Text>Go Home to make a search and discover something new.</Text>
-      <Text fontSize="xs">There's no error code available.</Text>
     </Stack>
   );
 }
@@ -30,8 +29,8 @@ export default function ErrorPage() {
 ErrorPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>
-        <ErrorLayout>{page}</ErrorLayout>
+      <Layout isBasicLayout={false}>
+        <ErrorLayout is404={true}>{page}</ErrorLayout>
       </Layout>
     </ApplicationKit>
   );

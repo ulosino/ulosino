@@ -13,6 +13,7 @@ import {
   HiOutlineDatabase,
   HiOutlineSearch,
   HiOutlineSparkles,
+  HiOutlineInformationCircle,
 } from "react-icons/hi";
 import { FiTwitter, FiGithub } from "react-icons/fi";
 
@@ -46,6 +47,11 @@ export default function Options() {
             ULOSINO Matches
           </Button>
         </Link>
+        <Link href="/about" passHref>
+          <Button as="a" leftIcon={<HiOutlineInformationCircle />}>
+            About ULOSINO
+          </Button>
+        </Link>
       </Stack>
       <Stack direction="column" spacing={2} as="nav">
         <Text textStyle="secondary" as="h6">
@@ -76,7 +82,7 @@ export default function Options() {
 Options.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>{page}</Layout>
+      <Layout isBasicLayout={true}>{page}</Layout>
     </ApplicationKit>
   );
 };

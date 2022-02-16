@@ -29,7 +29,7 @@ export default function AdvancedSearch() {
 AdvancedSearch.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>
+      <Layout isBasicLayout={false}>
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
     </ApplicationKit>

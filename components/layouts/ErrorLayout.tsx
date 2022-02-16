@@ -7,13 +7,45 @@ import type { ReactElement } from "react";
 
 // Chakra UI, icons, and other design imports
 import { Flex, Stack, Center, Box, Icon } from "@chakra-ui/react";
-import { HiExclamationCircle } from "react-icons/hi";
+import { HiExclamationCircle, HiQuestionMarkCircle } from "react-icons/hi";
 
 // First party components
 import ErrorOptions from "components/layouts/ErrorOptions";
 
+export function ErrorIcon({ is404 }: { is404: boolean }) {
+  return (
+    <>
+      {is404 ? (
+        <Icon
+          as={HiExclamationCircle}
+          w={16}
+          h={16}
+          aria-label="Exclamation circle indicating an error"
+          title="Exclamation circle indicating an error"
+          id="testing-errorPageIcon"
+        />
+      ) : (
+        <Icon
+          as={HiQuestionMarkCircle}
+          w={16}
+          h={16}
+          aria-label="Question mark circle indicating an error"
+          title="Question mark circle indicating an error"
+          id="testing-errorPageIcon"
+        />
+      )}
+    </>
+  );
+}
+
 // Begin wrapping component
-export default function ErrorLayout({ children }: { children: ReactElement }) {
+export default function ErrorLayout({
+  children,
+  is404,
+}: {
+  children: ReactElement;
+  is404: boolean;
+}) {
   return (
     <Flex direction={{ base: "column", md: "row" }}>
       <Stack
@@ -24,16 +56,9 @@ export default function ErrorLayout({ children }: { children: ReactElement }) {
         display={{ base: "none", md: "flex" }}
       >
         <Center>
-          <Icon
-            as={HiExclamationCircle}
-            w={16}
-            h={16}
-            aria-label="Exclamation circle indicating an error"
-            title="Exclamation circle indicating an error"
-            id="testing-errorPageIcon"
-          />
+          <ErrorIcon is404={is404} />
         </Center>
-        <ErrorOptions />
+        <ErrorOptions is404={is404} />
       </Stack>
       <Stack flex={1} spacing={10} as="main">
         {children}
@@ -41,7 +66,7 @@ export default function ErrorLayout({ children }: { children: ReactElement }) {
           display={{ base: "block", md: "none" }}
           id="testing-errorPageActionsMobilePlacement"
         >
-          <ErrorOptions />
+          <ErrorOptions is404={is404} />
         </Box>
       </Stack>
     </Flex>

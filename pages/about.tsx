@@ -24,7 +24,7 @@ export default function About() {
 About.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout>{page}</Layout>
+      <Layout isBasicLayout={false}>{page}</Layout>
     </ApplicationKit>
   );
 };
