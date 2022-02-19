@@ -1,6 +1,8 @@
-// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // This is the Matches interface, supplying the switches and result cards
+// Forked from the ulosino/matches repository at version 1.1.0
 
 // Dynamic loading
 import dynamic from "next/dynamic";

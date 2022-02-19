@@ -1,8 +1,8 @@
-// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 describe("Error Page Display Testing", () => {
   it("Should test that the error page layout displays correctly across different devices", () => {
-    cy.visit("/");
     cy.visit("/error");
 
     // Test exclamation icon visibility on desktop

@@ -1,4 +1,5 @@
-// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
 
@@ -20,7 +21,7 @@ export default class Document extends NextDocument {
           <meta name="saashub-verification" content="t23yhfcmm06a" />
 
           {/* PWA configuration and icon import */}
-          <link rel="manifest" href="manifest.json" />
+          <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#001e38" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta

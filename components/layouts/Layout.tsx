@@ -1,4 +1,5 @@
-// This Source Code Form is subject to the terms of the Mozilla Public License 2.0, available at http://mozilla.org/MPL/2.0/
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // The main layout implements the header and footer. It's opt-in by page
 
@@ -178,13 +179,13 @@ export default function Layout({
           )}
           <Spacer />
           <Stack direction="row" spacing={2} id="testing-footerLegalLinks">
-            <Link href="/licence" passHref>
-              <Button variant="ghost" size="sm" isDisabled>
-                Licence
+            <Link href="/license" passHref>
+              <Button variant="ghost" size="sm" as="a" id="testing-licenseLink">
+                License
               </Button>
             </Link>
             <Link href="/privacy" passHref>
-              <Button variant="ghost" size="sm" isDisabled>
+              <Button variant="ghost" size="sm" as="a">
                 Privacy
               </Button>
             </Link>
