@@ -5,6 +5,9 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Head and SEO
+import Head from "next/head";
+
 // First party components
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
@@ -29,9 +32,24 @@ export default function LegalMarkdownPage({
   componentOverrides,
 }: OSPageTypes) {
   return (
-    <MDXProvider>
-      <MDXRemote {...source} components={componentOverrides} />
-    </MDXProvider>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; {source.frontmatter.name}</title>
+        <meta
+          property="og:title"
+          content="{source.frontmatter.name} on ULOSINO"
+        />
+        <meta name="description" content="{source.frontmatter.summary}." />
+        <meta
+          property="og:description"
+          content="{source.frontmatter.summary}."
+        />
+      </Head>
+
+      <MDXProvider>
+        <MDXRemote {...source} components={componentOverrides} />
+      </MDXProvider>
+    </>
   );
 }
 

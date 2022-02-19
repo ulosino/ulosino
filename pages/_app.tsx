@@ -20,6 +20,9 @@ import "@fontsource/public-sans/variable.css";
 import "@fontsource/public-sans/400.css";
 import "@fontsource/public-sans/600.css";
 
+// Import Splitbee scripts
+import splitbee from "@splitbee/web";
+
 // Providers are imported by the Application Kit component
 
 // Begin application
@@ -34,6 +37,14 @@ export default function Application({
       e.preventDefault();
     });
   });
+  // Initilise Splitbee analytics tracking
+  useEffect(() => {
+    splitbee.init({
+      disableCookie: true,
+      scriptUrl: "/tree.js",
+      apiUrl: "/_oak",
+    });
+  }, []);
   const getLayout = Component.getLayout ?? ((page) => page);
   return getLayout(<Component {...pageProps} />);
 }

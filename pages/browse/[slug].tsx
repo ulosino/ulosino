@@ -5,6 +5,9 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Head and SEO
+import Head from "next/head";
+
 // Links and routing
 import Link from "next/link";
 
@@ -51,6 +54,25 @@ export default function OSPage({
 }: OSPageTypes) {
   return (
     <>
+      <Head>
+        <title>
+          ULOSINO &mdash; {source.frontmatter.name}: '
+          {source.frontmatter.summary}''
+        </title>
+        <meta
+          property="og:title"
+          content="{source.frontmatter.name} on ULOSINO"
+        />
+        <meta
+          name="description"
+          content="Discover {source.frontmatter.name} on ULOSINO. Learn and lift off with a through description and explore ULOSINO's vast collection of metadata."
+        />
+        <meta
+          property="og:description"
+          content="Discover {source.frontmatter.name} on ULOSINO."
+        />
+      </Head>
+
       <Stack direction="column" spacing={5}>
         <Heading size="xl">{source.frontmatter.name}</Heading>
         <Stack direction={{ base: "column", md: "row" }} spacing={10}>
@@ -61,7 +83,11 @@ export default function OSPage({
             <Stack direction="column" spacing={2}>
               {(source.frontmatter.donate && (
                 <Link href={donationPath} passHref>
-                  <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                  <Button
+                    leftIcon={<HiOutlineCreditCard />}
+                    as="a"
+                    id="testing-donationPageLink"
+                  >
                     Donate{" "}
                     <Badge ms={2} bg="brand" color="gray.800" pt={1}>
                       Tempo
@@ -215,14 +241,6 @@ export const getStaticProps: GetStaticProps<{
     `https://github.com/ulosino/ulosino/blob/main/public/markdown/browse`,
     `${params.slug}.mdx`
   );
-
-  // Use the OS path to return a image
-  // This concept doesn't work due to (1) use of both PNG and JPEG files and (2) general failure
-  // const OSPageImagePath = path.join(
-  //   process.cwd(),
-  //   `public/images/`,
-  //   `${params.slug}.png`
-  // );
 
   return {
     props: {

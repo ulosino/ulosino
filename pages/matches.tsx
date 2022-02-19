@@ -4,6 +4,9 @@
 // Types
 import type { ReactElement } from "react";
 
+// Head and SEO
+import Head from "next/head";
+
 // Chakra UI, icons, and other design imports
 import { Stack, Heading, Text } from "@chakra-ui/react";
 
@@ -17,14 +20,31 @@ import MatchesExperience from "components/matches/MatchesExperience";
 // Begin page
 export default function Matches() {
   return (
-    <Stack direction="column" spacing={5}>
-      <Heading size="xl">ULOSINO Matches</Heading>
-      <noscript>
-        <NoJSWarningFeaturesDisabled />
-      </noscript>
-      <Text>Find an OS that matches your preferences, quickly and easily.</Text>
-      <MatchesExperience />
-    </Stack>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; ULOSINO Matches</title>
+        <meta property="og:title" content="ULOSINO Matches" />
+        <meta
+          name="description"
+          content="Find an open source operating system that matches your preferences with ULOSINO Matches."
+        />
+        <meta
+          property="og:description"
+          content="Find an open source OS that matches your preferences with ULOSINO Matches."
+        />
+      </Head>
+
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">ULOSINO Matches</Heading>
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
+        <Text>
+          Find an OS that matches your preferences, quickly and easily.
+        </Text>
+        <MatchesExperience />
+      </Stack>
+    </>
   );
 }
 

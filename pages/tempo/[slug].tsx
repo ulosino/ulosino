@@ -5,7 +5,8 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
-import { useEffect } from "react";
+// Head and SEO
+import Head from "next/head";
 
 // Links and routing
 import Link from "next/link";
@@ -15,11 +16,13 @@ import {
   Flex,
   Stack,
   Center,
+  Box,
   Heading,
   Text,
   Icon,
   Button,
   Badge,
+  useStyleConfig,
   createStandaloneToast,
 } from "@chakra-ui/react";
 import {
@@ -28,6 +31,17 @@ import {
   HiOutlineChevronLeft,
   HiOutlineGlobe,
 } from "react-icons/hi";
+function Card(props: { [x: string]: any; variant: string; children: any }) {
+  const { variant, children, ...rest } = props;
+
+  const styles = useStyleConfig("Card", { variant });
+
+  return (
+    <Box __css={styles} {...rest}>
+      {children}
+    </Box>
+  );
+}
 import UITheme from "providers/UIThemeProvider";
 const toast = createStandaloneToast({ theme: UITheme });
 
@@ -40,6 +54,8 @@ import fs from "fs";
 import path from "path";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+
+import { useEffect } from "react";
 
 interface OSPageTypes {
   source: any;
@@ -62,114 +78,139 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
     });
   });
   return (
-    <Flex direction={{ base: "column", md: "row" }}>
-      <Stack
-        direction="column"
-        spacing={10}
-        mb={10}
-        me={10}
-        display={{ base: "none", md: "flex" }}
-      >
-        <Center>
-          <Icon
-            as={HiCreditCard}
-            w={16}
-            h={16}
-            aria-label="Payment card icon indicating payment options"
-            title="Payment card"
-          />
-        </Center>
-        <Link href={descriptionPath} passHref>
-          <Button leftIcon={<HiOutlineChevronLeft />} as="a">
-            Back to {source.frontmatter.name}
-          </Button>
-        </Link>
-      </Stack>
-      <Stack direction="column" spacing={10} flex={1}>
-        <Stack direction="column" spacing={5}>
-          <Heading size="xl">Donate to {source.frontmatter.name}</Heading>
-          {(source.frontmatter.donate && (
-            <>
-              <Badge variant="tempo" w={210}>
-                Powered by ULOSINO Tempo
-              </Badge>
-              <Stack direction="column" spacing={2}>
-                <Text as="h6" textStyle="secondary">
-                  Make a Donation
-                </Text>
-                {source.frontmatter.donate && (
-                  <Link href={source.frontmatter.donate} passHref>
-                    <Button leftIcon={<HiOutlineCreditCard />} as="a">
+    <>
+      <Head>
+        <title>
+          ULOSINO &mdash; Donate to {source.frontmatter.name} on ULOSINO Tempo
+        </title>
+        <meta
+          property="og:title"
+          content="Donate to {source.frontmatter.name} on ULOSINO Tempo"
+        />
+        <meta
+          name="description"
+          content="Quickly donate to {source.frontmatter.name} with ULOSINO Tempo donation options."
+        />
+        <meta
+          property="og:description"
+          content="Donate to {source.frontmatter.name} with ULOSINO Tempo donation options."
+        />
+      </Head>
+
+      <Flex direction={{ base: "column", md: "row" }}>
+        <Stack
+          direction="column"
+          spacing={10}
+          mb={10}
+          me={10}
+          display={{ base: "none", md: "flex" }}
+        >
+          <Center>
+            <Icon
+              as={HiCreditCard}
+              w={16}
+              h={16}
+              aria-label="Payment card icon indicating payment options"
+              title="Payment card"
+            />
+          </Center>
+          <Link href={descriptionPath} passHref>
+            <Button leftIcon={<HiOutlineChevronLeft />} as="a">
+              Back to {source.frontmatter.name}
+            </Button>
+          </Link>
+        </Stack>
+        <Stack direction="column" spacing={10} flex={1}>
+          <Stack direction="column" spacing={5}>
+            <Heading size="xl">Donate to {source.frontmatter.name}</Heading>
+            {(source.frontmatter.donate && (
+              <>
+                <Badge variant="tempo" w={210}>
+                  Powered by ULOSINO Tempo
+                </Badge>
+                <Stack direction="column" spacing={2}>
+                  <Text as="h6" textStyle="secondary">
+                    Make a Donation
+                  </Text>
+                  {source.frontmatter.donate && (
+                    <Link href={source.frontmatter.donate} passHref>
+                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                        Visit Project Website
+                      </Button>
+                    </Link>
+                  )}
+                </Stack>
+                <Stack direction="column" spacing={2}>
+                  <Text as="h6" textStyle="secondary">
+                    Quick Donation Options
+                  </Text>
+                  {(source.frontmatter.donateOpenCollective && (
+                    <Link
+                      href={source.frontmatter.donateOpenCollective}
+                      passHref
+                    >
+                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                        Donate with Open Collective
+                      </Button>
+                    </Link>
+                  )) ?? (
+                    <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                      Donate with Open Collective
+                    </Button>
+                  )}
+                  {(source.frontmatter.donateLiberapay && (
+                    <Link href={source.frontmatter.donateLiberapay} passHref>
+                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                        Donate with Liberapay
+                      </Button>
+                    </Link>
+                  )) ?? (
+                    <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                      Donate with Liberapay
+                    </Button>
+                  )}
+                  {(source.frontmatter.donateGithub && (
+                    <Link href={source.frontmatter.donateGithub} passHref>
+                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                        Donate with GitHub Sponsors
+                      </Button>
+                    </Link>
+                  )) ?? (
+                    <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                      Donate with GitHub Sponsors
+                    </Button>
+                  )}
+                </Stack>
+              </>
+            )) ?? (
+              <Card variant="solid">
+                <Stack direction="column" spacing={5}>
+                  <Text>
+                    ULOSINO Tempo isn't available for {source.frontmatter.name}.
+                  </Text>
+                  <Link href={source.frontmatter.website} passHref>
+                    <Button leftIcon={<HiOutlineGlobe />} as="a">
                       Visit Project Website
                     </Button>
                   </Link>
-                )}
-              </Stack>
-              <Stack direction="column" spacing={2}>
-                <Text as="h6" textStyle="secondary">
-                  Quick Donation Options
-                </Text>
-                {(source.frontmatter.donateOpenCollective && (
-                  <Link href={source.frontmatter.donateOpenCollective} passHref>
-                    <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                      Donate with Open Collective
-                    </Button>
-                  </Link>
-                )) ?? (
-                  <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                    Donate with Open Collective
-                  </Button>
-                )}
-                {(source.frontmatter.donateLiberapay && (
-                  <Link href={source.frontmatter.donateLiberapay} passHref>
-                    <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                      Donate with Liberapay
-                    </Button>
-                  </Link>
-                )) ?? (
-                  <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                    Donate with Liberapay
-                  </Button>
-                )}
-                {(source.frontmatter.donateGithub && (
-                  <Link href={source.frontmatter.donateGithub} passHref>
-                    <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                      Donate with GitHub Sponsors
-                    </Button>
-                  </Link>
-                )) ?? (
-                  <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                    Donate with GitHub Sponsors
-                  </Button>
-                )}
-              </Stack>
-            </>
-          )) ?? (
-            <>
-              <Text>
-                ULOSINO Tempo isn't available for {source.frontmatter.name}.
-              </Text>
-              <Link href={source.frontmatter.website} passHref>
-                <Button leftIcon={<HiOutlineGlobe />} as="a">
-                  Visit Project Website
-                </Button>
-              </Link>
-            </>
-          )}
+                </Stack>
+              </Card>
+            )}
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <Text fontWeight="bold" fontSize="xs">
+              Warning:
+            </Text>
+            <Text fontSize="xs">
+              ULOSINO Tempo features link to financial services not provided by
+              ULOSINO. Tender currency to third-parties at your own risk.
+              General advice only. ULOSINO doesn't receive commission from
+              third-party financial services.
+            </Text>
+          </Stack>
         </Stack>
-        <Stack direction="row" spacing={2}>
-          <Text fontWeight="bold" fontSize="xs">
-            Warning:
-          </Text>
-          <Text fontSize="xs">
-            ULOSINO Tempo features link to financial services not provided by
-            ULOSINO. Tender currency to third-parties at your own risk. General
-            advice only. ULOSINO doesn't receive commission from third-party
-            financial services.
-          </Text>
-        </Stack>
-      </Stack>
-    </Flex>
+      </Flex>
+    </>
   );
 }
 

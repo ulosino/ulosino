@@ -21,7 +21,7 @@ export default function BackButton() {
       onClick={() => router.back()}
       icon={<HiOutlineChevronLeft />}
       variant="ghost"
-      me={4}
+      me={5}
     />
   );
 }

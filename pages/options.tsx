@@ -4,6 +4,9 @@
 // Types
 import type { ReactElement } from "react";
 
+// Head and SEO
+import Head from "next/head";
+
 // Links and routing
 import Link from "next/link";
 
@@ -26,56 +29,71 @@ import ColourModeSwitcher from "components/ColourModeSwitcher";
 // Begin page
 export default function Options() {
   return (
-    <Stack direction="column" spacing={10}>
-      <Stack direction="column" spacing={2} as="nav">
-        <Link href="/" passHref>
-          <Button as="a" leftIcon={<HiOutlineHome />}>
-            Home
-          </Button>
-        </Link>
-        <Link href="/browse" passHref>
-          <Button as="a" leftIcon={<HiOutlineDatabase />}>
-            OS List &amp; Tempo
-          </Button>
-        </Link>
-        <Link href="/search" passHref>
-          <Button as="a" leftIcon={<HiOutlineSearch />}>
-            Advanced Search
-          </Button>
-        </Link>
-        <Link href="/matches" passHref>
-          <Button as="a" leftIcon={<HiOutlineSparkles />}>
-            ULOSINO Matches
-          </Button>
-        </Link>
-        <Link href="/about" passHref>
-          <Button as="a" leftIcon={<HiOutlineInformationCircle />}>
-            About ULOSINO
-          </Button>
-        </Link>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; Options</title>
+        <meta property="og:title" content="ULOSINO Options" />
+        <meta
+          name="description"
+          content="Navigate ULOSINO and set app preferences."
+        />
+        <meta
+          property="og:description"
+          content="Navigate ULOSINO and set app preferences."
+        />
+      </Head>
+
+      <Stack direction="column" spacing={10}>
+        <Stack direction="column" spacing={2} as="nav">
+          <Link href="/" passHref>
+            <Button as="a" leftIcon={<HiOutlineHome />}>
+              Home
+            </Button>
+          </Link>
+          <Link href="/browse" passHref>
+            <Button as="a" leftIcon={<HiOutlineDatabase />}>
+              OS List &amp; Tempo
+            </Button>
+          </Link>
+          <Link href="/search" passHref>
+            <Button as="a" leftIcon={<HiOutlineSearch />}>
+              Advanced Search
+            </Button>
+          </Link>
+          <Link href="/matches" passHref>
+            <Button as="a" leftIcon={<HiOutlineSparkles />}>
+              ULOSINO Matches
+            </Button>
+          </Link>
+          <Link href="/about" passHref>
+            <Button as="a" leftIcon={<HiOutlineInformationCircle />}>
+              About ULOSINO
+            </Button>
+          </Link>
+        </Stack>
+        <Stack direction="column" spacing={2} as="nav">
+          <Text textStyle="secondary" as="h6">
+            Connect and Contribute
+          </Text>
+          <Link href="https://twitter.com/ulosino" passHref>
+            <Button as="a" leftIcon={<FiTwitter />}>
+              Twitter
+            </Button>
+          </Link>
+          <Link href="https://github.com/ulosino" passHref>
+            <Button as="a" leftIcon={<FiGithub />}>
+              GitHub &amp; Source
+            </Button>
+          </Link>
+        </Stack>
+        <Stack direction="column" spacing={2} as="nav">
+          <Text textStyle="secondary" as="h6">
+            Session Preferences
+          </Text>
+          <ColourModeSwitcher />
+        </Stack>
       </Stack>
-      <Stack direction="column" spacing={2} as="nav">
-        <Text textStyle="secondary" as="h6">
-          Connect and Contribute
-        </Text>
-        <Link href="https://twitter.com/ulosino" passHref>
-          <Button as="a" leftIcon={<FiTwitter />}>
-            Twitter
-          </Button>
-        </Link>
-        <Link href="https://github.com/ulosino" passHref>
-          <Button as="a" leftIcon={<FiGithub />}>
-            GitHub &amp; Source
-          </Button>
-        </Link>
-      </Stack>
-      <Stack direction="column" spacing={2} as="nav">
-        <Text textStyle="secondary" as="h6">
-          Session Preferences
-        </Text>
-        <ColourModeSwitcher />
-      </Stack>
-    </Stack>
+    </>
   );
 }
 

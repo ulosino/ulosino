@@ -4,6 +4,9 @@
 // Types
 import type { ReactElement } from "react";
 
+// Head and SEO
+import Head from "next/head";
+
 // Chakra UI, icons, and other design imports
 import { Stack, Heading, Text } from "@chakra-ui/react";
 
@@ -16,13 +19,28 @@ import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 // Begin page
 export default function AdvancedSearch() {
   return (
-    <Stack direction="column" spacing={5}>
-      <Heading size="xl">Advanced Search</Heading>
-      <noscript>
-        <NoJSWarningFeaturesDisabled />
-      </noscript>
-      <Text>Take a search.</Text>
-    </Stack>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; Advanced Search</title>
+        <meta property="og:title" content="ULOSINO Advanced Search" />
+        <meta
+          name="description"
+          content="Search across the broad ULOSINO database across our collection of metadata."
+        />
+        <meta
+          property="og:description"
+          content="Search across the broad ULOSINO database across our collection of metadata."
+        />
+      </Head>
+
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">Advanced Search</Heading>
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
+        <Text>Take a search.</Text>
+      </Stack>
+    </>
   );
 }
 

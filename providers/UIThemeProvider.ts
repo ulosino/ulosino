@@ -28,7 +28,7 @@ export const Button = {
 
 export const Card = {
   baseStyle: {
-    padding: 4,
+    padding: 5,
     borderRadius: "xl",
     shadow: "md",
   },
@@ -56,11 +56,6 @@ export const Card = {
       bg: "secondary",
       color: "inherit",
     },
-    alert: ({ colorMode }: { colorMode: string }) => ({
-      bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
-      color: "inherit",
-      padding: 8,
-    }),
   },
   defaultProps: {
     variant: "solid",
@@ -68,7 +63,7 @@ export const Card = {
 };
 
 const Badge = {
-  baseStyle: { px: 4, pt: "0.5", h: "20px", shadow: "md" },
+  baseStyle: { px: 5, pt: "0.5", h: "20px", shadow: "md" },
   sizes: {
     sm: {
       fontSize: "xs",
@@ -107,18 +102,11 @@ export const Tabs = {
   },
 };
 
-// export const Tab = {
-//   defaultProps: {
-//     shadow: "inner",
-//     color: "white",
-//   },
-// };
-
 export const TabPanel = {
   defaultProps: {
     px: 0,
     pb: 0,
-    pt: 4,
+    pt: 5,
   },
 };
 

@@ -12,10 +12,6 @@ const securityHeaders = [
     value: "nosniff",
   },
   {
-    key: "Referrer-Policy",
-    value: "no-referrer",
-  },
-  {
     key: "Content-Security-Policy",
     value:
       "script-src 'self' 'unsafe-eval' 'unsafe-inline' ulosino.com *.ulosino.com *.vercel.app",
@@ -34,16 +30,29 @@ module.exports = withPWA({
   },
   // Configuration for Next.js
   reactStrictMode: true,
-  swcMinify: true,
   pageExtensions: ["tsx"],
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // Import HTTP headers
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+    ];
+  },
+  // Proxy Splitbee analytics tracking scripts
+  async rewrites() {
+    return [
+      {
+        source: "/tree.js",
+        destination: "https://cdn.splitbee.io/sb.js",
+      },
+      {
+        source: "/_oak/:slug",
+        destination: "https://hive.splitbee.io/:slug",
       },
     ];
   },

@@ -4,6 +4,9 @@
 // Types
 import type { ReactElement } from "react";
 
+// Head and SEO
+import Head from "next/head";
+
 // Chakra UI, icons, and other design imports
 import { Stack, Heading, Text } from "@chakra-ui/react";
 
@@ -14,10 +17,22 @@ import Layout from "components/layouts/Layout";
 // Begin page
 export default function About() {
   return (
-    <Stack direction="column" spacing={5}>
-      <Heading size="xl">About</Heading>
-      <Text>To complete</Text>
-    </Stack>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; About ULOSINO</title>
+        <meta property="og:title" content="About the ULOSINO Project" />
+        <meta name="description" content="Learn about the ULOSINO project." />
+        <meta
+          property="og:description"
+          content="Learn about the ULOSINO project."
+        />
+      </Head>
+
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">About</Heading>
+        <Text>To complete</Text>
+      </Stack>
+    </>
   );
 }
 

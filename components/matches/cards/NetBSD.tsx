@@ -5,8 +5,7 @@
 import Link from "next/link";
 
 // Chakra UI, icons, and other design imports
-import { Heading, Text, Box } from "@chakra-ui/react";
-import { useStyleConfig } from "@chakra-ui/react";
+import { Heading, Text, Box, useStyleConfig } from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
 

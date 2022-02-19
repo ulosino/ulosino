@@ -4,6 +4,9 @@
 // Types
 import type { ReactElement } from "react";
 
+// Head and SEO
+import Head from "next/head";
+
 // Chakra UI, icons, and other design imports
 import { Stack, Heading, Text, Code } from "@chakra-ui/react";
 
@@ -15,20 +18,29 @@ import ErrorLayout from "components/layouts/ErrorLayout";
 // Begin page
 export default function Custom500() {
   return (
-    <Stack direction="column" spacing={5}>
-      <Heading size="xl">Something went wrong</Heading>
-      <Text>
-        It appears that the server is experiencing problems. No further details
-        are available.
-      </Text>
-      <Text>Try again later as the issue is likely temporary.</Text>
-      <Text fontSize="xs">
-        You can look up this error code:{" "}
-        <Code ms={1} fontSize="xs">
-          HTTP 500
-        </Code>
-      </Text>
-    </Stack>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; 500</title>
+        <meta property="og:title" content="ULOSINO &mdash; 500" />
+        <meta name="description" content="Internal Server Error." />
+        <meta property="og:description" content="Internal Server Error." />
+      </Head>
+
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">Something went wrong</Heading>
+        <Text>
+          It appears that the server is experiencing problems. No further
+          details are available.
+        </Text>
+        <Text>Try again later as the issue is likely temporary.</Text>
+        <Text fontSize="xs">
+          You can look up this error code:{" "}
+          <Code ms={1} fontSize="xs">
+            HTTP 500
+          </Code>
+        </Text>
+      </Stack>
+    </>
   );
 }
 

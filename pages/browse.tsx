@@ -4,6 +4,9 @@
 // Types
 import type { ReactElement } from "react";
 
+// Head and SEO
+import Head from "next/head";
+
 // Chakra UI, icons, and other design imports
 import { Stack, Heading, Text } from "@chakra-ui/react";
 
@@ -15,10 +18,25 @@ import BrowseLayout from "components/layouts/BrowseLayout";
 // Begin page
 export default function Browse() {
   return (
-    <Stack direction="column" spacing={5}>
-      <Heading size="xl">Operating System List</Heading>
-      <Text>Test</Text>
-    </Stack>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; Operating System List &amp; Tempo</title>
+        <meta property="og:title" content="ULOSINO Operating System List" />
+        <meta
+          name="description"
+          content="Browse the full ULOSINO operating system list."
+        />
+        <meta
+          property="og:description"
+          content="Browse the full ULOSINO operating system list."
+        />
+      </Head>
+
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">Operating System List</Heading>
+        <Text>Test</Text>
+      </Stack>
+    </>
   );
 }
 
