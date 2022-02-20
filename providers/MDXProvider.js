@@ -14,7 +14,7 @@ import { Heading, Text, Divider } from "@chakra-ui/react";
 const componentOverrides = {
   h1: (props) => <Heading size="xl" mb={5} {...props} />,
   h2: (props) => <Heading size="md" mb={2} {...props} />,
-  h3: (props) => <Text textStyle="secondary" as="h6" {...props} />,
+  h3: (props) => <Text textStyle="miniHeading" as="h6" {...props} />,
   p: (props) => <Text {...props} my={2} />,
   hr: (props) => <Divider {...props} my={5} />,
 };

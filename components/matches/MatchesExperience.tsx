@@ -136,7 +136,7 @@ export default function MatchesExperience() {
     <Stack direction="column" spacing={10}>
       {/* Preferences switching area */}
       <Stack direction="column" spacing={4}>
-        <Text textStyle="secondary" as="h6">
+        <Text textStyle="miniHeading" as="h6">
           Find your Match
         </Text>
         {/* Linux/BSD */}
@@ -281,7 +281,7 @@ export default function MatchesExperience() {
       {/* Result console */}
       <Card variant="solid">
         <Stack direction="column" spacing={2}>
-          <Text textStyle="secondary" as="h6">
+          <Text textStyle="miniHeading" as="h6">
             Found Matches
           </Text>
           {linux ? (

@@ -11,11 +11,22 @@ import type { ReactElement } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import UITheme from "providers/UIThemeProvider";
 
+// Keyboard shortcut libraries
+import {
+  KeybindingProvider,
+  KeybindingManager,
+} from "providers/keybindings/index";
+const manager = new KeybindingManager();
+
 // Begin wrapping component
 export default function ApplicationKit({
   children,
 }: {
   children: ReactElement;
 }) {
-  return <ChakraProvider theme={UITheme}>{children}</ChakraProvider>;
+  return (
+    <ChakraProvider theme={UITheme}>
+      <KeybindingProvider manager={manager}>{children}</KeybindingProvider>
+    </ChakraProvider>
+  );
 }

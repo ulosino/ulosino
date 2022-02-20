@@ -57,7 +57,9 @@ export default function LegalMarkdownPage({
 LegalMarkdownPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout isBasicLayout={false}>{page}</Layout>
+      <Layout useBasicLayout={false} showPreferences={false}>
+        {page}
+      </Layout>
     </ApplicationKit>
   );
 };

@@ -8,6 +8,7 @@ import type { ReactElement } from "react";
 
 // Links and routing
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 // Chakra UI, icons, and other design imports
 import {
@@ -19,8 +20,8 @@ import {
   Button,
   IconButton,
   useBoolean,
+  useColorMode,
   useColorModeValue,
-  LightMode,
 } from "@chakra-ui/react";
 
 // First-party components
@@ -28,16 +29,94 @@ import Logo from "components/Logo";
 import BackButton from "components/layouts/BackButton";
 import { HiOutlineMenu } from "react-icons/hi";
 
+import { useEffect } from "react";
+import { useHotkeyManager } from "providers/keybindings/index";
+
 // Begin wrapping component
 export default function Layout({
   children,
-  isBasicLayout,
+  useBasicLayout,
+  showPreferences,
 }: {
   children: ReactElement;
-  isBasicLayout: boolean;
+  useBasicLayout: boolean;
+  showPreferences: boolean;
 }) {
+  // Global preferences
   const [backButton, setBackButton] = useBoolean();
   const [advancedSearch, setAdvancedSearch] = useBoolean();
+
+  // Global keybindings
+  const manager = useHotkeyManager();
+  const router = useRouter();
+  const { toggleColorMode } = useColorMode();
+  // Navigation keybindings
+  useEffect(
+    manager.registerHotkey({
+      key: "M",
+      ctrl: true,
+      shift: false,
+      callback: () => router.push("/options"),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "S",
+      ctrl: true,
+      shift: false,
+      callback: () => router.push("/search"),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "N",
+      ctrl: true,
+      shift: false,
+      callback: () => window.open("/", "_blank"),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "N",
+      ctrl: true,
+      shift: false,
+      alt: true,
+      callback: () => window.open("/search", "_blank"),
+    }),
+    []
+  );
+  // Preference switching keybindings
+  useEffect(
+    manager.registerHotkey({
+      key: "C",
+      ctrl: true,
+      shift: false,
+      callback: () => toggleColorMode(),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "S",
+      ctrl: true,
+      shift: true,
+      callback: () => setAdvancedSearch.toggle(),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "B",
+      ctrl: true,
+      shift: true,
+      callback: () => setBackButton.toggle(),
+    }),
+    []
+  );
+
   return (
     <Flex
       display="flex"
@@ -78,7 +157,7 @@ export default function Layout({
               <Logo />
             </Center>
           </Link>
-          {isBasicLayout ? (
+          {useBasicLayout ? (
             ""
           ) : (
             <Center
@@ -142,41 +221,55 @@ export default function Layout({
       </Container>
       <Container maxW="container.lg" as="footer">
         <Flex mt={10} mb={5}>
-          {isBasicLayout ? (
-            ""
-          ) : (
-            <Stack
-              direction="row"
-              spacing={2}
-              display={{ base: "none", sm: "block" }}
-              id="testing-footerGeneralLinks"
-            >
-              <Link href="https://github.com/ulosino" passHref>
-                <Button variant="ghost" size="sm" as="a">
-                  GitHub
+          <Stack
+            direction="row"
+            spacing={2}
+            display={{ base: "none", sm: "block" }}
+            id="testing-footerGeneralLinks"
+          >
+            {useBasicLayout ? (
+              ""
+            ) : (
+              <>
+                <Link href="https://github.com/ulosino" passHref>
+                  <Button variant="ghost" size="sm" as="a">
+                    GitHub
+                  </Button>
+                </Link>
+                <Link href="https://twitter.com/ulosino" passHref>
+                  <Button variant="ghost" size="sm" as="a">
+                    Twitter
+                  </Button>
+                </Link>
+                <Link href="/keybindings" passHref>
+                  <Button variant="ghost" size="sm" as="a">
+                    Keyboard Shortcuts
+                  </Button>
+                </Link>
+              </>
+            )}
+            {showPreferences ? (
+              <>
+                {/* These are shown on the Options page only */}
+                <Button
+                  size="sm"
+                  onClick={setBackButton.toggle}
+                  id="testing-footerBackButtonDesktopSwitch"
+                >
+                  {backButton ? "Hide" : "Show"} Back
                 </Button>
-              </Link>
-              <Link href="https://twitter.com/ulosino" passHref>
-                <Button variant="ghost" size="sm" as="a">
-                  Twitter
+                <Button
+                  size="sm"
+                  onClick={setAdvancedSearch.toggle}
+                  id="testing-footerBrowseButtonSwitch"
+                >
+                  Prefer {advancedSearch ? "Browse" : "Search"}
                 </Button>
-              </Link>
-              <Button
-                size="sm"
-                onClick={setBackButton.toggle}
-                id="testing-footerBackButtonDesktopSwitch"
-              >
-                {backButton ? "Hide" : "Show"} Back
-              </Button>
-              <Button
-                size="sm"
-                onClick={setAdvancedSearch.toggle}
-                id="testing-footerBrowseButtonSwitch"
-              >
-                Prefer {advancedSearch ? "Browse" : "Search"}
-              </Button>
-            </Stack>
-          )}
+              </>
+            ) : (
+              ""
+            )}
+          </Stack>
           <Spacer />
           <Stack direction="row" spacing={2} id="testing-footerLegalLinks">
             <Link href="/license" passHref>

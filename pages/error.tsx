@@ -42,7 +42,7 @@ export default function ErrorPage() {
 ErrorPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout isBasicLayout={false}>
+      <Layout useBasicLayout={false} showPreferences={false}>
         <ErrorLayout is404={true}>{page}</ErrorLayout>
       </Layout>
     </ApplicationKit>

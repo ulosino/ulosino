@@ -72,7 +72,7 @@ export default function Options() {
           </Link>
         </Stack>
         <Stack direction="column" spacing={2} as="nav">
-          <Text textStyle="secondary" as="h6">
+          <Text textStyle="miniHeading" as="h6">
             Connect and Contribute
           </Text>
           <Link href="https://twitter.com/ulosino" passHref>
@@ -87,7 +87,7 @@ export default function Options() {
           </Link>
         </Stack>
         <Stack direction="column" spacing={2} as="nav">
-          <Text textStyle="secondary" as="h6">
+          <Text textStyle="miniHeading" as="h6">
             Session Preferences
           </Text>
           <ColourModeSwitcher />
@@ -101,7 +101,9 @@ export default function Options() {
 Options.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout isBasicLayout={true}>{page}</Layout>
+      <Layout useBasicLayout={false} showPreferences={true}>
+        {page}
+      </Layout>
     </ApplicationKit>
   );
 };

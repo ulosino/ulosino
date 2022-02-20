@@ -52,7 +52,7 @@ export default function Matches() {
 Matches.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout isBasicLayout={false}>
+      <Layout useBasicLayout={false} showPreferences={false}>
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
     </ApplicationKit>

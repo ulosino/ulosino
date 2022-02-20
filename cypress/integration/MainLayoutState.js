@@ -3,7 +3,9 @@
 
 describe("Layout State Testing", () => {
   it("Should test that our configurable layout persists between pages", () => {
-    cy.visit("/");
+    // Using buttons to switch preferences has been superseded by keybindings
+    // Nevertheless, we're using buttons to test this out; buttons are only shown on Options
+    cy.visit("/options");
 
     cy.viewport("macbook-15");
 

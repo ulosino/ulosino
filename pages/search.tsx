@@ -48,7 +48,7 @@ export default function AdvancedSearch() {
 AdvancedSearch.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout isBasicLayout={false}>
+      <Layout useBasicLayout={false} showPreferences={false}>
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
     </ApplicationKit>

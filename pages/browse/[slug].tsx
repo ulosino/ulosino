@@ -40,10 +40,14 @@ import {
   HiOutlinePencil,
 } from "react-icons/hi";
 
+// Import keybinding libraries
+import { useEffect } from "react";
+import { useHotkeyManager } from "providers/keybindings/index";
+
 interface OSPageTypes {
   source: any;
   donationPath: string;
-  contributionPath: string;
+  contributionPath: object;
 }
 
 // Begin page
@@ -52,6 +56,41 @@ export default function OSPage({
   donationPath,
   contributionPath,
 }: OSPageTypes) {
+  const manager = useHotkeyManager();
+  useEffect(
+    manager.registerHotkey({
+      key: "O",
+      ctrl: true,
+      shift: false,
+      callback: () =>
+        window.open(source.frontmatter.website, "_blank") ||
+        window.location.replace(source.frontmatter.website),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "O",
+      ctrl: true,
+      shift: false,
+      alt: true,
+      callback: () =>
+        window.open(source.frontmatter.repository, "_blank") ||
+        window.location.replace(source.frontmatter.repository),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "D",
+      ctrl: true,
+      shift: false,
+      callback: () =>
+        window.open(source.frontmatter.donate, "_blank") ||
+        window.location.replace(source.frontmatter.donate),
+    }),
+    []
+  );
   return (
     <>
       <Head>
@@ -81,7 +120,7 @@ export default function OSPage({
           </Flex>
           <Stack direction="column" spacing={10} as="section">
             <Stack direction="column" spacing={2}>
-              {(source.frontmatter.donate && (
+              {source.frontmatter.donate && (
                 <Link href={donationPath} passHref>
                   <Button
                     leftIcon={<HiOutlineCreditCard />}
@@ -94,24 +133,19 @@ export default function OSPage({
                     </Badge>
                   </Button>
                 </Link>
-              )) ?? (
-                <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                  Donate{" "}
-                  <Badge variant="tempo" ms={2} pt={1}>
-                    Tempo
-                  </Badge>
-                </Button>
               )}
               <Link href={source.frontmatter.website} passHref>
                 <Button leftIcon={<HiOutlineGlobe />} as="a">
                   Visit Project Website
                 </Button>
               </Link>
-              <Link href={source.frontmatter.repository} passHref>
-                <Button leftIcon={<HiOutlineCode />} as="a">
-                  Visit Source Repository
-                </Button>
-              </Link>
+              {source.frontmatter.repository && (
+                <Link href={source.frontmatter.repository} passHref>
+                  <Button leftIcon={<HiOutlineCode />} as="a">
+                    Visit Source Repository
+                  </Button>
+                </Link>
+              )}
             </Stack>
             <Table>
               <Tbody>
@@ -207,7 +241,9 @@ export default function OSPage({
 OSPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout isBasicLayout={false}>{page}</Layout>
+      <Layout useBasicLayout={false} showPreferences={false}>
+        {page}
+      </Layout>
     </ApplicationKit>
   );
 };

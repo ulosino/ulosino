@@ -171,7 +171,7 @@ const UITheme = extendTheme({
     body: "Public Sans",
   },
   textStyles: {
-    secondary: {
+    miniHeading: {
       fontSize: "sm",
       fontWeight: 600,
       lineHeight: "200%",

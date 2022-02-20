@@ -125,11 +125,11 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
             <Heading size="xl">Donate to {source.frontmatter.name}</Heading>
             {(source.frontmatter.donate && (
               <>
-                <Badge variant="tempo" w={210}>
+                <Badge variant="tempo" w={215}>
                   Powered by ULOSINO Tempo
                 </Badge>
                 <Stack direction="column" spacing={2}>
-                  <Text as="h6" textStyle="secondary">
+                  <Text as="h6" textStyle="miniHeading">
                     Make a Donation
                   </Text>
                   {source.frontmatter.donate && (
@@ -141,7 +141,7 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
                   )}
                 </Stack>
                 <Stack direction="column" spacing={2}>
-                  <Text as="h6" textStyle="secondary">
+                  <Text as="h6" textStyle="miniHeading">
                     Quick Donation Options
                   </Text>
                   {(source.frontmatter.donateOpenCollective && (
@@ -218,7 +218,9 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
 DonationPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout isBasicLayout={false}>{page}</Layout>
+      <Layout useBasicLayout={false} showPreferences={false}>
+        {page}
+      </Layout>
     </ApplicationKit>
   );
 };
