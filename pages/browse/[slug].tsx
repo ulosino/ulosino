@@ -42,7 +42,7 @@ import {
 
 // Import keybinding libraries
 import { useEffect } from "react";
-import { useHotkeyManager } from "providers/keybindings/index";
+import { useHotkeyManager } from "providers/KeybindingProvider";
 
 interface OSPageTypes {
   source: any;
@@ -60,8 +60,8 @@ export default function OSPage({
   useEffect(
     manager.registerHotkey({
       key: "O",
-      ctrl: true,
       shift: false,
+      alt: false,
       callback: () =>
         window.open(source.frontmatter.website, "_blank") ||
         window.location.replace(source.frontmatter.website),
@@ -71,7 +71,6 @@ export default function OSPage({
   useEffect(
     manager.registerHotkey({
       key: "O",
-      ctrl: true,
       shift: false,
       alt: true,
       callback: () =>
@@ -83,8 +82,8 @@ export default function OSPage({
   useEffect(
     manager.registerHotkey({
       key: "D",
-      ctrl: true,
       shift: false,
+      alt: false,
       callback: () =>
         window.open(source.frontmatter.donate, "_blank") ||
         window.location.replace(source.frontmatter.donate),
@@ -134,11 +133,13 @@ export default function OSPage({
                   </Button>
                 </Link>
               )}
-              <Link href={source.frontmatter.website} passHref>
-                <Button leftIcon={<HiOutlineGlobe />} as="a">
-                  Visit Project Website
-                </Button>
-              </Link>
+              {source.frontmatter.website && (
+                <Link href={source.frontmatter.website} passHref>
+                  <Button leftIcon={<HiOutlineGlobe />} as="a">
+                    Visit Source Repository
+                  </Button>
+                </Link>
+              )}
               {source.frontmatter.repository && (
                 <Link href={source.frontmatter.repository} passHref>
                   <Button leftIcon={<HiOutlineCode />} as="a">
@@ -213,7 +214,7 @@ export default function OSPage({
                 )}
                 {source.frontmatter.license && (
                   <Tr>
-                    <Td>Licence</Td>
+                    <Td>License</Td>
                     <Td>{source.frontmatter.license}</Td>
                   </Tr>
                 )}

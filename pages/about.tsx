@@ -13,6 +13,7 @@ import { Stack, Heading, Text } from "@chakra-ui/react";
 // First party components
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
+import AboutOptions from "components/AboutOptions";
 
 // Begin page
 export default function About() {
@@ -30,7 +31,21 @@ export default function About() {
 
       <Stack direction="column" spacing={5}>
         <Heading size="xl">About</Heading>
-        <Text>To complete</Text>
+        <Text>
+          ULOSINO is the modern setting for open source operating system
+          information.
+        </Text>
+        <Text>
+          Our ambition is to make the hard easy. We've made discovering open
+          source operating systems easy. We've made recommending open source
+          operating systems easy with ULOSINO Matches. Plus, give capital with
+          ULOSINO Tempo. Make moves faster when The Friendly Flow is in your
+          flow.
+        </Text>
+        <Text>
+          Learn more about the ULOSINO project with our detailed README.md file.
+        </Text>
+        <AboutOptions />
       </Stack>
     </>
   );

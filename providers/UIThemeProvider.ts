@@ -14,6 +14,7 @@ export const Button = {
     fontWeight: 600,
     borderRadius: "xl",
     shadow: "inner",
+    userSelect: "none",
   },
   defaultProps: {
     size: "md",

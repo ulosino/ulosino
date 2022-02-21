@@ -24,7 +24,7 @@ export const useHotkeyManager = () => {
   const manager = useContext(HotkeyManagerContext);
   if (!manager)
     throw new Error(
-      "HotkeyManager Consumer needs to be child of at least one HotkeyManager Prvoider."
+      "HotkeyManager Consumer needs to be child of at least one HotkeyManager Provider."
     );
   return manager;
 };

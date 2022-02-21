@@ -27,7 +27,7 @@ interface OSPageTypes {
 }
 
 // Begin page
-export default function LegalMarkdownPage({
+export default function AboutMarkdownPage({
   source,
   componentOverrides,
 }: OSPageTypes) {
@@ -54,7 +54,7 @@ export default function LegalMarkdownPage({
 }
 
 // Apply persistent layout, wrapping page
-LegalMarkdownPage.getLayout = function getLayout(page: ReactElement) {
+AboutMarkdownPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
       <Layout useBasicLayout={false} showPreferences={false}>
@@ -75,7 +75,7 @@ interface PathProps {
 // @ts-expect-error
 export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
   // Find Markdown files
-  const filePath = path.join(`public/markdown`, `${params.slug}.mdx`);
+  const filePath = path.join(`public/markdown/about`, `${params.slug}.mdx`);
   const source = fs.readFileSync(filePath);
 
   // Use the files to parse MDX
@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
 
 // Find MDX files in the /public/markdown/ folder to generate paths
 export const getStaticPaths = async () => {
-  const pageContentPath = path.join(process.cwd(), "public/markdown");
+  const pageContentPath = path.join(process.cwd(), "public/markdown/about");
 
   const pageFilePaths = fs
     .readdirSync(pageContentPath)

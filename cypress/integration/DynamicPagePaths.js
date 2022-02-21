@@ -3,8 +3,8 @@
 
 describe("Dynamic Page Path Testing", () => {
   it("Should test the dynamic pages are receiving Markdown files and generating paths", () => {
-    // Try `/[slug].tsx` (misc. Markdown files, e.g. License)
-    cy.visit("/");
+    // Try `/about/[slug].tsx` (misc. Markdown files, e.g. License)
+    cy.visit("/about/license");
     cy.get("#testing-licenseLink")
       .should("have.attr", "href")
       .and("include", "/license");

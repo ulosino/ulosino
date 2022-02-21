@@ -9,13 +9,13 @@ describe("Layout Display Testing", () => {
     cy.viewport("macbook-15");
     cy.get("#testing-headerLinks").should("be.visible");
     cy.get("#testing-headerLogoLink").should("be.visible");
-    cy.get("#testing-headerOptionsLink").should("not.be.visible");
+    cy.get("#testing-headerMenuLink").should("not.be.visible");
 
     // Test header visibility on mobile
     cy.viewport("iphone-x");
     cy.get("#testing-headerLinks").should("not.be.visible");
     cy.get("#testing-headerLogoLink").should("be.visible");
-    cy.get("#testing-headerOptionsLink").should("be.visible");
+    cy.get("#testing-headerMenuLink").should("be.visible");
     cy.get("#testing-headerBackButtonMobile").should("be.visible");
 
     // Test footer visibility on desktop

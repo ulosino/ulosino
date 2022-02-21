@@ -30,7 +30,7 @@ import BackButton from "components/layouts/BackButton";
 import { HiOutlineMenu } from "react-icons/hi";
 
 import { useEffect } from "react";
-import { useHotkeyManager } from "providers/keybindings/index";
+import { useHotkeyManager } from "providers/KeybindingProvider";
 
 // Begin wrapping component
 export default function Layout({
@@ -53,18 +53,27 @@ export default function Layout({
   // Navigation keybindings
   useEffect(
     manager.registerHotkey({
-      key: "M",
-      ctrl: true,
+      key: "/",
       shift: false,
-      callback: () => router.push("/options"),
+      alt: false,
+      callback: () => router.push("/"),
+    }),
+    []
+  );
+  useEffect(
+    manager.registerHotkey({
+      key: "L",
+      shift: false,
+      alt: false,
+      callback: () => router.push("/browse"),
     }),
     []
   );
   useEffect(
     manager.registerHotkey({
       key: "S",
-      ctrl: true,
       shift: false,
+      alt: false,
       callback: () => router.push("/search"),
     }),
     []
@@ -72,8 +81,8 @@ export default function Layout({
   useEffect(
     manager.registerHotkey({
       key: "N",
-      ctrl: true,
       shift: false,
+      alt: false,
       callback: () => window.open("/", "_blank"),
     }),
     []
@@ -81,7 +90,6 @@ export default function Layout({
   useEffect(
     manager.registerHotkey({
       key: "N",
-      ctrl: true,
       shift: false,
       alt: true,
       callback: () => window.open("/search", "_blank"),
@@ -91,9 +99,9 @@ export default function Layout({
   // Preference switching keybindings
   useEffect(
     manager.registerHotkey({
-      key: "C",
-      ctrl: true,
+      key: "W",
       shift: false,
+      alt: false,
       callback: () => toggleColorMode(),
     }),
     []
@@ -101,8 +109,8 @@ export default function Layout({
   useEffect(
     manager.registerHotkey({
       key: "S",
-      ctrl: true,
       shift: true,
+      alt: false,
       callback: () => setAdvancedSearch.toggle(),
     }),
     []
@@ -110,8 +118,8 @@ export default function Layout({
   useEffect(
     manager.registerHotkey({
       key: "B",
-      ctrl: true,
       shift: true,
+      alt: false,
       callback: () => setBackButton.toggle(),
     }),
     []
@@ -203,14 +211,14 @@ export default function Layout({
 
           <Spacer />
           <Center display={{ base: "flex", sm: "none" }}>
-            <Link href="/options" passHref>
+            <Link href="/menu" passHref>
               <IconButton
                 icon={<HiOutlineMenu />}
                 variant="ghost"
                 as="a"
-                aria-label="Open Options and navigation"
-                title="Open Options"
-                id="testing-headerOptionsLink"
+                aria-label="Open Menu and preferences"
+                title="Open Menu"
+                id="testing-headerMenuLink"
               />
             </Link>
           </Center>
@@ -241,7 +249,7 @@ export default function Layout({
                     Twitter
                   </Button>
                 </Link>
-                <Link href="/keybindings" passHref>
+                <Link href="/about/keybindings" passHref>
                   <Button variant="ghost" size="sm" as="a">
                     Keyboard Shortcuts
                   </Button>
@@ -254,6 +262,7 @@ export default function Layout({
                 <Button
                   size="sm"
                   onClick={setBackButton.toggle}
+                  display={{ base: "none", md: "inline-block" }}
                   id="testing-footerBackButtonDesktopSwitch"
                 >
                   {backButton ? "Hide" : "Show"} Back
@@ -261,6 +270,7 @@ export default function Layout({
                 <Button
                   size="sm"
                   onClick={setAdvancedSearch.toggle}
+                  display={{ base: "none", md: "inline-block" }}
                   id="testing-footerBrowseButtonSwitch"
                 >
                   Prefer {advancedSearch ? "Browse" : "Search"}
@@ -272,12 +282,12 @@ export default function Layout({
           </Stack>
           <Spacer />
           <Stack direction="row" spacing={2} id="testing-footerLegalLinks">
-            <Link href="/license" passHref>
+            <Link href="/about/license" passHref>
               <Button variant="ghost" size="sm" as="a" id="testing-licenseLink">
                 License
               </Button>
             </Link>
-            <Link href="/privacy" passHref>
+            <Link href="/about/privacy" passHref>
               <Button variant="ghost" size="sm" as="a">
                 Privacy
               </Button>

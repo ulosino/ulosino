@@ -19,14 +19,7 @@ import {
   Text,
   Icon,
   Button,
-  Code,
   Kbd,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
 } from "@chakra-ui/react";
 import { HiTerminal, HiOutlineChevronLeft } from "react-icons/hi";
 
@@ -34,6 +27,11 @@ import { HiTerminal, HiOutlineChevronLeft } from "react-icons/hi";
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
+import {
+  GlobalNavigationKeybindings,
+  OSPageKeybindings,
+  SessionPreferencesKeybindings,
+} from "components/KeybindingTable";
 
 // Begin page
 export default function KeybindingReference() {
@@ -87,8 +85,7 @@ export default function KeybindingReference() {
             moves faster.
           </Text>
           <Text>
-            These shortcuts apply to <Code>ulosino.com</Code> and the ULOSINO
-            web app. <Kbd>alt</Kbd> has the same effect as <Kbd>option</Kbd>.
+            <Kbd>alt</Kbd> has the same effect as <Kbd>option</Kbd>.
           </Text>
           <noscript>
             <NoJSWarningFeaturesDisabled />
@@ -97,106 +94,19 @@ export default function KeybindingReference() {
             <Text textStyle="miniHeading" as="h6">
               Navigation
             </Text>
-            <Table>
-              <Thead>
-                <Tr>
-                  <Th>Keybinding</Th>
-                  <Th>Function</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>M</Kbd>
-                  </Td>
-                  <Td>Go to the Options menu</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>S</Kbd>
-                  </Td>
-                  <Td>Go to the Advanced Search page</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>N</Kbd>
-                  </Td>
-                  <Td>Open a new tab to the Home page</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>option</Kbd> + <Kbd>N</Kbd>
-                  </Td>
-                  <Td>Open a new tab to the Advanced Search page</Td>
-                </Tr>
-              </Tbody>
-            </Table>
+            <GlobalNavigationKeybindings />
           </Stack>
           <Stack direction="column" spacing={2}>
             <Text textStyle="miniHeading" as="h6">
               Session Preferences
             </Text>
-            <Table>
-              <Thead>
-                <Tr>
-                  <Th>Keybinding</Th>
-                  <Th>Function</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>C</Kbd>
-                  </Td>
-                  <Td>Toggle the application colour mode</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
-                  </Td>
-                  <Td>Toggle the Browse and Advanced Search link</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
-                  </Td>
-                  <Td>Toggle the back button for desktop displays</Td>
-                </Tr>
-              </Tbody>
-            </Table>
+            <SessionPreferencesKeybindings />
           </Stack>
           <Stack direction="column" spacing={2}>
             <Text textStyle="miniHeading" as="h6">
               Operating System Pages
             </Text>
-            <Table>
-              <Thead>
-                <Tr>
-                  <Th>Keybinding</Th>
-                  <Th>Function</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>O</Kbd>
-                  </Td>
-                  <Td>Open the Project Website in a new tab</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>option</Kbd> + <Kbd>O</Kbd>
-                  </Td>
-                  <Td>Open the Project Repository in a new tab</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Kbd>ctrl</Kbd> + <Kbd>D</Kbd>
-                  </Td>
-                  <Td>Open the Project's donation page in a new tab</Td>
-                </Tr>
-              </Tbody>
-            </Table>
+            <OSPageKeybindings />
           </Stack>
         </Stack>
       </Flex>

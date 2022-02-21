@@ -4,8 +4,14 @@
 // This gives a warning for users not using JavaScript
 
 // Chakra UI, icons, and other design imports
-import { Stack, Center, Box, Text, Icon } from "@chakra-ui/react";
-import { useStyleConfig } from "@chakra-ui/react";
+import {
+  Stack,
+  Center,
+  Box,
+  Text,
+  Icon,
+  useStyleConfig,
+} from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
 
@@ -19,7 +25,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 }
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-// Begin component
+// Begin components
 // This is shown on the home page
 export function NoJSWarningHome() {
   return (

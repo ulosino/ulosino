@@ -15,7 +15,7 @@ import UITheme from "providers/UIThemeProvider";
 import {
   KeybindingProvider,
   KeybindingManager,
-} from "providers/keybindings/index";
+} from "providers/KeybindingProvider";
 const manager = new KeybindingManager();
 
 // Begin wrapping component

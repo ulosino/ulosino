@@ -27,12 +27,12 @@ import Layout from "components/layouts/Layout";
 import ColourModeSwitcher from "components/ColourModeSwitcher";
 
 // Begin page
-export default function Options() {
+export default function Menu() {
   return (
     <>
       <Head>
-        <title>ULOSINO &mdash; Options</title>
-        <meta property="og:title" content="ULOSINO Options" />
+        <title>ULOSINO &mdash; Menu</title>
+        <meta property="og:title" content="ULOSINO Menu and Options" />
         <meta
           name="description"
           content="Navigate ULOSINO and set app preferences."
@@ -98,7 +98,7 @@ export default function Options() {
 }
 
 // Apply persistent layout, wrapping page
-Options.getLayout = function getLayout(page: ReactElement) {
+Menu.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
       <Layout useBasicLayout={false} showPreferences={true}>

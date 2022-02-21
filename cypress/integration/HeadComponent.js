@@ -7,8 +7,8 @@ describe("Head Component and SEO Testing", () => {
     cy.visit("/");
     cy.title().should("include", "Discover Open Source Operating Systems");
 
-    // Test top-level dynamic page
-    cy.visit("/license");
+    // Test about dynamic page
+    cy.visit("/about/license");
     cy.title().should("include", "License");
 
     // Test browse dynamic page
