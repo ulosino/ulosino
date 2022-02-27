@@ -262,7 +262,7 @@ export default function MatchesExperience() {
                             onClick={setWindows.toggle}
                             size={switchButtonSize}
                             mt={switchButtonPaddingY}
-                            id="testing-switchButton"
+                            id="testingMatchesSwitchButton"
                           >
                             Switch to {windows ? "Windows" : "macOS"} style
                             interfaces

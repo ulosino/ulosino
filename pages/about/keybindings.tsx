@@ -5,6 +5,7 @@
 import type { ReactElement } from "react";
 
 // Links and routing
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 // Head and SEO
@@ -19,7 +20,6 @@ import {
   Text,
   Icon,
   Button,
-  Kbd,
 } from "@chakra-ui/react";
 import { HiTerminal, HiOutlineChevronLeft } from "react-icons/hi";
 
@@ -31,6 +31,7 @@ import {
   GlobalNavigationKeybindings,
   OSPageKeybindings,
   SessionPreferencesKeybindings,
+  MiscellaneousKeybindings,
 } from "components/KeybindingTable";
 
 // Begin page
@@ -80,21 +81,29 @@ export default function KeybindingReference() {
         </Stack>
         <Stack direction="column" spacing={5} flex={1}>
           <Heading size="xl">Keyboard Shortcut Reference</Heading>
+          <noscript>
+            <NoJSWarningFeaturesDisabled />
+          </noscript>
           <Text>
             ULOSINO includes a set of keyboard shortcuts that allow you make
             moves faster.
           </Text>
-          <Text>
-            <Kbd>alt</Kbd> has the same effect as <Kbd>option</Kbd>.
+          <Text fontSize="xs">
+            We collect the browser user agent to identify the Request Host
+            operating system.{" "}
+            <Link href="/about/privacy">Privacy Notice...</Link>
           </Text>
-          <noscript>
-            <NoJSWarningFeaturesDisabled />
-          </noscript>
           <Stack direction="column" spacing={2}>
             <Text textStyle="miniHeading" as="h6">
               Navigation
             </Text>
             <GlobalNavigationKeybindings />
+          </Stack>
+          <Stack direction="column" spacing={2}>
+            <Text textStyle="miniHeading" as="h6">
+              Operating System Pages
+            </Text>
+            <OSPageKeybindings />
           </Stack>
           <Stack direction="column" spacing={2}>
             <Text textStyle="miniHeading" as="h6">
@@ -104,9 +113,9 @@ export default function KeybindingReference() {
           </Stack>
           <Stack direction="column" spacing={2}>
             <Text textStyle="miniHeading" as="h6">
-              Operating System Pages
+              Advanced Shortcuts
             </Text>
-            <OSPageKeybindings />
+            <MiscellaneousKeybindings />
           </Stack>
         </Stack>
       </Flex>
@@ -118,7 +127,12 @@ export default function KeybindingReference() {
 KeybindingReference.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={true}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         {page}
       </Layout>
     </ApplicationKit>

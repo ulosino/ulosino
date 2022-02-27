@@ -51,7 +51,12 @@ export default function Custom404() {
 Custom404.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={true}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         <ErrorLayout is404={false}>{page}</ErrorLayout>
       </Layout>
     </ApplicationKit>

@@ -23,7 +23,7 @@ export function ErrorIcon({ is404 }: { is404: boolean }) {
           h={16}
           aria-label="Exclamation circle indicating an error"
           title="Exclamation circle indicating an error"
-          id="testing-errorPageIcon"
+          id="testingErrorPageIcon"
         />
       ) : (
         <Icon
@@ -32,7 +32,7 @@ export function ErrorIcon({ is404 }: { is404: boolean }) {
           h={16}
           aria-label="Question mark circle indicating an error"
           title="Question mark circle indicating an error"
-          id="testing-errorPageIcon"
+          id="testingErrorPageIcon"
         />
       )}
     </>
@@ -65,7 +65,7 @@ export default function ErrorLayout({
         {children}
         <Box
           display={{ base: "block", md: "none" }}
-          id="testing-errorPageActionsMobilePlacement"
+          id="testingErrorPageActionsMobilePlacement"
         >
           <ErrorOptions is404={is404} />
         </Box>

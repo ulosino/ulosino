@@ -40,9 +40,10 @@ import {
   HiOutlinePencil,
 } from "react-icons/hi";
 
-// Import keybinding libraries
+// Keybinding libraries
 import { useEffect } from "react";
 import { useHotkeyManager } from "providers/KeybindingProvider";
+import { isWindows } from "react-device-detect";
 
 interface OSPageTypes {
   source: any;
@@ -57,45 +58,76 @@ export default function OSPage({
   contributionPath,
 }: OSPageTypes) {
   const manager = useHotkeyManager();
-  useEffect(
-    manager.registerHotkey({
-      key: "O",
-      shift: false,
-      alt: false,
-      callback: () =>
-        window.open(source.frontmatter.website, "_blank") ||
-        window.location.replace(source.frontmatter.website),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "O",
-      shift: false,
-      alt: true,
-      callback: () =>
-        window.open(source.frontmatter.repository, "_blank") ||
-        window.location.replace(source.frontmatter.repository),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "D",
-      shift: false,
-      alt: false,
-      callback: () =>
-        window.open(source.frontmatter.donate, "_blank") ||
-        window.location.replace(source.frontmatter.donate),
-    }),
-    []
-  );
+  useEffect(() => {
+    {
+      source.frontmatter.website && isWindows
+        ? manager.registerHotkey({
+            key: "O",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () =>
+              window.open(source.frontmatter.website, "_blank") ||
+              window.location.replace(source.frontmatter.website),
+          })
+        : manager.registerHotkey({
+            key: "O",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () =>
+              window.open(source.frontmatter.website, "_blank") ||
+              window.location.replace(source.frontmatter.website),
+          }),
+        [manager, window];
+    }
+  });
+  useEffect(() => {
+    {
+      source.frontmatter.repository && isWindows
+        ? ""
+        : manager.registerHotkey({
+            key: "O",
+            ctrl: true,
+            shift: false,
+            alt: true,
+            callback: () =>
+              window.open(source.frontmatter.repository, "_blank") ||
+              window.location.replace(source.frontmatter.repository),
+          }),
+        [manager, window];
+    }
+  });
+  useEffect(() => {
+    {
+      source.frontmatter.donate && isWindows
+        ? manager.registerHotkey({
+            key: "D",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () =>
+              window.open(source.frontmatter.donate, "_blank") ||
+              window.location.replace(source.frontmatter.donate),
+          })
+        : manager.registerHotkey({
+            key: "D",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () =>
+              window.open(source.frontmatter.donate, "_blank") ||
+              window.location.replace(source.frontmatter.donate),
+          }),
+        [manager, window];
+    }
+  });
   return (
     <>
       <Head>
         <title>
           ULOSINO &mdash; {source.frontmatter.name}: '
-          {source.frontmatter.summary}''
+          {source.frontmatter.summary}'
         </title>
         <meta
           property="og:title"
@@ -112,9 +144,11 @@ export default function OSPage({
       </Head>
 
       <Stack direction="column" spacing={5}>
-        <Heading size="xl">{source.frontmatter.name}</Heading>
+        <Heading size="xl" id="testingOSPageName">
+          {source.frontmatter.name}
+        </Heading>
         <Stack direction={{ base: "column", md: "row" }} spacing={10}>
-          <Flex direction="column">
+          <Flex direction="column" as="main" id="testingOSPageDescription">
             <MDXRemote {...source} />
           </Flex>
           <Stack direction="column" spacing={10} as="section">
@@ -124,7 +158,7 @@ export default function OSPage({
                   <Button
                     leftIcon={<HiOutlineCreditCard />}
                     as="a"
-                    id="testing-donationPageLink"
+                    id="testingDonationPageLink"
                   >
                     Donate{" "}
                     <Badge ms={2} bg="brand" color="gray.800" pt={1}>
@@ -135,14 +169,22 @@ export default function OSPage({
               )}
               {source.frontmatter.website && (
                 <Link href={source.frontmatter.website} passHref>
-                  <Button leftIcon={<HiOutlineGlobe />} as="a">
-                    Visit Source Repository
+                  <Button
+                    leftIcon={<HiOutlineGlobe />}
+                    as="a"
+                    id="testingOSPageProjectWebsiteLink"
+                  >
+                    Visit Project Website
                   </Button>
                 </Link>
               )}
               {source.frontmatter.repository && (
                 <Link href={source.frontmatter.repository} passHref>
-                  <Button leftIcon={<HiOutlineCode />} as="a">
+                  <Button
+                    leftIcon={<HiOutlineCode />}
+                    as="a"
+                    id="testingOSPageProjectRepositoryLink"
+                  >
                     Visit Source Repository
                   </Button>
                 </Link>
@@ -161,7 +203,9 @@ export default function OSPage({
                 {source.frontmatter.descends && (
                   <Tr>
                     <Td>Based on</Td>
-                    <Td>{source.frontmatter.descends}</Td>
+                    <Td id="testingOSPageTableDescends">
+                      {source.frontmatter.descends}
+                    </Td>
                   </Tr>
                 )}
                 {source.frontmatter.platform && (
@@ -227,7 +271,12 @@ export default function OSPage({
               </Tbody>
             </Table>
             <Link href={contributionPath} passHref>
-              <Button leftIcon={<HiOutlinePencil />} as="a" size="sm">
+              <Button
+                leftIcon={<HiOutlinePencil />}
+                size="sm"
+                as="a"
+                id="testingOSPageEditLink"
+              >
                 View on GitHub
               </Button>
             </Link>
@@ -242,7 +291,12 @@ export default function OSPage({
 OSPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={true}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         {page}
       </Layout>
     </ApplicationKit>

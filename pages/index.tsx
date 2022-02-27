@@ -3,6 +3,7 @@
 
 // Types
 import type { ReactElement } from "react";
+import { GetStaticProps } from "next";
 
 // Head and SEO
 import Head from "next/head";
@@ -14,9 +15,17 @@ import { Stack, Heading } from "@chakra-ui/react";
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
 import { NoJSWarningHome } from "components/NoJSWarning";
+import SearchName from "components/search/SearchName";
+
+// Markdown processing libraries
+import { getOSPages } from "providers/OSPageProvider";
+
+interface OSDataPage {
+  AZOSPageData: any;
+}
 
 // Begin page
-export default function Home() {
+export default function Home({ AZOSPageData }: OSDataPage) {
   return (
     <>
       <Head>
@@ -40,6 +49,7 @@ export default function Home() {
         <noscript>
           <NoJSWarningHome />
         </noscript>
+        <SearchName data={AZOSPageData} />
       </Stack>
     </>
   );
@@ -49,9 +59,24 @@ export default function Home() {
 Home.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         {page}
       </Layout>
     </ApplicationKit>
   );
+};
+
+// Import AZOSPageData OS Page handling
+export const getStaticProps: GetStaticProps = async () => {
+  const AZOSPageData = getOSPages();
+  return {
+    props: {
+      AZOSPageData,
+    },
+  };
 };

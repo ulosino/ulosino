@@ -15,6 +15,7 @@ export const Button = {
     borderRadius: "xl",
     shadow: "inner",
     userSelect: "none",
+    textDecoration: "none",
   },
   defaultProps: {
     size: "md",
@@ -29,9 +30,10 @@ export const Button = {
 
 export const Card = {
   baseStyle: {
-    padding: 5,
+    padding: 4,
     borderRadius: "xl",
     shadow: "md",
+    textDecoration: "none",
   },
   variants: {
     solid: ({ colorMode }: { colorMode: string }) => ({
@@ -55,7 +57,7 @@ export const Card = {
     },
     secondary: {
       bg: "secondary",
-      color: "inherit",
+      color: "white",
     },
   },
   defaultProps: {
@@ -92,22 +94,6 @@ const Badge = {
   defaultProps: {
     size: "sm",
     variant: "solid",
-  },
-};
-
-export const Tabs = {
-  defaultProps: {
-    variant: "solid-rounded",
-    colorScheme: "gray",
-    size: "sm",
-  },
-};
-
-export const TabPanel = {
-  defaultProps: {
-    px: 0,
-    pb: 0,
-    pt: 5,
   },
 };
 
@@ -165,6 +151,9 @@ const UITheme = extendTheme({
       b: {
         fontWeight: 600,
       },
+      a: {
+        textDecoration: "underline",
+      },
     },
   },
   fonts: {
@@ -183,9 +172,8 @@ const UITheme = extendTheme({
     Button,
     Card,
     Badge,
-    Tabs,
-    Table,
     Heading,
+    Table,
   },
 });
 

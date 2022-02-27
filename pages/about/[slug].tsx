@@ -57,7 +57,12 @@ export default function AboutMarkdownPage({
 AboutMarkdownPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={true}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         {page}
       </Layout>
     </ApplicationKit>

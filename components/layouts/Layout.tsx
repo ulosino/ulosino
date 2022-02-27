@@ -29,19 +29,41 @@ import Logo from "components/Logo";
 import BackButton from "components/layouts/BackButton";
 import { HiOutlineMenu } from "react-icons/hi";
 
+// Keybinding libraries
 import { useEffect } from "react";
 import { useHotkeyManager } from "providers/KeybindingProvider";
+import { isWindows } from "react-device-detect";
+
+interface LayoutProps {
+  children: ReactElement;
+  useBasicLayout: boolean;
+  // useBasicKeybindings is enabled on Home and Advanced Search, currently reserved
+  useBasicKeybindings: boolean;
+  // useAltBackground is reserved
+  useAltBackground: boolean;
+  showPreferences: boolean;
+}
+
+function DumpDeploymentInformation() {
+  console.debug("Vercel environment details (production/preview)");
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_ENV);
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_URL);
+  console.debug(
+    "Vercel deployment Git details (commit, branch, commit message)"
+  );
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA);
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF);
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE);
+}
 
 // Begin wrapping component
 export default function Layout({
   children,
   useBasicLayout,
+  useBasicKeybindings,
+  useAltBackground,
   showPreferences,
-}: {
-  children: ReactElement;
-  useBasicLayout: boolean;
-  showPreferences: boolean;
-}) {
+}: LayoutProps) {
   // Global preferences
   const [backButton, setBackButton] = useBoolean();
   const [advancedSearch, setAdvancedSearch] = useBoolean();
@@ -50,80 +72,178 @@ export default function Layout({
   const manager = useHotkeyManager();
   const router = useRouter();
   const { toggleColorMode } = useColorMode();
-  // Navigation keybindings
-  useEffect(
-    manager.registerHotkey({
-      key: "/",
-      shift: false,
-      alt: false,
-      callback: () => router.push("/"),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "L",
-      shift: false,
-      alt: false,
-      callback: () => router.push("/browse"),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "S",
-      shift: false,
-      alt: false,
-      callback: () => router.push("/search"),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "N",
-      shift: false,
-      alt: false,
-      callback: () => window.open("/", "_blank"),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "N",
-      shift: false,
-      alt: true,
-      callback: () => window.open("/search", "_blank"),
-    }),
-    []
-  );
-  // Preference switching keybindings
-  useEffect(
-    manager.registerHotkey({
-      key: "W",
-      shift: false,
-      alt: false,
-      callback: () => toggleColorMode(),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "S",
-      shift: true,
-      alt: false,
-      callback: () => setAdvancedSearch.toggle(),
-    }),
-    []
-  );
-  useEffect(
-    manager.registerHotkey({
-      key: "B",
-      shift: true,
-      alt: false,
-      callback: () => setBackButton.toggle(),
-    }),
-    []
-  );
+
+  // Global navigation keybindings
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "/",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () => router.push("/"),
+          })
+        : manager.registerHotkey({
+            key: "/",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () => router.push("/"),
+          }),
+        [manager, router];
+    }
+  });
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "L",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () => router.push("/browse"),
+          })
+        : manager.registerHotkey({
+            key: "L",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () => router.push("/browse"),
+          }),
+        [manager, router];
+    }
+  });
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "S",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () => router.push("/search"),
+          })
+        : manager.registerHotkey({
+            key: "S",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () => router.push("/search"),
+          }),
+        [manager, router];
+    }
+  });
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "N",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () => window.open("/", "_blank"),
+          })
+        : manager.registerHotkey({
+            key: "N",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () => window.open("/", "_blank"),
+          }),
+        [manager, window];
+    }
+  });
+  useEffect(() => {
+    {
+      isWindows
+        ? ""
+        : manager.registerHotkey({
+            key: "N",
+            ctrl: true,
+            shift: false,
+            alt: true,
+            callback: () => window.open("/search", "_blank"),
+          }),
+        [manager, window];
+    }
+  });
+  // Session preference keybindings
+  useEffect(() => {
+    {
+      isWindows
+        ? ""
+        : manager.registerHotkey({
+            key: "W",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () => toggleColorMode(),
+          }),
+        [manager, toggleColorMode];
+    }
+  });
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "S",
+            ctrl: false,
+            shift: true,
+            alt: true,
+            callback: () => setAdvancedSearch.toggle(),
+          })
+        : manager.registerHotkey({
+            key: "S",
+            ctrl: true,
+            shift: true,
+            alt: false,
+            callback: () => setAdvancedSearch.toggle(),
+          }),
+        [manager, setAdvancedSearch];
+    }
+  });
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "B",
+            ctrl: false,
+            shift: true,
+            alt: true,
+            callback: () => setBackButton.toggle(),
+          })
+        : manager.registerHotkey({
+            key: "B",
+            ctrl: true,
+            shift: true,
+            alt: false,
+            callback: () => setBackButton.toggle(),
+          }),
+        [manager, setBackButton];
+    }
+  });
+  // Troubleshooting keybindings
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "~",
+            ctrl: false,
+            shift: true,
+            alt: true,
+            callback: () => DumpDeploymentInformation(),
+          })
+        : manager.registerHotkey({
+            key: "~",
+            ctrl: true,
+            shift: true,
+            alt: false,
+            callback: () => DumpDeploymentInformation(),
+          }),
+        [manager, DumpDeploymentInformation];
+    }
+  });
 
   return (
     <Flex
@@ -136,7 +256,7 @@ export default function Layout({
         <Flex mt={2} mb={10}>
           <Center
             display={{ base: "flex", sm: "none" }}
-            id="testing-headerBackButtonMobile"
+            id="testingHeaderBackButtonMobile"
           >
             <BackButton />
           </Center>
@@ -160,7 +280,7 @@ export default function Layout({
               as="a"
               aria-label="Go Home"
               title="Go Home"
-              id="testing-headerLogoLink"
+              id="testingHeaderLogoLink"
             >
               <Logo />
             </Center>
@@ -171,7 +291,7 @@ export default function Layout({
             <Center
               display={{ base: "none", sm: "flex" }}
               as="nav"
-              id="testing-headerLinks"
+              id="testingHeaderLinks"
             >
               <Stack direction="row" spacing={2} mx={10}>
                 <Link href="/" passHref>
@@ -218,7 +338,7 @@ export default function Layout({
                 as="a"
                 aria-label="Open Menu and preferences"
                 title="Open Menu"
-                id="testing-headerMenuLink"
+                id="testingHeaderMenuLink"
               />
             </Link>
           </Center>
@@ -233,7 +353,7 @@ export default function Layout({
             direction="row"
             spacing={2}
             display={{ base: "none", sm: "block" }}
-            id="testing-footerGeneralLinks"
+            id="testingFooterGeneralLinks"
           >
             {useBasicLayout ? (
               ""
@@ -281,9 +401,9 @@ export default function Layout({
             )}
           </Stack>
           <Spacer />
-          <Stack direction="row" spacing={2} id="testing-footerLegalLinks">
+          <Stack direction="row" spacing={2} id="testingLegalLinks">
             <Link href="/about/license" passHref>
-              <Button variant="ghost" size="sm" as="a" id="testing-licenseLink">
+              <Button variant="ghost" size="sm" as="a" id="testingLicenseLink">
                 License
               </Button>
             </Link>

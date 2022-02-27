@@ -7,20 +7,20 @@ describe("Error Layout Display Testing", () => {
 
     // Test exclamation icon visibility on desktop
     cy.viewport("macbook-15");
-    cy.get("#testing-errorPageIcon").should("be.visible");
+    cy.get("#testingErrorPageIcon").should("be.visible");
 
     // Test exclamation icon visibility on mobile
     cy.viewport("iphone-x");
-    cy.get("#testing-errorPageIcon").should("not.be.visible");
+    cy.get("#testingErrorPageIcon").should("not.be.visible");
 
     // Test actions visibility on desktop
     cy.viewport("macbook-15");
-    cy.get("#testing-errorPageActions").should("be.visible");
-    cy.get("#testing-errorPageActionsMobilePlacement").should("not.be.visible");
+    cy.get("#testingErrorPageActions").should("be.visible");
+    cy.get("#testingErrorPageActionsMobilePlacement").should("not.be.visible");
 
     // Test actions visibility on mobile
     cy.viewport("iphone-x");
-    cy.get("#testing-errorPageActions").should("not.be.visible");
-    cy.get("#testing-errorPageActionsMobilePlacement").should("be.visible");
+    cy.get("#testingErrorPageActions").should("not.be.visible");
+    cy.get("#testingErrorPageActionsMobilePlacement").should("be.visible");
   });
 });

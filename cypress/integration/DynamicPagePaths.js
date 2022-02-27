@@ -4,22 +4,24 @@
 describe("Dynamic Page Path Testing", () => {
   it("Should test the dynamic pages are receiving Markdown files and generating paths", () => {
     // Try `/about/[slug].tsx` (misc. Markdown files, e.g. License)
-    cy.visit("/about/license");
-    cy.get("#testing-licenseLink")
+    cy.visit("/");
+    cy.get("#testingLicenseLink")
       .should("have.attr", "href")
-      .and("include", "/license");
-    cy.get("#testing-licenseLink").click();
-    cy.url().should("include", "/license");
+      .and("include", "/about/license");
+    cy.get("#testingLicenseLink").click();
+    cy.url().should("include", "/about/license");
 
     // Try `/browse/[slug].tsx` (OS Pages)
-    // FILL with Browse page introduction
+    cy.visit("/browse");
+    cy.get("#testingOSDataCard").find("h2").contains("Alpine Linux").click();
+    cy.url().should("include", "/browse/alpine");
 
     // Try `/tempo/[slug].tsx` (Tempo pages)
     cy.visit("/browse/elementary");
-    cy.get("#testing-donationPageLink")
+    cy.get("#testingDonationPageLink")
       .should("have.attr", "href")
       .and("include", "/tempo/elementary");
-    cy.get("#testing-donationPageLink").click();
+    cy.get("#testingDonationPageLink").click();
     cy.url().should("include", "/tempo/elementary");
   });
 });

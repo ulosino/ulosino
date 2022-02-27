@@ -20,12 +20,7 @@ import {
 export default function ErrorOptions({ is404 }: { is404: boolean }) {
   const router = useRouter();
   return (
-    <Stack
-      direction="column"
-      spacing={2}
-      as="nav"
-      id="testing-errorPageActions"
-    >
+    <Stack direction="column" spacing={2} as="nav" id="testingErrorPageActions">
       <Button leftIcon={<HiOutlineChevronLeft />} onClick={router.back}>
         Go Back
       </Button>

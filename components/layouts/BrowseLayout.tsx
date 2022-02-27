@@ -23,7 +23,7 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
         me={10}
         display={{ base: "none", sm: "flex" }}
         as="nav"
-        id="testing-browseSeriesSidebar"
+        id="testingBrowsePageSeriesSidebar"
       >
         <Link href="/browse" passHref>
           <Button as="a">OS List &amp; Tempo</Button>

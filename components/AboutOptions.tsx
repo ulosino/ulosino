@@ -16,12 +16,7 @@ import { FiTwitter } from "react-icons/fi";
 export default function AboutOptions() {
   const router = useRouter();
   return (
-    <Stack
-      direction="column"
-      spacing={2}
-      as="nav"
-      id="testing-errorPageActions"
-    >
+    <Stack direction="column" spacing={2} as="nav" id="testingErrorPageActions">
       <Link href="https://github.com/ulosino/ulosino" passHref>
         <Button leftIcon={<HiOutlineInformationCircle />} as="a">
           Read the project README

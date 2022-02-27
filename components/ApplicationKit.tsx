@@ -5,13 +5,13 @@
 // This replaces some functions delegated to _app.tsx. Application Kit is opt-in by page
 
 // Types
-import type { ReactElement } from "react";
+import { ReactElement } from "react";
 
 // Chakra UI, icons, and other design imports
 import { ChakraProvider } from "@chakra-ui/react";
 import UITheme from "providers/UIThemeProvider";
 
-// Keyboard shortcut libraries
+// Keybinding libraries
 import {
   KeybindingProvider,
   KeybindingManager,

@@ -7,25 +7,25 @@ describe("Layout Display Testing", () => {
 
     // Test header visibility on desktop
     cy.viewport("macbook-15");
-    cy.get("#testing-headerLinks").should("be.visible");
-    cy.get("#testing-headerLogoLink").should("be.visible");
-    cy.get("#testing-headerMenuLink").should("not.be.visible");
+    cy.get("#testingHeaderLinks").should("be.visible");
+    cy.get("#testingHeaderLogoLink").should("be.visible");
+    cy.get("#testingHeaderMenuLink").should("not.be.visible");
 
     // Test header visibility on mobile
     cy.viewport("iphone-x");
-    cy.get("#testing-headerLinks").should("not.be.visible");
-    cy.get("#testing-headerLogoLink").should("be.visible");
-    cy.get("#testing-headerMenuLink").should("be.visible");
-    cy.get("#testing-headerBackButtonMobile").should("be.visible");
+    cy.get("#testingHeaderLinks").should("not.be.visible");
+    cy.get("#testingHeaderLogoLink").should("be.visible");
+    cy.get("#testingHeaderMenuLink").should("be.visible");
+    cy.get("#testingHeaderBackButtonMobile").should("be.visible");
 
     // Test footer visibility on desktop
     cy.viewport("macbook-15");
-    cy.get("#testing-footerGeneralLinks").should("be.visible");
-    cy.get("#testing-footerLegalLinks").should("be.visible");
+    cy.get("#testingFooterGeneralLinks").should("be.visible");
+    cy.get("#testingLegalLinks").should("be.visible");
 
     // Test footer visibility on desktop
     cy.viewport("iphone-x");
-    cy.get("#testing-footerGeneralLinks").should("not.be.visible");
-    cy.get("#testing-footerLegalLinks").should("be.visible");
+    cy.get("#testingFooterGeneralLinks").should("not.be.visible");
+    cy.get("#testingLegalLinks").should("be.visible");
   });
 });

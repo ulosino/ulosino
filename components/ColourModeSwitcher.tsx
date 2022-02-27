@@ -16,7 +16,7 @@ export default function ColourModeSwitcher() {
     <Button
       leftIcon={<ColourModeIcon />}
       onClick={toggleColorMode}
-      id="testing-colourSchemeToggle"
+      id="testingColourSchemeToggle"
     >
       Toggle {colorMode === "light" ? "Dark" : "Light"} Mode
     </Button>

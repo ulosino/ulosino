@@ -101,7 +101,12 @@ export default function Menu() {
 Menu.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={true}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={true}
+        useAltBackground={false}
+        showPreferences={true}
+      >
         {page}
       </Layout>
     </ApplicationKit>

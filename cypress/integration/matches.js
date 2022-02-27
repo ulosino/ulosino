@@ -6,25 +6,25 @@ describe("ULOSINO Matches Testing", () => {
     cy.visit("/matches");
 
     // Test Linux Mint card (visible by default)
-    cy.get("#testing-mintInfoCard")
+    cy.get("#testingMatchesMintInfoCard")
       .find("h2")
       .contains("Linux Mint")
       .should("be.visible");
-    cy.get("#testing-mintInfoCard")
+    cy.get("#testingMatchesMintInfoCard")
       .should("have.attr", "href")
       .and("include", "browse/mint");
 
     // Test preference switching
-    cy.get("#testing-switchButton")
+    cy.get("#testingMatchesSwitchButton")
       .contains("Switch to macOS style interfaces")
       .click();
 
     // Test elementary OS card (visible after switch)
-    cy.get("#testing-elementaryInfoCard")
+    cy.get("#testingMatchesElementaryInfoCard")
       .find("h2")
       .contains("elementary OS")
       .should("be.visible");
-    cy.get("#testing-elementaryInfoCard")
+    cy.get("#testingMatchesElementaryInfoCard")
       .should("have.attr", "href")
       .and("include", "/browse/elementary");
   });

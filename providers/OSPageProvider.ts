@@ -16,14 +16,14 @@ const OSPageStore = path.join(process.cwd(), "public/markdown/browse");
 export function getOSPages() {
   const fileNames = fs.readdirSync(OSPageStore);
   const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.mdx$/, "");
+    const slug = fileName.replace(/\.mdx$/, "");
 
     const fullPath = path.join(OSPageStore, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const matterResult = matter(fileContents);
 
     return {
-      id,
+      slug,
       ...(matterResult.data as { date: string; title: string }),
     };
   });
@@ -40,14 +40,14 @@ export function getOSPages() {
 export function getNewestOSPages() {
   const fileNames = fs.readdirSync(OSPageStore);
   const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.mdx$/, "");
+    const slug = fileName.replace(/\.mdx$/, "");
 
     const fullPath = path.join(OSPageStore, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const matterResult = matter(fileContents);
 
     return {
-      id,
+      slug,
       ...(matterResult.data as { date: string; title: string }),
     };
   });
@@ -64,14 +64,14 @@ export function getNewestOSPages() {
 export function getOldestOSPages() {
   const fileNames = fs.readdirSync(OSPageStore);
   const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.mdx$/, "");
+    const slug = fileName.replace(/\.mdx$/, "");
 
     const fullPath = path.join(OSPageStore, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const matterResult = matter(fileContents);
 
     return {
-      id,
+      slug,
       ...(matterResult.data as { date: string; title: string }),
     };
   });
@@ -90,7 +90,7 @@ export function getOSPageSlugs() {
   return fileNames.map((fileName) => {
     return {
       params: {
-        id: fileName.replace(/\.mdx$/, ""),
+        slug: fileName.replace(/\.mdx$/, ""),
       },
     };
   });

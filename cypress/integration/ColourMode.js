@@ -3,11 +3,11 @@
 
 describe("Colour Mode Display Testing", () => {
   it("Should test the colour mode switch works correctly", () => {
-    cy.visit("/options");
+    cy.visit("/menu");
 
     // Try switching the colour mode, and watch for the class change
     // The default mode is light
-    cy.get("#testing-colourSchemeToggle").click();
+    cy.get("#testingColourSchemeToggle").click();
     cy.get("body").should("have.class", "chakra-ui-dark");
   });
 });

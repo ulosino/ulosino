@@ -5,14 +5,14 @@ describe("Layout State Testing", () => {
   it("Should test that our configurable layout persists between pages", () => {
     // Using buttons to switch preferences has been superseded by keybindings
     // Nevertheless, we're using buttons to test this out; buttons are only shown on Options
-    cy.visit("/options");
+    cy.visit("/menu");
 
     cy.viewport("macbook-15");
 
     // Test back button (not visible by default)
     // The desktop back button is not in the DOM until switched
     cy.get("#testing-headerBackButtonDesktop").should("not.exist");
-    cy.get("#testing-headerBackButtonMobile")
+    cy.get("#testingHeaderBackButtonMobile")
       .find("button")
       .should("not.be.visible");
 
@@ -25,7 +25,7 @@ describe("Layout State Testing", () => {
     cy.get("#testing-headerBackButtonDesktop")
       .find("button")
       .should("be.visible");
-    cy.get("#testing-headerBackButtonMobile")
+    cy.get("#testingHeaderBackButtonMobile")
       .find("button")
       .should("not.be.visible");
 
@@ -34,7 +34,7 @@ describe("Layout State Testing", () => {
     cy.get("#testing-headerBackButtonDesktop")
       .find("button")
       .should("be.visible");
-    cy.get("#testing-headerBackButtonMobile")
+    cy.get("#testingHeaderBackButtonMobile")
       .find("button")
       .should("not.be.visible");
 
@@ -43,7 +43,7 @@ describe("Layout State Testing", () => {
     cy.get("#testing-headerBackButtonDesktop")
       .find("button")
       .should("not.be.visible");
-    cy.get("#testing-headerBackButtonMobile")
+    cy.get("#testingHeaderBackButtonMobile")
       .find("button")
       .should("be.visible");
 

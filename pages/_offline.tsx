@@ -47,7 +47,12 @@ export default function OfflineFallback() {
 OfflineFallback.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={true}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         <ErrorLayout is404={true}>{page}</ErrorLayout>
       </Layout>
     </ApplicationKit>

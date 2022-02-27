@@ -23,14 +23,7 @@ import {
   Button,
   Badge,
   useStyleConfig,
-  createStandaloneToast,
 } from "@chakra-ui/react";
-import {
-  HiCreditCard,
-  HiOutlineCreditCard,
-  HiOutlineChevronLeft,
-  HiOutlineGlobe,
-} from "react-icons/hi";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
 
@@ -42,8 +35,12 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
     </Box>
   );
 }
-import UITheme from "providers/UIThemeProvider";
-const toast = createStandaloneToast({ theme: UITheme });
+import {
+  HiCreditCard,
+  HiOutlineCreditCard,
+  HiOutlineChevronLeft,
+  HiOutlineGlobe,
+} from "react-icons/hi";
 
 // First party components
 import ApplicationKit from "components/ApplicationKit";
@@ -55,8 +52,6 @@ import path from "path";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
-import { useEffect } from "react";
-
 interface OSPageTypes {
   source: any;
   descriptionPath: string;
@@ -64,19 +59,6 @@ interface OSPageTypes {
 
 // Begin page
 export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
-  // Show web app installation banner
-  useEffect(() => {
-    window.addEventListener("beforeinstallprompt", () => {
-      toast({
-        title: "Go offline with the ULOSINO web app",
-        description: "Simply select 'Install ULOSINO' in your browser's menu.",
-        status: "info",
-        position: "top-right",
-        duration: 7000,
-        isClosable: true,
-      });
-    });
-  });
   return (
     <>
       <Head>
@@ -120,14 +102,14 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
             </Button>
           </Link>
         </Stack>
-        <Stack direction="column" spacing={10} flex={1}>
+        <Stack direction="column" spacing={10} flex={1} as="main">
           <Stack direction="column" spacing={5}>
             <Heading size="xl">Donate to {source.frontmatter.name}</Heading>
             {(source.frontmatter.donate && (
               <>
-                <Badge variant="tempo" w={215}>
-                  Powered by ULOSINO Tempo
-                </Badge>
+                <Box>
+                  <Badge variant="tempo">Powered by ULOSINO Tempo</Badge>
+                </Box>
                 <Stack direction="column" spacing={2}>
                   <Text as="h6" textStyle="miniHeading">
                     Make a Donation
@@ -218,7 +200,12 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
 DonationPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={true}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         {page}
       </Layout>
     </ApplicationKit>

@@ -47,6 +47,14 @@ This document describes a standard collection of code comments.
 // Markdown processing libraries
 ```
 
+```
+// Search libraries
+```
+
+```
+// Keybinding libraries
+```
+
 ## Export categories
 
 ### Pages

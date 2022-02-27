@@ -3,21 +3,32 @@
 
 // Types
 import type { ReactElement } from "react";
+import { GetStaticProps } from "next";
 
 // Head and SEO
 import Head from "next/head";
 
 // Chakra UI, icons, and other design imports
-import { Stack, Heading, Text } from "@chakra-ui/react";
+import { Stack, Heading, Text, Kbd } from "@chakra-ui/react";
 
 // First party components
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
+import CoreSearchGroup from "components/search/CoreSearchGroup";
+import AdvancedSearchGroup from "components/search/AdvancedSearchGroup";
+import SystemSearch from "components/search/SystemSearch";
+
+// Markdown processing libraries
+import { getOSPages } from "providers/OSPageProvider";
+
+interface OSDataPage {
+  AZOSPageData: any;
+}
 
 // Begin page
-export default function AdvancedSearch() {
+export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
   return (
     <>
       <Head>
@@ -38,7 +49,31 @@ export default function AdvancedSearch() {
         <noscript>
           <NoJSWarningFeaturesDisabled />
         </noscript>
-        <Text>Take a search.</Text>
+        <Text>Take a search. Choose from 10 metadata categories.</Text>
+        <Stack direction="column" spacing={2}>
+          <Text textStyle="miniHeading" as="h6">
+            Core Metadata Search
+          </Text>
+          <CoreSearchGroup data={AZOSPageData} />
+        </Stack>
+        <Stack direction="column" spacing={2}>
+          <Text textStyle="miniHeading" as="h6">
+            Advanced Metadata Search
+          </Text>
+          <AdvancedSearchGroup data={AZOSPageData} />
+        </Stack>
+        <Stack direction="column" spacing={2}>
+          <Text textStyle="miniHeading" as="h6">
+            ULOSINO System Search
+          </Text>
+          <SystemSearch data={AZOSPageData} />
+        </Stack>
+        <Text fontSize="xs">
+          Get here quickly by pressing <Kbd>control</Kbd> + <Kbd>S</Kbd> or{" "}
+          <Kbd>alt</Kbd> + <Kbd>S</Kbd> on Windows. You can also open a new tab
+          to this page with <Kbd>control</Kbd> + <Kbd>option</Kbd> +{" "}
+          <Kbd>N</Kbd>.
+        </Text>
       </Stack>
     </>
   );
@@ -48,9 +83,24 @@ export default function AdvancedSearch() {
 AdvancedSearch.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationKit>
-      <Layout useBasicLayout={false} showPreferences={false}>
+      <Layout
+        useBasicLayout={false}
+        useBasicKeybindings={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
     </ApplicationKit>
   );
+};
+
+// Import AZOSPageData OS Page handling
+export const getStaticProps: GetStaticProps = async () => {
+  const AZOSPageData = getOSPages();
+  return {
+    props: {
+      AZOSPageData,
+    },
+  };
 };

@@ -8,20 +8,20 @@ describe("Browse Layout Display Testing", () => {
     // Test sidebar visibility, across all pages, on desktop
     cy.viewport("macbook-15");
     cy.visit("/browse");
-    cy.get("#testing-browseSeriesSidebar").should("be.visible");
+    cy.get("#testingBrowsePageSeriesSidebar").should("be.visible");
     cy.visit("/search");
-    cy.get("#testing-browseSeriesSidebar").should("be.visible");
+    cy.get("#testingBrowsePageSeriesSidebar").should("be.visible");
     cy.visit("/matches");
-    cy.get("#testing-browseSeriesSidebar").should("be.visible");
+    cy.get("#testingBrowsePageSeriesSidebar").should("be.visible");
 
     // Test sidebar existence, across all pages, on mobile
     // The sidebar isn't visible on mobile
     cy.viewport("iphone-x");
     cy.visit("/browse");
-    cy.get("#testing-browseSeriesSidebar").should("not.be.visible");
+    cy.get("#testingBrowsePageSeriesSidebar").should("not.be.visible");
     cy.visit("/search");
-    cy.get("#testing-browseSeriesSidebar").should("not.be.visible");
+    cy.get("#testingBrowsePageSeriesSidebar").should("not.be.visible");
     cy.visit("/matches");
-    cy.get("#testing-browseSeriesSidebar").should("not.be.visible");
+    cy.get("#testingBrowsePageSeriesSidebar").should("not.be.visible");
   });
 });

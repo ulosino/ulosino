@@ -14,74 +14,53 @@ export function GlobalNavigationKeybindings() {
     <Table>
       <Thead>
         <Tr>
-          <Th>Keybinding</Th>
           <Th>Function</Th>
+          <Th>Standard Keybinding</Th>
+          <Th>Windows</Th>
         </Tr>
       </Thead>
       <Tbody>
         <Tr>
-          <Td>
-            <Kbd>/</Kbd>
-          </Td>
           <Td>Go Home</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>/</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>/</Kbd>
+          </Td>
         </Tr>
         <Tr>
-          <Td>
-            <Kbd>L</Kbd>
-          </Td>
           <Td>Go to the Operating System List</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>L</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>L</Kbd>
+          </Td>
         </Tr>
         <Tr>
-          <Td>
-            <Kbd>S</Kbd>
-          </Td>
           <Td>Go to the Advanced Search page</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>S</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>S</Kbd>
+          </Td>
         </Tr>
         <Tr>
-          <Td>
-            <Kbd>N</Kbd>
-          </Td>
           <Td>Open Home in a new tab</Td>
-        </Tr>
-        <Tr>
           <Td>
-            <Kbd>option</Kbd> + <Kbd>N</Kbd>
+            <Kbd>control</Kbd> + <Kbd>N</Kbd>
           </Td>
-          <Td>Open the Advanced Search page in a new tab</Td>
-        </Tr>
-      </Tbody>
-    </Table>
-  );
-}
-
-// Manages preferences for the current tab
-export function SessionPreferencesKeybindings() {
-  return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>Keybinding</Th>
-          <Th>Function</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
           <Td>
-            <Kbd>W</Kbd>
+            <Kbd>alt</Kbd> + <Kbd>N</Kbd>
           </Td>
-          <Td>Toggle the application colour mode</Td>
         </Tr>
         <Tr>
-          <Td>
-            <Kbd>shift</Kbd> + <Kbd>S</Kbd>
+          <Td>Open Advanced Search in a new tab</Td>
+          <Td colSpan={2}>
+            <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>N</Kbd>
           </Td>
-          <Td>Toggle the Browse and Advanced Search link</Td>
-        </Tr>
-        <Tr>
-          <Td>
-            <Kbd>shift</Kbd> + <Kbd>B</Kbd>
-          </Td>
-          <Td>Toggle the back button for desktop displays</Td>
         </Tr>
       </Tbody>
     </Table>
@@ -94,28 +73,102 @@ export function OSPageKeybindings() {
     <Table>
       <Thead>
         <Tr>
-          <Th>Keybinding</Th>
           <Th>Function</Th>
+          <Th>Standard Keybinding</Th>
+          <Th>Windows</Th>
         </Tr>
       </Thead>
       <Tbody>
         <Tr>
-          <Td>
-            <Kbd>O</Kbd>
-          </Td>
           <Td>Open the Project Website in a new tab</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>O</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>O</Kbd>
+          </Td>
         </Tr>
         <Tr>
-          <Td>
-            <Kbd>option</Kbd> + <Kbd>O</Kbd>
-          </Td>
           <Td>Open the Project Repository in a new tab</Td>
+          <Td colSpan={2}>
+            <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>O</Kbd>
+          </Td>
         </Tr>
         <Tr>
+          <Td>Open the donation page in a new tab</Td>
           <Td>
-            <Kbd>D</Kbd>
+            <Kbd>control</Kbd> + <Kbd>D</Kbd>
           </Td>
-          <Td>Open the Project's donation page in a new tab</Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>D</Kbd>
+          </Td>
+        </Tr>
+      </Tbody>
+    </Table>
+  );
+}
+
+// Manages preferences for the current tab
+export function SessionPreferencesKeybindings() {
+  return (
+    <Table>
+      <Thead>
+        <Tr>
+          <Th>Function</Th>
+          <Th>Standard Keybinding</Th>
+          <Th>Windows</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr>
+          <Td>Toggle the application colour mode</Td>
+          <Td colSpan={2}>
+            <Kbd>control</Kbd> + <Kbd>W</Kbd>
+          </Td>
+        </Tr>
+        <Tr>
+          <Td>Toggle the Browse and Advanced Search link</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
+          </Td>
+        </Tr>
+        <Tr>
+          <Td>Toggle the back button for desktop displays</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+          </Td>
+        </Tr>
+      </Tbody>
+    </Table>
+  );
+}
+
+// Advanced keybindings
+export function MiscellaneousKeybindings() {
+  return (
+    <Table>
+      <Thead>
+        <Tr>
+          <Th>Function</Th>
+          <Th>Standard Keybinding</Th>
+          <Th>Windows</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr>
+          <Td>Export deployment details to browser console</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>`</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>`</Kbd>
+          </Td>
         </Tr>
       </Tbody>
     </Table>
