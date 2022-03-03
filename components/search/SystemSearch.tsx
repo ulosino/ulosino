@@ -32,6 +32,7 @@ export default function SystemSearch({ data }: DataTypes) {
     <>
       {/* Category */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Category..."
         inputId="testingSearchInputCategory"
       >
@@ -56,6 +57,7 @@ export default function SystemSearch({ data }: DataTypes) {
       </SearchWrapper>
       {/* Summary */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Summary..."
         inputId="testingSearchInputSummary"
       >

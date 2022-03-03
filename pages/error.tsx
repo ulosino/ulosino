@@ -2,7 +2,7 @@
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // This is a boilerplate error page
-// Currently it serves no purpose other than testing ErrorLayout
+// Currently it serves no purpose other than testing ErrorLayout (and ErrorOptions)
 
 // Types
 import type { ReactElement } from "react";
@@ -20,6 +20,9 @@ import ErrorLayout from "components/layouts/ErrorLayout";
 
 // Begin page
 export default function ErrorPage() {
+  console.warn(
+    "Integrated Application Error: PageIsError (Reference ULOSINO 3.x.x documentation)"
+  );
   return (
     <>
       <Head>

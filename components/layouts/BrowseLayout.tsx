@@ -12,31 +12,37 @@ import Link from "next/link";
 // Chakra UI, icons, and other design imports
 import { Flex, Stack, Box, Button } from "@chakra-ui/react";
 
+// First party components
+import { ErrorFallback } from "components/ErrorFallback";
+
 // Begin wrapping component
 export default function BrowseLayout({ children }: { children: ReactElement }) {
   return (
     <Flex direction={{ base: "column", md: "row" }}>
-      <Stack
-        direction="column"
-        spacing={2}
-        mb={10}
-        me={10}
-        display={{ base: "none", sm: "flex" }}
-        as="nav"
-        id="testingBrowsePageSeriesSidebar"
-      >
-        <Link href="/browse" passHref>
-          <Button as="a">OS List &amp; Tempo</Button>
-        </Link>
-        <Link href="/search" passHref>
-          <Button as="a">Advanced Search</Button>
-        </Link>
-        <Link href="/matches" passHref>
-          <Button as="a">Matches</Button>
-        </Link>
-      </Stack>
+      <ErrorFallback>
+        <Stack
+          direction="column"
+          spacing={2}
+          mb={10}
+          me={10}
+          display={{ base: "none", sm: "flex" }}
+          as="nav"
+          id="testingBrowsePageSeriesSidebar"
+          w={175}
+        >
+          <Link href="/browse" passHref>
+            <Button as="a">OS List &amp; Tempo</Button>
+          </Link>
+          <Link href="/search" passHref>
+            <Button as="a">Advanced Search</Button>
+          </Link>
+          <Link href="/matches" passHref>
+            <Button as="a">Matches</Button>
+          </Link>
+        </Stack>
+      </ErrorFallback>
       <Box flex={1} as="main">
-        {children}
+        <ErrorFallback>{children}</ErrorFallback>
       </Box>
     </Flex>
   );

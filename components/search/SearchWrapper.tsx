@@ -15,6 +15,7 @@ import {
 
 interface PageProps {
   children: ReactElement;
+  size: string;
   placeholder: string;
   inputId: string;
 }
@@ -22,6 +23,7 @@ interface PageProps {
 // Begin wrapping component
 export default function SearchWrapper({
   children,
+  size,
   placeholder,
   inputId,
 }: PageProps) {
@@ -29,7 +31,7 @@ export default function SearchWrapper({
     <AutoComplete>
       <AutoCompleteInput
         variant="outline"
-        size="md"
+        size={size}
         borderRadius="xl"
         shadow="inner"
         placeholder={placeholder}

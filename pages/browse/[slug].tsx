@@ -27,6 +27,7 @@ import {
 // First party components
 import ApplicationKit from "components/ApplicationKit";
 import Layout from "components/layouts/Layout";
+import { ErrorFallback } from "components/ErrorFallback";
 
 // Markdown processing libraries
 import fs from "fs";
@@ -144,143 +145,149 @@ export default function OSPage({
       </Head>
 
       <Stack direction="column" spacing={5}>
-        <Heading size="xl" id="testingOSPageName">
-          {source.frontmatter.name}
-        </Heading>
+        <ErrorFallback>
+          <Heading size="xl" id="testingOSPageName">
+            {source.frontmatter.name}
+          </Heading>
+        </ErrorFallback>
         <Stack direction={{ base: "column", md: "row" }} spacing={10}>
-          <Flex direction="column" as="main" id="testingOSPageDescription">
-            <MDXRemote {...source} />
-          </Flex>
-          <Stack direction="column" spacing={10} as="section">
-            <Stack direction="column" spacing={2}>
-              {source.frontmatter.donate && (
-                <Link href={donationPath} passHref>
-                  <Button
-                    leftIcon={<HiOutlineCreditCard />}
-                    as="a"
-                    id="testingDonationPageLink"
-                  >
-                    Donate{" "}
-                    <Badge ms={2} bg="brand" color="gray.800" pt={1}>
-                      Tempo
-                    </Badge>
-                  </Button>
-                </Link>
-              )}
-              {source.frontmatter.website && (
-                <Link href={source.frontmatter.website} passHref>
-                  <Button
-                    leftIcon={<HiOutlineGlobe />}
-                    as="a"
-                    id="testingOSPageProjectWebsiteLink"
-                  >
-                    Visit Project Website
-                  </Button>
-                </Link>
-              )}
-              {source.frontmatter.repository && (
-                <Link href={source.frontmatter.repository} passHref>
-                  <Button
-                    leftIcon={<HiOutlineCode />}
-                    as="a"
-                    id="testingOSPageProjectRepositoryLink"
-                  >
-                    Visit Source Repository
-                  </Button>
-                </Link>
-              )}
+          <ErrorFallback>
+            <Flex direction="column" as="main" id="testingOSPageDescription">
+              <MDXRemote {...source} />
+            </Flex>
+          </ErrorFallback>
+          <ErrorFallback>
+            <Stack direction="column" spacing={10} as="section" w={350}>
+              <Stack direction="column" spacing={2}>
+                {source.frontmatter.donate && (
+                  <Link href={donationPath} passHref>
+                    <Button
+                      leftIcon={<HiOutlineCreditCard />}
+                      as="a"
+                      id="testingDonationPageLink"
+                    >
+                      Donate{" "}
+                      <Badge ms={2} bg="brand" color="gray.800" pt={1}>
+                        Tempo
+                      </Badge>
+                    </Button>
+                  </Link>
+                )}
+                {source.frontmatter.website && (
+                  <Link href={source.frontmatter.website} passHref>
+                    <Button
+                      leftIcon={<HiOutlineGlobe />}
+                      as="a"
+                      id="testingOSPageProjectWebsiteLink"
+                    >
+                      Visit Project Website
+                    </Button>
+                  </Link>
+                )}
+                {source.frontmatter.repository && (
+                  <Link href={source.frontmatter.repository} passHref>
+                    <Button
+                      leftIcon={<HiOutlineCode />}
+                      as="a"
+                      id="testingOSPageProjectRepositoryLink"
+                    >
+                      Visit Source Repository
+                    </Button>
+                  </Link>
+                )}
+              </Stack>
+              <Table>
+                <Tbody>
+                  {source.frontmatter.category && (
+                    <Tr>
+                      <Td>Category</Td>
+                      <Td>
+                        <Badge>{source.frontmatter.category}</Badge>
+                      </Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.descends && (
+                    <Tr>
+                      <Td>Based on</Td>
+                      <Td id="testingOSPageTableDescends">
+                        {source.frontmatter.descends}
+                      </Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.platform && (
+                    <Tr>
+                      <Td>Platforms</Td>
+                      <Td>{source.frontmatter.platform}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.desktop && (
+                    <Tr>
+                      <Td>Preinstalled Desktop</Td>
+                      <Td>{source.frontmatter.desktop}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.browser && (
+                    <Tr>
+                      <Td>Preinstalled Browser</Td>
+                      <Td>{source.frontmatter.browser}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.productivity && (
+                    <Tr>
+                      <Td>Preinstalled Productivity Software</Td>
+                      <Td>{source.frontmatter.productivity}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.shell && (
+                    <Tr>
+                      <Td>Shell</Td>
+                      <Td>{source.frontmatter.shell}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.packagemgr && (
+                    <Tr>
+                      <Td>Package Manager</Td>
+                      <Td>{source.frontmatter.packagemgr}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.startup && (
+                    <Tr>
+                      <Td>Startup Manager</Td>
+                      <Td>{source.frontmatter.startup}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.origin && (
+                    <Tr>
+                      <Td>Region of Origin</Td>
+                      <Td>{source.frontmatter.origin}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.license && (
+                    <Tr>
+                      <Td>License</Td>
+                      <Td>{source.frontmatter.license}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.version && (
+                    <Tr>
+                      <Td>Version at Writing</Td>
+                      <Td>{source.frontmatter.version}</Td>
+                    </Tr>
+                  )}
+                </Tbody>
+              </Table>
+              <Link href={contributionPath} passHref>
+                <Button
+                  leftIcon={<HiOutlinePencil />}
+                  size="sm"
+                  as="a"
+                  id="testingOSPageEditLink"
+                >
+                  View on GitHub
+                </Button>
+              </Link>
             </Stack>
-            <Table>
-              <Tbody>
-                {source.frontmatter.category && (
-                  <Tr>
-                    <Td>Category</Td>
-                    <Td>
-                      <Badge>{source.frontmatter.category}</Badge>
-                    </Td>
-                  </Tr>
-                )}
-                {source.frontmatter.descends && (
-                  <Tr>
-                    <Td>Based on</Td>
-                    <Td id="testingOSPageTableDescends">
-                      {source.frontmatter.descends}
-                    </Td>
-                  </Tr>
-                )}
-                {source.frontmatter.platform && (
-                  <Tr>
-                    <Td>Platforms</Td>
-                    <Td>{source.frontmatter.platform}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.desktop && (
-                  <Tr>
-                    <Td>Preinstalled Desktop</Td>
-                    <Td>{source.frontmatter.desktop}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.browser && (
-                  <Tr>
-                    <Td>Preinstalled Browser</Td>
-                    <Td>{source.frontmatter.browser}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.productivity && (
-                  <Tr>
-                    <Td>Preinstalled Productivity Software</Td>
-                    <Td>{source.frontmatter.productivity}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.shell && (
-                  <Tr>
-                    <Td>Shell</Td>
-                    <Td>{source.frontmatter.shell}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.packagemgr && (
-                  <Tr>
-                    <Td>Package Manager</Td>
-                    <Td>{source.frontmatter.packagemgr}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.startup && (
-                  <Tr>
-                    <Td>Startup Manager</Td>
-                    <Td>{source.frontmatter.startup}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.origin && (
-                  <Tr>
-                    <Td>Region of Origin</Td>
-                    <Td>{source.frontmatter.origin}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.license && (
-                  <Tr>
-                    <Td>License</Td>
-                    <Td>{source.frontmatter.license}</Td>
-                  </Tr>
-                )}
-                {source.frontmatter.version && (
-                  <Tr>
-                    <Td>Version at Writing</Td>
-                    <Td>{source.frontmatter.version}</Td>
-                  </Tr>
-                )}
-              </Tbody>
-            </Table>
-            <Link href={contributionPath} passHref>
-              <Button
-                leftIcon={<HiOutlinePencil />}
-                size="sm"
-                as="a"
-                id="testingOSPageEditLink"
-              >
-                View on GitHub
-              </Button>
-            </Link>
-          </Stack>
+          </ErrorFallback>
         </Stack>
       </Stack>
     </>

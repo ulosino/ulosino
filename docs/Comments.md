@@ -1,4 +1,4 @@
-# Code comments
+# Code Comments
 
 This document describes a standard collection of code comments.
 

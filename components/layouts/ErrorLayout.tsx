@@ -55,6 +55,7 @@ export default function ErrorLayout({
         mb={10}
         me={10}
         display={{ base: "none", md: "flex" }}
+        w={175}
       >
         <Center>
           <ErrorIcon is404={is404} />

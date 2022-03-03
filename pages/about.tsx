@@ -30,7 +30,7 @@ export default function About() {
       </Head>
 
       <Stack direction="column" spacing={5}>
-        <Heading size="xl">About</Heading>
+        <Heading size="xl">About ULOSINO</Heading>
         <Text>
           ULOSINO is the modern setting for open source operating system
           information.

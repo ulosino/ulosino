@@ -35,6 +35,7 @@ export default function AdvancedSearchGroup({ data }: DataTypes) {
     <>
       {/* Derived OS */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Derived OS..."
         inputId="testingSearchInputDerivedOS"
       >
@@ -59,6 +60,7 @@ export default function AdvancedSearchGroup({ data }: DataTypes) {
       </SearchWrapper>
       {/* Region of Origin */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Region of Origin..."
         inputId="testingSearchInputRegion"
       >
@@ -83,6 +85,7 @@ export default function AdvancedSearchGroup({ data }: DataTypes) {
       </SearchWrapper>
       {/* Shell */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Shell..."
         inputId="testingSearchInputShell"
       >

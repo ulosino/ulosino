@@ -44,18 +44,6 @@ interface LayoutProps {
   showPreferences: boolean;
 }
 
-function DumpDeploymentInformation() {
-  console.debug("Vercel environment details (production/preview)");
-  console.debug(process.env.NEXT_PUBLIC_VERCEL_ENV);
-  console.debug(process.env.NEXT_PUBLIC_VERCEL_URL);
-  console.debug(
-    "Vercel deployment Git details (commit, branch, commit message)"
-  );
-  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA);
-  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF);
-  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE);
-}
-
 // Begin wrapping component
 export default function Layout({
   children,
@@ -221,27 +209,6 @@ export default function Layout({
             callback: () => setBackButton.toggle(),
           }),
         [manager, setBackButton];
-    }
-  });
-  // Troubleshooting keybindings
-  useEffect(() => {
-    {
-      isWindows
-        ? manager.registerHotkey({
-            key: "~",
-            ctrl: false,
-            shift: true,
-            alt: true,
-            callback: () => DumpDeploymentInformation(),
-          })
-        : manager.registerHotkey({
-            key: "~",
-            ctrl: true,
-            shift: true,
-            alt: false,
-            callback: () => DumpDeploymentInformation(),
-          }),
-        [manager, DumpDeploymentInformation];
     }
   });
 

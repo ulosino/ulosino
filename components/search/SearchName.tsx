@@ -14,6 +14,7 @@ import OSDataLayout from "components/OSDataLayout";
 
 interface DataTypes {
   data: any;
+  size: string;
 }
 
 interface MetadataTypes {
@@ -29,9 +30,10 @@ interface MetadataTypes {
 }
 
 // Begin wrapping component
-export default function SearchName({ data }: DataTypes) {
+export default function SearchName({ data, size }: DataTypes) {
   return (
     <SearchWrapper
+      size={size}
       placeholder="Find an Operating System..."
       inputId="testingSearchInputName"
     >

@@ -11,12 +11,31 @@ import { ReactElement } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import UITheme from "providers/UIThemeProvider";
 
+// First party components
+import { ErrorFallbackApplication } from "components/ErrorFallback";
+import { UnsupportedBrowser } from "components/UnsupportedBrowser";
+
 // Keybinding libraries
 import {
   KeybindingProvider,
   KeybindingManager,
 } from "providers/KeybindingProvider";
 const manager = new KeybindingManager();
+import { useEffect } from "react";
+import { isWindows, isIE, isLegacyEdge, isYandex } from "react-device-detect";
+
+// This contains deployment variables from Vercel
+function DumpDeploymentInformation() {
+  console.debug("Vercel environment details (production/preview)");
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_ENV);
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_URL);
+  console.debug(
+    "Vercel deployment Git details (commit, branch, commit message)"
+  );
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA);
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF);
+  console.debug(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE);
+}
 
 // Begin wrapping component
 export default function ApplicationKit({
@@ -24,9 +43,50 @@ export default function ApplicationKit({
 }: {
   children: ReactElement;
 }) {
+  // Troubleshooting keybindings
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: "~",
+            ctrl: false,
+            shift: true,
+            alt: true,
+            callback: () => DumpDeploymentInformation(),
+          })
+        : manager.registerHotkey({
+            key: "~",
+            ctrl: true,
+            shift: true,
+            alt: false,
+            callback: () => DumpDeploymentInformation(),
+          }),
+        [manager, DumpDeploymentInformation];
+    }
+  });
   return (
     <ChakraProvider theme={UITheme}>
-      <KeybindingProvider manager={manager}>{children}</KeybindingProvider>
+      <ErrorFallbackApplication>
+        <KeybindingProvider manager={manager}>
+          {isIE ? (
+            <UnsupportedBrowser browser="Internet Explorer" />
+          ) : (
+            <>
+              {isLegacyEdge ? (
+                <UnsupportedBrowser browser="Microsoft Edge Legacy" />
+              ) : (
+                <>
+                  {isYandex ? (
+                    <UnsupportedBrowser browser="Yandex Browser" />
+                  ) : (
+                    children
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </KeybindingProvider>
+      </ErrorFallbackApplication>
     </ChakraProvider>
   );
 }

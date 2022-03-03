@@ -26,9 +26,10 @@ describe("OS Page Local Metadata Testing", () => {
     cy.get("#testingOSPageEditLink")
       .contains("View on GitHub")
       .should("have.attr", "href")
+      // IP URL standard is not recognised by Cypress below, resorted to use one "/"
       .and(
         "include",
-        "https://github.com/ulosino/ulosino/blob/main/public/markdown/browse/elementary.mdx"
+        "https:/github.com/ulosino/ulosino/blob/main/public/markdown/browse/elementary.mdx"
       );
   });
 });

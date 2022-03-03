@@ -37,9 +37,10 @@ export default function CoreSearchGroup({ data }: DataTypes) {
   return (
     <>
       {/* Name */}
-      <SearchName data={data} />
+      <SearchName data={data} size="md" />
       {/* Platform */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Platform..."
         inputId="testingSearchInputPlatform"
       >
@@ -86,6 +87,7 @@ export default function CoreSearchGroup({ data }: DataTypes) {
       </SearchWrapper>
       {/* Desktop */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Desktop..."
         inputId="testingSearchInputDesktop"
       >
@@ -132,6 +134,7 @@ export default function CoreSearchGroup({ data }: DataTypes) {
       </SearchWrapper>
       {/* Startup manager */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Startup Manager..."
         inputId="testingSearchInputStartupManager"
       >
@@ -178,6 +181,7 @@ export default function CoreSearchGroup({ data }: DataTypes) {
       </SearchWrapper>
       {/* Package manager */}
       <SearchWrapper
+        size="md"
         placeholder="Search by Package Manager..."
         inputId="testingSearchInputPackageManager"
       >

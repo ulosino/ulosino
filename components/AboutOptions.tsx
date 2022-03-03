@@ -5,7 +5,6 @@
 
 // Links and routing
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 // Chakra UI, icons, and other design imports
 import { Stack, Button } from "@chakra-ui/react";
@@ -14,7 +13,6 @@ import { FiTwitter } from "react-icons/fi";
 
 // Begin component
 export default function AboutOptions() {
-  const router = useRouter();
   return (
     <Stack direction="column" spacing={2} as="nav" id="testingErrorPageActions">
       <Link href="https://github.com/ulosino/ulosino" passHref>
