@@ -12,13 +12,14 @@ import {
   Button,
   Box,
   Stack,
-  Flex,
-  Spacer,
-  FormControl,
   DarkMode,
-  useBreakpointValue,
+  SimpleGrid,
 } from "@chakra-ui/react";
-import { HiOutlineDatabase } from "react-icons/hi";
+import {
+  HiOutlineDatabase,
+  HiOutlineInformationCircle,
+  HiOutlineSparkles,
+} from "react-icons/hi";
 
 import { useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
@@ -36,19 +37,11 @@ function Card(props) {
 import UIProvider from "providers/UIProvider";
 
 import {
+  AutoComplete,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
-
-import dynamic from "next/dynamic";
-import Loading from "components/Loading";
-const HomeHero = dynamic(() => import("components/HomeHero"), {
-  loading: () => <Loading />,
-});
-const AutoComplete = dynamic(() =>
-  import("@choc-ui/chakra-autocomplete").then((mod) => mod.AutoComplete)
-);
 
 export default function Home({
   AZOSPageData,
@@ -66,17 +59,13 @@ export default function Home({
     packagemgr: string;
   }[];
 }) {
-  const searchCardPaddingX = useBreakpointValue({ base: 4, md: 10 });
-  const searchCardPaddingY = useBreakpointValue({ base: 12, md: 24 });
-  const searchCardBorderRadius = useBreakpointValue({
-    base: "xl",
-    md: "2xl",
-  });
-  const searchCardBorderEndRadius = useBreakpointValue({
-    base: "xl",
-    md: "none",
-  });
-  const LandingAreaHeight = useBreakpointValue({ base: "60", md: 320 });
+  const systemDate = new Date();
+  const hours = systemDate.getHours();
+  var timeGreeting;
+  if (hours < 12) timeGreeting = "Good Morning";
+  else if (hours >= 12 && hours <= 17) timeGreeting = "Good Afternoon";
+  else if (hours >= 17 && hours <= 24) timeGreeting = "Good Evening";
+
   return (
     <UIProvider>
       <Head>
@@ -91,144 +80,127 @@ export default function Home({
         />
         <meta
           property="og:description"
-          content="ULOSINO is The Friendly Flow for open source operating system discovery. Search and discover Linux and BSD-based OSs in a modern setting."
+          content="ULOSINO is The Friendly Flow for open source OS discovery. Search and discover Linux and BSD-based OSs in a modern setting."
         />
       </Head>
 
-      <Stack direction="column" spacing={16}>
-        <Flex h={LandingAreaHeight} mt={16} as="main">
-          <Card
-            flex="1"
-            px={searchCardPaddingX}
-            py={searchCardPaddingY}
-            borderStartRadius={searchCardBorderRadius}
-            borderEndRadius={searchCardBorderEndRadius}
-            variant="secondary"
-          >
-            <DarkMode>
-              <Stack direction="column" spacing={2}>
-                <Flex color="brand">
-                  <Text textStyle="secondary" as="h6">
-                    Start
-                  </Text>
-                  <Spacer />
-                  <Link href="/browse" passHref>
-                    <Button
-                      leftIcon={<HiOutlineDatabase />}
-                      size="sm"
-                      display={{ base: "none", md: "flex" }}
-                    >
-                      Browse All OSs
-                    </Button>
-                  </Link>
-                </Flex>
-                <FormControl>
-                  <AutoComplete>
-                    <AutoCompleteInput
-                      variant="outline"
-                      size="lg"
-                      color="brand"
-                      borderColor="gray.700"
-                      borderRadius="xl"
-                      shadow="inner"
-                      placeholder="Find an operating system..."
-                      id="testing-db-input"
-                    />
-                    <AutoCompleteList>
-                      {AZOSPageData.map(
-                        ({
-                          id,
-                          title,
-                          summary,
-                          category,
-                          version,
-                          platform,
-                          desktop,
-                          startup,
-                          packagemgr,
-                        }) => (
-                          <AutoCompleteItem
-                            key={`option-${title}`}
-                            value={title}
-                            maxSuggestions={5}
-                            mx={3}
-                            id="testing-db-item"
-                          >
-                            <Link
-                              href={`/browse/${id}`}
-                              passHref
-                              key={`/browse/${id}`}
+      <Stack direction="column" spacing={10}>
+        <SimpleGrid minChildWidth="300px" spacing={10}>
+          <Stack direction="column" spacing={5}>
+            <Text textStyle="secondary" as="h6">
+              Start
+            </Text>
+            <Stack direction="column" spacing={5}>
+              <Heading size="xl">{timeGreeting}</Heading>
+              <AutoComplete>
+                <AutoCompleteInput
+                  variant="outline"
+                  size="lg"
+                  borderRadius="xl"
+                  shadow="inner"
+                  placeholder="Find an Operating System..."
+                  id="testing-db-input"
+                />
+                <AutoCompleteList>
+                  {AZOSPageData.map(
+                    ({
+                      id,
+                      title,
+                      summary,
+                      category,
+                      version,
+                      platform,
+                      desktop,
+                      startup,
+                      packagemgr,
+                    }) => (
+                      <AutoCompleteItem
+                        key={`option-${title}`}
+                        value={title}
+                        maxSuggestions={5}
+                        mx={3}
+                        id="testing-db-item"
+                      >
+                        <Link
+                          href={`/browse/${id}`}
+                          passHref
+                          key={`/browse/${id}`}
+                        >
+                          <Box p={2} mb={2}>
+                            <Heading size="md">{title}</Heading>
+                            {summary && <Text fontSize="sm">"{summary}"</Text>}
+                            <Stack
+                              direction="row"
+                              display={{ base: "none", sm: "flex" }}
+                              spacing={4}
                             >
-                              <Box p={2} mb={2}>
-                                <Heading size="md">{title}</Heading>
-                                {summary && (
-                                  <Text fontSize="sm">"{summary}"</Text>
-                                )}
-                                <Stack
-                                  direction="row"
-                                  display={{ base: "none", sm: "flex" }}
-                                  spacing={4}
-                                >
-                                  {category && <Badge>{category}</Badge>}
-                                  {version && (
-                                    <Text fontSize="sm">{version}</Text>
-                                  )}
-                                  {platform && (
-                                    <Text fontSize="sm">{platform}</Text>
-                                  )}
-                                  {desktop && (
-                                    <Text fontSize="sm">{desktop}</Text>
-                                  )}
-                                  {startup && (
-                                    <Text fontSize="sm">{startup}</Text>
-                                  )}
-                                  {packagemgr && (
-                                    <Text fontSize="sm">{packagemgr}</Text>
-                                  )}
-                                </Stack>
-                              </Box>
-                            </Link>
-                          </AutoCompleteItem>
-                        )
-                      )}
-                    </AutoCompleteList>
-                  </AutoComplete>
-                </FormControl>
+                              {category && <Badge>{category}</Badge>}
+                              {version && <Text fontSize="sm">{version}</Text>}
+                              {platform && (
+                                <Text fontSize="sm">{platform}</Text>
+                              )}
+                              {desktop && <Text fontSize="sm">{desktop}</Text>}
+                              {startup && <Text fontSize="sm">{startup}</Text>}
+                              {packagemgr && (
+                                <Text fontSize="sm">{packagemgr}</Text>
+                              )}
+                            </Stack>
+                          </Box>
+                        </Link>
+                      </AutoCompleteItem>
+                    )
+                  )}
+                </AutoCompleteList>
+              </AutoComplete>
+            </Stack>
+          </Stack>
+          <Card variant="secondary">
+            <DarkMode>
+              <Stack direction="column" spacing={5}>
+                <Text textStyle="secondary" as="h6">
+                  ULOSINO Tempo
+                </Text>
+                <Stack direction="column" spacing={0}>
+                  <Heading>Give Capital.</Heading>
+                  <Heading>Support Projects.</Heading>
+                </Stack>
+                <Text>
+                  Open source projects move faster with financial support. Look
+                  for the{" "}
+                  <Badge bg="brand" color="gray.800" mb={1} mx={1}>
+                    Tempo
+                  </Badge>{" "}
+                  badge for quick access to a selection of donation options.
+                </Text>
                 <Link href="/browse" passHref>
-                  <Button
-                    leftIcon={<HiOutlineDatabase />}
-                    display={{ base: "flex", md: "none" }}
-                  >
-                    Browse All
+                  <Button leftIcon={<HiOutlineDatabase />} as="a">
+                    Browse the OS List
                   </Button>
                 </Link>
               </Stack>
             </DarkMode>
           </Card>
-          <Card
-            ps={10}
-            borderStartRadius="none"
-            borderEndRadius="2xl"
-            display={{ base: "none", md: "flex" }}
-            textAlign="end"
-          >
-            <Heading size="3xl">
-              The
-              <br />
-              Friendly
-              <br />
-              Flow
-            </Heading>
+        </SimpleGrid>
+        <SimpleGrid minChildWidth="300px" spacing={10}>
+          <Card variant="solid">
+            <Stack direction="column" spacing={5}>
+              <Text textStyle="secondary" as="h6">
+                Don't know what to search for?
+              </Text>
+              <Heading>Find a Match.</Heading>
+              <Link href="/matches" passHref>
+                <Button leftIcon={<HiOutlineSparkles />} as="a">
+                  Get Started with Matches
+                </Button>
+              </Link>
+            </Stack>
           </Card>
-        </Flex>
-
-        <Text fontSize="lg">
-          Search and discover open source operating systems, like Linux and BSD,
-          in a modern setting with ULOSINO. Make moves faster and easier when
-          the power of ULOSINO is in your flow.
-        </Text>
-
-        <HomeHero />
+          <Link href="/about" passHref>
+            <Button leftIcon={<HiOutlineInformationCircle />} as="a">
+              About ULOSINO
+            </Button>
+          </Link>
+        </SimpleGrid>
       </Stack>
     </UIProvider>
   );
