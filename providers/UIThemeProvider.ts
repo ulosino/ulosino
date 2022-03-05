@@ -11,6 +11,8 @@ export const Button = {
     fontWeight: 600,
     borderRadius: "xl",
     shadow: "inner",
+    userSelect: "none",
+    textDecoration: "none",
   },
   defaultProps: {
     size: "md",
@@ -28,15 +30,21 @@ export const Card = {
     padding: 4,
     borderRadius: "xl",
     shadow: "md",
+    textDecoration: "none",
   },
   variants: {
-    solid: ({ colorMode }) => ({
+    solid: ({ colorMode }: { colorMode: string }) => ({
       bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
       color: "inherit",
     }),
-    button: ({ colorMode }) => ({
-      bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
-      color: colorMode === "dark" ? "white" : "gray.800",
+    button: ({ colorMode }: { colorMode: string }) => ({
+      bg: colorMode === "dark" ? "blackAlpha.800" : "whiteAlpha.800",
+      color: "inherit",
+      _hover: {
+        bg: colorMode === "dark" ? "gray.900" : "gray.100",
+        color: colorMode === "dark" ? "gray.200" : "gray.900",
+      },
+      transition: ".30s ease",
       cursor: "pointer",
       shadow: "inner",
     }),
@@ -46,13 +54,8 @@ export const Card = {
     },
     secondary: {
       bg: "secondary",
-      color: "inherit",
+      color: "white",
     },
-    alert: ({ colorMode }) => ({
-      bg: colorMode === "dark" ? "whiteAlpha.300" : "whiteAlpha.800",
-      color: "inherit",
-      padding: 8,
-    }),
   },
   defaultProps: {
     variant: "solid",
@@ -166,11 +169,6 @@ const UITheme = extendTheme({
     global: {
       body: {
         fontFamily: "Public Sans",
-      },
-      // Next.js <Link> does not style links
-      a: {
-        textDecoration: "underline",
-        cursor: "pointer",
       },
       b: {
         fontWeight: 600,
