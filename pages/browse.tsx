@@ -194,7 +194,7 @@ export default function Browse({
                           startup,
                           packagemgr,
                         }) => (
-                          <Box flex={1}>
+                          <Box flex={1} key={id}>
                             <Link
                               href={`/browse/${id}`}
                               passHref
@@ -269,7 +269,7 @@ export default function Browse({
                           startup,
                           packagemgr,
                         }) => (
-                          <Box flex={1}>
+                          <Box flex={1} key={id}>
                             <Link
                               href={`/browse/${id}`}
                               passHref

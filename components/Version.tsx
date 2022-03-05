@@ -1,5 +1,5 @@
 // Raw version string
 
 export default function Version() {
-  return <span>2.1.1</span>;
+  return <span>2.2.0</span>;
 }

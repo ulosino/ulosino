@@ -21,9 +21,6 @@ import {
   Tbody,
   Tr,
   Td,
-  ModalContent,
-  ModalCloseButton,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { HiOutlineCash, HiOutlineGlobe, HiOutlineCode } from "react-icons/hi";
 
@@ -31,35 +28,21 @@ import UIProvider from "providers/UIProvider";
 
 const DiscussionModal = dynamic(() => import("components/DiscussionModal"));
 
-// Dynamically import Tempo experience components to cut performance on pages where Tempo isn't available
-const Modal = dynamic(() =>
-  import("@chakra-ui/react").then((mod) => mod.Modal)
-);
-const ModalOverlay = dynamic(() =>
-  import("@chakra-ui/react").then((mod) => mod.ModalOverlay)
-);
-const ModalHeader = dynamic(() =>
-  import("@chakra-ui/react").then((mod) => mod.ModalHeader)
-);
-const ModalBody = dynamic(() =>
-  import("@chakra-ui/react").then((mod) => mod.ModalBody)
-);
-const ModalFooter = dynamic(() =>
-  import("@chakra-ui/react").then((mod) => mod.ModalFooter)
-);
-const TempoDisclaimer = dynamic(() => import("components/TempoDisclaimer"));
-
 // Pages can use the following components if needed
 const Image = dynamic(() => import("next/image"));
 
 const availableComponents = [Image];
 
-export default function MDXHostPage({ source, metadata, componentNames }) {
+export default function MDXHostPage({
+  source,
+  metadata,
+  donationPath,
+  componentNames,
+}) {
   const components = {
     ...availableComponents,
     Image: componentNames.includes("Image") ? Image : null,
   };
-  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <UIProvider>
       <Head>
@@ -95,95 +78,17 @@ export default function MDXHostPage({ source, metadata, componentNames }) {
           <Stack spacing={2} as="section">
             <DiscussionModal />
             {metadata.donate && (
-              <>
+              <Link href={donationPath} passHref>
                 <Button
                   leftIcon={<HiOutlineCash />}
                   aria-label="Show donation options for this operating system"
-                  onClick={onOpen}
                 >
                   Donate
                   <Badge ms={2} bg="brand" color="gray.800" pt={1}>
                     Tempo
                   </Badge>
                 </Button>
-                <Modal
-                  isOpen={isOpen}
-                  onClose={onClose}
-                  isCentered
-                  motionPreset="scale"
-                  size="sm"
-                  scrollBehavior="inside"
-                >
-                  <ModalOverlay />
-                  <ModalContent rounded="2xl">
-                    <ModalHeader>Donate to {metadata.title}</ModalHeader>
-                    <ModalCloseButton rounded="xl" />
-                    <ModalBody>
-                      <Stack direction="column" spacing={8}>
-                        <Stack direction="column" spacing={2}>
-                          <Text textStyle="secondary" as="h6">
-                            Visit OS Website
-                          </Text>
-                          {metadata.donate && (
-                            <Link href={metadata.donate} passHref>
-                              <Button leftIcon={<HiOutlineCash />}>
-                                See Donation Options
-                              </Button>
-                            </Link>
-                          )}
-                        </Stack>
-                        <Stack direction="column" spacing={2}>
-                          <Text textStyle="secondary" as="h6">
-                            Quick Donation Options
-                          </Text>
-                          {(metadata.donateCollective && (
-                            <Link href={metadata.donateCollective} passHref>
-                              <Button leftIcon={<HiOutlineCash />}>
-                                Donate with Open Collective
-                              </Button>
-                            </Link>
-                          )) ?? (
-                            <Button leftIcon={<HiOutlineCash />} isDisabled>
-                              Donate with Open Collective
-                            </Button>
-                          )}
-                          {(metadata.donateGithub && (
-                            <Link href={metadata.donateGithub} passHref>
-                              <Button leftIcon={<HiOutlineCash />}>
-                                Donate with GitHub Sponsors
-                              </Button>
-                            </Link>
-                          )) ?? (
-                            <Button leftIcon={<HiOutlineCash />} isDisabled>
-                              Donate with GitHub Sponsors
-                            </Button>
-                          )}
-                          {(metadata.donateLibera && (
-                            <Link href={metadata.donateLibera} passHref>
-                              <Button leftIcon={<HiOutlineCash />}>
-                                Donate with Liberapay
-                              </Button>
-                            </Link>
-                          )) ?? (
-                            <Button leftIcon={<HiOutlineCash />} isDisabled>
-                              Donate with Liberapay
-                            </Button>
-                          )}
-                        </Stack>
-                        <Stack direction="column" spacing={2}>
-                          <Badge bg="brand" color="gray.800" w={210}>
-                            Powered by ULOSINO Tempo
-                          </Badge>
-                        </Stack>
-                        <TempoDisclaimer />
-                      </Stack>
-                    </ModalBody>
-                    <ModalFooter>
-                      <Button onClick={onClose}>Done</Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-              </>
+              </Link>
             )}
             {metadata.website && (
               <Link href={metadata.website} passHref>
@@ -317,10 +222,13 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
     scope: data,
   });
 
+  const donationPagePath = path.join(`/tempo/`, `${params.slug}`);
+
   return {
     props: {
       source: mdxSource,
       metadata: data,
+      donationPath: donationPagePath,
       componentNames,
     },
   };

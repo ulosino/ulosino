@@ -174,7 +174,7 @@ export default function Home({
                 </Text>
                 <Link href="/browse" passHref>
                   <Button leftIcon={<HiOutlineDatabase />} as="a">
-                    Browse the OS List
+                    Browse Operating Systems
                   </Button>
                 </Link>
               </Stack>
@@ -195,11 +195,9 @@ export default function Home({
               </Link>
             </Stack>
           </Card>
-          <Link href="/about" passHref>
-            <Button leftIcon={<HiOutlineInformationCircle />} as="a">
-              About ULOSINO
-            </Button>
-          </Link>
+          <Button leftIcon={<HiOutlineInformationCircle />} isDisabled>
+            About ULOSINO
+          </Button>
         </SimpleGrid>
       </Stack>
     </UIProvider>
