@@ -52,7 +52,6 @@ OfflineFallback.getLayout = function getLayout(page: ReactElement) {
     <ApplicationKit>
       <Layout
         useBasicLayout={false}
-        useBasicKeybindings={true}
         useAltBackground={false}
         showPreferences={false}
       >

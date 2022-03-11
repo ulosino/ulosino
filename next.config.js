@@ -31,6 +31,9 @@ module.exports = withPWA({
   // Configuration for Next.js
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
+  // experimental: {
+  //   runtime: "nodejs",
+  // },
   pageExtensions: ["tsx"],
   images: {
     formats: ["image/avif", "image/webp"],

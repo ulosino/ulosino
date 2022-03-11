@@ -19,15 +19,17 @@ import {
   Container,
   Button,
   IconButton,
+  Text,
   useBoolean,
   useColorMode,
   useColorModeValue,
+  DarkMode,
 } from "@chakra-ui/react";
+import { HiOutlineMenu } from "react-icons/hi";
 
 // First-party components
 import Logo from "components/Logo";
 import BackButton from "components/layouts/BackButton";
-import { HiOutlineMenu } from "react-icons/hi";
 
 // Keybinding libraries
 import { useEffect } from "react";
@@ -37,8 +39,6 @@ import { isWindows } from "react-device-detect";
 interface LayoutProps {
   children: ReactElement;
   useBasicLayout: boolean;
-  // useBasicKeybindings is enabled on Home and Advanced Search, currently reserved
-  useBasicKeybindings: boolean;
   // useAltBackground is reserved
   useAltBackground: boolean;
   showPreferences: boolean;
@@ -48,13 +48,12 @@ interface LayoutProps {
 export default function Layout({
   children,
   useBasicLayout,
-  useBasicKeybindings,
-  useAltBackground,
   showPreferences,
 }: LayoutProps) {
   // Global preferences
   const [backButton, setBackButton] = useBoolean();
   const [advancedSearch, setAdvancedSearch] = useBoolean();
+  const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
 
   // Global keybindings
   const manager = useHotkeyManager();
@@ -219,6 +218,56 @@ export default function Layout({
       direction="column"
       bg={useColorModeValue("gray.50", "inherit")}
     >
+      {ukraineAidBanner ? (
+        ""
+      ) : (
+        <Flex
+          bg="secondary"
+          color="white"
+          py={2}
+          mb={4}
+          display={{ base: "none", md: "flex" }}
+        >
+          <DarkMode>
+            <Container maxW="container.lg">
+              <Flex>
+                <Stack direction="row" spacing={5}>
+                  <Center>
+                    <Stack direction="column" spacing={0}>
+                      <Flex bg="blue" w={8} h={2} roundedTop="sm" />
+                      <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
+                    </Stack>
+                  </Center>
+                  <Center>
+                    <Text textStyle="miniHeading" as="h6">
+                      Donate to UNICEF
+                    </Text>
+                  </Center>
+                  <Center>
+                    <Text fontSize="sm">Help children in Ukraine.</Text>
+                  </Center>
+                  <Center>
+                    <Link
+                      href="https://help.unicef.org/ukraine-emergency"
+                      passHref
+                    >
+                      <Button size="sm" as="a">
+                        Get Started
+                      </Button>
+                    </Link>
+                  </Center>
+                </Stack>
+                <Spacer />
+                <Center>
+                  <Button size="sm" onClick={setUkraineAidBanner.toggle}>
+                    Not Now
+                  </Button>
+                </Center>
+              </Flex>
+            </Container>
+          </DarkMode>
+        </Flex>
+      )}
       <Container maxW="container.lg" as="header">
         <Flex mt={2} mb={10}>
           <Center

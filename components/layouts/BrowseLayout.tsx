@@ -24,11 +24,11 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
           direction="column"
           spacing={2}
           mb={10}
-          me={10}
+          me={{ base: "none", md: 10 }}
+          minW={{ base: "inherit", sm: 175 }}
           display={{ base: "none", sm: "flex" }}
           as="nav"
           id="testingBrowsePageSeriesSidebar"
-          w={175}
         >
           <Link href="/browse" passHref>
             <Button as="a">OS List &amp; Tempo</Button>

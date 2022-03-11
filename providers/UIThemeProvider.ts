@@ -41,10 +41,13 @@ export const Card = {
       color: "inherit",
     }),
     button: ({ colorMode }: { colorMode: string }) => ({
-      bg: colorMode === "dark" ? "blackAlpha.800" : "whiteAlpha.800",
+      bg: "inherit",
+      border: "solid",
+      borderWidth: "0.5px",
+      borderColor: colorMode === "dark" ? "whiteAlpha.300" : "gray.200",
       color: "inherit",
       _hover: {
-        bg: colorMode === "dark" ? "gray.900" : "gray.100",
+        bg: colorMode === "dark" ? "whiteAlpha.100" : "gray.100",
         color: colorMode === "dark" ? "gray.200" : "gray.900",
       },
       transition: ".30s ease",

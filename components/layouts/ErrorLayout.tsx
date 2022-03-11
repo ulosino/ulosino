@@ -53,9 +53,9 @@ export default function ErrorLayout({
         direction="column"
         spacing={10}
         mb={10}
-        me={10}
+        me={{ base: "none", md: 10 }}
+        minW={{ base: "inherit", sm: 175 }}
         display={{ base: "none", md: "flex" }}
-        w={175}
       >
         <Center>
           <ErrorIcon is404={is404} />

@@ -161,7 +161,6 @@ Home.getLayout = function getLayout(page: ReactElement) {
     <ApplicationKit>
       <Layout
         useBasicLayout={false}
-        useBasicKeybindings={false}
         useAltBackground={false}
         showPreferences={false}
       >

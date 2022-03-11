@@ -13,7 +13,7 @@ import UITheme from "providers/UIThemeProvider";
 
 // First party components
 import { ErrorFallbackApplication } from "components/ErrorFallback";
-import { UnsupportedBrowser } from "components/UnsupportedBrowser";
+import { BrowserNotPermitted } from "components/BrowserNotPermitted";
 
 // Keybinding libraries
 import {
@@ -69,15 +69,15 @@ export default function ApplicationKit({
       <ErrorFallbackApplication>
         <KeybindingProvider manager={manager}>
           {isIE ? (
-            <UnsupportedBrowser browser="Internet Explorer" />
+            <BrowserNotPermitted browser="Internet Explorer" />
           ) : (
             <>
               {isLegacyEdge ? (
-                <UnsupportedBrowser browser="Microsoft Edge Legacy" />
+                <BrowserNotPermitted browser="Microsoft Edge Legacy" />
               ) : (
                 <>
                   {isYandex ? (
-                    <UnsupportedBrowser browser="Yandex Browser" />
+                    <BrowserNotPermitted browser="Yandex Browser" />
                   ) : (
                     children
                   )}

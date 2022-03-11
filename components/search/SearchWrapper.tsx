@@ -6,6 +6,9 @@
 // Types
 import { ReactElement } from "react";
 
+// First party components
+import EmptyState from "components/search/EmptyState";
+
 // Search libraries
 import {
   AutoComplete,
@@ -28,7 +31,7 @@ export default function SearchWrapper({
   inputId,
 }: PageProps) {
   return (
-    <AutoComplete>
+    <AutoComplete emptyState={EmptyState}>
       <AutoCompleteInput
         variant="outline"
         size={size}

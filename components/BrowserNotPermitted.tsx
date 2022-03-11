@@ -1,7 +1,8 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// This is rendered when the ApplicationKit finds an unsupported browser
+// This is rendered when the ApplicationKit finds a browser that isn't permitted
+// It returns IAE BrowserNotPermitted
 
 // Chakra UI, icons, and other design imports
 import { Text, Code } from "@chakra-ui/react";
@@ -13,7 +14,7 @@ interface UnsupportedBrowserTypes {
 }
 
 // Begin component
-export function UnsupportedBrowser({ browser }: UnsupportedBrowserTypes) {
+export function BrowserNotPermitted({ browser }: UnsupportedBrowserTypes) {
   console.error(
     "Integrated Application Error: BrowserNotPermitted (Reference ULOSINO 3.x.x documentation)"
   );

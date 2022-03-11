@@ -71,8 +71,7 @@ export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
         <Text fontSize="xs">
           Get here quickly by pressing <Kbd>control</Kbd> + <Kbd>S</Kbd> or{" "}
           <Kbd>alt</Kbd> + <Kbd>S</Kbd> on Windows. You can also open a new tab
-          to this page with <Kbd>control</Kbd> + <Kbd>option</Kbd> +{" "}
-          <Kbd>N</Kbd>.
+          here with <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>N</Kbd>.
         </Text>
       </Stack>
     </>
@@ -85,7 +84,6 @@ AdvancedSearch.getLayout = function getLayout(page: ReactElement) {
     <ApplicationKit>
       <Layout
         useBasicLayout={false}
-        useBasicKeybindings={false}
         useAltBackground={false}
         showPreferences={false}
       >
