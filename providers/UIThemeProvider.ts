@@ -50,7 +50,7 @@ export const Card = {
         bg: colorMode === "dark" ? "whiteAlpha.100" : "gray.100",
         color: colorMode === "dark" ? "gray.200" : "gray.900",
       },
-      transition: ".30s ease",
+      transition: ".15s ease",
       cursor: "pointer",
       shadow: "inner",
     }),

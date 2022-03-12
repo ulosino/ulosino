@@ -9,17 +9,17 @@ import { useRouter } from "next/router";
 
 // Chakra UI, icons, and other design imports
 import { IconButton } from "@chakra-ui/react";
-import { HiOutlineChevronLeft } from "react-icons/hi";
+import { FiChevronLeft } from "react-icons/fi";
 
 // Begin component
-export default function BackButton() {
+export default function HeaderBackButton() {
   const router = useRouter();
   return (
     <IconButton
       aria-label="Go Back"
       title="Go Back"
       onClick={() => router.back()}
-      icon={<HiOutlineChevronLeft />}
+      icon={<FiChevronLeft />}
       variant="ghost"
       me={5}
     />

@@ -30,11 +30,11 @@ export default function ErrorOptions({ is404 }: { is404: boolean }) {
         </Button>
       </Link>
       {is404 ? (
+        ""
+      ) : (
         <Button leftIcon={<HiOutlineRefresh />} onClick={router.reload}>
           Try Again
         </Button>
-      ) : (
-        ""
       )}
     </Stack>
   );

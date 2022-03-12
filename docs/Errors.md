@@ -6,11 +6,11 @@ To improve the reliability of the ULOSINO web app, we've bundled in some common 
 
 | IAE                      | Description                                                                                 |
 | ------------------------ | ------------------------------------------------------------------------------------------- |
-| `PageIsError`            | Page is /error                                                                              |
+| `PageIsError`            | Page is `/error `                                                                           |
 | `PageNotInCache`         | The page is not available locally and downloading it from a remote server failed            |
 | `ErrorRegionCaught`      | A defined region of the page returned a React Error Boundary                                |
 | `ErrorInUndefinedRegion` | A React Error Boundary was returned in a DOM region not wrapped in a page-specific fallback |
-| `BrowserNotPermitted`    | An unsupported browser is being used to access ULOSINO                                      |
+| `BrowserNotPermitted`    | The browser being used to access ULOSINO isn't supported                                    |
 
 ## Other errors
 
@@ -23,4 +23,4 @@ We've built custom fallbacks for these common HTTP error codes:
 
 ## Export deployment details
 
-Sometimes you'll get the commit hash or branch of the deployment you're using. This can be done by pressing Control+Shift+Backtick or Alt+Shift+Backtick. Go to the Keyboard Shortcut Reference for more information.
+Sometimes you'll get the commit hash or branch of the deployment you're using. This can be done by pressing Control+Shift+Backtick (or Alt+Shift+Backtick on Windows). Go to the Keyboard Shortcut Reference for more information.

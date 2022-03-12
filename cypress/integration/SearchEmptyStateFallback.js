@@ -4,7 +4,7 @@
 describe("Search Empty State Fallback Testing", () => {
   it("Should test that the custom fallback is used when the search query returns no results", () => {
     cy.visit("/");
-    cy.get("#testingSearchInputName").focus().type("Peppermint");
+    cy.get("#testingSearchInputName").focus().type("Lorem ipsum");
     cy.get("#testingSearchEmptyStateFallback").should("exist", "be.visible");
   });
 });

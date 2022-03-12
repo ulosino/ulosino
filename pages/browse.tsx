@@ -26,7 +26,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 }
 
 // First party components
-import ApplicationKit from "components/ApplicationKit";
+import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 
@@ -112,7 +112,7 @@ export default function Browse({ AZOSPageData }: PageDataProps) {
 // Apply persistent layout, wrapping page
 Browse.getLayout = function getLayout(page: ReactElement) {
   return (
-    <ApplicationKit>
+    <ApplicationProvider>
       <Layout
         useBasicLayout={false}
         useAltBackground={false}
@@ -120,7 +120,7 @@ Browse.getLayout = function getLayout(page: ReactElement) {
       >
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
-    </ApplicationKit>
+    </ApplicationProvider>
   );
 };
 

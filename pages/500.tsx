@@ -11,7 +11,7 @@ import Head from "next/head";
 import { Stack, Heading, Text, Code } from "@chakra-ui/react";
 
 // First party components
-import ApplicationKit from "components/ApplicationKit";
+import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import ErrorLayout from "components/layouts/ErrorLayout";
 
@@ -47,14 +47,14 @@ export default function Custom500() {
 // Apply persistent layout, wrapping page
 Custom500.getLayout = function getLayout(page: ReactElement) {
   return (
-    <ApplicationKit>
+    <ApplicationProvider>
       <Layout
         useBasicLayout={false}
         useAltBackground={false}
         showPreferences={false}
       >
-        <ErrorLayout is404={true}>{page}</ErrorLayout>
+        <ErrorLayout is404={false}>{page}</ErrorLayout>
       </Layout>
-    </ApplicationKit>
+    </ApplicationProvider>
   );
 };

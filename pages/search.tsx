@@ -12,7 +12,7 @@ import Head from "next/head";
 import { Stack, Heading, Text, Kbd } from "@chakra-ui/react";
 
 // First party components
-import ApplicationKit from "components/ApplicationKit";
+import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
@@ -81,7 +81,7 @@ export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
 // Apply persistent layout, wrapping page
 AdvancedSearch.getLayout = function getLayout(page: ReactElement) {
   return (
-    <ApplicationKit>
+    <ApplicationProvider>
       <Layout
         useBasicLayout={false}
         useAltBackground={false}
@@ -89,7 +89,7 @@ AdvancedSearch.getLayout = function getLayout(page: ReactElement) {
       >
         <BrowseLayout>{page}</BrowseLayout>
       </Layout>
-    </ApplicationKit>
+    </ApplicationProvider>
   );
 };
 

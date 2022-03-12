@@ -9,7 +9,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 
 // First party components
-import ApplicationKit from "components/ApplicationKit";
+import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 
 // Markdown processing libraries
@@ -56,7 +56,7 @@ export default function AboutMarkdownPage({
 // Apply persistent layout, wrapping page
 AboutMarkdownPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <ApplicationKit>
+    <ApplicationProvider>
       <Layout
         useBasicLayout={false}
         useAltBackground={false}
@@ -64,7 +64,7 @@ AboutMarkdownPage.getLayout = function getLayout(page: ReactElement) {
       >
         {page}
       </Layout>
-    </ApplicationKit>
+    </ApplicationProvider>
   );
 };
 

@@ -29,7 +29,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 
 // First-party components
 import Logo from "components/Logo";
-import BackButton from "components/layouts/BackButton";
+import HeaderBackButton from "components/HeaderBackButton";
 
 // Keybinding libraries
 import { useEffect } from "react";
@@ -274,14 +274,14 @@ export default function Layout({
             display={{ base: "flex", sm: "none" }}
             id="testingHeaderBackButtonMobile"
           >
-            <BackButton />
+            <HeaderBackButton />
           </Center>
           {backButton ? (
             <Center
               display={{ base: "none", sm: "flex" }}
               id="testing-headerBackButtonDesktop"
             >
-              <BackButton />
+              <HeaderBackButton />
             </Center>
           ) : (
             ""

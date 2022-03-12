@@ -41,7 +41,7 @@ import {
 } from "react-icons/hi";
 
 // First party components
-import ApplicationKit from "components/ApplicationKit";
+import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import { NoJSWarningHome } from "components/NoJSWarning";
 import SearchName from "components/search/SearchName";
@@ -158,7 +158,7 @@ export default function Home({ AZOSPageData }: OSDataPage) {
 // Apply persistent layout, wrapping page
 Home.getLayout = function getLayout(page: ReactElement) {
   return (
-    <ApplicationKit>
+    <ApplicationProvider>
       <Layout
         useBasicLayout={false}
         useAltBackground={false}
@@ -166,7 +166,7 @@ Home.getLayout = function getLayout(page: ReactElement) {
       >
         {page}
       </Layout>
-    </ApplicationKit>
+    </ApplicationProvider>
   );
 };
 

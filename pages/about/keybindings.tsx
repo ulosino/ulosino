@@ -24,7 +24,7 @@ import {
 import { HiTerminal, HiOutlineChevronLeft } from "react-icons/hi";
 
 // First party components
-import ApplicationKit from "components/ApplicationKit";
+import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 import {
@@ -127,7 +127,7 @@ export default function KeybindingReference() {
 // Apply persistent layout, wrapping page
 KeybindingReference.getLayout = function getLayout(page: ReactElement) {
   return (
-    <ApplicationKit>
+    <ApplicationProvider>
       <Layout
         useBasicLayout={false}
         useAltBackground={false}
@@ -135,6 +135,6 @@ KeybindingReference.getLayout = function getLayout(page: ReactElement) {
       >
         {page}
       </Layout>
-    </ApplicationKit>
+    </ApplicationProvider>
   );
 };

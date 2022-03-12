@@ -25,7 +25,7 @@ import {
 } from "@chakra-ui/react";
 
 // First party components
-import ApplicationKit from "components/ApplicationKit";
+import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import { ErrorFallback } from "components/ErrorFallback";
 
@@ -297,7 +297,7 @@ export default function OSPage({
 // Apply persistent layout, wrapping page
 OSPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <ApplicationKit>
+    <ApplicationProvider>
       <Layout
         useBasicLayout={false}
         useAltBackground={false}
@@ -305,7 +305,7 @@ OSPage.getLayout = function getLayout(page: ReactElement) {
       >
         {page}
       </Layout>
-    </ApplicationKit>
+    </ApplicationProvider>
   );
 };
 
