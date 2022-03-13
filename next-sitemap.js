@@ -4,7 +4,7 @@ module.exports = {
   siteUrl: "https://www.ulosino.com",
   changefreq: "weekly",
   generateRobotsTxt: true,
-  exclude: ["/500"],
+  exclude: ["/500", "/license"],
   robotsTxtOptions: {
     policies: [
       {

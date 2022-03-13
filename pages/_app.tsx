@@ -1,26 +1,43 @@
-import { AppProps } from "next/app";
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Import global providers
-import MDXProvider from "providers/MDXProvider";
-import { ChakraProvider } from "@chakra-ui/react";
-import UITheme from "providers/UIThemeProvider";
+// Types
+import type { ReactElement } from "react";
+import type { NextPage } from "next";
+import type { AppProps } from "next/app";
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactElement;
+};
 
-// Import global analytics
-import splitbee from "@splitbee/web";
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
 import { useEffect } from "react";
 
-// Import global components
-import JSWarning from "components/JSWarning";
-import ErrorBoundary from "components/ErrorBoundary";
-
-// Import global typography
+// Chakra UI, icons, and other design imports
 import "@fontsource/public-sans/variable.css";
-
-// Import global typography using fixed-axle fonts (compatibility)
 import "@fontsource/public-sans/400.css";
 import "@fontsource/public-sans/600.css";
 
-export default function App({ Component, pageProps }: AppProps) {
+// Import Splitbee scripts
+import splitbee from "@splitbee/web";
+
+// Providers are imported by the Application Kit component
+
+// Begin application
+export default function Application({
+  Component,
+  pageProps,
+}: AppPropsWithLayout) {
+  // Suppress default/browser PWA installation prompts
+  // There's a few PWA promotions sprinkled throughtout the app
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+    });
+  });
+  // Initilise Splitbee analytics tracking
   useEffect(() => {
     splitbee.init({
       disableCookie: true,
@@ -28,16 +45,6 @@ export default function App({ Component, pageProps }: AppProps) {
       apiUrl: "/_oak",
     });
   }, []);
-  return (
-    <ChakraProvider theme={UITheme}>
-      <MDXProvider>
-        <noscript>
-          <JSWarning />
-        </noscript>
-        <ErrorBoundary>
-          <Component {...pageProps} />
-        </ErrorBoundary>
-      </MDXProvider>
-    </ChakraProvider>
-  );
+  const getLayout = Component.getLayout ?? ((page) => page);
+  return getLayout(<Component {...pageProps} />);
 }

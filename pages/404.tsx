@@ -1,101 +1,63 @@
-import { GetStaticProps } from "next";
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// Types
+import type { ReactElement } from "react";
+
+// Head and SEO
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
-import {
-  Badge,
-  Heading,
-  Text,
-  Button,
-  Box,
-  Stack,
-  Flex,
-  Spacer,
-  Container,
-  Icon,
-} from "@chakra-ui/react";
-import {
-  HiChevronLeft,
-  HiArrowNarrowLeft,
-  HiCursorClick,
-} from "react-icons/hi";
-import { AlertIcon } from "components/Icons";
+// Chakra UI, icons, and other design imports
+import { Stack, Heading, Text, Code } from "@chakra-ui/react";
 
-import { useStyleConfig } from "@chakra-ui/react";
-function Card(props) {
-  const { variant, children, ...rest } = props;
+// First party components
+import ApplicationProvider from "providers/ApplicationProvider";
+import Layout from "components/layouts/Layout";
+import ErrorLayout from "components/layouts/ErrorLayout";
 
-  const styles = useStyleConfig("Card", { variant });
-
-  return (
-    <Box __css={styles} {...rest}>
-      {children}
-    </Box>
-  );
-}
-
-import UIProvider from "providers/UIProvider";
-
+// Begin page
 export default function Custom404() {
-  const router = useRouter();
   return (
-    <UIProvider>
+    <>
       <Head>
-        <title>ULOSINO &mdash; Page Not Found</title>
+        <title>ULOSINO &mdash; 404</title>
+        <meta property="og:title" content="ULOSINO &mdash; 404" />
+        <meta name="description" content="Page Not Found." />
+        <meta property="og:description" content="Page Not Found." />
       </Head>
 
-      <Container maxW="container.sm" mt={16}>
-        <Stack direction="column" spacing={8}>
-          <Flex>
-            <Text textStyle="secondary" as="h6">
-              Page Not Found
-            </Text>
-            <Spacer />
-            <Badge variant="alert">HTTP 404</Badge>
-          </Flex>
-          <Stack direction="row" spacing={8}>
-            <Box display="block">
-              <AlertIcon />
-            </Box>
-            <Stack direction="column" spacing={2}>
-              <Heading size="md">There is nothing to show at this URL.</Heading>
-              <Text>
-                If you typed the URL manually, check it for spelling mistakes.
-                If there was once a page here, it was probably moved or deleted.
-              </Text>
-            </Stack>
-          </Stack>
-          <Stack direction="row" spacing={8}>
-            <Box display="block">
-              <Card p={2} pb={1} rounded="2xl">
-                <Icon as={HiCursorClick} w={12} h={12} />
-              </Card>
-            </Box>
-            <Stack direction="column" spacing={2} w="full">
-              <Link href="/" passHref>
-                <Button leftIcon={<HiArrowNarrowLeft />} size="lg">
-                  Go Home
-                </Button>
-              </Link>
-              <Button
-                leftIcon={<HiChevronLeft />}
-                size="sm"
-                onClick={() => router.back()}
-              >
-                Go Back
-              </Button>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Container>
-    </UIProvider>
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">There's nothing to show</Heading>
+        <Text>A page couldn't be found at this URL.</Text>
+        <Text>
+          If you entered the URL manually, check it for spelling mistakes.
+          Operating system pages look like{" "}
+          <Code>ulosino.com/browse/operating-system</Code>. If there was once a
+          page here, it was likely moved or deleted.
+        </Text>
+        <Text>Go Home to make a search and discover something new.</Text>
+        <Text fontSize="xs">
+          You can look up this error code:{" "}
+          <Code ms={1} fontSize="xs">
+            HTTP 404
+          </Code>
+        </Text>
+      </Stack>
+    </>
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {},
-  };
+// Apply persistent layout, wrapping page
+Custom404.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <ApplicationProvider>
+      <Layout
+        useBasicLayout={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
+        <ErrorLayout is404={true}>{page}</ErrorLayout>
+      </Layout>
+    </ApplicationProvider>
+  );
 };

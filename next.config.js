@@ -12,13 +12,9 @@ const securityHeaders = [
     value: "nosniff",
   },
   {
-    key: "Referrer-Policy",
-    value: "no-referrer",
-  },
-  {
     key: "Content-Security-Policy",
     value:
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' ulosino.com *.ulosino.com *.vercel.app utteranc.es",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' ulosino.com *.ulosino.com *.vercel.app",
   },
 ];
 
@@ -30,16 +26,19 @@ module.exports = withPWA({
     register: true,
     skipWaiting: true,
     runtimeCaching,
-    buildExcludes: [/middleware-manifest.json$/],
     disable: process.env.NODE_ENV === "development",
   },
   // Configuration for Next.js
   reactStrictMode: true,
-  swcMinify: true,
+  productionBrowserSourceMaps: true,
+  // experimental: {
+  //   runtime: "nodejs",
+  // },
   pageExtensions: ["tsx"],
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // Import HTTP headers
   async headers() {
     return [
       {
@@ -48,6 +47,7 @@ module.exports = withPWA({
       },
     ];
   },
+  // Proxy Splitbee analytics tracking scripts
   async rewrites() {
     return [
       {
@@ -57,6 +57,16 @@ module.exports = withPWA({
       {
         source: "/_oak/:slug",
         destination: "https://hive.splitbee.io/:slug",
+      },
+    ];
+  },
+  // Add redirects for the privacy link found on guides.ulosino.com and matches.ulosino.com
+  async redirects() {
+    return [
+      {
+        source: "/privacy",
+        destination: "/about/privacy",
+        permanent: true,
       },
     ];
   },

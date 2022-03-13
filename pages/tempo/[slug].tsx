@@ -1,3 +1,6 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 // Types
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
@@ -40,7 +43,9 @@ import {
 } from "react-icons/hi";
 
 // First party components
-import UIProvider from "providers/UIProvider";
+import ApplicationProvider from "providers/ApplicationProvider";
+import Layout from "components/layouts/Layout";
+import { ErrorFallback } from "components/ErrorFallback";
 
 // Markdown processing libraries
 import fs from "fs";
@@ -56,22 +61,22 @@ interface OSPageTypes {
 // Begin page
 export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
   return (
-    <UIProvider>
+    <>
       <Head>
         <title>
-          ULOSINO &mdash; Donate to {source.frontmatter.title} on ULOSINO Tempo
+          ULOSINO &mdash; Donate to {source.frontmatter.name} on ULOSINO Tempo
         </title>
         <meta
           property="og:title"
-          content="Donate to {source.frontmatter.title} on ULOSINO Tempo"
+          content="Donate to {source.frontmatter.name} on ULOSINO Tempo"
         />
         <meta
-          title="description"
-          content="Quickly donate to {source.frontmatter.title} with ULOSINO Tempo donation options."
+          name="description"
+          content="Quickly donate to {source.frontmatter.name} with ULOSINO Tempo donation options."
         />
         <meta
           property="og:description"
-          content="Donate to {source.frontmatter.title} with ULOSINO Tempo donation options."
+          content="Donate to {source.frontmatter.name} with ULOSINO Tempo donation options."
         />
       </Head>
 
@@ -80,9 +85,9 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
           direction="column"
           spacing={10}
           mb={10}
-          me={10}
+          me={{ base: "none", md: 10 }}
+          minW={{ base: "inherit", sm: 175 }}
           display={{ base: "none", md: "flex" }}
-          w={175}
         >
           <Center>
             <Icon
@@ -101,83 +106,83 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
         </Stack>
         <Stack direction="column" spacing={10} flex={1} as="main">
           <Stack direction="column" spacing={5}>
-            <Heading size="xl">Donate to {source.frontmatter.title}</Heading>
-            {(source.frontmatter.donate && (
-              <>
-                <Box>
-                  <Badge bg="brand" color="gray.800">
-                    Powered by ULOSINO Tempo
-                  </Badge>
-                </Box>
-                <Stack direction="column" spacing={2}>
-                  <Text as="h6" textStyle="secondary">
-                    Make a Donation
-                  </Text>
-                  {source.frontmatter.donate && (
-                    <Link href={source.frontmatter.donate} passHref>
-                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
+            <Heading size="xl">Donate to {source.frontmatter.name}</Heading>
+            <ErrorFallback>
+              {(source.frontmatter.donate && (
+                <>
+                  <Box>
+                    <Badge variant="tempo">Powered by ULOSINO Tempo</Badge>
+                  </Box>
+                  <Stack direction="column" spacing={2}>
+                    <Text as="h6" textStyle="miniHeading">
+                      Make a Donation
+                    </Text>
+                    {source.frontmatter.donate && (
+                      <Link href={source.frontmatter.donate} passHref>
+                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                          Visit Project Website
+                        </Button>
+                      </Link>
+                    )}
+                  </Stack>
+                  <Stack direction="column" spacing={2}>
+                    <Text as="h6" textStyle="miniHeading">
+                      Quick Donation Options
+                    </Text>
+                    {(source.frontmatter.donateOpenCollective && (
+                      <Link
+                        href={source.frontmatter.donateOpenCollective}
+                        passHref
+                      >
+                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                          Donate with Open Collective
+                        </Button>
+                      </Link>
+                    )) ?? (
+                      <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                        Donate with Open Collective
+                      </Button>
+                    )}
+                    {(source.frontmatter.donateLiberapay && (
+                      <Link href={source.frontmatter.donateLiberapay} passHref>
+                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                          Donate with Liberapay
+                        </Button>
+                      </Link>
+                    )) ?? (
+                      <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                        Donate with Liberapay
+                      </Button>
+                    )}
+                    {(source.frontmatter.donateGithub && (
+                      <Link href={source.frontmatter.donateGithub} passHref>
+                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                          Donate with GitHub Sponsors
+                        </Button>
+                      </Link>
+                    )) ?? (
+                      <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                        Donate with GitHub Sponsors
+                      </Button>
+                    )}
+                  </Stack>
+                </>
+              )) ?? (
+                <Card variant="solid">
+                  <Stack direction="column" spacing={5}>
+                    <Text>
+                      ULOSINO Tempo isn't available for{" "}
+                      {source.frontmatter.name}.
+                    </Text>
+                    <Link href={source.frontmatter.website} passHref>
+                      <Button leftIcon={<HiOutlineGlobe />} as="a">
                         Visit Project Website
                       </Button>
                     </Link>
-                  )}
-                </Stack>
-                <Stack direction="column" spacing={2}>
-                  <Text as="h6" textStyle="secondary">
-                    Quick Donation Options
-                  </Text>
-                  {(source.frontmatter.donateOpenCollective && (
-                    <Link
-                      href={source.frontmatter.donateOpenCollective}
-                      passHref
-                    >
-                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                        Donate with Open Collective
-                      </Button>
-                    </Link>
-                  )) ?? (
-                    <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                      Donate with Open Collective
-                    </Button>
-                  )}
-                  {(source.frontmatter.donateLiberapay && (
-                    <Link href={source.frontmatter.donateLiberapay} passHref>
-                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                        Donate with Liberapay
-                      </Button>
-                    </Link>
-                  )) ?? (
-                    <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                      Donate with Liberapay
-                    </Button>
-                  )}
-                  {(source.frontmatter.donateGithub && (
-                    <Link href={source.frontmatter.donateGithub} passHref>
-                      <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                        Donate with GitHub Sponsors
-                      </Button>
-                    </Link>
-                  )) ?? (
-                    <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                      Donate with GitHub Sponsors
-                    </Button>
-                  )}
-                </Stack>
-              </>
-            )) ?? (
-              <Card variant="solid">
-                <Stack direction="column" spacing={5}>
-                  <Text>
-                    ULOSINO Tempo isn't available for {source.frontmatter.title}
-                    .
-                  </Text>
-                  <Link href={source.frontmatter.website} passHref>
-                    <Button leftIcon={<HiOutlineGlobe />} as="a">
-                      Visit Project Website
-                    </Button>
-                  </Link>
-                </Stack>
-              </Card>
-            )}
+                  </Stack>
+                </Card>
+              )}
+            </ErrorFallback>
           </Stack>
           <Stack direction="row" spacing={2}>
             <Text fontWeight="bold" fontSize="xs">
@@ -192,9 +197,24 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
           </Stack>
         </Stack>
       </Flex>
-    </UIProvider>
+    </>
   );
 }
+
+// Apply persistent layout, wrapping page
+DonationPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <ApplicationProvider>
+      <Layout
+        useBasicLayout={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
+        {page}
+      </Layout>
+    </ApplicationProvider>
+  );
+};
 
 interface PathProps {
   params: {
@@ -204,9 +224,10 @@ interface PathProps {
 }
 
 // Use the MDX files to generate props
+// @ts-expect-error
 export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
   // Find Markdown files
-  const filePath = path.join(`public/content/browse`, `${params.slug}.mdx`);
+  const filePath = path.join(`public/markdown/browse`, `${params.slug}.mdx`);
   const source = fs.readFileSync(filePath);
 
   // Use the files to parse MDX
@@ -215,7 +236,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
     parseFrontmatter: true,
   });
 
-  // This uses the OS title to get the description page URL
+  // This uses the OS name to get the description page URL
   const descriptionPagePath = path.join(`/browse/`, `${params.slug}`);
 
   return {
@@ -228,7 +249,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
 
 // Find MDX files in the /public/markdown/ folder to generate paths
 export const getStaticPaths = async () => {
-  const pageContentPath = path.join(process.cwd(), "public/content/browse");
+  const pageContentPath = path.join(process.cwd(), "public/markdown/browse");
 
   const pageFilePaths = fs
     .readdirSync(pageContentPath)
