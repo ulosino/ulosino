@@ -157,7 +157,12 @@ export default function OSPage({
             </Flex>
           </ErrorFallback>
           <ErrorFallback>
-            <Stack direction="column" spacing={10} as="section" w={350}>
+            <Stack
+              direction="column"
+              spacing={10}
+              as="section"
+              minW={{ base: "inherit", sm: 250 }}
+            >
               <Stack direction="column" spacing={2}>
                 {source.frontmatter.donate && (
                   <Link href={donationPath} passHref>

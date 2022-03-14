@@ -23,7 +23,11 @@ import "@fontsource/public-sans/600.css";
 // Import Splitbee scripts
 import splitbee from "@splitbee/web";
 
-// Providers are imported by the Application Kit component
+// There are two known technical limitations preventing _app.tsx from being expanded
+// Primarily, keyboard shortcuts must be wrapped with KeyboardProvider, generating errors when used on <Layout>
+// Plus, styling provided by ChakraProvider and UITheme may not be correct
+// Instead, providers are imported by the <ApplicationProvider> provider (/providers/ApplicationProvider)
+// It should be clear that this is not the preferred solution (note that changes would be breaking)
 
 // Begin application
 export default function Application({
@@ -46,5 +50,7 @@ export default function Application({
     });
   }, []);
   const getLayout = Component.getLayout ?? ((page) => page);
+  // Wrapping <Component> with other components works in theory (preferred approach)
+  // Using this function as a component in another function will generate errors
   return getLayout(<Component {...pageProps} />);
 }

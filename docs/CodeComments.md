@@ -11,7 +11,9 @@ This document describes a standard collection of code comments.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ```
 
-## Import categories
+## Import groups
+
+> Import groups are in sequential order. When importing as part of an import group, follow the order below. Imports that don't belong to a group should be imported last.
 
 ### TypeScript
 
