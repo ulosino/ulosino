@@ -1,39 +1,19 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+// Types
+import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Head and SEO
 import Head from "next/head";
+
+// Links and routing
 import Link from "next/link";
 
-import { getNewestOSPages, getOSPages } from "providers/OSPageProvider";
-
-import {
-  AutoCompleteInput,
-  AutoCompleteItem,
-  AutoCompleteList,
-} from "@choc-ui/chakra-autocomplete";
-
-import dynamic from "next/dynamic";
-const AutoComplete = dynamic(() =>
-  import("@choc-ui/chakra-autocomplete").then((mod) => mod.AutoComplete)
-);
-
-import {
-  Heading,
-  Text,
-  Badge,
-  Box,
-  Stack,
-  Flex,
-  Spacer,
-  IconButton,
-  Button,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-} from "@chakra-ui/react";
-import { useStyleConfig } from "@chakra-ui/react";
-function Card(props) {
+// Chakra UI, icons, and other design imports
+import { Stack, Heading, Box, useStyleConfig } from "@chakra-ui/react";
+function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
 
   const styles = useStyleConfig("Card", { variant });
@@ -45,307 +25,110 @@ function Card(props) {
   );
 }
 
-import UIProvider from "providers/UIProvider";
-import BrowseLayout from "components/BrowseLayout";
+// First party components
+import ApplicationProvider from "providers/ApplicationProvider";
+import Layout from "components/layouts/Layout";
+import BrowseLayout from "components/layouts/BrowseLayout";
 
-export default function Browse({
-  newestOSPageData,
-  AZOSPageData,
-}: {
-  newestOSPageData: {
-    date: string;
-    id: string;
-    title: string;
-    version: string;
-    summary: string;
-    category: string;
-    platform: string;
-    startup: string;
-    desktop: string;
-    packagemgr: string;
-  }[];
-  AZOSPageData: {
-    date: string;
-    id: string;
-    title: string;
-    version: string;
-    summary: string;
-    category: string;
-    platform: string;
-    startup: string;
-    desktop: string;
-    packagemgr: string;
-  }[];
-}) {
+// Markdown processing libraries
+import { getOSPages } from "providers/OSPageProvider";
+import OSDataLayout from "components/OSDataLayout";
+
+interface PageDataProps {
+  AZOSPageData: any;
+}
+
+interface MetadataTypes {
+  slug: string;
+  name: string;
+  summary: string;
+  category: string;
+  donate: string;
+  platform: string;
+  desktop: string;
+  startup: string;
+  packagemgr: string;
+}
+
+// Begin page
+export default function Browse({ AZOSPageData }: PageDataProps) {
   return (
-    <UIProvider>
-      <BrowseLayout>
-        <>
-          <Head>
-            <title>ULOSINO &mdash; Browse</title>
-            <meta
-              property="og:title"
-              content="ULOSINO &mdash; Browse ULOSINO"
-            />
-            <meta
-              name="description"
-              content="Browse through ULOSINO's wide selection of open source operating systems, like Linux and BSD. Take advantage of our leading search options, or browse alphabetically."
-            />
-            <meta
-              property="og:description"
-              content="Browse through ULOSINO's wide selection of open source operating systems, like Linux and BSD."
-            />
-          </Head>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; Operating System List &amp; Tempo</title>
+        <meta property="og:title" content="ULOSINO Operating System List" />
+        <meta
+          name="description"
+          content="Browse the full ULOSINO operating system list."
+        />
+        <meta
+          property="og:description"
+          content="Browse the full ULOSINO operating system list."
+        />
+      </Head>
 
-          <Heading size="3xl" mb={8}>
-            Browse
-          </Heading>
-
-          <Stack direction="column" spacing={10}>
-            <Stack direction="column" spacing={2}>
-              <Text textStyle="secondary" as="h6">
-                Make a Search
-              </Text>
-              <AutoComplete>
-                <AutoCompleteInput
-                  variant="outline"
-                  size="md"
-                  borderRadius="xl"
-                  shadow="inner"
-                  placeholder="Find an Operating System..."
-                  id="testing-db-input"
-                />
-                <AutoCompleteList>
-                  {AZOSPageData.map(
-                    ({
-                      id,
-                      title,
-                      summary,
-                      category,
-                      version,
-                      platform,
-                      desktop,
-                      startup,
-                      packagemgr,
-                    }) => (
-                      <AutoCompleteItem
-                        key={`option-${title}`}
-                        value={title}
-                        maxSuggestions={5}
-                        mx={3}
-                        id="testing-db-item"
-                      >
-                        <Link
-                          href={`/browse/${id}`}
-                          passHref
-                          key={`/browse/${id}`}
-                        >
-                          <Box p={2} mb={2}>
-                            <Heading size="md">{title}</Heading>
-                            {summary && <Text fontSize="sm">"{summary}"</Text>}
-                            <Stack
-                              direction="row"
-                              display={{ base: "none", sm: "flex" }}
-                              spacing={4}
-                            >
-                              {category && <Badge>{category}</Badge>}
-                              {version && <Text fontSize="sm">{version}</Text>}
-                              {platform && (
-                                <Text fontSize="sm">{platform}</Text>
-                              )}
-                              {desktop && <Text fontSize="sm">{desktop}</Text>}
-                              {startup && <Text fontSize="sm">{startup}</Text>}
-                              {packagemgr && (
-                                <Text fontSize="sm">{packagemgr}</Text>
-                              )}
-                            </Stack>
-                          </Box>
-                        </Link>
-                      </AutoCompleteItem>
-                    )
-                  )}
-                </AutoCompleteList>
-              </AutoComplete>
-            </Stack>
-
-            <Stack direction="column" spacing={2}>
-              <Text textStyle="secondary" as="h6">
-                All Operating Systems
-              </Text>
-              <Tabs isLazy>
-                <TabList id="testing-display-tabList">
-                  <Stack direction="row" spacing={4} w="full">
-                    <Tab shadow="inner">Alphabetical</Tab>
-                    <Tab shadow="inner">Newest</Tab>
-                  </Stack>
-                </TabList>
-                <TabPanels>
-                  <TabPanel px={0} pb={0} pt={4}>
-                    <Stack direction="column" spacing={2}>
-                      {AZOSPageData.map(
-                        ({
-                          id,
-                          title,
-                          version,
-                          summary,
-                          category,
-                          platform,
-                          desktop,
-                          startup,
-                          packagemgr,
-                        }) => (
-                          <Box flex={1} key={id}>
-                            <Link
-                              href={`/browse/${id}`}
-                              passHref
-                              key={`/browse/${id}`}
-                            >
-                              <Card
-                                key={id}
-                                id="testing-db-OSPages"
-                                variant="button"
-                                px={6}
-                              >
-                                <Heading size="md">{title}</Heading>
-                                {summary && (
-                                  <Text fontSize="sm">"{summary}"</Text>
-                                )}
-                                <Stack
-                                  direction="row"
-                                  display={{ base: "flex", md: "none" }}
-                                  spacing={4}
-                                >
-                                  {category && <Badge>{category}</Badge>}
-                                  {version && (
-                                    <Text fontSize="sm">{version}</Text>
-                                  )}
-                                  {platform && (
-                                    <Text fontSize="sm">{platform}</Text>
-                                  )}
-                                  {desktop && (
-                                    <Text fontSize="sm">{desktop}</Text>
-                                  )}
-                                </Stack>
-                                <Stack
-                                  direction="row"
-                                  display={{ base: "none", md: "flex" }}
-                                  spacing={4}
-                                >
-                                  <Badge>{category}</Badge>
-                                  {version && (
-                                    <Text fontSize="sm">{version}</Text>
-                                  )}
-                                  {platform && (
-                                    <Text fontSize="sm">{platform}</Text>
-                                  )}
-                                  {desktop && (
-                                    <Text fontSize="sm">{desktop}</Text>
-                                  )}
-                                  {startup && (
-                                    <Text fontSize="sm">{startup}</Text>
-                                  )}
-                                  {packagemgr && (
-                                    <Text fontSize="sm">{packagemgr}</Text>
-                                  )}
-                                </Stack>
-                              </Card>
-                            </Link>
-                          </Box>
-                        )
-                      )}
-                    </Stack>
-                  </TabPanel>
-                  <TabPanel px={0} pb={0} pt={4}>
-                    <Stack direction="column" spacing={2}>
-                      {newestOSPageData.map(
-                        ({
-                          id,
-                          title,
-                          version,
-                          summary,
-                          category,
-                          platform,
-                          desktop,
-                          startup,
-                          packagemgr,
-                        }) => (
-                          <Box flex={1} key={id}>
-                            <Link
-                              href={`/browse/${id}`}
-                              passHref
-                              key={`/browse/${id}`}
-                            >
-                              <Card
-                                key={id}
-                                id="testing-display-newOSPages"
-                                variant="button"
-                                px={6}
-                              >
-                                <Heading size="md">{title}</Heading>
-                                {summary && (
-                                  <Text fontSize="sm">"{summary}"</Text>
-                                )}
-                                <Stack
-                                  direction="row"
-                                  display={{ base: "flex", md: "none" }}
-                                  spacing={4}
-                                >
-                                  {category && <Badge>{category}</Badge>}
-                                  {version && (
-                                    <Text fontSize="sm">{version}</Text>
-                                  )}
-                                  {platform && (
-                                    <Text fontSize="sm">{platform}</Text>
-                                  )}
-                                  {desktop && (
-                                    <Text fontSize="sm">{desktop}</Text>
-                                  )}
-                                </Stack>
-                                <Stack
-                                  direction="row"
-                                  display={{ base: "none", md: "flex" }}
-                                  spacing={4}
-                                >
-                                  <Badge>{category}</Badge>
-                                  {version && (
-                                    <Text fontSize="sm">{version}</Text>
-                                  )}
-                                  {platform && (
-                                    <Text fontSize="sm">{platform}</Text>
-                                  )}
-                                  {desktop && (
-                                    <Text fontSize="sm">{desktop}</Text>
-                                  )}
-                                  {startup && (
-                                    <Text fontSize="sm">{startup}</Text>
-                                  )}
-                                  {packagemgr && (
-                                    <Text fontSize="sm">{packagemgr}</Text>
-                                  )}
-                                </Stack>
-                              </Card>
-                            </Link>
-                          </Box>
-                        )
-                      )}
-                    </Stack>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            </Stack>
-          </Stack>
-        </>
-      </BrowseLayout>
-    </UIProvider>
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">Operating System List</Heading>
+        <Stack direction="column" spacing={2}>
+          {AZOSPageData.map(
+            ({
+              slug,
+              name,
+              summary,
+              category,
+              donate,
+              platform,
+              desktop,
+              startup,
+              packagemgr,
+            }: MetadataTypes) => (
+              <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+                <Card variant="button" as="a">
+                  <OSDataLayout
+                    name={name}
+                    summary={summary}
+                    category={category}
+                    donate={donate}
+                    platform={platform}
+                    desktop={desktop}
+                    startup={startup}
+                    packagemgr={packagemgr}
+                    usePlatform={false}
+                    useDesktop={false}
+                    useStartup={false}
+                    usePackagemgr={false}
+                    OSCardId="testingOSDataCard"
+                  />
+                </Card>
+              </Link>
+            )
+          )}
+        </Stack>
+      </Stack>
+    </>
   );
 }
 
+// Apply persistent layout, wrapping page
+Browse.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <ApplicationProvider>
+      <Layout
+        useBasicLayout={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
+        <BrowseLayout>{page}</BrowseLayout>
+      </Layout>
+    </ApplicationProvider>
+  );
+};
+
+// Import AZOSPageData OS Page handling
 export const getStaticProps: GetStaticProps = async () => {
-  const newestOSPageData = getNewestOSPages();
   const AZOSPageData = getOSPages();
   return {
     props: {
-      newestOSPageData,
       AZOSPageData,
     },
   };
