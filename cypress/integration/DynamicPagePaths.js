@@ -16,12 +16,12 @@ describe("Dynamic Page Path Testing", () => {
     cy.get("#testingOSDataCard").find("h2").contains("Alpine Linux").click();
     cy.url().should("include", "/browse/alpine");
 
-    // Try `/tempo/[slug].tsx` (Tempo pages)
+    // Try `/marketplace/[slug].tsx` (Tempo pages)
     cy.visit("/browse/elementary");
     cy.get("#testingDonationPageLink")
       .should("have.attr", "href")
-      .and("include", "/tempo/elementary");
+      .and("include", "/marketplace/elementary");
     cy.get("#testingDonationPageLink").click();
-    cy.url().should("include", "/tempo/elementary");
+    cy.url().should("include", "/marketplace/elementary");
   });
 });

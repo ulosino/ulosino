@@ -55,7 +55,7 @@ export default function Browse({ AZOSPageData }: PageDataProps) {
   return (
     <>
       <Head>
-        <title>ULOSINO &mdash; Operating System List &amp; Tempo</title>
+        <title>ULOSINO &mdash; Operating System List</title>
         <meta property="og:title" content="ULOSINO Operating System List" />
         <meta
           name="description"

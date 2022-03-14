@@ -17,7 +17,7 @@ describe("Head Component and SEO Testing", () => {
     cy.title().should("include", "Alpine Linux: 'Haven for power users'");
 
     // Test Tempo dynamic page
-    cy.visit("/tempo/alpine");
+    cy.visit("/marketplace/alpine");
     cy.title().should("include", "Donate to Alpine Linux on ULOSINO Tempo");
   });
 });

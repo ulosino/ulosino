@@ -337,7 +337,7 @@ export const getStaticProps: GetStaticProps<{
   });
 
   // This uses the OS name to get the donation page URL
-  const donationPagePath = path.join(`/tempo/`, `${params.slug}`);
+  const donationPagePath = path.join(`/marketplace/`, `${params.slug}`);
 
   const contributionPagePath = path.join(
     `https://github.com/ulosino/ulosino/blob/main/public/markdown/browse`,

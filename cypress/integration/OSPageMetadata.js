@@ -13,7 +13,7 @@ describe("OS Page Local Metadata Testing", () => {
     cy.get("#testingDonationPageLink")
       .contains("Donate")
       .should("have.attr", "href")
-      .and("include", "/tempo/elementary");
+      .and("include", "/marketplace/elementary");
     cy.get("#testingOSPageProjectWebsiteLink")
       .contains("Visit Project Website")
       .should("have.attr", "href")

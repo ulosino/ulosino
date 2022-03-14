@@ -184,17 +184,21 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
               )}
             </ErrorFallback>
           </Stack>
-          <Stack direction="row" spacing={2}>
-            <Text fontWeight="bold" fontSize="xs">
-              Warning:
-            </Text>
-            <Text fontSize="xs">
-              ULOSINO Tempo features link to financial services not provided by
-              ULOSINO. Tender currency to third-parties at your own risk.
-              General advice only. ULOSINO doesn't receive commission from
-              third-party financial services.
-            </Text>
-          </Stack>
+          {source.frontmatter.donate ? (
+            <Stack direction="row" spacing={2}>
+              <Text fontWeight="bold" fontSize="xs">
+                Warning:
+              </Text>
+              <Text fontSize="xs">
+                ULOSINO Tempo features link to financial services not provided
+                by ULOSINO. Tender currency to third-parties at your own risk.
+                General advice only. ULOSINO doesn't receive commission from
+                third-party financial services.
+              </Text>
+            </Stack>
+          ) : (
+            ""
+          )}
         </Stack>
       </Flex>
     </>
