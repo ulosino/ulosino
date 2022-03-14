@@ -1,91 +1,62 @@
-import { GetStaticProps } from "next";
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// Types
+import type { ReactElement } from "react";
+
+// Head and SEO
 import Head from "next/head";
-import { useRouter } from "next/router";
 
-import {
-  Heading,
-  Text,
-  Button,
-  Box,
-  Stack,
-  Container,
-  Icon,
-} from "@chakra-ui/react";
-import { HiChevronLeft, HiOutlineRefresh, HiCursorClick } from "react-icons/hi";
-import { AlertIcon } from "components/Icons";
+// Chakra UI, icons, and other design imports
+import { Stack, Heading, Text } from "@chakra-ui/react";
 
-import { useStyleConfig } from "@chakra-ui/react";
-function Card(props) {
-  const { variant, children, ...rest } = props;
+// First party components
+import ApplicationProvider from "providers/ApplicationProvider";
+import Layout from "components/layouts/Layout";
+import ErrorLayout from "components/layouts/ErrorLayout";
 
-  const styles = useStyleConfig("Card", { variant });
-
-  return (
-    <Box __css={styles} {...rest}>
-      {children}
-    </Box>
+// Begin page
+export default function OfflineFallback() {
+  console.warn(
+    "Integrated Application Error: PageNotInCache (Reference ULOSINO 3.x.x documentation)"
   );
-}
-
-import UIProvider from "providers/UIProvider";
-
-export default function CacheFallback() {
-  const router = useRouter();
   return (
-    <UIProvider>
+    <>
       <Head>
-        <title>ULOSINO &mdash; Disconnected</title>
+        <title>ULOSINO &mdash; Offline</title>
+        <meta property="og:title" content="ULOSINO &mdash; Offline" />
+        <meta
+          name="description"
+          content="There were issues downloading data from the server."
+        />
+        <meta
+          property="og:description"
+          content="There were issues downloading data from the server."
+        />
       </Head>
 
-      <Container maxW="container.sm" mt={16}>
-        <Stack direction="column" spacing={8}>
-          <Text textStyle="secondary" as="h6">
-            Disconnected From Server
-          </Text>
-          <Stack direction="row" spacing={8}>
-            <Box display="block">
-              <AlertIcon />
-            </Box>
-            <Stack direction="column" spacing={2}>
-              <Heading size="md">You're offline.</Heading>
-              <Text>
-                There were issues downloading data from the server. Check your
-                data or networking settings and get back online.
-              </Text>
-            </Stack>
-          </Stack>
-          <Stack direction="row" spacing={8}>
-            <Box display="block">
-              <Card p={2} pb={1} rounded="2xl">
-                <Icon as={HiCursorClick} w={12} h={12} />
-              </Card>
-            </Box>
-            <Stack direction="column" spacing={2} w="full">
-              <Button
-                leftIcon={<HiOutlineRefresh />}
-                size="lg"
-                onClick={() => router.reload()}
-              >
-                Try Again
-              </Button>
-              <Button
-                leftIcon={<HiChevronLeft />}
-                size="sm"
-                onClick={() => router.back()}
-              >
-                Go Back
-              </Button>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Container>
-    </UIProvider>
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">You're offline</Heading>
+        <Text>There were issues downloading data from the server.</Text>
+        <Text>
+          Check your data and networking settings and then return to ULOSINO.
+        </Text>
+      </Stack>
+    </>
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {},
-  };
+// Apply persistent layout, wrapping page
+OfflineFallback.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <ApplicationProvider>
+      <Layout
+        useBasicLayout={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
+        <ErrorLayout is404={false}>{page}</ErrorLayout>
+      </Layout>
+    </ApplicationProvider>
+  );
 };

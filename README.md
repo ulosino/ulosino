@@ -1,38 +1,17 @@
 # ULOSINO
 
-[![ULOSINO](./public/brand/alternative-flag.png)]()
+## New platform
 
-[![Cypress Testing](https://github.com/ulosino/ulosino/actions/workflows/testing.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/testing.yml)
-[![Lighthouse Performance CI](https://github.com/ulosino/ulosino/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/lighthouse.yml)
+This is ULOSINO on an experimental platform. We expect to deliver this as `3.0.0` around the middle of March.
 
-ULOSINO is the modern setting for open source operating system information. Open to community contributions, ULOSINO aims to let you connect direct to culture.
+**It's currently in alpha** and isn't being versioned yet.
 
-ULOSINO is The Friendly Flow. Go to [ULOSINO.com](https://ulosino.com) now.
+## Ethos
 
-## Features
+ULOSINO is wouldn't be possible without using modern technologies on an open source platform.
 
-- Learn and discover in **speed and style**, optimised for both desktop and mobile
-- Browse at night with responsive **dark mode**
-- Take ULOSINO anywhere, even off-the-grid, with **offline compatibility**
-- **Search by name, platform, desktop, and more**, efficiently and quickly
-- **Make a donation** with ULOSINO Tempo, the community capital hub
-- Community contributions, bringing **up-and-coming operating systems** on the same playing field
+Our ambition is to make the hard easy. We've made discovering open source operating systems easy. We've made recommending open source operating systems easy with ULOSINO Matches. Plus, give capital with ULOSINO Tempo.
 
-And more!
+Behind the simplistic facade, you'll discover innovative and powerful features. 10-way search using metadata categories. Instant sorting. Reliable keyboard shortcuts.
 
-## How it works
-
-1. Database Content is edited, in the Markdown format, as a part of a commit, and;
-2. Then the new revision, with all of the Database Content is processed by the Source Code and delivered to visitors.
-
-Read through [CONTRIBUTING.md](https://github.com/ulosino/.github/blob/main/CONTRIBUTING.md) for more details.
-
-ULOSINO, as a whole stack, is divided into Database Content (`/public`) and the Source Code (`/src`), which live together on a modern Next.js application.
-
-Contributions to the source are welcomed as well. Reference [STACK.md](https://github.com/ulosino/ulosino/blob/main/STACK.md) for an overview of the ULOSINO stack.
-
-## License
-
-ULOSINO is available for copy or study under the MIT Licence.
-
-Read through the [Contribution Code of Conduct](https://github.com/ulosino/.github/blob/main/CODE_OF_CONDUCT.md) before contributing.
+Under the hood, ULOSINO runs a Next.js application with PWA web app functionality. Our PWA libraries deliver automatic content caching and offline capability. The key ingredient here is MDX, which is based on Markdown. Together with our free licensing model, this allows anyone to contribute changes to our rich collection of OS pages. (In fact, we make it easy; open an OS and click "View on GitHub"). It also allows us to deliver performance and consistency at scale. Even though we've only programmed around 14 pages, we deploy around 150 pages. Ultimately, this leads to the faster implementation of features and bug fixes.

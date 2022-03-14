@@ -1,4 +1,7 @@
-// Provides global theming (Chakra UI)
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+// The UIThemeProvider provides global theming for Chakra UI
 
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
@@ -38,13 +41,16 @@ export const Card = {
       color: "inherit",
     }),
     button: ({ colorMode }: { colorMode: string }) => ({
-      bg: colorMode === "dark" ? "blackAlpha.800" : "whiteAlpha.800",
+      bg: "inherit",
+      border: "solid",
+      borderWidth: "0.5px",
+      borderColor: colorMode === "dark" ? "whiteAlpha.300" : "gray.200",
       color: "inherit",
       _hover: {
-        bg: colorMode === "dark" ? "gray.900" : "gray.100",
+        bg: colorMode === "dark" ? "whiteAlpha.100" : "gray.100",
         color: colorMode === "dark" ? "gray.200" : "gray.900",
       },
-      transition: ".30s ease",
+      transition: ".15s ease",
       cursor: "pointer",
       shadow: "inner",
     }),
@@ -63,7 +69,7 @@ export const Card = {
 };
 
 const Badge = {
-  baseStyle: { px: 4, pt: "0.5", h: "20px", shadow: "md" },
+  baseStyle: { px: 5, pt: "0.5", h: "20px", shadow: "md" },
   sizes: {
     sm: {
       fontSize: "xs",
@@ -79,6 +85,10 @@ const Badge = {
       bg: "secondary",
       color: "white",
     },
+    tempo: {
+      bg: "brand",
+      color: "gray.800",
+    },
     alert: {
       bg: "alert",
       color: "gray.800",
@@ -87,29 +97,6 @@ const Badge = {
   defaultProps: {
     size: "sm",
     variant: "solid",
-  },
-};
-
-export const Tabs = {
-  defaultProps: {
-    variant: "solid-rounded",
-    colorScheme: "gray",
-    size: "sm",
-  },
-};
-
-// export const Tab = {
-//   defaultProps: {
-//     shadow: "inner",
-//     color: "white",
-//   },
-// };
-
-export const TabPanel = {
-  defaultProps: {
-    px: 0,
-    pb: 0,
-    pt: 4,
   },
 };
 
@@ -161,17 +148,14 @@ const UITheme = extendTheme({
       800: "rgba(0, 30, 56, 1)",
       900: "rgba(0, 30, 56, 1)",
     },
-
-    // Other colours
-    alert: "rgba(253, 188, 180, 0.5)",
   },
   styles: {
     global: {
-      body: {
-        fontFamily: "Public Sans",
-      },
       b: {
         fontWeight: 600,
+      },
+      a: {
+        textDecoration: "underline",
       },
     },
   },
@@ -180,7 +164,7 @@ const UITheme = extendTheme({
     body: "Public Sans",
   },
   textStyles: {
-    secondary: {
+    miniHeading: {
       fontSize: "sm",
       fontWeight: 600,
       lineHeight: "200%",
@@ -191,10 +175,10 @@ const UITheme = extendTheme({
     Button,
     Card,
     Badge,
-    Tabs,
-    Table,
     Heading,
+    Table,
   },
 });
 
+// This is imported by Application Kit (general) and _document.tsx (colour mode only)
 export default UITheme;

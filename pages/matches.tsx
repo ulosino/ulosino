@@ -1,48 +1,64 @@
-import { GetStaticProps } from "next";
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// Types
+import type { ReactElement } from "react";
+
+// Head and SEO
 import Head from "next/head";
-import Link from "next/link";
 
-import {
-  Heading,
-  Text,
-  Badge,
-  Box,
-  Stack,
-  Flex,
-  Spacer,
-  Button,
-} from "@chakra-ui/react";
+// Chakra UI, icons, and other design imports
+import { Stack, Heading, Text } from "@chakra-ui/react";
 
-import UIProvider from "providers/UIProvider";
-import BrowseLayout from "components/BrowseLayout";
-import MatchesRedirectionHero from "components/MatchesRedirectionHero";
+// First party components
+import ApplicationProvider from "providers/ApplicationProvider";
+import Layout from "components/layouts/Layout";
+import BrowseLayout from "components/layouts/BrowseLayout";
+import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
+import MatchesExperience from "components/matches/MatchesExperience";
 
+// Begin page
 export default function Matches() {
   return (
-    <UIProvider>
-      <BrowseLayout>
-        <>
-          <Head>
-            <title>ULOSINO &mdash; ULOSINO Matches</title>
-            <meta property="og:title" content="ULOSINO Matches" />
-            <meta
-              name="description"
-              content="Find an open source operating system that matches your preferences with ULOSINO Matches."
-            />
-            <meta
-              property="og:description"
-              content="Find an open source OS that matches your preferences with ULOSINO Matches."
-            />
-          </Head>
+    <>
+      <Head>
+        <title>ULOSINO &mdash; ULOSINO Matches</title>
+        <meta property="og:title" content="ULOSINO Matches" />
+        <meta
+          name="description"
+          content="Find an open source operating system that matches your preferences with ULOSINO Matches."
+        />
+        <meta
+          property="og:description"
+          content="Find an open source OS that matches your preferences with ULOSINO Matches."
+        />
+      </Head>
 
-          <Heading size="3xl" mb={8}>
-            Matches
-          </Heading>
-
-          <MatchesRedirectionHero />
-        </>
-      </BrowseLayout>
-    </UIProvider>
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">ULOSINO Matches</Heading>
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
+        <Text>
+          Find an OS that matches your preferences, quickly and easily.
+        </Text>
+        <MatchesExperience />
+      </Stack>
+    </>
   );
 }
+
+// Apply persistent layout, wrapping page
+Matches.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <ApplicationProvider>
+      <Layout
+        useBasicLayout={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
+        <BrowseLayout>{page}</BrowseLayout>
+      </Layout>
+    </ApplicationProvider>
+  );
+};

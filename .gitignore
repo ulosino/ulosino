@@ -19,6 +19,10 @@
 **/public/worker-*.js.map
 **/public/fallback-*.js
 **/public/sitemap.xml
+/cypress/downloads/
+/cypress/fixtures/
+/cypress/screenshots/
+/cypress/videos/
 
 # Debugging files
 npm-debug.log*

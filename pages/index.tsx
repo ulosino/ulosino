@@ -1,28 +1,29 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+// Types
+import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Head and SEO
 import Head from "next/head";
+
+// Links and routing
 import Link from "next/link";
 
-import { getOSPages } from "providers/OSPageProvider";
-
+// Chakra UI, icons, and other design imports
 import {
+  Stack,
+  SimpleGrid,
   Heading,
   Text,
   Badge,
   Button,
-  Box,
-  Stack,
   DarkMode,
-  SimpleGrid,
+  Box,
+  useStyleConfig,
 } from "@chakra-ui/react";
-import {
-  HiOutlineDatabase,
-  HiOutlineInformationCircle,
-  HiOutlineSparkles,
-} from "react-icons/hi";
-
-import { useStyleConfig } from "@chakra-ui/react";
-function Card(props) {
+function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
 
   const styles = useStyleConfig("Card", { variant });
@@ -33,32 +34,28 @@ function Card(props) {
     </Box>
   );
 }
-
-import UIProvider from "providers/UIProvider";
-
 import {
-  AutoComplete,
-  AutoCompleteInput,
-  AutoCompleteItem,
-  AutoCompleteList,
-} from "@choc-ui/chakra-autocomplete";
+  HiOutlineDatabase,
+  HiOutlineInformationCircle,
+  HiOutlineSparkles,
+} from "react-icons/hi";
 
-export default function Home({
-  AZOSPageData,
-}: {
-  AZOSPageData: {
-    date: string;
-    id: string;
-    title: string;
-    summary: string;
-    category: string;
-    version: string;
-    platform: string;
-    startup: string;
-    desktop: string;
-    packagemgr: string;
-  }[];
-}) {
+// First party components
+import ApplicationProvider from "providers/ApplicationProvider";
+import Layout from "components/layouts/Layout";
+import { NoJSWarningHome } from "components/NoJSWarning";
+import SearchName from "components/search/SearchName";
+import { ErrorFallback } from "components/ErrorFallback";
+
+// Markdown processing libraries
+import { getOSPages } from "providers/OSPageProvider";
+
+interface OSDataPage {
+  AZOSPageData: any;
+}
+
+// Begin page
+export default function Home({ AZOSPageData }: OSDataPage) {
   const systemDate = new Date();
   const hours = systemDate.getHours();
   var timeGreeting;
@@ -67,7 +64,7 @@ export default function Home({
   else if (hours >= 17 && hours <= 24) timeGreeting = "Good Evening";
 
   return (
-    <UIProvider>
+    <>
       <Head>
         <title>ULOSINO &mdash; Discover Open Source Operating Systems</title>
         <meta
@@ -85,125 +82,95 @@ export default function Home({
       </Head>
 
       <Stack direction="column" spacing={10}>
+        <ErrorFallback>
+          <noscript>
+            <NoJSWarningHome />
+          </noscript>
+        </ErrorFallback>
         <SimpleGrid minChildWidth="300px" spacing={10}>
-          <Stack direction="column" spacing={5}>
-            <Text textStyle="secondary" as="h6">
-              Start
-            </Text>
+          <ErrorFallback>
             <Stack direction="column" spacing={5}>
-              <Heading size="xl">{timeGreeting}</Heading>
-              <AutoComplete>
-                <AutoCompleteInput
-                  variant="outline"
-                  size="lg"
-                  borderRadius="xl"
-                  shadow="inner"
-                  placeholder="Find an Operating System..."
-                  id="testing-db-input"
-                />
-                <AutoCompleteList>
-                  {AZOSPageData.map(
-                    ({
-                      id,
-                      title,
-                      summary,
-                      category,
-                      version,
-                      platform,
-                      desktop,
-                      startup,
-                      packagemgr,
-                    }) => (
-                      <AutoCompleteItem
-                        key={`option-${title}`}
-                        value={title}
-                        maxSuggestions={5}
-                        mx={3}
-                        id="testing-db-item"
-                      >
-                        <Link
-                          href={`/browse/${id}`}
-                          passHref
-                          key={`/browse/${id}`}
-                        >
-                          <Box p={2} mb={2}>
-                            <Heading size="md">{title}</Heading>
-                            {summary && <Text fontSize="sm">"{summary}"</Text>}
-                            <Stack
-                              direction="row"
-                              display={{ base: "none", sm: "flex" }}
-                              spacing={4}
-                            >
-                              {category && <Badge>{category}</Badge>}
-                              {version && <Text fontSize="sm">{version}</Text>}
-                              {platform && (
-                                <Text fontSize="sm">{platform}</Text>
-                              )}
-                              {desktop && <Text fontSize="sm">{desktop}</Text>}
-                              {startup && <Text fontSize="sm">{startup}</Text>}
-                              {packagemgr && (
-                                <Text fontSize="sm">{packagemgr}</Text>
-                              )}
-                            </Stack>
-                          </Box>
-                        </Link>
-                      </AutoCompleteItem>
-                    )
-                  )}
-                </AutoCompleteList>
-              </AutoComplete>
-            </Stack>
-          </Stack>
-          <Card variant="secondary">
-            <DarkMode>
+              <Text textStyle="miniHeading" as="h6">
+                Start
+              </Text>
               <Stack direction="column" spacing={5}>
-                <Text textStyle="secondary" as="h6">
-                  ULOSINO Tempo
-                </Text>
-                <Stack direction="column" spacing={0}>
-                  <Heading>Give Capital.</Heading>
-                  <Heading>Support Projects.</Heading>
+                <Heading size="xl">{timeGreeting}</Heading>
+                <SearchName data={AZOSPageData} size="lg" />
+              </Stack>
+            </Stack>
+          </ErrorFallback>
+          <ErrorFallback>
+            <Card variant="secondary">
+              <DarkMode>
+                <Stack direction="column" spacing={5}>
+                  <Text textStyle="miniHeading" as="h6">
+                    ULOSINO Tempo
+                  </Text>
+                  <Stack direction="column" spacing={0}>
+                    <Heading>Give Capital.</Heading>
+                    <Heading>Support Projects.</Heading>
+                  </Stack>
+                  <Text>
+                    Open source projects move faster with financial support.
+                    Look for the{" "}
+                    <Badge variant="tempo" mb={1} mx={1}>
+                      Tempo
+                    </Badge>{" "}
+                    badge for quick access to a selection of donation options.
+                  </Text>
+                  <Link href="/browse" passHref>
+                    <Button leftIcon={<HiOutlineDatabase />} as="a">
+                      Browse the OS List
+                    </Button>
+                  </Link>
                 </Stack>
-                <Text>
-                  Open source projects move faster with financial support. Look
-                  for the{" "}
-                  <Badge bg="brand" color="gray.800" mb={1} mx={1}>
-                    Tempo
-                  </Badge>{" "}
-                  badge for quick access to a selection of donation options.
+              </DarkMode>
+            </Card>
+          </ErrorFallback>
+        </SimpleGrid>
+        <ErrorFallback>
+          <SimpleGrid minChildWidth="300px" spacing={10}>
+            <Card variant="solid">
+              <Stack direction="column" spacing={5}>
+                <Text textStyle="miniHeading" as="h6">
+                  Don't know what to search for?
                 </Text>
-                <Link href="/browse" passHref>
-                  <Button leftIcon={<HiOutlineDatabase />} as="a">
-                    Browse Operating Systems
+                <Heading>Find a Match.</Heading>
+                <Link href="/matches" passHref>
+                  <Button leftIcon={<HiOutlineSparkles />} as="a">
+                    Get Started with Matches
                   </Button>
                 </Link>
               </Stack>
-            </DarkMode>
-          </Card>
-        </SimpleGrid>
-        <SimpleGrid minChildWidth="300px" spacing={10}>
-          <Card variant="solid">
-            <Stack direction="column" spacing={5}>
-              <Text textStyle="secondary" as="h6">
-                Don't know what to search for?
-              </Text>
-              <Heading>Find a Match.</Heading>
-              <Link href="/matches" passHref>
-                <Button leftIcon={<HiOutlineSparkles />} as="a">
-                  Get Started with Matches
-                </Button>
-              </Link>
-            </Stack>
-          </Card>
-          <Button leftIcon={<HiOutlineInformationCircle />} isDisabled>
-            About ULOSINO
-          </Button>
-        </SimpleGrid>
+            </Card>
+            <Link href="/about" passHref>
+              <Button leftIcon={<HiOutlineInformationCircle />} as="a">
+                About ULOSINO
+              </Button>
+            </Link>
+          </SimpleGrid>
+        </ErrorFallback>
       </Stack>
-    </UIProvider>
+    </>
   );
 }
 
+// Apply persistent layout, wrapping page
+Home.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <ApplicationProvider>
+      <Layout
+        useBasicLayout={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
+        {page}
+      </Layout>
+    </ApplicationProvider>
+  );
+};
+
+// Import AZOSPageData OS Page handling
 export const getStaticProps: GetStaticProps = async () => {
   const AZOSPageData = getOSPages();
   return {
