@@ -9,7 +9,7 @@
     "cypress": "cypress run"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.8.3",
+    "@chakra-ui/react": "^1.8.6",
     "@choc-ui/chakra-autocomplete": "^4.17.0",
     "@emotion/react": "^11.7.1",
     "@fontsource/public-sans": "^4.5.2",
