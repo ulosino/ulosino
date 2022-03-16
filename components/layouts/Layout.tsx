@@ -30,6 +30,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 // First-party components
 import Logo from "components/Logo";
 import HeaderBackButton from "components/HeaderBackButton";
+import ExperimentalBanner from "components/ExperimentalBanner";
 
 // Keybinding libraries
 import { useEffect } from "react";
@@ -268,6 +269,7 @@ export default function Layout({
           </DarkMode>
         </Flex>
       )}
+      <ExperimentalBanner />
       <Container maxW="container.lg" as="header">
         <Flex mt={2} mb={10}>
           <Center
