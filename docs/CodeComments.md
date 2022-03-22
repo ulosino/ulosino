@@ -32,7 +32,7 @@ This document describes a standard collection of code comments.
 ```
 
 ```
-// Dynamic loading
+// Suspense and performance
 ```
 
 ### Others

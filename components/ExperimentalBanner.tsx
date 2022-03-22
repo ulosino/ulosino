@@ -21,7 +21,7 @@ export default function ExperimentalBanner() {
             </Center>
             <Center>
               <Text fontSize="sm">
-                Some ULOSINO features may be unavailable.
+                Some ULOSINO features are known to be unavailable.
               </Text>
             </Center>
           </Stack>

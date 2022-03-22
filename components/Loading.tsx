@@ -6,11 +6,21 @@
 // Chakra UI, icons, and other design imports
 import { Spinner, Center } from "@chakra-ui/react";
 
-// Begin component
-export default function Loading() {
+// Begin components
+// This a general loading spinner
+export function Loading() {
   return (
     <Center>
       <Spinner />
+    </Center>
+  );
+}
+
+// This spinner should be used for SSR communications (Suspense, dynamic loading)
+export function LoadingServer() {
+  return (
+    <Center>
+      <Spinner title="Communicating with Server" m={5} />
     </Center>
   );
 }

@@ -6,6 +6,11 @@
 // Types
 import type { ReactElement } from "react";
 
+// Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { LoadingServer } from "components/Loading";
+
 // Links and routing
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -24,13 +29,45 @@ import {
   useColorMode,
   useColorModeValue,
   DarkMode,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  Box,
+  useStyleConfig,
+  Switch,
+  Kbd,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
+function Card(props: { [x: string]: any; variant: string; children: any }) {
+  const { variant, children, ...rest } = props;
+
+  const styles = useStyleConfig("Card", { variant });
+
+  return (
+    <Box __css={styles} {...rest}>
+      {children}
+    </Box>
+  );
+}
 import { HiOutlineMenu } from "react-icons/hi";
 
 // First-party components
 import Logo from "components/Logo";
 import HeaderBackButton from "components/HeaderBackButton";
 import ExperimentalBanner from "components/ExperimentalBanner";
+const AboutApplication = dynamic(() => import("components/AboutApplication"), {
+  suspense: true,
+});
+const OSPageAssistant = dynamic(() => import("components/OSPageAssistant"), {
+  suspense: true,
+});
 
 // Keybinding libraries
 import { useEffect } from "react";
@@ -45,12 +82,36 @@ interface LayoutProps {
   showPreferences: boolean;
 }
 
+export function LoadingMenuItem() {
+  return <MenuItem isDisabled>Communicating with Server</MenuItem>;
+}
+export function LoadingMenuButton() {
+  return (
+    <MenuButton
+      as={IconButton}
+      aria-label="Open Menu - Communicating with Server"
+      title="Communicating with Server"
+      isLoading
+    />
+  );
+}
+export function LoadingAboutApplicationButton() {
+  return (
+    <Button size="sm" isDisabled>
+      Communicating with Server
+    </Button>
+  );
+}
+
 // Begin wrapping component
 export default function Layout({
   children,
   useBasicLayout,
   showPreferences,
 }: LayoutProps) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [applicationPreferences, setApplicationPreferences] = useBoolean();
+
   // Global preferences
   const [backButton, setBackButton] = useBoolean();
   const [advancedSearch, setAdvancedSearch] = useBoolean();
@@ -211,7 +272,6 @@ export default function Layout({
         [manager, setBackButton];
     }
   });
-
   return (
     <Flex
       display="flex"
@@ -346,8 +406,157 @@ export default function Layout({
               </Stack>
             </Center>
           )}
-
           <Spacer />
+          <Suspense fallback={<LoadingMenuButton />}>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                icon={<HiOutlineMenu />}
+                aria-label="Open Menu"
+                title="Open Menu"
+              />
+              <MenuList>
+                <Suspense fallback={<LoadingMenuItem />}>
+                  <OSPageAssistant />
+                </Suspense>
+                <Suspense fallback={<LoadingMenuItem />}>
+                  <Center display={{ base: "none", sm: "flex" }}>
+                    <MenuItem onClick={onOpen}>Preferences</MenuItem>
+                  </Center>
+                  <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+                    <ModalOverlay />
+                    <ModalContent rounded="xl" my={5}>
+                      <ModalHeader fontSize="2xl">Preferences</ModalHeader>
+                      <ModalBody>
+                        <Flex direction="row">
+                          <Stack direction="column" spacing={2} me={10}>
+                            {applicationPreferences ? (
+                              <Button onClick={setApplicationPreferences.off}>
+                                Appearance
+                              </Button>
+                            ) : (
+                              <Button
+                                onClick={setApplicationPreferences.off}
+                                isActive
+                              >
+                                Appearance
+                              </Button>
+                            )}
+                            {applicationPreferences ? (
+                              <Button
+                                onClick={setApplicationPreferences.on}
+                                isActive
+                              >
+                                Application
+                              </Button>
+                            ) : (
+                              <Button onClick={setApplicationPreferences.on}>
+                                Application
+                              </Button>
+                            )}
+                          </Stack>
+                          <Spacer />
+                          {applicationPreferences ? (
+                            <Stack direction="column" spacing={5} w="full">
+                              <Flex>
+                                <Text>Minimise In-App Notifications</Text>
+                                <Spacer />
+                                <Switch />
+                              </Flex>
+                              <Flex>
+                                <Text>Minimise In-App Banners</Text>
+                                <Spacer />
+                                <Switch />
+                              </Flex>
+                              <Flex>
+                                <Text>
+                                  Disable Navigation Keyboard Shortcuts
+                                </Text>
+                                <Spacer />
+                                <Switch />
+                              </Flex>
+                              <Flex>
+                                <Text>Use Guides (Beta)</Text>
+                                <Spacer />
+                                <Switch isDisabled />
+                              </Flex>
+                            </Stack>
+                          ) : (
+                            <Stack direction="column" spacing={5} w="full">
+                              <Card variant="secondary">
+                                <DarkMode>
+                                  <Stack direction="column">
+                                    <Stack direction="column" spacing={2}>
+                                      <Button>Toggle Dark Mode</Button>
+                                      <Text fontSize="xs">
+                                        Switch to dark mode. For operating
+                                        systems that use system-wide colour mode
+                                        settings, this will use the opposite of
+                                        your system preference.
+                                      </Text>
+                                      <Text fontSize="xs">
+                                        <Kbd>control</Kbd> + <Kbd>W</Kbd>
+                                      </Text>
+                                    </Stack>
+                                  </Stack>
+                                </DarkMode>
+                              </Card>
+                              <Flex>
+                                <Stack direction="column" spacing={0}>
+                                  <Text>Use Advanced Search Link</Text>
+                                  <Text fontSize="xs">
+                                    <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
+                                    <Kbd>S</Kbd>
+                                  </Text>
+                                </Stack>
+                                <Spacer />
+                                <Switch onClick={setAdvancedSearch.toggle} />
+                              </Flex>
+                              <Flex>
+                                <Stack direction="column" spacing={0}>
+                                  <Text>
+                                    Show Back Button for Large Windows
+                                  </Text>
+                                  <Text fontSize="xs">
+                                    <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
+                                    <Kbd>B</Kbd>
+                                  </Text>
+                                </Stack>
+                                <Spacer />
+                                <Switch onClick={setAdvancedSearch.toggle} />
+                              </Flex>
+                              <Flex>
+                                <Stack direction="column" spacing={0}>
+                                  <Text>
+                                    Show Menu Button for Large Windows
+                                  </Text>
+                                </Stack>
+                                <Spacer />
+                                <Switch onClick={setAdvancedSearch.toggle} />
+                              </Flex>
+                            </Stack>
+                          )}
+                        </Flex>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Flex w="full">
+                          <Center>
+                            <Suspense
+                              fallback={<LoadingAboutApplicationButton />}
+                            >
+                              <AboutApplication />
+                            </Suspense>
+                          </Center>
+                          <Spacer />
+                          <Button onClick={onClose}>Done</Button>
+                        </Flex>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Suspense>
+              </MenuList>
+            </Menu>
+          </Suspense>
           <Center display={{ base: "flex", sm: "none" }}>
             <Link href="/menu" passHref>
               <IconButton

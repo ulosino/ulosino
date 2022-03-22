@@ -4,9 +4,10 @@
 // This is the Matches interface, supplying the switches and result cards
 // Forked from the ulosino/matches repository at version 1.1.0
 
-// Dynamic loading
+// Suspense and performance
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import Loading from "components/Loading";
+import { LoadingServer } from "components/Loading";
 
 // Chakra UI, icons, and other design imports
 import {
@@ -42,82 +43,82 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 
 // First party components
 const AlpineCard = dynamic(() => import("components/matches/cards/Alpine"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const ArchCard = dynamic(() => import("components/matches/cards/Arch"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const GentooCard = dynamic(() => import("components/matches/cards/Gentoo"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const GardenCard = dynamic(() => import("components/matches/cards/Garden"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const FreeBSDCard = dynamic(() => import("components/matches/cards/FreeBSD"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const NetBSDCard = dynamic(() => import("components/matches/cards/NetBSD"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const MidnightBSDCard = dynamic(
   () => import("components/matches/cards/MidnightBSD"),
   {
-    loading: () => <Loading />,
+    suspense: true,
   }
 );
 const GhostBSDCard = dynamic(
   () => import("components/matches/cards/GhostBSD"),
   {
-    loading: () => <Loading />,
+    suspense: true,
   }
 );
 const AntiXCard = dynamic(() => import("components/matches/cards/AntiX"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const MXLinuxCard = dynamic(() => import("components/matches/cards/MXLinux"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const Q4OSCard = dynamic(() => import("components/matches/cards/Q4OS"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const UbuntuMateCard = dynamic(
   () => import("components/matches/cards/UbuntuMate"),
   {
-    loading: () => <Loading />,
+    suspense: true,
   }
 );
 const ElementaryCard = dynamic(
   () => import("components/matches/cards/Elementary"),
   {
-    loading: () => <Loading />,
+    suspense: true,
   }
 );
 const PopOSCard = dynamic(() => import("components/matches/cards/PopOS"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const NitruxCard = dynamic(() => import("components/matches/cards/Nitrux"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const SolusCard = dynamic(() => import("components/matches/cards/Solus"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const ZorinCard = dynamic(() => import("components/matches/cards/Zorin"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const UbuntuCard = dynamic(() => import("components/matches/cards/Ubuntu"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const LinuxMintCard = dynamic(
   () => import("components/matches/cards/LinuxMint"),
   {
-    loading: () => <Loading />,
+    suspense: true,
   }
 );
 const KDENeonCard = dynamic(() => import("components/matches/cards/KDENeon"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 const ManjaroCard = dynamic(() => import("components/matches/cards/Manjaro"), {
-  loading: () => <Loading />,
+  suspense: true,
 });
 
 export default function MatchesExperience() {
@@ -289,15 +290,25 @@ export default function MatchesExperience() {
               {gui ? (
                 // BSD CLI
                 <Stack direction="column" spacing={2}>
-                  <FreeBSDCard />
-                  <NetBSDCard />
+                  <Suspense fallback={<LoadingServer />}>
+                    <FreeBSDCard />
+                  </Suspense>
+                  <Suspense fallback={<LoadingServer />}>
+                    <NetBSDCard />
+                  </Suspense>
                 </Stack>
               ) : (
                 // BSD GUI
                 <Stack direction="column" spacing={2}>
-                  <GhostBSDCard />
-                  <MidnightBSDCard />
-                  <FreeBSDCard />
+                  <Suspense fallback={<LoadingServer />}>
+                    <GhostBSDCard />
+                  </Suspense>
+                  <Suspense fallback={<LoadingServer />}>
+                    <MidnightBSDCard />
+                  </Suspense>
+                  <Suspense fallback={<LoadingServer />}>
+                    <FreeBSDCard />
+                  </Suspense>
                 </Stack>
               )}
             </>
@@ -308,14 +319,22 @@ export default function MatchesExperience() {
                   {managed ? (
                     // Advanced Linux CLI
                     <Stack direction="column" spacing={2}>
-                      <GentooCard />
-                      <GardenCard />
+                      <Suspense fallback={<LoadingServer />}>
+                        <GentooCard />
+                      </Suspense>
+                      <Suspense fallback={<LoadingServer />}>
+                        <GardenCard />
+                      </Suspense>
                     </Stack>
                   ) : (
                     // Managed Linux CLI
                     <Stack direction="column" spacing={2}>
-                      <AlpineCard />
-                      <ArchCard />
+                      <Suspense fallback={<LoadingServer />}>
+                        <AlpineCard />
+                      </Suspense>
+                      <Suspense fallback={<LoadingServer />}>
+                        <ArchCard />
+                      </Suspense>
                     </Stack>
                   )}
                 </>
@@ -324,36 +343,64 @@ export default function MatchesExperience() {
                   {legacyHardware ? (
                     // Linux for older hardware
                     <Stack direction="column" spacing={2}>
-                      <AntiXCard />
-                      <MXLinuxCard />
-                      <Q4OSCard />
-                      <UbuntuMateCard />
+                      <Suspense fallback={<LoadingServer />}>
+                        <AntiXCard />
+                      </Suspense>
+                      <Suspense fallback={<LoadingServer />}>
+                        <MXLinuxCard />
+                      </Suspense>
+                      <Suspense fallback={<LoadingServer />}>
+                        <Q4OSCard />
+                      </Suspense>
+                      <Suspense fallback={<LoadingServer />}>
+                        <UbuntuMateCard />
+                      </Suspense>
                     </Stack>
                   ) : (
                     <>
                       {managed ? (
                         // Advanced Linux
                         <Stack direction="column" spacing={2}>
-                          <ManjaroCard />
-                          <KDENeonCard />
+                          <Suspense fallback={<LoadingServer />}>
+                            <ManjaroCard />
+                          </Suspense>
+                          <Suspense fallback={<LoadingServer />}>
+                            <KDENeonCard />
+                          </Suspense>
                         </Stack>
                       ) : (
                         <>
                           {windows ? (
                             // Managed macOS-style Linux
                             <Stack direction="column" spacing={2}>
-                              <ElementaryCard />
-                              <PopOSCard />
-                              <NitruxCard />
-                              <UbuntuCard />
+                              <Suspense fallback={<LoadingServer />}>
+                                <ElementaryCard />
+                              </Suspense>
+                              <Suspense fallback={<LoadingServer />}>
+                                <PopOSCard />
+                              </Suspense>
+                              <Suspense fallback={<LoadingServer />}>
+                                <NitruxCard />
+                              </Suspense>
+                              <Suspense fallback={<LoadingServer />}>
+                                <UbuntuCard />
+                              </Suspense>
                             </Stack>
                           ) : (
                             // Managed Windows-style Linux
                             <Stack direction="column" spacing={2}>
-                              <LinuxMintCard />
-                              <ZorinCard />
-                              <UbuntuCard />
-                              <SolusCard />
+                              <Suspense fallback={<LoadingServer />}>
+                                <LinuxMintCard />
+                              </Suspense>
+                              <Suspense fallback={<LoadingServer />}>
+                                <ZorinCard />
+                              </Suspense>
+                              <Suspense fallback={<LoadingServer />}>
+                                <UbuntuCard />
+                              </Suspense>
+                              <Suspense fallback={<LoadingServer />}>
+                                <SolusCard />
+                              </Suspense>
                             </Stack>
                           )}
                         </>

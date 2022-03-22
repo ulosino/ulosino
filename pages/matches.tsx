@@ -4,6 +4,11 @@
 // Types
 import type { ReactElement } from "react";
 
+// Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { LoadingServer } from "components/Loading";
+
 // Head and SEO
 import Head from "next/head";
 
@@ -15,7 +20,12 @@ import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
-import MatchesExperience from "components/matches/MatchesExperience";
+const MatchesExperience = dynamic(
+  () => import("components/matches/MatchesExperience"),
+  {
+    suspense: true,
+  }
+);
 
 // Begin page
 export default function Matches() {
@@ -42,7 +52,9 @@ export default function Matches() {
         <Text>
           Find an OS that matches your preferences, quickly and easily.
         </Text>
-        <MatchesExperience />
+        <Suspense fallback={<LoadingServer />}>
+          <MatchesExperience />
+        </Suspense>
       </Stack>
     </>
   );

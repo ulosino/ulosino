@@ -5,6 +5,11 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { LoadingServer } from "components/Loading";
+
 // Head and SEO
 import Head from "next/head";
 
@@ -44,7 +49,9 @@ import {
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import { NoJSWarningHome } from "components/NoJSWarning";
-import SearchName from "components/search/SearchName";
+const SearchName = dynamic(() => import("components/search/SearchName"), {
+  suspense: true,
+});
 import { ErrorFallback } from "components/ErrorFallback";
 
 // Markdown processing libraries
@@ -89,66 +96,72 @@ export default function Home({ AZOSPageData }: OSDataPage) {
         </ErrorFallback>
         <SimpleGrid minChildWidth="300px" spacing={10}>
           <ErrorFallback>
-            <Stack direction="column" spacing={5}>
-              <Text textStyle="miniHeading" as="h6">
-                Start
-              </Text>
+            <Suspense fallback={<LoadingServer />}>
               <Stack direction="column" spacing={5}>
-                <Heading size="xl">{timeGreeting}</Heading>
-                <SearchName data={AZOSPageData} size="lg" />
+                <Text textStyle="miniHeading" as="h6">
+                  Start
+                </Text>
+                <Stack direction="column" spacing={5}>
+                  <Heading size="xl">{timeGreeting}</Heading>
+                  <SearchName data={AZOSPageData} size="lg" />
+                </Stack>
               </Stack>
-            </Stack>
+            </Suspense>
           </ErrorFallback>
           <ErrorFallback>
-            <Card variant="secondary">
-              <DarkMode>
-                <Stack direction="column" spacing={5}>
-                  <Text textStyle="miniHeading" as="h6">
-                    ULOSINO Tempo
-                  </Text>
-                  <Stack direction="column" spacing={0}>
-                    <Heading>Give Capital.</Heading>
-                    <Heading>Support Projects.</Heading>
+            <Suspense fallback={<LoadingServer />}>
+              <Card variant="secondary">
+                <DarkMode>
+                  <Stack direction="column" spacing={5}>
+                    <Text textStyle="miniHeading" as="h6">
+                      ULOSINO Tempo
+                    </Text>
+                    <Stack direction="column" spacing={0}>
+                      <Heading>Give Capital.</Heading>
+                      <Heading>Support Projects.</Heading>
+                    </Stack>
+                    <Text>
+                      Open source projects move faster with financial support.
+                      Look for the{" "}
+                      <Badge variant="tempo" mb={1} mx={1}>
+                        Tempo
+                      </Badge>{" "}
+                      badge for quick access to a selection of donation options.
+                    </Text>
+                    <Link href="/browse" passHref>
+                      <Button leftIcon={<HiOutlineDatabase />} as="a">
+                        Browse the OS List
+                      </Button>
+                    </Link>
                   </Stack>
-                  <Text>
-                    Open source projects move faster with financial support.
-                    Look for the{" "}
-                    <Badge variant="tempo" mb={1} mx={1}>
-                      Tempo
-                    </Badge>{" "}
-                    badge for quick access to a selection of donation options.
-                  </Text>
-                  <Link href="/browse" passHref>
-                    <Button leftIcon={<HiOutlineDatabase />} as="a">
-                      Browse the OS List
-                    </Button>
-                  </Link>
-                </Stack>
-              </DarkMode>
-            </Card>
+                </DarkMode>
+              </Card>
+            </Suspense>
           </ErrorFallback>
         </SimpleGrid>
         <ErrorFallback>
-          <SimpleGrid minChildWidth="300px" spacing={10}>
-            <Card variant="solid">
-              <Stack direction="column" spacing={5}>
-                <Text textStyle="miniHeading" as="h6">
-                  Don't know what to search for?
-                </Text>
-                <Heading>Find a Match.</Heading>
-                <Link href="/matches" passHref>
-                  <Button leftIcon={<HiOutlineSparkles />} as="a">
-                    Get Started with Matches
-                  </Button>
-                </Link>
-              </Stack>
-            </Card>
-            <Link href="/about" passHref>
-              <Button leftIcon={<HiOutlineInformationCircle />} as="a">
-                About ULOSINO
-              </Button>
-            </Link>
-          </SimpleGrid>
+          <Suspense fallback={<LoadingServer />}>
+            <SimpleGrid minChildWidth="300px" spacing={10}>
+              <Card variant="solid">
+                <Stack direction="column" spacing={5}>
+                  <Text textStyle="miniHeading" as="h6">
+                    Don't know what to search for?
+                  </Text>
+                  <Heading>Find a Match.</Heading>
+                  <Link href="/matches" passHref>
+                    <Button leftIcon={<HiOutlineSparkles />} as="a">
+                      Get Started with Matches
+                    </Button>
+                  </Link>
+                </Stack>
+              </Card>
+              <Link href="/about" passHref>
+                <Button leftIcon={<HiOutlineInformationCircle />} as="a">
+                  About ULOSINO
+                </Button>
+              </Link>
+            </SimpleGrid>
+          </Suspense>
         </ErrorFallback>
       </Stack>
     </>
