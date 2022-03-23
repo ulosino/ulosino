@@ -1,0 +1,29 @@
+name: Webhint Code Scanning
+on: [push]
+
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    steps:
+      # Cache our dependencies and Next.js files
+      # Reference https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows
+      - name: Set Persistent Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Run Webhint code scanning, with a build and start of the production server
+      - name: Run Cypress
+        run: npm run hint
+        with:
+          build: npm run build
+          start: npm run start
