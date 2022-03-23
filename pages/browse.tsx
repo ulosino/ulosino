@@ -29,7 +29,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
-import { OSPageAssistantHero } from "components/OSPageAssistantHero";
+import { OSPageAssistantHero } from "components/assistants/OSPageAssistantHero";
 
 // Markdown processing libraries
 import { getOSPages } from "providers/OSPageProvider";

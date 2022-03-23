@@ -19,7 +19,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 }
 
 // First party component
-import OSPageAssistant from "components/OSPageAssistant";
+import OSPageAssistant from "components/assistants/OSPageAssistant";
 
 // Begin components
 export function OSPageAssistantHero() {
