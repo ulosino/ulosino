@@ -2,7 +2,14 @@ name: Webhint Code Scanning
 on: [push]
 
 jobs:
-  chrome:
+  build-and-start:
+    runs-on: ubuntu-latest
+    - name: Build and Start Server
+    - script:
+      - npm run build
+      - npm run start
+
+  webhint:
     runs-on: ubuntu-latest
 
     timeout-minutes: 10
@@ -21,9 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # Run Webhint code scanning, with a build and start of the production server
-      - name: Run Cypress
-        run: npm run hint
-        with:
-          build: npm run build
-          start: npm run start
+      # Run Webhint, with a build and start of the production server
+      - name: Run Webhint
+        needs: build-and-start
+        run: npm run webhint
