@@ -1,0 +1,31 @@
+---
+# Required metadata
+name: "Kerla"
+summary: "Linux compatible OS written in Rust" # 2-7 words - shown on the OS List
+date: "2022-03-24" # Year-Month-Day
+version: "0.1.0" # Version at writing
+category: "Advanced"
+
+# Other metadata - if details unknown or not applicable, leave blank
+platform: "x86" # Separate by commas
+descends: ""
+desktop: "" # Leave blank if not installed or default
+shell: "ash"
+packagemgr: ""
+startup: "busybox"
+size: ""
+browser: ""
+license: "MIT"
+origin: ""
+website: "https://kerla.dev/" # e.g. "https://www.ulosino.com"
+repository: "https://github.com/nuta/kerla" # e.g. "https://github.com/ulosino/ulosino"
+
+# ULOSINO Tempo donation options
+# Uncomment a specific field if available
+# donate: "" # Required to enable Quick Donation Options
+# donateOpenCollective: "" # Open Collective
+# donateGithub: ""
+# donateLiberapay: ""
+---
+
+Kerla is an independent operating system. Targeting the power-user and developer markets, it uses a custom monolithic kernel that aims "to be compatible with the Linux ABI" meaning that "it runs Linux binaries without any modifications." Uniquely, it is written in Rust (around 90% of the code) and uses a custom Docker-based build system. It implements Unix-like "process concepts" like context switching and signals, "commonly used system calls." Internet Protocol compatibility is included. However, Kerla doesn't yet support disks, but does allow "pseudo file systems" to be used.
