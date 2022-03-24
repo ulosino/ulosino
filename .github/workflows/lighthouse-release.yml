@@ -1,0 +1,28 @@
+# This runs Lighthouse CI upon the creation of a GitHub Release
+# This strategy can be used for tracking performance of releases over time
+
+name: Lighthouse Performance CI
+on:
+  release:
+    types: [published]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Run checks on mobile
+      - name: Run Lighthouse CI for Mobile
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          urls: |
+            https://www.ulosino.com
+            https://www.ulosino.com/browse
+            https://www.ulosino.com/browse/elementary
+            https://www.ulosino.com/search
+            https://www.ulosino.com/matches
+            https://www.ulosino.com/about/privacy
+          runs: 1
+          uploadArtifacts: true
