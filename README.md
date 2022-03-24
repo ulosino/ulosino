@@ -3,7 +3,8 @@
 [![ULOSINO](./public/brand/flag.png)]()
 
 [![Cypress Testing](https://github.com/ulosino/ulosino/actions/workflows/testing.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/testing.yml)
-[![Lighthouse Performance CI](https://github.com/ulosino/ulosino/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/lighthouse.yml)
+[![Last Release Lighthouse CI](https://github.com/ulosino/ulosino/actions/workflows/lighthouse-release.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/lighthouse-release.yml)
+[![Last Release Webhint](https://github.com/ulosino/ulosino/actions/workflows/webhint-release.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/webhint-release.yml)
 
 ULOSINO is the modern setting for open source operating system information. Open to community contributions, ULOSINO aims to let you connect direct to culture.
 
