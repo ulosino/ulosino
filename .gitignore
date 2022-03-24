@@ -23,6 +23,7 @@
 /cypress/fixtures/
 /cypress/screenshots/
 /cypress/videos/
+/hint-report/
 
 # Debugging files
 npm-debug.log*

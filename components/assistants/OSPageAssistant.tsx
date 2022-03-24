@@ -1,6 +1,11 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// This experience is designed to help users create an OS Page
+// It combines customisable description and metadata fields and then combines them into a compatible OS page
+// The user is then directed to GitHub to name the page and commit the changes
+// One of the main access points for the Assistant is the <OSPageAssistantHero>, which is shown on the OS List
+
 // Links and routing
 import Link from "next/link";
 
@@ -9,6 +14,7 @@ import {
   useDisclosure,
   Center,
   Stack,
+  Box,
   Button,
   Drawer,
   DrawerOverlay,
@@ -49,8 +55,6 @@ export default function OSPageAssistant() {
   };
 
   // Metadata clipboard
-  // const [metadataUseDonationOptions, setMetadataUseDonationOptions] =
-  //   useBoolean();
   let metadataValue = String.raw`# Required metadata
 name: ""
 summary: "" # 2-7 words - shown on the OS List
