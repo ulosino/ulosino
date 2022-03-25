@@ -1,6 +1,5 @@
 const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
-const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
 // Content security options
 const securityHeaders = [

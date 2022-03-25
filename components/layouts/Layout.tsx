@@ -9,7 +9,8 @@ import type { ReactElement } from "react";
 // Suspense and performance
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import { LoadingServer } from "components/Loading";
+import { Loading, LoadingServer } from "components/Loading";
+import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Links and routing
 import Link from "next/link";
@@ -38,36 +39,15 @@ import {
   useDisclosure,
   Box,
   useStyleConfig,
-  Switch,
   Kbd,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
+  Badge,
 } from "@chakra-ui/react";
-function Card(props: { [x: string]: any; variant: string; children: any }) {
-  const { variant, children, ...rest } = props;
-
-  const styles = useStyleConfig("Card", { variant });
-
-  return (
-    <Box __css={styles} {...rest}>
-      {children}
-    </Box>
-  );
-}
 import { HiOutlineMenu } from "react-icons/hi";
 
 // First-party components
 import Logo from "components/Logo";
 import HeaderBackButton from "components/HeaderBackButton";
 import ExperimentalBanner from "components/ExperimentalBanner";
-const AboutApplication = dynamic(() => import("components/AboutApplication"), {
-  suspense: true,
-});
-const OSPageAssistant = dynamic(() => import("components/OSPageAssistant"), {
-  suspense: true,
-});
 
 // Keybinding libraries
 import { useEffect } from "react";
@@ -82,19 +62,6 @@ interface LayoutProps {
   showPreferences: boolean;
 }
 
-export function LoadingMenuItem() {
-  return <MenuItem isDisabled>Communicating with Server</MenuItem>;
-}
-export function LoadingMenuButton() {
-  return (
-    <MenuButton
-      as={IconButton}
-      aria-label="Open Menu - Communicating with Server"
-      title="Communicating with Server"
-      isLoading
-    />
-  );
-}
 export function LoadingAboutApplicationButton() {
   return (
     <Button size="sm" isDisabled>
@@ -112,15 +79,15 @@ export default function Layout({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [applicationPreferences, setApplicationPreferences] = useBoolean();
 
-  // Global preferences
-  const [backButton, setBackButton] = useBoolean();
-  const [advancedSearch, setAdvancedSearch] = useBoolean();
-  const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
-
   // Global keybindings
   const manager = useHotkeyManager();
   const router = useRouter();
   const { toggleColorMode } = useColorMode();
+
+  // Global preferences
+  const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
+  const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
+  const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
 
   // Global navigation keybindings
   useEffect(() => {
@@ -240,16 +207,24 @@ export default function Layout({
             ctrl: false,
             shift: true,
             alt: true,
-            callback: () => setAdvancedSearch.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefAdvancedSearchLink",
+                advancedSearch ? false : true
+              ),
           })
         : manager.registerHotkey({
             key: "S",
             ctrl: true,
             shift: true,
             alt: false,
-            callback: () => setAdvancedSearch.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefAdvancedSearchLink",
+                advancedSearch ? false : true
+              ),
           }),
-        [manager, setAdvancedSearch];
+        [manager, advancedSearch];
     }
   });
   useEffect(() => {
@@ -260,16 +235,24 @@ export default function Layout({
             ctrl: false,
             shift: true,
             alt: true,
-            callback: () => setBackButton.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefBackButtonLargeWindows",
+                backButton ? false : true
+              ),
           })
         : manager.registerHotkey({
             key: "B",
             ctrl: true,
             shift: true,
             alt: false,
-            callback: () => setBackButton.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefBackButtonLargeWindows",
+                backButton ? false : true
+              ),
           }),
-        [manager, setBackButton];
+        [manager, backButton];
     }
   });
   return (
@@ -407,155 +390,141 @@ export default function Layout({
             </Center>
           )}
           <Spacer />
-          <Suspense fallback={<LoadingMenuButton />}>
-            <Menu>
-              <MenuButton
-                as={IconButton}
+          <Suspense fallback={<LoadingServer />}>
+            <Center display={{ base: "none", sm: "flex" }}>
+              <IconButton
+                onClick={onOpen}
                 icon={<HiOutlineMenu />}
-                aria-label="Open Menu"
-                title="Open Menu"
+                aria-label="Open Options Menu"
+                title="Open Options Menu"
               />
-              <MenuList>
-                <Suspense fallback={<LoadingMenuItem />}>
-                  <OSPageAssistant />
-                </Suspense>
-                <Suspense fallback={<LoadingMenuItem />}>
-                  <Center display={{ base: "none", sm: "flex" }}>
-                    <MenuItem onClick={onOpen}>Preferences</MenuItem>
-                  </Center>
-                  <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
-                    <ModalOverlay />
-                    <ModalContent rounded="xl" my={5}>
-                      <ModalHeader fontSize="2xl">Preferences</ModalHeader>
-                      <ModalBody>
-                        <Flex direction="row">
-                          <Stack direction="column" spacing={2} me={10}>
-                            {applicationPreferences ? (
-                              <Button onClick={setApplicationPreferences.off}>
-                                Appearance
-                              </Button>
+            </Center>
+            <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+              <ModalOverlay />
+              <ModalContent rounded="xl" m={5}>
+                <ModalHeader fontSize="2xl">Preferences</ModalHeader>
+                <ModalBody>
+                  <Flex direction="row">
+                    <Stack direction="column" spacing={2} me={10}>
+                      {applicationPreferences ? (
+                        <Button onClick={setApplicationPreferences.off}>
+                          Appearance
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={setApplicationPreferences.off}
+                          isActive
+                        >
+                          Appearance
+                        </Button>
+                      )}
+                      {applicationPreferences ? (
+                        <Button onClick={setApplicationPreferences.on} isActive>
+                          Application
+                        </Button>
+                      ) : (
+                        <Button onClick={setApplicationPreferences.on}>
+                          Application
+                        </Button>
+                      )}
+                    </Stack>
+                    <Spacer />
+                    {applicationPreferences ? (
+                      <Stack direction="column" spacing={5} w="full">
+                        <Button isDisabled>
+                          Minimise In-App Notifications
+                        </Button>
+                        <Button isDisabled>
+                          Disable Navigation Keyboard Shortcuts
+                        </Button>
+                        <Button isDisabled>
+                          Enable{" "}
+                          <Badge variant="tempo" pt={1} mx={2}>
+                            Tempo
+                          </Badge>{" "}
+                          Features
+                        </Button>
+                      </Stack>
+                    ) : (
+                      <Stack direction="column" spacing={5} w="full">
+                        <Stack direction="column" spacing={1}>
+                          <Button
+                            onClick={(_) =>
+                              writeStorage(
+                                "P3PrefAdvancedSearchLink",
+                                advancedSearch ? false : true
+                              )
+                            }
+                          >
+                            {advancedSearch ? "Hide" : "Show"} Advanced Search
+                            Link
+                          </Button>
+                          <Text fontSize="xs">
+                            {isWindows ? (
+                              <>
+                                <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
+                              </>
                             ) : (
-                              <Button
-                                onClick={setApplicationPreferences.off}
-                                isActive
-                              >
-                                Appearance
-                              </Button>
+                              <>
+                                <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
+                                <Kbd>S</Kbd>
+                              </>
                             )}
-                            {applicationPreferences ? (
-                              <Button
-                                onClick={setApplicationPreferences.on}
-                                isActive
-                              >
-                                Application
-                              </Button>
+                          </Text>
+                        </Stack>
+                        <Stack direction="column" spacing={1}>
+                          <Button
+                            onClick={(_) =>
+                              writeStorage(
+                                "P3PrefBackButtonLargeWindows",
+                                backButton ? false : true
+                              )
+                            }
+                          >
+                            {backButton ? "Hide" : "Show"} Back Button on Large
+                            Windows
+                          </Button>
+                          <Text fontSize="xs">
+                            {isWindows ? (
+                              <>
+                                <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+                              </>
                             ) : (
-                              <Button onClick={setApplicationPreferences.on}>
-                                Application
-                              </Button>
+                              <>
+                                <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
+                                <Kbd>B</Kbd>
+                              </>
                             )}
-                          </Stack>
-                          <Spacer />
-                          {applicationPreferences ? (
-                            <Stack direction="column" spacing={5} w="full">
-                              <Flex>
-                                <Text>Minimise In-App Notifications</Text>
-                                <Spacer />
-                                <Switch />
-                              </Flex>
-                              <Flex>
-                                <Text>Minimise In-App Banners</Text>
-                                <Spacer />
-                                <Switch />
-                              </Flex>
-                              <Flex>
-                                <Text>
-                                  Disable Navigation Keyboard Shortcuts
-                                </Text>
-                                <Spacer />
-                                <Switch />
-                              </Flex>
-                              <Flex>
-                                <Text>Use Guides (Beta)</Text>
-                                <Spacer />
-                                <Switch isDisabled />
-                              </Flex>
-                            </Stack>
+                          </Text>
+                        </Stack>
+                        <Button isDisabled>
+                          {backButton ? "Hide" : "Show"} Mobile Menu on Large
+                          Windows
+                        </Button>
+                        <Stack direction="column" spacing={1}>
+                          <Button onClick={toggleColorMode}>
+                            Invert Colour Mode for this Tab
+                          </Button>
+                          {isWindows ? (
+                            ""
                           ) : (
-                            <Stack direction="column" spacing={5} w="full">
-                              <Card variant="secondary">
-                                <DarkMode>
-                                  <Stack direction="column">
-                                    <Stack direction="column" spacing={2}>
-                                      <Button>Toggle Dark Mode</Button>
-                                      <Text fontSize="xs">
-                                        Switch to dark mode. For operating
-                                        systems that use system-wide colour mode
-                                        settings, this will use the opposite of
-                                        your system preference.
-                                      </Text>
-                                      <Text fontSize="xs">
-                                        <Kbd>control</Kbd> + <Kbd>W</Kbd>
-                                      </Text>
-                                    </Stack>
-                                  </Stack>
-                                </DarkMode>
-                              </Card>
-                              <Flex>
-                                <Stack direction="column" spacing={0}>
-                                  <Text>Use Advanced Search Link</Text>
-                                  <Text fontSize="xs">
-                                    <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
-                                    <Kbd>S</Kbd>
-                                  </Text>
-                                </Stack>
-                                <Spacer />
-                                <Switch onClick={setAdvancedSearch.toggle} />
-                              </Flex>
-                              <Flex>
-                                <Stack direction="column" spacing={0}>
-                                  <Text>
-                                    Show Back Button for Large Windows
-                                  </Text>
-                                  <Text fontSize="xs">
-                                    <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
-                                    <Kbd>B</Kbd>
-                                  </Text>
-                                </Stack>
-                                <Spacer />
-                                <Switch onClick={setAdvancedSearch.toggle} />
-                              </Flex>
-                              <Flex>
-                                <Stack direction="column" spacing={0}>
-                                  <Text>
-                                    Show Menu Button for Large Windows
-                                  </Text>
-                                </Stack>
-                                <Spacer />
-                                <Switch onClick={setAdvancedSearch.toggle} />
-                              </Flex>
-                            </Stack>
+                            <Text fontSize="xs">
+                              <Kbd>control</Kbd> + <Kbd>W</Kbd>
+                            </Text>
                           )}
-                        </Flex>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Flex w="full">
-                          <Center>
-                            <Suspense
-                              fallback={<LoadingAboutApplicationButton />}
-                            >
-                              <AboutApplication />
-                            </Suspense>
-                          </Center>
-                          <Spacer />
-                          <Button onClick={onClose}>Done</Button>
-                        </Flex>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal>
-                </Suspense>
-              </MenuList>
-            </Menu>
+                        </Stack>
+                      </Stack>
+                    )}
+                  </Flex>
+                </ModalBody>
+                <ModalFooter>
+                  <Flex w="full">
+                    <Spacer />
+                    <Button onClick={onClose}>Done</Button>
+                  </Flex>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
           </Suspense>
           <Center display={{ base: "flex", sm: "none" }}>
             <Link href="/menu" passHref>
@@ -608,17 +577,27 @@ export default function Layout({
                 {/* These are shown on the Options page only */}
                 <Button
                   size="sm"
-                  onClick={setBackButton.toggle}
+                  onClick={(_) =>
+                    writeStorage(
+                      "P3PrefBackButtonLargeWindows",
+                      backButton ? false : true
+                    )
+                  }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBackButtonDesktopSwitch"
+                  id="testing-footerBackButtonDesktopCheckbox"
                 >
                   {backButton ? "Hide" : "Show"} Back
                 </Button>
                 <Button
                   size="sm"
-                  onClick={setAdvancedSearch.toggle}
+                  onClick={(_) =>
+                    writeStorage(
+                      "P3PrefAdvancedSearchLink",
+                      advancedSearch ? false : true
+                    )
+                  }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBrowseButtonSwitch"
+                  id="testing-footerBrowseButtonCheckbox"
                 >
                   Prefer {advancedSearch ? "Browse" : "Search"}
                 </Button>
