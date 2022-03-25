@@ -1,0 +1,24 @@
+# This runs Webhint upon the creation of a GitHub Release
+# This strategy can be used for tracking performance of releases over time
+
+name: Webhint Linting CI
+on:
+  release:
+    types: [published]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Run checks on mobile
+      - name: Run Webhint Checks
+        run: |
+          npx hint www.ulosino.com
+          npx hint www.ulosino.com/browse
+          npx hint www.ulosino.com/browse/elementary
+          npx hint www.ulosino.com/search
+          npx hint www.ulosino.com/matches
+          npx hint www.ulosino.com/about/privacy
