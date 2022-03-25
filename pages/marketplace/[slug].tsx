@@ -5,6 +5,9 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Suspense and performance
+import { useLocalStorage } from "@rehooks/local-storage";
+
 // Head and SEO
 import Head from "next/head";
 
@@ -60,6 +63,7 @@ interface OSPageTypes {
 
 // Begin page
 export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
+  const [donationFeatures] = useLocalStorage("P3PrefDonationFeatures");
   return (
     <>
       <Head>
@@ -108,79 +112,88 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
           <Stack direction="column" spacing={5}>
             <Heading size="xl">Donate to {source.frontmatter.name}</Heading>
             <ErrorFallback>
-              {(source.frontmatter.donate && (
+              {donationFeatures ? (
                 <>
-                  <Box>
-                    <Badge variant="tempo">Powered by ULOSINO Tempo</Badge>
-                  </Box>
-                  <Stack direction="column" spacing={2}>
-                    <Text as="h6" textStyle="miniHeading">
-                      Make a Donation
-                    </Text>
-                    {source.frontmatter.donate && (
-                      <Link href={source.frontmatter.donate} passHref>
-                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                          Visit Project Website
-                        </Button>
-                      </Link>
-                    )}
-                  </Stack>
-                  <Stack direction="column" spacing={2}>
-                    <Text as="h6" textStyle="miniHeading">
-                      Quick Donation Options
-                    </Text>
-                    {(source.frontmatter.donateOpenCollective && (
-                      <Link
-                        href={source.frontmatter.donateOpenCollective}
-                        passHref
-                      >
-                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                          Donate with Open Collective
-                        </Button>
-                      </Link>
-                    )) ?? (
-                      <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                        Donate with Open Collective
-                      </Button>
-                    )}
-                    {(source.frontmatter.donateLiberapay && (
-                      <Link href={source.frontmatter.donateLiberapay} passHref>
-                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                          Donate with Liberapay
-                        </Button>
-                      </Link>
-                    )) ?? (
-                      <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                        Donate with Liberapay
-                      </Button>
-                    )}
-                    {(source.frontmatter.donateGithub && (
-                      <Link href={source.frontmatter.donateGithub} passHref>
-                        <Button leftIcon={<HiOutlineCreditCard />} as="a">
-                          Donate with GitHub Sponsors
-                        </Button>
-                      </Link>
-                    )) ?? (
-                      <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
-                        Donate with GitHub Sponsors
-                      </Button>
-                    )}
-                  </Stack>
+                  {(source.frontmatter.donate && (
+                    <>
+                      <Box>
+                        <Badge variant="tempo">Powered by ULOSINO Tempo</Badge>
+                      </Box>
+                      <Stack direction="column" spacing={2}>
+                        <Text as="h6" textStyle="miniHeading">
+                          Make a Donation
+                        </Text>
+                        {source.frontmatter.donate && (
+                          <Link href={source.frontmatter.donate} passHref>
+                            <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                              Visit Project Website
+                            </Button>
+                          </Link>
+                        )}
+                      </Stack>
+                      <Stack direction="column" spacing={2}>
+                        <Text as="h6" textStyle="miniHeading">
+                          Quick Donation Options
+                        </Text>
+                        {(source.frontmatter.donateOpenCollective && (
+                          <Link
+                            href={source.frontmatter.donateOpenCollective}
+                            passHref
+                          >
+                            <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                              Donate with Open Collective
+                            </Button>
+                          </Link>
+                        )) ?? (
+                          <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                            Donate with Open Collective
+                          </Button>
+                        )}
+                        {(source.frontmatter.donateLiberapay && (
+                          <Link
+                            href={source.frontmatter.donateLiberapay}
+                            passHref
+                          >
+                            <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                              Donate with Liberapay
+                            </Button>
+                          </Link>
+                        )) ?? (
+                          <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                            Donate with Liberapay
+                          </Button>
+                        )}
+                        {(source.frontmatter.donateGithub && (
+                          <Link href={source.frontmatter.donateGithub} passHref>
+                            <Button leftIcon={<HiOutlineCreditCard />} as="a">
+                              Donate with GitHub Sponsors
+                            </Button>
+                          </Link>
+                        )) ?? (
+                          <Button leftIcon={<HiOutlineCreditCard />} isDisabled>
+                            Donate with GitHub Sponsors
+                          </Button>
+                        )}
+                      </Stack>
+                    </>
+                  )) ?? (
+                    <Card variant="solid">
+                      <Stack direction="column" spacing={5}>
+                        <Text>
+                          ULOSINO Tempo isn't available for{" "}
+                          {source.frontmatter.name}.
+                        </Text>
+                        <Link href={source.frontmatter.website} passHref>
+                          <Button leftIcon={<HiOutlineGlobe />} as="a">
+                            Visit Project Website
+                          </Button>
+                        </Link>
+                      </Stack>
+                    </Card>
+                  )}
                 </>
-              )) ?? (
-                <Card variant="solid">
-                  <Stack direction="column" spacing={5}>
-                    <Text>
-                      ULOSINO Tempo isn't available for{" "}
-                      {source.frontmatter.name}.
-                    </Text>
-                    <Link href={source.frontmatter.website} passHref>
-                      <Button leftIcon={<HiOutlineGlobe />} as="a">
-                        Visit Project Website
-                      </Button>
-                    </Link>
-                  </Stack>
-                </Card>
+              ) : (
+                ""
               )}
             </ErrorFallback>
           </Stack>

@@ -1,7 +1,7 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// The main layout implements the header and footer. It's opt-in by page
+// The Preferences modal allows the user to change "P3Pref" LocalStorage values using a graphical interface
 
 // Suspense and performance
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
@@ -40,6 +40,10 @@ export default function Preferences() {
   // Global preferences
   const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
+  const [minimiseNotifications] = useLocalStorage(
+    "P3PrefMinimiseNotifications"
+  );
+  const [donationFeatures] = useLocalStorage("P3PrefDonationFeatures");
   return (
     <>
       <Center display={{ base: "none", sm: "flex" }}>
@@ -79,12 +83,26 @@ export default function Preferences() {
               <Spacer />
               {applicationPreferences ? (
                 <Stack direction="column" spacing={5} w="full">
-                  <Button isDisabled>Minimise In-App Notifications</Button>
-                  <Button isDisabled>
-                    Disable Navigation Keyboard Shortcuts
+                  <Button
+                    onClick={(_) =>
+                      writeStorage(
+                        "P3PrefMinimiseNotifications",
+                        minimiseNotifications ? false : true
+                      )
+                    }
+                  >
+                    {minimiseNotifications ? "Allow More" : "Minimise"} In-App
+                    Notifications
                   </Button>
-                  <Button isDisabled>
-                    Disable{" "}
+                  <Button
+                    onClick={(_) =>
+                      writeStorage(
+                        "P3PrefDonationFeatures",
+                        donationFeatures ? false : true
+                      )
+                    }
+                  >
+                    {donationFeatures ? "Disable" : "Enable"}{" "}
                     <Badge variant="tempo" pt={1} mx={2}>
                       Tempo
                     </Badge>{" "}

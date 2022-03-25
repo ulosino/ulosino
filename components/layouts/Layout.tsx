@@ -63,12 +63,15 @@ export default function Layout({
   // Global keybindings
   const manager = useHotkeyManager();
   const router = useRouter();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
 
   // Global preferences
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
   const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
+  const [minimiseNotifications] = useLocalStorage(
+    "P3PrefMinimiseNotifications"
+  );
 
   // Global navigation keybindings
   useEffect(() => {
@@ -165,6 +168,7 @@ export default function Layout({
         [manager, window];
     }
   });
+
   // Session preference keybindings
   useEffect(() => {
     {
@@ -243,55 +247,61 @@ export default function Layout({
       direction="column"
       bg={useColorModeValue("gray.50", "inherit")}
     >
-      {ukraineAidBanner ? (
+      {minimiseNotifications ? (
         ""
       ) : (
-        <Flex
-          bg="secondary"
-          color="white"
-          py={2}
-          mb={4}
-          display={{ base: "none", md: "flex" }}
-        >
-          <DarkMode>
-            <Container maxW="container.lg">
-              <Flex>
-                <Stack direction="row" spacing={5}>
-                  <Center>
-                    <Stack direction="column" spacing={0}>
-                      <Flex bg="blue" w={8} h={2} roundedTop="sm" />
-                      <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
+        <>
+          {ukraineAidBanner ? (
+            ""
+          ) : (
+            <Flex
+              bg="secondary"
+              color="white"
+              py={2}
+              mb={4}
+              display={{ base: "none", md: "flex" }}
+            >
+              <DarkMode>
+                <Container maxW="container.lg">
+                  <Flex>
+                    <Stack direction="row" spacing={5}>
+                      <Center>
+                        <Stack direction="column" spacing={0}>
+                          <Flex bg="blue" w={8} h={2} roundedTop="sm" />
+                          <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
+                        </Stack>
+                      </Center>
+                      <Center>
+                        <Text textStyle="miniHeading" as="h6">
+                          Donate to UNICEF
+                        </Text>
+                      </Center>
+                      <Center>
+                        <Text fontSize="sm">Help children in Ukraine.</Text>
+                      </Center>
+                      <Center>
+                        <Link
+                          href="https://help.unicef.org/ukraine-emergency"
+                          passHref
+                        >
+                          <Button size="sm" as="a">
+                            Get Started
+                          </Button>
+                        </Link>
+                      </Center>
                     </Stack>
-                  </Center>
-                  <Center>
-                    <Text textStyle="miniHeading" as="h6">
-                      Donate to UNICEF
-                    </Text>
-                  </Center>
-                  <Center>
-                    <Text fontSize="sm">Help children in Ukraine.</Text>
-                  </Center>
-                  <Center>
-                    <Link
-                      href="https://help.unicef.org/ukraine-emergency"
-                      passHref
-                    >
-                      <Button size="sm" as="a">
-                        Get Started
+                    <Spacer />
+                    <Center>
+                      <Button size="sm" onClick={setUkraineAidBanner.toggle}>
+                        Not Now
                       </Button>
-                    </Link>
-                  </Center>
-                </Stack>
-                <Spacer />
-                <Center>
-                  <Button size="sm" onClick={setUkraineAidBanner.toggle}>
-                    Not Now
-                  </Button>
-                </Center>
-              </Flex>
-            </Container>
-          </DarkMode>
-        </Flex>
+                    </Center>
+                  </Flex>
+                </Container>
+              </DarkMode>
+            </Flex>
+          )}
+        </>
       )}
       <ExperimentalBanner />
       <Container maxW="container.lg" as="header">

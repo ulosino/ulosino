@@ -5,6 +5,9 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Suspense and performance
+import { useLocalStorage } from "@rehooks/local-storage";
+
 // Head and SEO
 import Head from "next/head";
 
@@ -58,6 +61,7 @@ export default function OSPage({
   donationPath,
   contributionPath,
 }: OSPageTypes) {
+  const [donationFeatures] = useLocalStorage("P3PrefDonationFeatures");
   const manager = useHotkeyManager();
   useEffect(() => {
     {
@@ -164,19 +168,23 @@ export default function OSPage({
               minW={{ base: "inherit", sm: 250 }}
             >
               <Stack direction="column" spacing={2}>
-                {source.frontmatter.donate && (
-                  <Link href={donationPath} passHref>
-                    <Button
-                      leftIcon={<HiOutlineCreditCard />}
-                      as="a"
-                      id="testingDonationPageLink"
-                    >
-                      Donate{" "}
-                      <Badge ms={2} bg="brand" color="gray.800" pt={1}>
-                        Tempo
-                      </Badge>
-                    </Button>
-                  </Link>
+                {donationFeatures && (
+                  <>
+                    {source.frontmatter.donate && (
+                      <Link href={donationPath} passHref>
+                        <Button
+                          leftIcon={<HiOutlineCreditCard />}
+                          as="a"
+                          id="testingDonationPageLink"
+                        >
+                          Donate{" "}
+                          <Badge ms={2} bg="brand" color="gray.800" pt={1}>
+                            Tempo
+                          </Badge>
+                        </Button>
+                      </Link>
+                    )}
+                  </>
                 )}
                 {source.frontmatter.website && (
                   <Link href={source.frontmatter.website} passHref>
