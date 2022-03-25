@@ -9,7 +9,7 @@ import type { ReactElement } from "react";
 // Suspense and performance
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import { Loading, LoadingServer } from "components/Loading";
+import { LoadingServer } from "components/Loading";
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Links and routing
@@ -30,17 +30,6 @@ import {
   useColorMode,
   useColorModeValue,
   DarkMode,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-  Box,
-  useStyleConfig,
-  Kbd,
-  Badge,
 } from "@chakra-ui/react";
 import { HiOutlineMenu } from "react-icons/hi";
 
@@ -48,6 +37,9 @@ import { HiOutlineMenu } from "react-icons/hi";
 import Logo from "components/Logo";
 import HeaderBackButton from "components/HeaderBackButton";
 import ExperimentalBanner from "components/ExperimentalBanner";
+const Preferences = dynamic(() => import("components/Preferences"), {
+  suspense: true,
+});
 
 // Keybinding libraries
 import { useEffect } from "react";
@@ -62,27 +54,16 @@ interface LayoutProps {
   showPreferences: boolean;
 }
 
-export function LoadingAboutApplicationButton() {
-  return (
-    <Button size="sm" isDisabled>
-      Communicating with Server
-    </Button>
-  );
-}
-
 // Begin wrapping component
 export default function Layout({
   children,
   useBasicLayout,
   showPreferences,
 }: LayoutProps) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [applicationPreferences, setApplicationPreferences] = useBoolean();
-
   // Global keybindings
   const manager = useHotkeyManager();
   const router = useRouter();
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   // Global preferences
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
@@ -391,140 +372,7 @@ export default function Layout({
           )}
           <Spacer />
           <Suspense fallback={<LoadingServer />}>
-            <Center display={{ base: "none", sm: "flex" }}>
-              <IconButton
-                onClick={onOpen}
-                icon={<HiOutlineMenu />}
-                aria-label="Open Options Menu"
-                title="Open Options Menu"
-              />
-            </Center>
-            <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
-              <ModalOverlay />
-              <ModalContent rounded="xl" m={5}>
-                <ModalHeader fontSize="2xl">Preferences</ModalHeader>
-                <ModalBody>
-                  <Flex direction="row">
-                    <Stack direction="column" spacing={2} me={10}>
-                      {applicationPreferences ? (
-                        <Button onClick={setApplicationPreferences.off}>
-                          Appearance
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={setApplicationPreferences.off}
-                          isActive
-                        >
-                          Appearance
-                        </Button>
-                      )}
-                      {applicationPreferences ? (
-                        <Button onClick={setApplicationPreferences.on} isActive>
-                          Application
-                        </Button>
-                      ) : (
-                        <Button onClick={setApplicationPreferences.on}>
-                          Application
-                        </Button>
-                      )}
-                    </Stack>
-                    <Spacer />
-                    {applicationPreferences ? (
-                      <Stack direction="column" spacing={5} w="full">
-                        <Button isDisabled>
-                          Minimise In-App Notifications
-                        </Button>
-                        <Button isDisabled>
-                          Disable Navigation Keyboard Shortcuts
-                        </Button>
-                        <Button isDisabled>
-                          Enable{" "}
-                          <Badge variant="tempo" pt={1} mx={2}>
-                            Tempo
-                          </Badge>{" "}
-                          Features
-                        </Button>
-                      </Stack>
-                    ) : (
-                      <Stack direction="column" spacing={5} w="full">
-                        <Stack direction="column" spacing={1}>
-                          <Button
-                            onClick={(_) =>
-                              writeStorage(
-                                "P3PrefAdvancedSearchLink",
-                                advancedSearch ? false : true
-                              )
-                            }
-                          >
-                            {advancedSearch ? "Hide" : "Show"} Advanced Search
-                            Link
-                          </Button>
-                          <Text fontSize="xs">
-                            {isWindows ? (
-                              <>
-                                <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
-                              </>
-                            ) : (
-                              <>
-                                <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
-                                <Kbd>S</Kbd>
-                              </>
-                            )}
-                          </Text>
-                        </Stack>
-                        <Stack direction="column" spacing={1}>
-                          <Button
-                            onClick={(_) =>
-                              writeStorage(
-                                "P3PrefBackButtonLargeWindows",
-                                backButton ? false : true
-                              )
-                            }
-                          >
-                            {backButton ? "Hide" : "Show"} Back Button on Large
-                            Windows
-                          </Button>
-                          <Text fontSize="xs">
-                            {isWindows ? (
-                              <>
-                                <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
-                              </>
-                            ) : (
-                              <>
-                                <Kbd>control</Kbd> + <Kbd>shift</Kbd> +{" "}
-                                <Kbd>B</Kbd>
-                              </>
-                            )}
-                          </Text>
-                        </Stack>
-                        <Button isDisabled>
-                          {backButton ? "Hide" : "Show"} Mobile Menu on Large
-                          Windows
-                        </Button>
-                        <Stack direction="column" spacing={1}>
-                          <Button onClick={toggleColorMode}>
-                            Invert Colour Mode for this Tab
-                          </Button>
-                          {isWindows ? (
-                            ""
-                          ) : (
-                            <Text fontSize="xs">
-                              <Kbd>control</Kbd> + <Kbd>W</Kbd>
-                            </Text>
-                          )}
-                        </Stack>
-                      </Stack>
-                    )}
-                  </Flex>
-                </ModalBody>
-                <ModalFooter>
-                  <Flex w="full">
-                    <Spacer />
-                    <Button onClick={onClose}>Done</Button>
-                  </Flex>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
+            <Preferences />
           </Suspense>
           <Center display={{ base: "flex", sm: "none" }}>
             <Link href="/menu" passHref>
