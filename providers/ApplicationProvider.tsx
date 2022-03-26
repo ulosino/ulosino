@@ -7,6 +7,9 @@
 // Types
 import { ReactElement } from "react";
 
+// Suspense and performance
+import { useLocalStorage } from "@rehooks/local-storage";
+
 // Chakra UI, icons, and other design imports
 import { ChakraProvider } from "@chakra-ui/react";
 import UITheme from "providers/UIThemeProvider";
@@ -21,6 +24,7 @@ import {
   KeybindingManager,
 } from "providers/KeybindingProvider";
 const manager = new KeybindingManager();
+
 import { useEffect } from "react";
 import { isWindows, isIE, isLegacyEdge, isYandex } from "react-device-detect";
 
@@ -67,27 +71,43 @@ export default function ApplicationProvider({
         [manager, DumpDeploymentDetails];
     }
   });
+
+  // Developers can disable the browser check to test on blacklisted browsers
+  // Set P3PrefDangerousBrowserCheck to true in localStorage to disable checks
+  // DANGER! Running ULOSINO on an uncompatible browser is risky
+  const [browserBypass] = useLocalStorage("P3PrefDangerousRuntime");
+
   return (
     <ChakraProvider theme={UITheme}>
       <ErrorFallbackApplication>
         <KeybindingProvider manager={manager}>
-          {isIE ? (
-            <BrowserNotPermitted browser="Internet Explorer" />
-          ) : (
-            <>
-              {isLegacyEdge ? (
-                <BrowserNotPermitted browser="Microsoft Edge Legacy" />
-              ) : (
-                <>
-                  {isYandex ? (
-                    <BrowserNotPermitted browser="Yandex Browser" />
-                  ) : (
-                    children
-                  )}
-                </>
-              )}
-            </>
-          )}
+          <>
+            {browserBypass && "Preference P3PrefDangerousRuntime is true"}
+            {browserBypass ? (
+              children
+            ) : (
+              // Check if the browser is permitted
+              <>
+                {isIE ? (
+                  <BrowserNotPermitted browser="Internet Explorer" />
+                ) : (
+                  <>
+                    {isLegacyEdge ? (
+                      <BrowserNotPermitted browser="Microsoft Edge Legacy" />
+                    ) : (
+                      <>
+                        {isYandex ? (
+                          <BrowserNotPermitted browser="Yandex Browser" />
+                        ) : (
+                          children
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </>
         </KeybindingProvider>
       </ErrorFallbackApplication>
     </ChakraProvider>
