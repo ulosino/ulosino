@@ -43,7 +43,7 @@ export default function OSDataLayout({
   usePackagemgr,
   OSCardId,
 }: MetadataTypes) {
-  const [donationFeatures] = useLocalStorage("P3PrefDonationFeatures");
+  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
   return (
     <Box w="full" id={OSCardId}>
       <Heading size="md">{name}</Heading>
@@ -53,7 +53,9 @@ export default function OSDataLayout({
           <Badge fontSize="xs" pb={1}>
             {category}
           </Badge>
-          {donationFeatures && (
+          {donationFeatures ? (
+            ""
+          ) : (
             <>
               {donate ? (
                 <Badge variant="tempo" fontSize="xs" pb={1}>

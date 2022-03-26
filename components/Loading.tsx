@@ -4,7 +4,7 @@
 // This is our standardised loading spinner
 
 // Chakra UI, icons, and other design imports
-import { Spinner, Center } from "@chakra-ui/react";
+import { Spinner, Center, Button } from "@chakra-ui/react";
 
 // Begin components
 // This a general loading spinner
@@ -23,4 +23,8 @@ export function LoadingServer() {
       <Spinner title="Communicating with Server" m={5} />
     </Center>
   );
+}
+
+export function LoadingServerButton() {
+  return <Button isLoading>Communicating with Server</Button>;
 }

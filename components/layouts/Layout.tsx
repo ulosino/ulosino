@@ -303,7 +303,7 @@ export default function Layout({
           )}
         </>
       )}
-      <ExperimentalBanner />
+      {minimiseNotifications ? "" : <ExperimentalBanner />}
       <Container maxW="container.lg" as="header">
         <Flex mt={2} mb={10}>
           <Center
@@ -382,7 +382,7 @@ export default function Layout({
           )}
           <Spacer />
           <Suspense fallback={<LoadingServer />}>
-            <Preferences />
+            <Preferences isLayout={true} />
           </Suspense>
           <Center display={{ base: "flex", sm: "none" }}>
             <Link href="/menu" passHref>

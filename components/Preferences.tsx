@@ -9,13 +9,11 @@ import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 // Chakra UI, icons, and other design imports
 import {
   Flex,
-  Spacer,
   Stack,
-  Center,
+  Box,
   Button,
   IconButton,
   Text,
-  useBoolean,
   useColorMode,
   Modal,
   ModalBody,
@@ -26,159 +24,288 @@ import {
   useDisclosure,
   Kbd,
   Badge,
+  Input,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Code,
+  Center,
 } from "@chakra-ui/react";
-import { HiOutlineMenu } from "react-icons/hi";
+import { HiOutlineCog, HiOutlineTemplate, HiOutlineUser } from "react-icons/hi";
+
+// First party components
+import { ErrorFallback } from "components/ErrorFallback";
 
 import { isWindows } from "react-device-detect";
+import { useState, useRef } from "react";
 
-// Begin component
-export default function Preferences() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [applicationPreferences, setApplicationPreferences] = useBoolean();
-  const { toggleColorMode } = useColorMode();
+// Begin components
 
-  // Global preferences
+// Appearance preferances
+export function AppearancePreferences() {
   const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
+  const { toggleColorMode } = useColorMode();
+  return (
+    <Stack direction="column" spacing={5}>
+      <Stack direction="column" spacing={1}>
+        <Button
+          onClick={(_) =>
+            writeStorage(
+              "P3PrefAdvancedSearchLink",
+              advancedSearch ? false : true
+            )
+          }
+        >
+          Use {advancedSearch ? "Browse" : "Advanced Search"} Link
+        </Button>
+        <Text fontSize="xs">
+          {isWindows ? (
+            <>
+              <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
+            </>
+          ) : (
+            <>
+              <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
+            </>
+          )}
+        </Text>
+      </Stack>
+      <Stack direction="column" spacing={1}>
+        <Button
+          onClick={(_) =>
+            writeStorage(
+              "P3PrefBackButtonLargeWindows",
+              backButton ? false : true
+            )
+          }
+        >
+          {backButton ? "Hide" : "Show"} Back Button on Large Windows
+        </Button>
+        <Text fontSize="xs">
+          {isWindows ? (
+            <>
+              <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+            </>
+          ) : (
+            <>
+              <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+            </>
+          )}
+        </Text>
+      </Stack>
+      <Stack direction="column" spacing={1}>
+        <Button onClick={toggleColorMode}>Invert Colours for this Tab</Button>
+        <Stack direction="column" spacing={1}>
+          {isWindows ? (
+            ""
+          ) : (
+            <Text fontSize="xs">
+              <Kbd>control</Kbd> + <Kbd>W</Kbd>
+            </Text>
+          )}
+        </Stack>
+      </Stack>
+    </Stack>
+  );
+}
+
+// Integration preferences
+export function IntegrationPreferences() {
+  // Contributor preference
+  const [contributor] = useLocalStorage("P3PrefContributor");
+  const contributorInputChange = (e: { target: { value: any } }) => {
+    let inputValue = e.target.value;
+    writeStorage("P3PrefContributor", inputValue);
+  };
+
+  // Editor preference
+  const [editor] = useLocalStorage("P3PrefFileEditorURL");
+  const editorInputChange = (e: { target: { value: any } }) => {
+    let inputValue = e.target.value;
+    writeStorage("P3PrefFileEditorURL", inputValue);
+  };
+  return (
+    <Stack direction="column" spacing={5}>
+      <ErrorFallback>
+        <Text>
+          Integration preferences connect ULOSINO with other applications on
+          your computer.
+        </Text>
+        <FormControl>
+          <FormLabel htmlFor="contributorUsername" fontWeight="bold" mb={1}>
+            Contributor Username
+          </FormLabel>
+          <Input
+            // @ts-ignore
+            value={contributor}
+            onChange={contributorInputChange}
+            size="sm"
+            rounded="xl"
+            id="contributorUsername"
+          />
+          <FormHelperText color="inherit" fontSize="xs" as="p">
+            Enter your GitHub username to enable contributor watermarks and
+            other advanced features. This information is stored locally and
+            never sent to ULOSINO.
+          </FormHelperText>
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="editorURL" fontWeight="bold" mb={1}>
+            Custom Editing Application
+          </FormLabel>
+          <Input
+            // @ts-ignore
+            value={editor}
+            onChange={editorInputChange}
+            size="sm"
+            rounded="xl"
+            id="editorURL"
+          />
+          <FormHelperText color="inherit" fontSize="xs" as="p">
+            Enter a URL that ULOSINO will use to edit files instead of the
+            GitHub Web Editor. For example, <Code fontSize="xs">vscode://</Code>{" "}
+            would open files with Visual Studio Code.
+          </FormHelperText>
+        </FormControl>
+      </ErrorFallback>
+    </Stack>
+  );
+}
+
+// Application preferences
+export function ApplicationPreferences() {
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
-  const [donationFeatures] = useLocalStorage("P3PrefDonationFeatures");
+  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
+  return (
+    <Stack direction="column" spacing={5}>
+      <Stack direction="column" spacing={2}>
+        <Button
+          onClick={(_) =>
+            writeStorage(
+              "P3PrefMinimiseNotifications",
+              minimiseNotifications ? false : true
+            )
+          }
+        >
+          {minimiseNotifications ? "Enable" : "Minimise"} In-App Notifications
+        </Button>
+        <Text fontSize="xs" lineHeight="shorter">
+          {minimiseNotifications ? "Allow" : "Hide"} non-critical notifications
+          and banners.
+        </Text>
+      </Stack>
+      <Stack direction="column" spacing={2}>
+        <Button
+          onClick={(_) =>
+            writeStorage(
+              "P3PrefDisableDonationFeatures",
+              donationFeatures ? false : true
+            )
+          }
+        >
+          {donationFeatures ? "Enable" : "Disable"}{" "}
+          <Badge variant="tempo" pt={1} mx={2}>
+            Tempo
+          </Badge>{" "}
+          Features
+        </Button>
+        <Text fontSize="xs" lineHeight="shorter">
+          {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo donation
+          features, including links to external financial services.
+        </Text>
+      </Stack>
+    </Stack>
+  );
+}
+
+// Tab array
+const tabData = [
+  {
+    label: "Appearance",
+    icon: <HiOutlineTemplate />,
+    content: <AppearancePreferences />,
+  },
+  {
+    label: "Integrations",
+    icon: <HiOutlineUser />,
+    content: <IntegrationPreferences />,
+  },
+  {
+    label: "Application",
+    icon: <HiOutlineCog />,
+    content: <ApplicationPreferences />,
+  },
+];
+
+interface Props {
+  isLayout: boolean;
+}
+
+// Create a modal that uses the useState hook to switch between tabData
+// The modal has a sidebar with the Button containing the label
+// The modal has a content area with the content of the tabData
+// The Buttons can be clicked to switch between content areas
+export default function Preferences({ isLayout }: Props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [activeTab, setActiveTab] = useState(0);
+  const initialRef: any = useRef();
   return (
     <>
-      <Center display={{ base: "none", sm: "flex" }}>
-        <IconButton
-          onClick={onOpen}
-          icon={<HiOutlineMenu />}
-          aria-label="Open Options Menu"
-          title="Open Options Menu"
-        />
-      </Center>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+      {isLayout ? (
+        <Center display={{ base: "none", sm: "flex" }}>
+          <IconButton
+            icon={<HiOutlineCog />}
+            onClick={onOpen}
+            aria-label="Open Preferences modal"
+            title="Open Preferences"
+          />
+        </Center>
+      ) : (
+        <Button leftIcon={<HiOutlineCog />} onClick={onOpen}>
+          Preferences
+        </Button>
+      )}
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        initialFocusRef={initialRef}
+        size="xl"
+        isCentered
+      >
         <ModalOverlay />
-        <ModalContent rounded="xl" m={5}>
+        <ModalContent rounded="xl">
           <ModalHeader fontSize="2xl">Preferences</ModalHeader>
           <ModalBody>
-            <Flex direction="row">
-              <Stack direction="column" spacing={2} me={10}>
-                {applicationPreferences ? (
-                  <Button onClick={setApplicationPreferences.off}>
-                    Appearance
+            <Flex direction={{ base: "column", sm: "row" }}>
+              <Stack
+                direction="column"
+                spacing={2}
+                me={{ base: 0, sm: 10 }}
+                mb={{ base: 5, sm: 0 }}
+              >
+                {tabData.map((tab, index) => (
+                  <Button
+                    key={index}
+                    onClick={(_) => setActiveTab(index)}
+                    variant={index === activeTab ? "solid" : "outline"}
+                    leftIcon={tab.icon}
+                  >
+                    {tab.label}
                   </Button>
-                ) : (
-                  <Button onClick={setApplicationPreferences.off} isActive>
-                    Appearance
-                  </Button>
-                )}
-                {applicationPreferences ? (
-                  <Button onClick={setApplicationPreferences.on} isActive>
-                    Application
-                  </Button>
-                ) : (
-                  <Button onClick={setApplicationPreferences.on}>
-                    Application
-                  </Button>
-                )}
+                ))}
               </Stack>
-              <Spacer />
-              {applicationPreferences ? (
-                <Stack direction="column" spacing={5} w="full">
-                  <Button
-                    onClick={(_) =>
-                      writeStorage(
-                        "P3PrefMinimiseNotifications",
-                        minimiseNotifications ? false : true
-                      )
-                    }
-                  >
-                    {minimiseNotifications ? "Allow More" : "Minimise"} In-App
-                    Notifications
-                  </Button>
-                  <Button
-                    onClick={(_) =>
-                      writeStorage(
-                        "P3PrefDonationFeatures",
-                        donationFeatures ? false : true
-                      )
-                    }
-                  >
-                    {donationFeatures ? "Disable" : "Enable"}{" "}
-                    <Badge variant="tempo" pt={1} mx={2}>
-                      Tempo
-                    </Badge>{" "}
-                    Features
-                  </Button>
-                </Stack>
-              ) : (
-                <Stack direction="column" spacing={5} w="full">
-                  <Stack direction="column" spacing={1}>
-                    <Button
-                      onClick={(_) =>
-                        writeStorage(
-                          "P3PrefAdvancedSearchLink",
-                          advancedSearch ? false : true
-                        )
-                      }
-                    >
-                      {advancedSearch ? "Hide" : "Show"} Advanced Search Link
-                    </Button>
-                    <Text fontSize="xs">
-                      {isWindows ? (
-                        <>
-                          <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
-                        </>
-                      ) : (
-                        <>
-                          <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
-                        </>
-                      )}
-                    </Text>
-                  </Stack>
-                  <Stack direction="column" spacing={1}>
-                    <Button
-                      onClick={(_) =>
-                        writeStorage(
-                          "P3PrefBackButtonLargeWindows",
-                          backButton ? false : true
-                        )
-                      }
-                    >
-                      {backButton ? "Hide" : "Show"} Back Button on Large
-                      Windows
-                    </Button>
-                    <Text fontSize="xs">
-                      {isWindows ? (
-                        <>
-                          <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
-                        </>
-                      ) : (
-                        <>
-                          <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
-                        </>
-                      )}
-                    </Text>
-                  </Stack>
-                  <Stack direction="column" spacing={1}>
-                    <Button onClick={toggleColorMode}>
-                      Invert Colours for this Tab
-                    </Button>
-                    {isWindows ? (
-                      ""
-                    ) : (
-                      <Text fontSize="xs">
-                        <Kbd>control</Kbd> + <Kbd>W</Kbd>
-                      </Text>
-                    )}
-                  </Stack>
-                </Stack>
-              )}
+              <ErrorFallback>
+                <Box w="full">{tabData[activeTab].content}</Box>
+              </ErrorFallback>
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Flex w="full">
-              <Spacer />
-              <Button onClick={onClose}>Done</Button>
-            </Flex>
+            <Button ref={initialRef} onClick={onClose}>
+              Done
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -62,6 +62,7 @@ export default function OSPage({
   contributionPath,
 }: OSPageTypes) {
   const [donationFeatures] = useLocalStorage("P3PrefDonationFeatures");
+  const [customEditor] = useLocalStorage("P3PrefFileEditorURL");
   const manager = useHotkeyManager();
   useEffect(() => {
     {
@@ -289,16 +290,24 @@ export default function OSPage({
                   )}
                 </Tbody>
               </Table>
-              <Link href={contributionPath} passHref>
-                <Button
-                  leftIcon={<HiOutlinePencil />}
-                  size="sm"
-                  as="a"
-                  id="testingOSPageEditLink"
-                >
-                  View on GitHub
-                </Button>
-              </Link>
+              {customEditor ? (
+                <Link href={customEditor} passHref>
+                  <Button leftIcon={<HiOutlinePencil />} as="a" ms={5}>
+                    Edit with Custom Editor
+                  </Button>
+                </Link>
+              ) : (
+                <Link href={contributionPath} passHref>
+                  <Button
+                    leftIcon={<HiOutlinePencil />}
+                    size="sm"
+                    as="a"
+                    id="testingOSPageEditLink"
+                  >
+                    View on GitHub
+                  </Button>
+                </Link>
+              )}
             </Stack>
           </ErrorFallback>
         </Stack>
