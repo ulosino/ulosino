@@ -50,6 +50,16 @@ export default function ApplicationProvider({
 }: {
   children: ReactElement;
 }) {
+  // Developers can disable the browser check to test on browsers that are not supported
+  // DANGER! You're on your own when if you enable this preference. Use as a last resort
+  const [browserBypass] = useLocalStorage("P3PrefDangerousRuntime");
+  // If browserBypass has any value, console.warn the user
+  if (browserBypass) {
+    console.warn(
+      "You have enabled P3PrefDangerousRuntime. Disable it now to reinstate recommended security protections."
+    );
+  }
+
   // Global troubleshooting keybindings
   useEffect(() => {
     {
@@ -71,43 +81,34 @@ export default function ApplicationProvider({
         [manager, DumpDeploymentDetails];
     }
   });
-
-  // Developers can disable the browser check to test on blacklisted browsers
-  // Set P3PrefDangerousBrowserCheck to true in localStorage to disable checks
-  // DANGER! Running ULOSINO on an uncompatible browser is risky
-  const [browserBypass] = useLocalStorage("P3PrefDangerousRuntime");
-
   return (
     <ChakraProvider theme={UITheme}>
       <ErrorFallbackApplication>
         <KeybindingProvider manager={manager}>
-          <>
-            {browserBypass && "Preference P3PrefDangerousRuntime is true"}
-            {browserBypass ? (
-              children
-            ) : (
-              // Check if the browser is permitted
-              <>
-                {isIE ? (
-                  <BrowserNotPermitted browser="Internet Explorer" />
-                ) : (
-                  <>
-                    {isLegacyEdge ? (
-                      <BrowserNotPermitted browser="Microsoft Edge Legacy" />
-                    ) : (
-                      <>
-                        {isYandex ? (
-                          <BrowserNotPermitted browser="Yandex Browser" />
-                        ) : (
-                          children
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
-              </>
-            )}
-          </>
+          {browserBypass ? (
+            children
+          ) : (
+            // Check if the browser is permitted
+            <>
+              {isIE ? (
+                <BrowserNotPermitted browser="Internet Explorer" />
+              ) : (
+                <>
+                  {isLegacyEdge ? (
+                    <BrowserNotPermitted browser="Microsoft Edge Legacy" />
+                  ) : (
+                    <>
+                      {isYandex ? (
+                        <BrowserNotPermitted browser="Yandex Browser" />
+                      ) : (
+                        children
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </>
+          )}
         </KeybindingProvider>
       </ErrorFallbackApplication>
     </ChakraProvider>
