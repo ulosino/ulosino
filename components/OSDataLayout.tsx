@@ -81,21 +81,27 @@ export default function OSDataLayout({
               {desktop}
             </Text>
           ) : (
-            <Text fontSize="xs">{desktop}</Text>
+            <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+              {desktop}
+            </Text>
           )}
           {useStartup ? (
             <Text fontSize="xs" fontWeight="bold">
               {startup}
             </Text>
           ) : (
-            <Text fontSize="xs">{startup}</Text>
+            <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+              {startup}
+            </Text>
           )}
           {usePackagemgr ? (
             <Text fontSize="xs" fontWeight="bold">
               {packagemgr}
             </Text>
           ) : (
-            <Text fontSize="xs">{packagemgr}</Text>
+            <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+              {packagemgr}
+            </Text>
           )}
         </Stack>
       </Stack>
