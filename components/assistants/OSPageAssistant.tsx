@@ -6,6 +6,9 @@
 // The user is then directed to GitHub to name the page and commit the changes
 // One of the main access points for the Assistant is the <OSPageAssistantHero>, which is shown on the OS List
 
+// Suspense and performance
+import { useLocalStorage } from "@rehooks/local-storage";
+
 // Links and routing
 import Link from "next/link";
 
@@ -14,7 +17,6 @@ import {
   useDisclosure,
   Center,
   Stack,
-  Box,
   Button,
   Drawer,
   DrawerOverlay,
@@ -46,6 +48,10 @@ import { useState } from "react";
 // Begin component
 export default function OSPageAssistant() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // Get preferences
+  const [contributor] = useLocalStorage("P3PrefContributor");
+  const [customEditor] = useLocalStorage("P3PrefFileEditorURL");
 
   // Description clipboard
   const [description, setDescriptionValue] = useState("");
@@ -239,81 +245,97 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
               </>
             </DrawerBody>
             <DrawerFooter>
-              {descriptionPage ? (
-                <>
-                  {finalPage ? (
-                    <Center>
-                      <Button
-                        leftIcon={<HiOutlinePencil />}
-                        onClick={setFinalPage.off}
-                      >
-                        Back to Editing
-                      </Button>
-                    </Center>
-                  ) : (
-                    <>
-                      {metadataPage ? (
-                        <Button onClick={setMetadataPage.off}>Go Back</Button>
-                      ) : (
-                        <Button onClick={setDescriptionPage.off}>
-                          Go Back
-                        </Button>
-                      )}
-                    </>
-                  )}
-                </>
-              ) : (
-                <Button onClick={onClose}>Cancel</Button>
-              )}
-              {descriptionPage ? (
-                <>
-                  {finalPage ? (
-                    <Link
-                      href="https://github.com/ulosino/ulosino/new/main/public/markdown/browse"
-                      passHref
-                    >
-                      <Button
-                        leftIcon={<HiOutlineExternalLink />}
-                        as="a"
-                        ms={5}
-                      >
-                        Continue on GitHub
-                      </Button>
-                    </Link>
-                  ) : (
-                    <>
-                      {metadataPage ? (
+              <Stack direction={{ base: "column", md: "row" }} spacing={2}>
+                {descriptionPage ? (
+                  <>
+                    {finalPage ? (
+                      <Center>
                         <Button
-                          leftIcon={<HiOutlineArrowRight />}
-                          onClick={setFinalPage.on}
-                          ms={5}
-                          id="testingCOPANavigationToConclusion"
+                          leftIcon={<HiOutlinePencil />}
+                          onClick={setFinalPage.off}
                         >
-                          Continue
+                          Back to Editing
                         </Button>
-                      ) : (
-                        <Button
-                          leftIcon={<HiOutlineArrowRight />}
-                          onClick={setMetadataPage.on}
-                          ms={5}
-                          id="testingCOPANavigationToMetadata"
-                        >
-                          Continue
-                        </Button>
-                      )}
-                    </>
-                  )}
-                </>
-              ) : (
-                <Button
-                  leftIcon={<HiOutlineArrowRight />}
-                  onClick={setDescriptionPage.on}
-                  ms={5}
-                  id="testingCOPANavigationToDescription"
-                >
-                  Get Started
-                </Button>
-              )}
+                      </Center>
+                    ) : (
+                      <>
+                        {metadataPage ? (
+                          <Button onClick={setMetadataPage.off}>Go Back</Button>
+                        ) : (
+                          <Button onClick={setDescriptionPage.off}>
+                            Go Back
+                          </Button>
+                        )}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <Button onClick={onClose}>Cancel</Button>
+                )}
+                {descriptionPage ? (
+                  <>
+                    {finalPage ? (
+                      <>
+                        {customEditor ? (
+                          <Link href={customEditor} passHref>
+                            <Button
+                              leftIcon={<HiOutlineExternalLink />}
+                              as="a"
+                              ms={5}
+                            >
+                              Continue with Custom Editor
+                            </Button>
+                          </Link>
+                        ) : (
+                          <Link
+                            href="https://github.com/ulosino/ulosino/new/main/public/markdown/browse"
+                            passHref
+                          >
+                            <Button
+                              leftIcon={<HiOutlineExternalLink />}
+                              as="a"
+                              ms={5}
+                            >
+                              Continue on GitHub
+                            </Button>
+                          </Link>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {metadataPage ? (
+                          <Button
+                            leftIcon={<HiOutlineArrowRight />}
+                            onClick={setFinalPage.on}
+                            ms={5}
+                            id="testingCOPANavigationToConclusion"
+                          >
+                            Continue
+                          </Button>
+                        ) : (
+                          <Button
+                            leftIcon={<HiOutlineArrowRight />}
+                            onClick={setMetadataPage.on}
+                            ms={5}
+                            id="testingCOPANavigationToMetadata"
+                          >
+                            Continue
+                          </Button>
+                        )}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <Button
+                    leftIcon={<HiOutlineArrowRight />}
+                    onClick={setDescriptionPage.on}
+                    ms={5}
+                    id="testingCOPANavigationToDescription"
+                  >
+                    Get Started
+                  </Button>
+                )}
+              </Stack>
             </DrawerFooter>
           </ErrorFallback>
         </DrawerContent>

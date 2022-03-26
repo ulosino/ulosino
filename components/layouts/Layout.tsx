@@ -6,6 +6,9 @@
 // Types
 import type { ReactElement } from "react";
 
+// Suspense and performance
+import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
+
 // Links and routing
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -51,8 +54,11 @@ export default function Layout({
   showPreferences,
 }: LayoutProps) {
   // Global preferences
-  const [backButton, setBackButton] = useBoolean();
-  const [advancedSearch, setAdvancedSearch] = useBoolean();
+  const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
+  const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
+  const [minimiseNotifications] = useLocalStorage(
+    "P3PrefMinimiseNotifications"
+  );
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
 
   // Global keybindings
@@ -178,16 +184,24 @@ export default function Layout({
             ctrl: false,
             shift: true,
             alt: true,
-            callback: () => setAdvancedSearch.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefAdvancedSearchLink",
+                advancedSearch ? false : true
+              ),
           })
         : manager.registerHotkey({
             key: "S",
             ctrl: true,
             shift: true,
             alt: false,
-            callback: () => setAdvancedSearch.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefAdvancedSearchLink",
+                advancedSearch ? false : true
+              ),
           }),
-        [manager, setAdvancedSearch];
+        [manager, advancedSearch];
     }
   });
   useEffect(() => {
@@ -198,16 +212,24 @@ export default function Layout({
             ctrl: false,
             shift: true,
             alt: true,
-            callback: () => setBackButton.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefBackButtonLargeWindows",
+                backButton ? false : true
+              ),
           })
         : manager.registerHotkey({
             key: "B",
             ctrl: true,
             shift: true,
             alt: false,
-            callback: () => setBackButton.toggle(),
+            callback: () =>
+              writeStorage(
+                "P3PrefBackButtonLargeWindows",
+                backButton ? false : true
+              ),
           }),
-        [manager, setBackButton];
+        [manager, backButton];
     }
   });
 
@@ -218,58 +240,63 @@ export default function Layout({
       direction="column"
       bg={useColorModeValue("gray.50", "inherit")}
     >
-      {ukraineAidBanner ? (
+      {minimiseNotifications ? (
         ""
       ) : (
-        <Flex
-          bg="secondary"
-          color="white"
-          py={2}
-          mb={4}
-          display={{ base: "none", md: "flex" }}
-        >
-          <DarkMode>
-            <Container maxW="container.lg">
-              <Flex>
-                <Stack direction="row" spacing={5}>
-                  <Center>
-                    <Stack direction="column" spacing={0}>
-                      <Flex bg="blue" w={8} h={2} roundedTop="sm" />
-                      <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
+        <>
+          {ukraineAidBanner ? (
+            ""
+          ) : (
+            <Flex
+              bg="secondary"
+              color="white"
+              py={2}
+              display={{ base: "none", md: "flex" }}
+            >
+              <DarkMode>
+                <Container maxW="container.lg">
+                  <Flex>
+                    <Stack direction="row" spacing={5}>
+                      <Center>
+                        <Stack direction="column" spacing={0}>
+                          <Flex bg="blue" w={8} h={2} roundedTop="sm" />
+                          <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
+                        </Stack>
+                      </Center>
+                      <Center>
+                        <Text textStyle="miniHeading" as="h6">
+                          Donate to UNICEF
+                        </Text>
+                      </Center>
+                      <Center>
+                        <Text fontSize="sm">Help children in Ukraine.</Text>
+                      </Center>
+                      <Center>
+                        <Link
+                          href="https://help.unicef.org/ukraine-emergency"
+                          passHref
+                        >
+                          <Button size="sm" as="a">
+                            Get Started
+                          </Button>
+                        </Link>
+                      </Center>
                     </Stack>
-                  </Center>
-                  <Center>
-                    <Text textStyle="miniHeading" as="h6">
-                      Donate to UNICEF
-                    </Text>
-                  </Center>
-                  <Center>
-                    <Text fontSize="sm">Help children in Ukraine.</Text>
-                  </Center>
-                  <Center>
-                    <Link
-                      href="https://help.unicef.org/ukraine-emergency"
-                      passHref
-                    >
-                      <Button size="sm" as="a">
-                        Get Started
+                    <Spacer />
+                    <Center>
+                      <Button size="sm" onClick={setUkraineAidBanner.toggle}>
+                        Not Now
                       </Button>
-                    </Link>
-                  </Center>
-                </Stack>
-                <Spacer />
-                <Center>
-                  <Button size="sm" onClick={setUkraineAidBanner.toggle}>
-                    Not Now
-                  </Button>
-                </Center>
-              </Flex>
-            </Container>
-          </DarkMode>
-        </Flex>
+                    </Center>
+                  </Flex>
+                </Container>
+              </DarkMode>
+            </Flex>
+          )}
+        </>
       )}
       <Container maxW="container.lg" as="header">
-        <Flex mt={2} mb={10}>
+        <Flex mt={4} mb={10}>
           <Center
             display={{ base: "flex", sm: "none" }}
             id="testingHeaderBackButtonMobile"
@@ -397,7 +424,12 @@ export default function Layout({
                 {/* These are shown on the Options page only */}
                 <Button
                   size="sm"
-                  onClick={setBackButton.toggle}
+                  onClick={(_) =>
+                    writeStorage(
+                      "P3PrefBackButtonLargeWindows",
+                      backButton ? false : true
+                    )
+                  }
                   display={{ base: "none", md: "inline-block" }}
                   id="testing-footerBackButtonDesktopSwitch"
                 >
@@ -405,7 +437,12 @@ export default function Layout({
                 </Button>
                 <Button
                   size="sm"
-                  onClick={setAdvancedSearch.toggle}
+                  onClick={(_) =>
+                    writeStorage(
+                      "P3PrefAdvancedSearchLink",
+                      advancedSearch ? false : true
+                    )
+                  }
                   display={{ base: "none", md: "inline-block" }}
                   id="testing-footerBrowseButtonSwitch"
                 >

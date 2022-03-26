@@ -5,6 +5,9 @@
 // Used on Home search, Operating System List, and Advanced Search
 // It's not used on Matches which relies on hardcoded summary and platform data
 
+// Suspense and performance
+import { useLocalStorage } from "@rehooks/local-storage";
+
 // Chakra UI, icons, and other design imports
 import { Stack, Box, Heading, Text, Badge } from "@chakra-ui/react";
 
@@ -40,6 +43,8 @@ export default function OSDataLayout({
   usePackagemgr,
   OSCardId,
 }: MetadataTypes) {
+  // Get preferences
+  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
   return (
     <Box w="full" id={OSCardId}>
       <Heading size="md">{name}</Heading>
@@ -49,12 +54,18 @@ export default function OSDataLayout({
           <Badge fontSize="xs" pb={1}>
             {category}
           </Badge>
-          {donate ? (
-            <Badge variant="tempo" fontSize="xs" pb={1}>
-              Tempo
-            </Badge>
-          ) : (
+          {donationFeatures ? (
             ""
+          ) : (
+            <>
+              {donate ? (
+                <Badge variant="tempo" fontSize="xs" pb={1}>
+                  Tempo
+                </Badge>
+              ) : (
+                ""
+              )}
+            </>
           )}
         </Stack>
         <Stack direction="row" spacing={2}>
@@ -70,21 +81,27 @@ export default function OSDataLayout({
               {desktop}
             </Text>
           ) : (
-            <Text fontSize="xs">{desktop}</Text>
+            <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+              {desktop}
+            </Text>
           )}
           {useStartup ? (
             <Text fontSize="xs" fontWeight="bold">
               {startup}
             </Text>
           ) : (
-            <Text fontSize="xs">{startup}</Text>
+            <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+              {startup}
+            </Text>
           )}
           {usePackagemgr ? (
             <Text fontSize="xs" fontWeight="bold">
               {packagemgr}
             </Text>
           ) : (
-            <Text fontSize="xs">{packagemgr}</Text>
+            <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+              {packagemgr}
+            </Text>
           )}
         </Stack>
       </Stack>
