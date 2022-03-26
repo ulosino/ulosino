@@ -60,18 +60,18 @@ export default function Layout({
   useBasicLayout,
   showPreferences,
 }: LayoutProps) {
-  // Global keybindings
-  const manager = useHotkeyManager();
-  const router = useRouter();
-  const { toggleColorMode } = useColorMode();
-
   // Global preferences
-  const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
   const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
+  const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
+
+  // Global keybindings
+  const manager = useHotkeyManager();
+  const router = useRouter();
+  const { toggleColorMode } = useColorMode();
 
   // Global navigation keybindings
   useEffect(() => {
@@ -305,7 +305,7 @@ export default function Layout({
       )}
       {minimiseNotifications ? "" : <ExperimentalBanner />}
       <Container maxW="container.lg" as="header">
-        <Flex mt={2} mb={10}>
+        <Flex mt={4} mb={10}>
           <Center
             display={{ base: "flex", sm: "none" }}
             id="testingHeaderBackButtonMobile"

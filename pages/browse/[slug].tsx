@@ -61,8 +61,11 @@ export default function OSPage({
   donationPath,
   contributionPath,
 }: OSPageTypes) {
-  const [donationFeatures] = useLocalStorage("P3PrefDonationFeatures");
+  // Get preferences
+  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
   const [customEditor] = useLocalStorage("P3PrefFileEditorURL");
+
+  // Keybindings
   const manager = useHotkeyManager();
   useEffect(() => {
     {
@@ -169,7 +172,9 @@ export default function OSPage({
               minW={{ base: "inherit", sm: 250 }}
             >
               <Stack direction="column" spacing={2}>
-                {donationFeatures && (
+                {donationFeatures ? (
+                  ""
+                ) : (
                   <>
                     {source.frontmatter.donate && (
                       <Link href={donationPath} passHref>
@@ -292,7 +297,7 @@ export default function OSPage({
               </Table>
               {customEditor ? (
                 <Link href={customEditor} passHref>
-                  <Button leftIcon={<HiOutlinePencil />} as="a" ms={5}>
+                  <Button leftIcon={<HiOutlinePencil />} as="a" size="sm">
                     Edit with Custom Editor
                   </Button>
                 </Link>

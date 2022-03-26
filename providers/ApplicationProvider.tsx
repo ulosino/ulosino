@@ -7,6 +7,9 @@
 // Types
 import { ReactElement } from "react";
 
+// Suspense and performance
+import { useLocalStorage } from "@rehooks/local-storage";
+
 // Chakra UI, icons, and other design imports
 import { ChakraProvider } from "@chakra-ui/react";
 import UITheme from "providers/UIThemeProvider";
@@ -21,6 +24,7 @@ import {
   KeybindingManager,
 } from "providers/KeybindingProvider";
 const manager = new KeybindingManager();
+
 import { useEffect } from "react";
 import { isWindows, isIE, isLegacyEdge, isYandex } from "react-device-detect";
 
@@ -46,6 +50,16 @@ export default function ApplicationProvider({
 }: {
   children: ReactElement;
 }) {
+  // Developers can disable the browser check to test on browsers that are not supported
+  // DANGER! You're on your own when if you enable this preference. Use as a last resort
+  const [browserBypass] = useLocalStorage("P3PrefDangerousRuntime");
+  // If browserBypass has any value, console.warn the user
+  if (browserBypass) {
+    console.warn(
+      "You have enabled P3PrefDangerousRuntime. Disable it now to reinstate recommended security protections."
+    );
+  }
+
   // Global troubleshooting keybindings
   useEffect(() => {
     {
@@ -71,18 +85,25 @@ export default function ApplicationProvider({
     <ChakraProvider theme={UITheme}>
       <ErrorFallbackApplication>
         <KeybindingProvider manager={manager}>
-          {isIE ? (
-            <BrowserNotPermitted browser="Internet Explorer" />
+          {browserBypass ? (
+            children
           ) : (
+            // Check if the browser is permitted
             <>
-              {isLegacyEdge ? (
-                <BrowserNotPermitted browser="Microsoft Edge Legacy" />
+              {isIE ? (
+                <BrowserNotPermitted browser="Internet Explorer" />
               ) : (
                 <>
-                  {isYandex ? (
-                    <BrowserNotPermitted browser="Yandex Browser" />
+                  {isLegacyEdge ? (
+                    <BrowserNotPermitted browser="Microsoft Edge Legacy" />
                   ) : (
-                    children
+                    <>
+                      {isYandex ? (
+                        <BrowserNotPermitted browser="Yandex Browser" />
+                      ) : (
+                        children
+                      )}
+                    </>
                   )}
                 </>
               )}
