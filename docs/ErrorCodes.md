@@ -11,6 +11,7 @@ To improve the reliability of the ULOSINO web app, we've bundled in some common 
 | `ErrorRegionCaught`      | A defined region of the page returned a React Error Boundary (`<ErrorFallback>`)                             |
 | `ErrorInUndefinedRegion` | A React Error Boundary was returned in a DOM region not wrapped in a fallback (`<ErrorFallbackApplication>`) |
 | `BrowserNotPermitted`    | The browser being used to access ULOSINO isn't supported                                                     |
+| `FeatureIsDisabled`      | The feature has been manually disabled by the user (non-default behaviour)                                   |
 
 ## Other Errors
 

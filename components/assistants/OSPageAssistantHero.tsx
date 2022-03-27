@@ -4,8 +4,12 @@
 // This is a banner to open the OS Page Assistant
 // It is shown on the OS List
 
+// Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
 // Chakra UI, icons, and other design imports
-import { Stack, Box, Text, useStyleConfig } from "@chakra-ui/react";
+import { Stack, Box, Text, Button, useStyleConfig } from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
 
@@ -18,8 +22,17 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
   );
 }
 
-// First party component
-import OSPageAssistant from "components/assistants/OSPageAssistant";
+// First party components
+const OSPageAssistant = dynamic(
+  () => import("components/assistants/OSPageAssistant"),
+  {
+    suspense: true,
+  }
+);
+
+export function LoadingCOPAButton() {
+  return <Button isDisabled>Communicating with Server</Button>;
+}
 
 // Begin components
 export function OSPageAssistantHero() {
@@ -32,7 +45,9 @@ export function OSPageAssistantHero() {
         <Text color="white">
           ULOSINO now offers a new assistant to fast-track creating an OS Page.
         </Text>
-        <OSPageAssistant />
+        <Suspense fallback={<LoadingCOPAButton />}>
+          <OSPageAssistant />
+        </Suspense>
       </Stack>
     </Card>
   );
