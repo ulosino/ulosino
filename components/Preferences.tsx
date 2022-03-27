@@ -239,11 +239,9 @@ export function ApplicationPreferences() {
           features, including links to external financial services.
         </Text>
       </Stack>
-      <Box pt={5}>
-        <Suspense fallback={<LoadingPreferenceResetAssistant />}>
-          <PreferenceResetAssistant />
-        </Suspense>
-      </Box>
+      <Suspense fallback={<LoadingPreferenceResetAssistant />}>
+        <PreferenceResetAssistant />
+      </Suspense>
     </Stack>
   );
 }

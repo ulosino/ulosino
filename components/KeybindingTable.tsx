@@ -94,15 +94,6 @@ export function OSPageKeybindings() {
             <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>O</Kbd>
           </Td>
         </Tr>
-        <Tr>
-          <Td>Open the donation page in a new tab</Td>
-          <Td>
-            <Kbd>control</Kbd> + <Kbd>D</Kbd>
-          </Td>
-          <Td>
-            <Kbd>alt</Kbd> + <Kbd>D</Kbd>
-          </Td>
-        </Tr>
       </Tbody>
     </Table>
   );
