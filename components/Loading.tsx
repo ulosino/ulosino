@@ -20,7 +20,7 @@ export function Loading() {
 export function LoadingServer() {
   return (
     <Center>
-      <Spinner title="Communicating with Server" m={5} />
+      <Spinner title="Communicating with Server" />
     </Center>
   );
 }

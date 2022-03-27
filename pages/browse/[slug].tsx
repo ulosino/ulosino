@@ -107,30 +107,33 @@ export default function OSPage({
         [manager, window];
     }
   });
-  useEffect(() => {
-    {
-      source.frontmatter.donate && isWindows
-        ? manager.registerHotkey({
-            key: "D",
-            ctrl: false,
-            shift: false,
-            alt: true,
-            callback: () =>
-              window.open(source.frontmatter.donate, "_blank") ||
-              window.location.replace(source.frontmatter.donate),
-          })
-        : manager.registerHotkey({
-            key: "D",
-            ctrl: true,
-            shift: false,
-            alt: false,
-            callback: () =>
-              window.open(source.frontmatter.donate, "_blank") ||
-              window.location.replace(source.frontmatter.donate),
-          }),
-        [manager, window];
-    }
-  });
+  // This if wrapper disables the shortcut, accomodating P3PrefDisableDonationFeatures
+  if (donationFeatures) {
+    useEffect(() => {
+      {
+        source.frontmatter.donate && isWindows
+          ? manager.registerHotkey({
+              key: "D",
+              ctrl: false,
+              shift: false,
+              alt: true,
+              callback: () =>
+                window.open(source.frontmatter.donate, "_blank") ||
+                window.location.replace(source.frontmatter.donate),
+            })
+          : manager.registerHotkey({
+              key: "D",
+              ctrl: true,
+              shift: false,
+              alt: false,
+              callback: () =>
+                window.open(source.frontmatter.donate, "_blank") ||
+                window.location.replace(source.frontmatter.donate),
+            }),
+          [manager, window];
+      }
+    });
+  }
   return (
     <>
       <Head>

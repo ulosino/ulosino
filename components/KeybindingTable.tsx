@@ -121,9 +121,12 @@ export function SessionPreferencesKeybindings() {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>Toggle the application colour mode</Td>
-          <Td colSpan={2}>
-            <Kbd>control</Kbd> + <Kbd>W</Kbd>
+          <Td>Open Preferences</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>,</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>,</Kbd>
           </Td>
         </Tr>
         <Tr>
@@ -136,12 +139,18 @@ export function SessionPreferencesKeybindings() {
           </Td>
         </Tr>
         <Tr>
-          <Td>Toggle the back button for desktop displays</Td>
+          <Td>Toggle the back button for large windows</Td>
           <Td>
             <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
           </Td>
           <Td>
             <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+          </Td>
+        </Tr>
+        <Tr>
+          <Td>Toggle the application colour mode</Td>
+          <Td colSpan={2}>
+            <Kbd>control</Kbd> + <Kbd>W</Kbd>
           </Td>
         </Tr>
       </Tbody>

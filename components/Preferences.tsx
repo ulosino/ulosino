@@ -4,6 +4,8 @@
 // The Preferences modal allows the user to change "P3Pref" LocalStorage values using a graphical interface
 
 // Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
@@ -35,11 +37,31 @@ import { HiOutlineCog, HiOutlineTemplate, HiOutlineUser } from "react-icons/hi";
 
 // First party components
 import { ErrorFallback } from "components/ErrorFallback";
+const PreferenceResetAssistant = dynamic(
+  () => import("components/assistants/PreferenceResetAssistant"),
+  {
+    suspense: true,
+  }
+);
 
+// Keybinding libraries
+import { useEffect } from "react";
+import { useHotkeyManager } from "providers/KeybindingProvider";
 import { isWindows } from "react-device-detect";
+
 import { useState, useRef } from "react";
 
 // Begin components
+
+export function LoadingPreferenceResetAssistant() {
+  return (
+    <Center>
+      <Button size="sm" isDisabled>
+        Communicating with Server
+      </Button>
+    </Center>
+  );
+}
 
 // Appearance preferances
 export function AppearancePreferences() {
@@ -217,6 +239,11 @@ export function ApplicationPreferences() {
           features, including links to external financial services.
         </Text>
       </Stack>
+      <Box pt={5}>
+        <Suspense fallback={<LoadingPreferenceResetAssistant />}>
+          <PreferenceResetAssistant />
+        </Suspense>
+      </Box>
     </Stack>
   );
 }
@@ -252,6 +279,29 @@ export default function Preferences({ isLayout }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeTab, setActiveTab] = useState(0);
   const initialRef: any = useRef();
+
+  // Keybinding
+  const manager = useHotkeyManager();
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: ",",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () => (isOpen ? onClose() : onOpen()),
+          })
+        : manager.registerHotkey({
+            key: ",",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () => (isOpen ? onClose() : onOpen()),
+          }),
+        [manager, window];
+    }
+  });
   return (
     <>
       {isLayout ? (
