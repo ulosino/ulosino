@@ -134,7 +134,7 @@ export default function PreferenceResetAssistant() {
               Cancel
             </Button>
             <Button colorScheme="red" ms={2} onClick={BeginDelete}>
-              Reset Preferences
+              Continue &amp; Reset
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -32,6 +32,7 @@ import {
   DarkMode,
 } from "@chakra-ui/react";
 import { HiOutlineMenu } from "react-icons/hi";
+import { VercelLogo } from "components/VercelPromotion";
 
 // First-party components
 import Logo from "components/Logo";
@@ -66,6 +67,7 @@ export default function Layout({
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
+  const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
 
   // Global keybindings
@@ -466,6 +468,24 @@ export default function Layout({
           </Stack>
           <Spacer />
           <Stack direction="row" spacing={2} id="testingLegalLinks">
+            {dangerousRuntime ? (
+              ""
+            ) : (
+              <Center display={{ base: "block", sm: "none", md: "block" }}>
+                <Link href="https://vercel.com/home" passHref>
+                  <Button size="sm" variant="ghost" as="a">
+                    <Stack direction="row" spacing={2}>
+                      <Text>Powered by</Text>
+                      <Center>
+                        <VercelLogo
+                          fill={useColorModeValue("black", "white")}
+                        />
+                      </Center>
+                    </Stack>
+                  </Button>
+                </Link>
+              </Center>
+            )}
             <Link href="/about/license" passHref>
               <Button variant="ghost" size="sm" as="a" id="testingLicenseLink">
                 License
