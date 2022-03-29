@@ -7,6 +7,7 @@
 import type { ReactElement } from "react";
 
 // Suspense and performance
+import dynamic from "next/dynamic";
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Links and routing
@@ -29,10 +30,12 @@ import {
   DarkMode,
 } from "@chakra-ui/react";
 import { HiOutlineMenu } from "react-icons/hi";
+import { VercelLogo } from "components/VercelPromotion";
 
 // First-party components
 import Logo from "components/Logo";
 import HeaderBackButton from "components/HeaderBackButton";
+const Preferences = dynamic(() => import("components/Preferences"));
 
 // Keybinding libraries
 import { useEffect } from "react";
@@ -59,6 +62,7 @@ export default function Layout({
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
+  const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
 
   // Global keybindings
@@ -161,6 +165,7 @@ export default function Layout({
         [manager, window];
     }
   });
+
   // Session preference keybindings
   useEffect(() => {
     {
@@ -232,7 +237,7 @@ export default function Layout({
         [manager, backButton];
     }
   });
-
+  const vercelLogoColour = useColorModeValue("black", "white");
   return (
     <Flex
       display="flex"
@@ -251,6 +256,7 @@ export default function Layout({
               bg="secondary"
               color="white"
               py={2}
+              mb={4}
               display={{ base: "none", md: "flex" }}
             >
               <DarkMode>
@@ -371,8 +377,8 @@ export default function Layout({
               </Stack>
             </Center>
           )}
-
           <Spacer />
+          <Preferences isLayout={true} />
           <Center display={{ base: "flex", sm: "none" }}>
             <Link href="/menu" passHref>
               <IconButton
@@ -431,7 +437,7 @@ export default function Layout({
                     )
                   }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBackButtonDesktopSwitch"
+                  id="testing-footerBackButtonDesktopCheckbox"
                 >
                   {backButton ? "Hide" : "Show"} Back
                 </Button>
@@ -444,7 +450,7 @@ export default function Layout({
                     )
                   }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBrowseButtonSwitch"
+                  id="testing-footerBrowseButtonCheckbox"
                 >
                   Prefer {advancedSearch ? "Browse" : "Search"}
                 </Button>
@@ -455,6 +461,22 @@ export default function Layout({
           </Stack>
           <Spacer />
           <Stack direction="row" spacing={2} id="testingLegalLinks">
+            {dangerousRuntime ? (
+              ""
+            ) : (
+              <Center display={{ base: "block", sm: "none", md: "block" }}>
+                <Link href="https://vercel.com/home" passHref>
+                  <Button size="sm" variant="ghost" as="a">
+                    <Stack direction="row" spacing={2}>
+                      <Text>Powered by</Text>
+                      <Center>
+                        <VercelLogo fill={vercelLogoColour} />
+                      </Center>
+                    </Stack>
+                  </Button>
+                </Link>
+              </Center>
+            )}
             <Link href="/about/license" passHref>
               <Button variant="ghost" size="sm" as="a" id="testingLicenseLink">
                 License
