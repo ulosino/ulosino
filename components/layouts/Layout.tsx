@@ -242,6 +242,7 @@ export default function Layout({
         [manager, backButton];
     }
   });
+  const vercelLogoColour = useColorModeValue("black", "white");
   return (
     <Flex
       display="flex"
@@ -477,9 +478,7 @@ export default function Layout({
                     <Stack direction="row" spacing={2}>
                       <Text>Powered by</Text>
                       <Center>
-                        <VercelLogo
-                          fill={useColorModeValue("black", "white")}
-                        />
+                        <VercelLogo fill={vercelLogoColour} />
                       </Center>
                     </Stack>
                   </Button>
