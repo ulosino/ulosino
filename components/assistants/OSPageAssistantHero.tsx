@@ -4,6 +4,10 @@
 // This is a banner to open the OS Page Assistant
 // It is shown on the OS List
 
+// Suspense and performance
+import dynamic from "next/dynamic";
+import { LoadingServerButton } from "components/Loading";
+
 // Chakra UI, icons, and other design imports
 import { Stack, Box, Text, useStyleConfig } from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
@@ -19,7 +23,12 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 }
 
 // First party component
-import OSPageAssistant from "components/assistants/OSPageAssistant";
+const OSPageAssistant = dynamic(
+  () => import("components/assistants/OSPageAssistant"),
+  {
+    loading: () => <LoadingServerButton />,
+  }
+);
 
 // Begin components
 export function OSPageAssistantHero() {

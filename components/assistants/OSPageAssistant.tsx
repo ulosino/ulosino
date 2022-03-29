@@ -18,12 +18,12 @@ import {
   Center,
   Stack,
   Button,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-  DrawerFooter,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
   Text,
   Textarea,
   useClipboard,
@@ -95,7 +95,7 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
     setMetadataValue(inputValue);
   };
 
-  // Combined value clipboard
+  // Combined clipboard
   const combinedValue = `---
   # Automatically generated with Create OS Page Assistant
 
@@ -121,12 +121,12 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
           Get Started
         </Button>
       </DarkMode>
-      <Drawer isOpen={isOpen} onClose={onClose} placement="left" size="lg">
-        <DrawerOverlay />
-        <DrawerContent rounded="xl" m={{ base: 0, sm: 2, md: 5 }}>
-          <DrawerHeader fontSize="2xl">Create an OS Page</DrawerHeader>
+      <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
+        <ModalOverlay />
+        <ModalContent rounded="xl" m={{ base: 0, sm: 2, md: 5 }}>
+          <ModalHeader fontSize="2xl">Create an OS Page</ModalHeader>
           <ErrorFallback>
-            <DrawerBody>
+            <ModalBody>
               <>
                 {descriptionPage ? (
                   <>
@@ -159,17 +159,36 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                             </Button>
                           )}
                         </ErrorFallback>
-                        <Text>
-                          Now we want to paste our assembled OS Page onto a new
-                          page on GitHub.
-                        </Text>
-                        <Text>
-                          At the top of the page, you'll need to name the new
-                          file, using the <Code>name.mdx</Code> convention (for
-                          example, <Code>ubuntu.mdx</Code>). Underneath, paste
-                          the OS Page. Then choose to create a new branch to
-                          open a pull request for your changes.
-                        </Text>
+                        {customEditor ? (
+                          <Text>
+                            Now we want to paste our assembled OS Page onto a
+                            new document on your custom editor.
+                          </Text>
+                        ) : (
+                          <Text>
+                            Now we want to paste our assembled OS Page onto a
+                            new page on GitHub.
+                          </Text>
+                        )}
+                        {customEditor ? (
+                          <Text>
+                            When you continue, you will be taken to your custom
+                            editor. From there, create a new document using the
+                            using the naming convention <Code>name.mdx</Code>{" "}
+                            convention (for example, <Code>ubuntu.mdx</Code>).
+                            You can then paste the OS Page. Finally, you'll need
+                            to use your editor to push your changes onto a new
+                            branch within the ULOSINO GitHub repository.
+                          </Text>
+                        ) : (
+                          <Text>
+                            At the top of the page, you'll need to name the new
+                            file, using the <Code>name.mdx</Code> convention
+                            (for example, <Code>ubuntu.mdx</Code>). Underneath,
+                            paste the OS Page. Then choose to create a new
+                            branch to open a pull request for your changes.
+                          </Text>
+                        )}
                       </Stack>
                     ) : (
                       <>
@@ -243,8 +262,8 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                   </Stack>
                 )}
               </>
-            </DrawerBody>
-            <DrawerFooter>
+            </ModalBody>
+            <ModalFooter w="full">
               <Stack direction={{ base: "column", md: "row" }} spacing={2}>
                 {descriptionPage ? (
                   <>
@@ -336,10 +355,10 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                   </Button>
                 )}
               </Stack>
-            </DrawerFooter>
+            </ModalFooter>
           </ErrorFallback>
-        </DrawerContent>
-      </Drawer>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
