@@ -312,7 +312,7 @@ export default function Layout({
           {backButton ? (
             <Center
               display={{ base: "none", sm: "flex" }}
-              id="testing-headerBackButtonDesktop"
+              id="testingHeaderBackButtonDesktop"
             >
               <HeaderBackButton />
             </Center>
@@ -350,21 +350,13 @@ export default function Layout({
                 </Link>
                 {advancedSearch ? (
                   <Link href="/search" passHref>
-                    <Button
-                      variant="ghost"
-                      as="a"
-                      id="testing-headerSearchLink"
-                    >
+                    <Button variant="ghost" as="a" id="testingHeaderSearchLink">
                       Advanced Search
                     </Button>
                   </Link>
                 ) : (
                   <Link href="/browse" passHref>
-                    <Button
-                      variant="ghost"
-                      as="a"
-                      id="testing-headerBrowseLink"
-                    >
+                    <Button variant="ghost" as="a" id="testingHeaderBrowseLink">
                       Browse
                     </Button>
                   </Link>
@@ -437,7 +429,7 @@ export default function Layout({
                     )
                   }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBackButtonDesktopCheckbox"
+                  id="testingFooterBackButtonDesktopSwitch"
                 >
                   {backButton ? "Hide" : "Show"} Back
                 </Button>
@@ -450,7 +442,7 @@ export default function Layout({
                     )
                   }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBrowseButtonCheckbox"
+                  id="testingFooterAdvancedSearchLinkSwitch"
                 >
                   Prefer {advancedSearch ? "Browse" : "Search"}
                 </Button>
@@ -466,7 +458,13 @@ export default function Layout({
             ) : (
               <Center display={{ base: "block", sm: "none", md: "block" }}>
                 <Link href="https://vercel.com/home" passHref>
-                  <Button size="sm" variant="ghost" as="a">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    as="a"
+                    title="Powered by Vercel"
+                    aria-label="Powered by Vercel"
+                  >
                     <Stack direction="row" spacing={2}>
                       <Text>Powered by</Text>
                       <Center>

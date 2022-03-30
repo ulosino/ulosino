@@ -5,6 +5,7 @@
 
 // Suspense and performance
 import dynamic from "next/dynamic";
+import { LoadingServerButton } from "components/Loading";
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
@@ -25,21 +26,16 @@ import {
   useDisclosure,
   Kbd,
   Badge,
-  Input,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Code,
   Center,
 } from "@chakra-ui/react";
-import { HiOutlineCog, HiOutlineTemplate, HiOutlineUser } from "react-icons/hi";
+import { HiOutlineCog, HiOutlineTemplate } from "react-icons/hi";
 
 // First party components
 import { ErrorFallback } from "components/ErrorFallback";
 const PreferenceResetAssistant = dynamic(
   () => import("components/assistants/PreferenceResetAssistant"),
   {
-    loading: () => <LoadingPreferenceResetAssistant />,
+    loading: () => <LoadingServerButton />,
   }
 );
 
@@ -51,16 +47,6 @@ import { isWindows } from "react-device-detect";
 import { useState, useRef } from "react";
 
 // Begin components
-
-export function LoadingPreferenceResetAssistant() {
-  return (
-    <Center>
-      <Button size="sm" isDisabled>
-        Communicating with Server
-      </Button>
-    </Center>
-  );
-}
 
 // Appearance preferances
 export function AppearancePreferences() {
@@ -131,69 +117,6 @@ export function AppearancePreferences() {
   );
 }
 
-// Integration preferences
-export function IntegrationPreferences() {
-  // Contributor preference
-  const [contributor] = useLocalStorage("P3PrefContributor");
-  const contributorInputChange = (e: { target: { value: any } }) => {
-    let inputValue = e.target.value;
-    writeStorage("P3PrefContributor", inputValue);
-  };
-
-  // Editor preference
-  const [editor] = useLocalStorage("P3PrefFileEditorURL");
-  const editorInputChange = (e: { target: { value: any } }) => {
-    let inputValue = e.target.value;
-    writeStorage("P3PrefFileEditorURL", inputValue);
-  };
-  return (
-    <Stack direction="column" spacing={5}>
-      <ErrorFallback>
-        <Text>
-          Integration preferences connect ULOSINO with other applications on
-          your computer.
-        </Text>
-        <FormControl>
-          <FormLabel htmlFor="contributorUsername" fontWeight="bold" mb={1}>
-            Contributor Username
-          </FormLabel>
-          <Input
-            // @ts-ignore
-            value={contributor}
-            onChange={contributorInputChange}
-            size="sm"
-            rounded="xl"
-            id="contributorUsername"
-          />
-          <FormHelperText color="inherit" fontSize="xs" as="p">
-            Enter your GitHub username to enable contributor watermarks and
-            other advanced features. This information is stored locally and
-            never sent to ULOSINO.
-          </FormHelperText>
-        </FormControl>
-        <FormControl>
-          <FormLabel htmlFor="editorURL" fontWeight="bold" mb={1}>
-            Custom Editing Application
-          </FormLabel>
-          <Input
-            // @ts-ignore
-            value={editor}
-            onChange={editorInputChange}
-            size="sm"
-            rounded="xl"
-            id="editorURL"
-          />
-          <FormHelperText color="inherit" fontSize="xs" as="p">
-            Enter a URL that ULOSINO will use to edit files instead of the
-            GitHub Web Editor. For example, <Code fontSize="xs">vscode://</Code>{" "}
-            would open files with Visual Studio Code.
-          </FormHelperText>
-        </FormControl>
-      </ErrorFallback>
-    </Stack>
-  );
-}
-
 // Application preferences
 export function ApplicationPreferences() {
   const [minimiseNotifications] = useLocalStorage(
@@ -234,11 +157,16 @@ export function ApplicationPreferences() {
           Features
         </Button>
         <Text fontSize="xs" lineHeight="shorter">
-          {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo donation
-          features, including links to external financial services.
+          {donationFeatures ? "Enable" : "Disable"} donation features and links
+          to financial services.
         </Text>
       </Stack>
-      <PreferenceResetAssistant />
+      <Stack direction="column" spacing={2}>
+        <PreferenceResetAssistant />
+        <Text fontSize="xs" lineHeight="shorter">
+          Restore default preferences for all sessions.
+        </Text>
+      </Stack>
     </Stack>
   );
 }
@@ -249,11 +177,6 @@ const tabData = [
     label: "Appearance",
     icon: <HiOutlineTemplate />,
     content: <AppearancePreferences />,
-  },
-  {
-    label: "Integrations",
-    icon: <HiOutlineUser />,
-    content: <IntegrationPreferences />,
   },
   {
     label: "Application",

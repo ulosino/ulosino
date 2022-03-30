@@ -6,9 +6,6 @@
 // The user is then directed to GitHub to name the page and commit the changes
 // One of the main access points for the Assistant is the <OSPageAssistantHero>, which is shown on the OS List
 
-// Suspense and performance
-import { useLocalStorage } from "@rehooks/local-storage";
-
 // Links and routing
 import Link from "next/link";
 
@@ -48,10 +45,6 @@ import { useState } from "react";
 // Begin component
 export default function OSPageAssistant() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // Get preferences
-  const [contributor] = useLocalStorage("P3PrefContributor");
-  const [customEditor] = useLocalStorage("P3PrefFileEditorURL");
 
   // Description clipboard
   const [description, setDescriptionValue] = useState("");
@@ -165,36 +158,17 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                             </Button>
                           )}
                         </ErrorFallback>
-                        {customEditor ? (
-                          <Text>
-                            Now we want to paste our assembled OS Page onto a
-                            new document on your custom editor.
-                          </Text>
-                        ) : (
-                          <Text>
-                            Now we want to paste our assembled OS Page onto a
-                            new page on GitHub.
-                          </Text>
-                        )}
-                        {customEditor ? (
-                          <Text>
-                            When you continue, you will be taken to your custom
-                            editor. From there, create a new document using the
-                            using the naming convention <Code>name.mdx</Code>{" "}
-                            convention (for example, <Code>ubuntu.mdx</Code>).
-                            You can then paste the OS Page. Finally, you'll need
-                            to use your editor to push your changes onto a new
-                            branch within the ULOSINO GitHub repository.
-                          </Text>
-                        ) : (
-                          <Text>
-                            At the top of the page, you'll need to name the new
-                            file, using the <Code>name.mdx</Code> convention
-                            (for example, <Code>ubuntu.mdx</Code>). Underneath,
-                            paste the OS Page. Then choose to create a new
-                            branch to open a pull request for your changes.
-                          </Text>
-                        )}
+                        <Text>
+                          Now we want to paste our assembled OS Page onto a new
+                          page on GitHub.
+                        </Text>
+                        <Text>
+                          At the top of the page, you'll need to name the new
+                          file, using the <Code>name.mdx</Code> convention (for
+                          example, <Code>ubuntu.mdx</Code>). Underneath, paste
+                          the OS Page. Then choose to create a new branch to
+                          open a pull request for your changes.
+                        </Text>
                       </Stack>
                     ) : (
                       <>
@@ -300,32 +274,18 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                 {descriptionPage ? (
                   <>
                     {finalPage ? (
-                      <>
-                        {customEditor ? (
-                          <Link href={customEditor} passHref>
-                            <Button
-                              leftIcon={<HiOutlineExternalLink />}
-                              as="a"
-                              ms={5}
-                            >
-                              Continue with Custom Editor
-                            </Button>
-                          </Link>
-                        ) : (
-                          <Link
-                            href="https://github.com/ulosino/ulosino/new/main/public/markdown/browse"
-                            passHref
-                          >
-                            <Button
-                              leftIcon={<HiOutlineExternalLink />}
-                              as="a"
-                              ms={5}
-                            >
-                              Continue on GitHub
-                            </Button>
-                          </Link>
-                        )}
-                      </>
+                      <Link
+                        href="https://github.com/ulosino/ulosino/new/main/public/markdown/browse"
+                        passHref
+                      >
+                        <Button
+                          leftIcon={<HiOutlineExternalLink />}
+                          as="a"
+                          ms={5}
+                        >
+                          Continue on GitHub
+                        </Button>
+                      </Link>
                     ) : (
                       <>
                         {metadataPage ? (

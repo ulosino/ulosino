@@ -9,7 +9,6 @@ import { deleteFromStorage, useLocalStorage } from "@rehooks/local-storage";
 // Chakra UI, icons, and other design imports
 import {
   Stack,
-  Center,
   Button,
   Text,
   AlertDialog,
@@ -20,15 +19,12 @@ import {
   AlertDialogOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { HiOutlineTrash } from "react-icons/hi";
 
 import { useRef } from "react";
 
 export function DeletePreferences() {
   deleteFromStorage("P3PrefAdvancedSearchLink");
   deleteFromStorage("P3PrefBackButtonLargeWindows");
-  deleteFromStorage("P3PrefContributor");
-  deleteFromStorage("P3PrefFileEditorURL");
   deleteFromStorage("P3PrefMinimiseNotifications");
   deleteFromStorage("P3PrefDisableDonationFeatures");
   deleteFromStorage("P3PrefDangerousRuntime");
@@ -43,8 +39,6 @@ export default function PreferenceResetAssistant() {
   // Get all preferences
   const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
-  const [contributor] = useLocalStorage("P3PrefContributor");
-  const [editor] = useLocalStorage("P3PrefFileEditorURL");
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
@@ -60,23 +54,15 @@ export default function PreferenceResetAssistant() {
       if (backButton) {
         return <ModalOpener />;
       } else {
-        if (contributor) {
+        if (minimiseNotifications) {
           return <ModalOpener />;
         } else {
-          if (editor) {
+          if (donationFeatures) {
             return <ModalOpener />;
           } else {
-            if (minimiseNotifications) {
+            if (dangerousRuntime) {
               return <ModalOpener />;
-            } else {
-              if (donationFeatures) {
-                return <ModalOpener />;
-              } else {
-                if (dangerousRuntime) {
-                  return <ModalOpener />;
-                } else return <ModalDisabled />;
-              }
-            }
+            } else return <ModalDisabled />;
           }
         }
       }
@@ -85,22 +71,10 @@ export default function PreferenceResetAssistant() {
 
   // Buttons to open the modal
   function ModalOpener() {
-    return (
-      <Center>
-        <Button leftIcon={<HiOutlineTrash />} onClick={onOpen} size="sm">
-          Reset Preferences
-        </Button>
-      </Center>
-    );
+    return <Button onClick={onOpen}>Use Default Preferences</Button>;
   }
   function ModalDisabled() {
-    return (
-      <Center>
-        <Button leftIcon={<HiOutlineTrash />} isDisabled size="sm">
-          Reset Preferences
-        </Button>
-      </Center>
-    );
+    return <Button isDisabled>Use Default Preferences</Button>;
   }
 
   // Gracefully close the modal once the deletion has completed

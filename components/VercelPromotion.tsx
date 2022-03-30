@@ -11,7 +11,6 @@ import Link from "next/link";
 
 // Chakra UI, icons, and other design imports
 import {
-  Icon,
   Box,
   Container,
   Flex,
@@ -26,10 +25,11 @@ import { HiArrowRight } from "react-icons/hi";
 
 // Begin components
 
+// Here the fill must be typed as any because we may need to pass a constant to enable colour mode switching
 export function VercelLogo({ fill }: { fill: any }) {
   return (
     // Important: The Vercel logo is copyright of Vercel, Inc., 340 S Lemon Ave #4133 Walnut, CA 91789
-    // Reference https://vercel.com/design/brands#vercel for additional details or mail brand@vercel.com
+    // Reference https://vercel.com/design/brands#vercel for additional details or email brand@vercel.com
     // Implemented 28 March 2022 by Noah Stanley @fernpolo
     // Size is a direct division of 4438 (w) and 1000 (h) by 75
     <svg

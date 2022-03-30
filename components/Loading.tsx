@@ -26,5 +26,5 @@ export function LoadingServer() {
 }
 
 export function LoadingServerButton() {
-  return <Button isLoading>Communicating with Server</Button>;
+  return <Button isLoading loadingText="Communicating with Server" />;
 }
