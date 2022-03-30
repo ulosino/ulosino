@@ -121,7 +121,13 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
           Get Started
         </Button>
       </DarkMode>
-      <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        scrollBehavior="inside"
+        size="lg"
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent rounded="xl" m={{ base: 0, sm: 2, md: 5 }}>
           <ModalHeader fontSize="2xl">Create an OS Page</ModalHeader>

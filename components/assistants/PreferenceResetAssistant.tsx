@@ -115,6 +115,7 @@ export default function PreferenceResetAssistant() {
       <AlertDialog
         isOpen={isOpen}
         onClose={onClose}
+        scrollBehavior="inside"
         leastDestructiveRef={cancelRef}
         size="md"
         isCentered

@@ -316,6 +316,7 @@ export default function Preferences({ isLayout }: Props) {
       <Modal
         isOpen={isOpen}
         onClose={onClose}
+        scrollBehavior="inside"
         initialFocusRef={initialRef}
         size="xl"
         isCentered
