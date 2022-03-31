@@ -1,6 +1,12 @@
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+// This file configures Next.js
+// Because it is parsed, we need to stick to classic JS syntax
+
 const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
-const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+const path = require("path");
 
 // Content security options
 const securityHeaders = [
@@ -32,10 +38,10 @@ module.exports = withPWA({
   // Configuration for Next.js
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
-  // experimental: {
-  //   runtime: "nodejs",
-  //   serverComponents: false,
-  // },
+  experimental: {
+    runtime: "nodejs",
+    serverComponents: false,
+  },
   pageExtensions: ["tsx"],
   images: {
     formats: ["image/avif", "image/webp"],
@@ -77,8 +83,7 @@ module.exports = withPWA({
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      // This line fixes next-mdx-remote issue "Package path ./jsx-runtime.js is not exported from package react"
-      "react/jsx-runtime.js": require.resolve("react/jsx-runtime"),
+      "react/jsx-runtime.js": path.resolve("node_modules/react/jsx-runtime"),
     };
     return config;
   },
