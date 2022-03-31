@@ -1,5 +1,6 @@
 const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
+const path = require("path")
 
 // Content security options
 const securityHeaders = [
@@ -73,12 +74,11 @@ module.exports = withPWA({
   },
   // Add temporary webpack config to resolve Suspense issue known to occur in next-mdx-remote 4.0.0
   // Refer to https://github.com/hashicorp/next-mdx-remote/issues/237
-  // webpack: (config) => {
-  //   config.resolve.alias = {
-  //     ...config.resolve.alias,
-  //     // This line fixes next-mdx-remote issue "Package path ./jsx-runtime.js is not exported from package react"
-  //     "react/jsx-runtime.js": require.resolve("react/jsx-runtime"),
-  //   };
-  //   return config;
-  // },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "react/jsx-runtime.js": path.resolve("node_modules/react/jsx-runtime"),
+    };
+    return config;
+  },
 });
