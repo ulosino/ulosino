@@ -4,6 +4,11 @@
 // Types
 import type { ReactElement } from "react";
 
+// Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { LoadingServerButton } from "components/Loading";
+
 // Head and SEO
 import Head from "next/head";
 
@@ -11,7 +16,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 // Chakra UI, icons, and other design imports
-import { Stack, Button, Text } from "@chakra-ui/react";
+import { Stack, Button } from "@chakra-ui/react";
 import {
   HiOutlineHome,
   HiOutlineDatabase,
@@ -24,7 +29,9 @@ import { FiTwitter, FiGithub } from "react-icons/fi";
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
-import ColourModeSwitcher from "components/ColourModeSwitcher";
+const Preferences = dynamic(() => import("components/Preferences"), {
+  suspense: true,
+});
 
 // Begin page
 export default function Menu() {
@@ -43,55 +50,45 @@ export default function Menu() {
         />
       </Head>
 
-      <Stack direction="column" spacing={10}>
-        <Stack direction="column" spacing={2} as="nav">
-          <Link href="/" passHref>
-            <Button as="a" leftIcon={<HiOutlineHome />}>
-              Home
-            </Button>
-          </Link>
-          <Link href="/browse" passHref>
-            <Button as="a" leftIcon={<HiOutlineDatabase />}>
-              OS List &amp; Tempo
-            </Button>
-          </Link>
-          <Link href="/search" passHref>
-            <Button as="a" leftIcon={<HiOutlineSearch />}>
-              Advanced Search
-            </Button>
-          </Link>
-          <Link href="/matches" passHref>
-            <Button as="a" leftIcon={<HiOutlineSparkles />}>
-              ULOSINO Matches
-            </Button>
-          </Link>
-          <Link href="/about" passHref>
-            <Button as="a" leftIcon={<HiOutlineInformationCircle />}>
-              About ULOSINO
-            </Button>
-          </Link>
-        </Stack>
-        <Stack direction="column" spacing={2} as="nav">
-          <Text textStyle="miniHeading" as="h6">
-            Connect and Contribute
-          </Text>
-          <Link href="https://twitter.com/ulosino" passHref>
-            <Button as="a" leftIcon={<FiTwitter />}>
-              Twitter
-            </Button>
-          </Link>
-          <Link href="https://github.com/ulosino" passHref>
-            <Button as="a" leftIcon={<FiGithub />}>
-              GitHub &amp; Source
-            </Button>
-          </Link>
-        </Stack>
-        <Stack direction="column" spacing={2} as="nav">
-          <Text textStyle="miniHeading" as="h6">
-            Session Preferences
-          </Text>
-          <ColourModeSwitcher />
-        </Stack>
+      <Stack direction="column" spacing={2} as="nav">
+        <Link href="/" passHref>
+          <Button as="a" leftIcon={<HiOutlineHome />}>
+            Home
+          </Button>
+        </Link>
+        <Link href="/browse" passHref>
+          <Button as="a" leftIcon={<HiOutlineDatabase />}>
+            OS List &amp; Tempo
+          </Button>
+        </Link>
+        <Link href="/search" passHref>
+          <Button as="a" leftIcon={<HiOutlineSearch />}>
+            Advanced Search
+          </Button>
+        </Link>
+        <Link href="/matches" passHref>
+          <Button as="a" leftIcon={<HiOutlineSparkles />}>
+            ULOSINO Matches
+          </Button>
+        </Link>
+        <Link href="/about" passHref>
+          <Button as="a" leftIcon={<HiOutlineInformationCircle />}>
+            About ULOSINO
+          </Button>
+        </Link>
+        <Suspense fallback={<LoadingServerButton />}>
+          <Preferences isLayout={false} />
+        </Suspense>
+        <Link href="https://twitter.com/ulosino" passHref>
+          <Button as="a" leftIcon={<FiTwitter />}>
+            Twitter
+          </Button>
+        </Link>
+        <Link href="https://github.com/ulosino" passHref>
+          <Button as="a" leftIcon={<FiGithub />}>
+            GitHub
+          </Button>
+        </Link>
       </Stack>
     </>
   );

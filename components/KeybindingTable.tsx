@@ -94,15 +94,6 @@ export function OSPageKeybindings() {
             <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>O</Kbd>
           </Td>
         </Tr>
-        <Tr>
-          <Td>Open the donation page in a new tab</Td>
-          <Td>
-            <Kbd>control</Kbd> + <Kbd>D</Kbd>
-          </Td>
-          <Td>
-            <Kbd>alt</Kbd> + <Kbd>D</Kbd>
-          </Td>
-        </Tr>
       </Tbody>
     </Table>
   );
@@ -121,9 +112,12 @@ export function SessionPreferencesKeybindings() {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>Toggle the application colour mode</Td>
-          <Td colSpan={2}>
-            <Kbd>control</Kbd> + <Kbd>W</Kbd>
+          <Td>Open Preferences</Td>
+          <Td>
+            <Kbd>control</Kbd> + <Kbd>,</Kbd>
+          </Td>
+          <Td>
+            <Kbd>alt</Kbd> + <Kbd>,</Kbd>
           </Td>
         </Tr>
         <Tr>
@@ -142,6 +136,12 @@ export function SessionPreferencesKeybindings() {
           </Td>
           <Td>
             <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+          </Td>
+        </Tr>
+        <Tr>
+          <Td>Toggle the application colour mode</Td>
+          <Td colSpan={2}>
+            <Kbd>control</Kbd> + <Kbd>W</Kbd>
           </Td>
         </Tr>
       </Tbody>
