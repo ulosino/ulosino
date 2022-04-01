@@ -5,6 +5,11 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { LoadingServer } from "components/Loading";
+
 // Head and SEO
 import Head from "next/head";
 
@@ -16,9 +21,21 @@ import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
-import CoreSearchGroup from "components/search/CoreSearchGroup";
-import AdvancedSearchGroup from "components/search/AdvancedSearchGroup";
-import SystemSearch from "components/search/SystemSearch";
+const CoreSearchGroup = dynamic(
+  () => import("components/search/CoreSearchGroup"),
+  {
+    suspense: true,
+  }
+);
+const AdvancedSearchGroup = dynamic(
+  () => import("components/search/AdvancedSearchGroup"),
+  {
+    suspense: true,
+  }
+);
+const SystemSearch = dynamic(() => import("components/search/SystemSearch"), {
+  suspense: true,
+});
 
 // Markdown processing libraries
 import { getOSPages } from "providers/OSPageProvider";
@@ -54,19 +71,25 @@ export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
           <Text textStyle="miniHeading" as="h6">
             Core Metadata Search
           </Text>
-          <CoreSearchGroup data={AZOSPageData} />
+          <Suspense fallback={<LoadingServer />}>
+            <CoreSearchGroup data={AZOSPageData} />
+          </Suspense>
         </Stack>
         <Stack direction="column" spacing={2}>
           <Text textStyle="miniHeading" as="h6">
             Advanced Metadata Search
           </Text>
-          <AdvancedSearchGroup data={AZOSPageData} />
+          <Suspense fallback={<LoadingServer />}>
+            <AdvancedSearchGroup data={AZOSPageData} />
+          </Suspense>
         </Stack>
         <Stack direction="column" spacing={2}>
           <Text textStyle="miniHeading" as="h6">
             ULOSINO System Search
           </Text>
-          <SystemSearch data={AZOSPageData} />
+          <Suspense fallback={<LoadingServer />}>
+            <SystemSearch data={AZOSPageData} />
+          </Suspense>
         </Stack>
         <Text fontSize="xs">
           Get here quickly by pressing <Kbd>control</Kbd> + <Kbd>S</Kbd> or{" "}

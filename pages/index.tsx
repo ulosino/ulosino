@@ -5,6 +5,11 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
 
+// Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { LoadingServer } from "components/Loading";
+
 // Head and SEO
 import Head from "next/head";
 
@@ -44,8 +49,10 @@ import {
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import { NoJSWarningHome } from "components/NoJSWarning";
-import SearchName from "components/search/SearchName";
 import { ErrorFallback } from "components/ErrorFallback";
+const SearchName = dynamic(() => import("components/search/SearchName"), {
+  suspense: true,
+});
 
 // Markdown processing libraries
 import { getOSPages } from "providers/OSPageProvider";
@@ -88,17 +95,19 @@ export default function Home({ AZOSPageData }: OSDataPage) {
           </noscript>
         </ErrorFallback>
         <SimpleGrid minChildWidth="300px" spacing={10}>
-          <ErrorFallback>
-            <Stack direction="column" spacing={5}>
-              <Text textStyle="miniHeading" as="h6">
-                Start
-              </Text>
+          <Suspense fallback={<LoadingServer />}>
+            <ErrorFallback>
               <Stack direction="column" spacing={5}>
-                <Heading size="xl">{timeGreeting}</Heading>
-                <SearchName data={AZOSPageData} size="lg" />
+                <Text textStyle="miniHeading" as="h6">
+                  Start
+                </Text>
+                <Stack direction="column" spacing={5}>
+                  <Heading size="xl">{timeGreeting}</Heading>
+                  <SearchName data={AZOSPageData} size="lg" />
+                </Stack>
               </Stack>
-            </Stack>
-          </ErrorFallback>
+            </ErrorFallback>
+          </Suspense>
           <ErrorFallback>
             <Card variant="secondary">
               <DarkMode>
