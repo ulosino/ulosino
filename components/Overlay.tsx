@@ -123,7 +123,6 @@ export function OverlayDrawer({
   );
 }
 
-// Begin wrapping component
 export default function Overlay({
   header,
   body,

@@ -21,10 +21,13 @@ import {
   useDisclosure,
   Kbd,
   Center,
-  useBreakpointValue,
   useBoolean,
 } from "@chakra-ui/react";
-import { HiArrowLeft, HiOutlineCog, HiOutlineTemplate } from "react-icons/hi";
+import {
+  HiOutlineArrowLeft,
+  HiOutlineCog,
+  HiOutlineTemplate,
+} from "react-icons/hi";
 
 // First party components
 import Overlay from "components/Overlay";
@@ -205,7 +208,7 @@ export default function Preferences({ isLayout }: Props) {
           <ErrorFallback>
             <Stack direction="column" spacing={5}>
               <Button
-                leftIcon={<HiArrowLeft />}
+                leftIcon={<HiOutlineArrowLeft />}
                 onClick={setPreferenceView.off}
               >
                 Go Back
@@ -217,7 +220,7 @@ export default function Preferences({ isLayout }: Props) {
           <Stack direction="column" spacing={5}>
             <Stack direction="column" spacing={5}>
               {tabData.map((tab, index) => (
-                <Stack direction="column" spacing={2}>
+                <Stack direction="column" spacing={2} key={index}>
                   <Button
                     key={index}
                     onClick={(_) => {
