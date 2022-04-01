@@ -21,8 +21,10 @@ import {
   useDisclosure,
   Kbd,
   Center,
+  useBreakpointValue,
+  useBoolean,
 } from "@chakra-ui/react";
-import { HiOutlineCog, HiOutlineTemplate } from "react-icons/hi";
+import { HiArrowLeft, HiOutlineCog, HiOutlineTemplate } from "react-icons/hi";
 
 // First party components
 import Overlay from "components/Overlay";
@@ -166,11 +168,13 @@ export function ApplicationPreferences() {
 const tabData = [
   {
     label: "Appearance",
+    description: "Change the appearance of ULOSINO.",
     icon: <HiOutlineTemplate />,
     content: <AppearancePreferences />,
   },
   {
     label: "Application",
+    description: "Change application behaviours and settings.",
     icon: <HiOutlineCog />,
     content: <ApplicationPreferences />,
   },
@@ -187,9 +191,56 @@ interface Props {
 export default function Preferences({ isLayout }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeTab, setActiveTab] = useState(0);
+  const [preferenceView, setPreferenceView] = useBoolean();
   const initialRef: any = useRef();
 
-  function PreferencesBody() {
+  // Create the PreferencesBodySmallWindows function that uses the useState hook to switch between tabData
+  // It has a sidebar with the Button containing the label
+  // It has a content area with the content of the tabData
+  // The Buttons on the menu can be clicked to switch between content areas
+  const PreferencesBodySmallWindows = () => {
+    return (
+      <>
+        {preferenceView ? (
+          <ErrorFallback>
+            <Stack direction="column" spacing={5}>
+              <Button
+                leftIcon={<HiArrowLeft />}
+                onClick={setPreferenceView.off}
+              >
+                Go Back
+              </Button>
+              <Box>{tabData[activeTab].content}</Box>
+            </Stack>
+          </ErrorFallback>
+        ) : (
+          <Stack direction="column" spacing={5}>
+            <Stack direction="column" spacing={5}>
+              {tabData.map((tab, index) => (
+                <Stack direction="column" spacing={2}>
+                  <Button
+                    key={index}
+                    onClick={(_) => {
+                      setPreferenceView.on();
+                      setActiveTab(index);
+                    }}
+                    leftIcon={tab.icon}
+                  >
+                    {tab.label}
+                  </Button>
+                  <Text fontSize="xs" lineHeight="shorter">
+                    {tab.description}
+                  </Text>
+                </Stack>
+              ))}
+            </Stack>
+          </Stack>
+        )}
+      </>
+    );
+  };
+
+  function PreferencesBodyLargeWindows() {
     return (
       <Flex direction={{ base: "column", sm: "row" }}>
         <Stack
@@ -213,6 +264,19 @@ export default function Preferences({ isLayout }: Props) {
           <Box w="full">{tabData[activeTab].content}</Box>
         </ErrorFallback>
       </Flex>
+    );
+  }
+
+  function PreferencesBody() {
+    return (
+      <>
+        <Box display={{ base: "none", sm: "initial" }}>
+          <PreferencesBodyLargeWindows />
+        </Box>
+        <Box display={{ base: "initial", sm: "none" }}>
+          <PreferencesBodySmallWindows />
+        </Box>
+      </>
     );
   }
 
