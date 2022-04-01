@@ -18,21 +18,21 @@ import {
   IconButton,
   Text,
   useColorMode,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   useDisclosure,
   Kbd,
-  Badge,
   Center,
 } from "@chakra-ui/react";
 import { HiOutlineCog, HiOutlineTemplate } from "react-icons/hi";
 
 // First party components
+import Overlay from "components/Overlay";
 import { ErrorFallback } from "components/ErrorFallback";
+const DisableDonationFeaturesConfirmation = dynamic(
+  () => import("components/confirmations/DisableDonationFeaturesConfirmation"),
+  {
+    suspense: true,
+  }
+);
 const PreferenceResetAssistant = dynamic(
   () => import("components/assistants/PreferenceResetAssistant"),
   {
@@ -143,23 +143,11 @@ export function ApplicationPreferences() {
         </Text>
       </Stack>
       <Stack direction="column" spacing={2}>
-        <Button
-          onClick={(_) =>
-            writeStorage(
-              "P3PrefDisableDonationFeatures",
-              donationFeatures ? false : true
-            )
-          }
-        >
-          {donationFeatures ? "Enable" : "Disable"}{" "}
-          <Badge variant="tempo" pt={1} mx={2}>
-            Tempo
-          </Badge>{" "}
-          Features
-        </Button>
+        <Suspense fallback={<LoadingServerButton />}>
+          <DisableDonationFeaturesConfirmation />
+        </Suspense>
         <Text fontSize="xs" lineHeight="shorter">
-          {donationFeatures ? "Enable" : "Disable"} donation features and links
-          to financial services.
+          {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo.
         </Text>
       </Stack>
       <Stack direction="column" spacing={2}>
@@ -201,6 +189,41 @@ export default function Preferences({ isLayout }: Props) {
   const [activeTab, setActiveTab] = useState(0);
   const initialRef: any = useRef();
 
+  function PreferencesBody() {
+    return (
+      <Flex direction={{ base: "column", sm: "row" }}>
+        <Stack
+          direction="column"
+          spacing={2}
+          me={{ base: 0, sm: 10 }}
+          mb={{ base: 5, sm: 0 }}
+        >
+          {tabData.map((tab, index) => (
+            <Button
+              key={index}
+              onClick={(_) => setActiveTab(index)}
+              variant={index === activeTab ? "solid" : "outline"}
+              leftIcon={tab.icon}
+            >
+              {tab.label}
+            </Button>
+          ))}
+        </Stack>
+        <ErrorFallback>
+          <Box w="full">{tabData[activeTab].content}</Box>
+        </ErrorFallback>
+      </Flex>
+    );
+  }
+
+  function PreferencesFooter() {
+    return (
+      <Button ref={initialRef} onClick={onClose}>
+        Done
+      </Button>
+    );
+  }
+
   // Keybinding
   const manager = useHotkeyManager();
   useEffect(() => {
@@ -227,60 +250,36 @@ export default function Preferences({ isLayout }: Props) {
     <>
       {isLayout ? (
         <Center display={{ base: "none", sm: "flex" }}>
-          <IconButton
-            icon={<HiOutlineCog />}
-            onClick={onOpen}
-            aria-label="Open Preferences modal"
-            title="Open Preferences"
-          />
+          {isOpen ? (
+            <IconButton
+              icon={<HiOutlineCog />}
+              aria-label="Open Preferences modal"
+              title="Open Preferences"
+              isActive
+            />
+          ) : (
+            <IconButton
+              icon={<HiOutlineCog />}
+              onClick={onOpen}
+              aria-label="Open Preferences modal"
+              title="Open Preferences"
+            />
+          )}
         </Center>
       ) : (
         <Button leftIcon={<HiOutlineCog />} onClick={onOpen}>
           Preferences
         </Button>
       )}
-      <Modal
+      <Overlay
         isOpen={isOpen}
         onClose={onClose}
-        scrollBehavior="inside"
-        initialFocusRef={initialRef}
-        size="xl"
-        isCentered
-      >
-        <ModalOverlay />
-        <ModalContent rounded="xl">
-          <ModalHeader fontSize="2xl">Preferences</ModalHeader>
-          <ModalBody>
-            <Flex direction={{ base: "column", sm: "row" }}>
-              <Stack
-                direction="column"
-                spacing={2}
-                me={{ base: 0, sm: 10 }}
-                mb={{ base: 5, sm: 0 }}
-              >
-                {tabData.map((tab, index) => (
-                  <Button
-                    key={index}
-                    onClick={(_) => setActiveTab(index)}
-                    variant={index === activeTab ? "solid" : "outline"}
-                    leftIcon={tab.icon}
-                  >
-                    {tab.label}
-                  </Button>
-                ))}
-              </Stack>
-              <ErrorFallback>
-                <Box w="full">{tabData[activeTab].content}</Box>
-              </ErrorFallback>
-            </Flex>
-          </ModalBody>
-          <ModalFooter>
-            <Button ref={initialRef} onClick={onClose}>
-              Done
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        header="Preferences"
+        body={<PreferencesBody />}
+        footer={<PreferencesFooter />}
+        cancelRef={initialRef}
+        useAlertDialog={false}
+      />
     </>
   );
 }

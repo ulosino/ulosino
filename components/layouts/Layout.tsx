@@ -352,11 +352,28 @@ export default function Layout({
                   </Button>
                 </Link>
                 {advancedSearch ? (
-                  <Link href="/search" passHref>
-                    <Button variant="ghost" as="a" id="testingHeaderSearchLink">
-                      Advanced Search
-                    </Button>
-                  </Link>
+                  <>
+                    <Link href="/search" passHref>
+                      <Button
+                        variant="ghost"
+                        as="a"
+                        id="testingHeaderSearchLink"
+                        display={{ base: "none", md: "flex" }}
+                      >
+                        Advanced Search
+                      </Button>
+                    </Link>
+                    <Link href="/search" passHref>
+                      <Button
+                        variant="ghost"
+                        as="a"
+                        id="testingHeaderSearchLink"
+                        display={{ base: "none", sm: "flex", md: "none" }}
+                      >
+                        Search
+                      </Button>
+                    </Link>
+                  </>
                 ) : (
                   <Link href="/browse" passHref>
                     <Button variant="ghost" as="a" id="testingHeaderBrowseLink">

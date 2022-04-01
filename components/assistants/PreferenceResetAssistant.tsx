@@ -1,24 +1,16 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// This AlertDialog Assistant allows the user to graphically delete preference keys stored in LocalStorage
+// This Assistant allows the user to graphically delete preference keys stored in LocalStorage
 
 // Suspense and performance
 import { deleteFromStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
-import {
-  Stack,
-  Button,
-  Text,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Stack, Button, Text, useDisclosure } from "@chakra-ui/react";
+
+// First party components
+import Overlay from "components/Overlay";
 
 import { useRef } from "react";
 
@@ -83,37 +75,39 @@ export default function PreferenceResetAssistant() {
     onClose();
   }
 
+  function ModalBody() {
+    return (
+      <Stack direction="column" spacing={5}>
+        <Text>This will restore default preferences.</Text>
+      </Stack>
+    );
+  }
+
+  function ModalFooter() {
+    return (
+      <>
+        <Button ref={cancelRef} onClick={onClose}>
+          Cancel
+        </Button>
+        <Button colorScheme="red" ms={2} onClick={BeginDelete}>
+          Continue &amp; Reset
+        </Button>
+      </>
+    );
+  }
+
   return (
     <>
       <ModalButton />
-      <AlertDialog
+      <Overlay
+        header="Reset Preferences?"
+        body={<ModalBody />}
+        footer={<ModalFooter />}
+        cancelRef={cancelRef}
         isOpen={isOpen}
         onClose={onClose}
-        scrollBehavior="inside"
-        leastDestructiveRef={cancelRef}
-        size="md"
-        isCentered
-      >
-        <AlertDialogOverlay />
-        <AlertDialogContent rounded="xl">
-          <AlertDialogHeader fontSize="2xl">
-            Reset Preferences?
-          </AlertDialogHeader>
-          <AlertDialogBody>
-            <Stack direction="column" spacing={5}>
-              <Text>This will restore default preferences.</Text>
-            </Stack>
-          </AlertDialogBody>
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="red" ms={2} onClick={BeginDelete}>
-              Continue &amp; Reset
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+        useAlertDialog={true}
+      />
     </>
   );
 }

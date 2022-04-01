@@ -20,6 +20,7 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 
 // First party component
 import OSPageAssistant from "components/assistants/OSPageAssistant";
+import { ErrorFallback } from "components/ErrorFallback";
 
 // Begin components
 export function OSPageAssistantHero() {
@@ -32,7 +33,9 @@ export function OSPageAssistantHero() {
         <Text color="white">
           ULOSINO now offers a new assistant to fast-track creating an OS Page.
         </Text>
-        <OSPageAssistant />
+        <ErrorFallback>
+          <OSPageAssistant />
+        </ErrorFallback>
       </Stack>
     </Card>
   );

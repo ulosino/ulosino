@@ -11,18 +11,18 @@ describe("Layout State Testing", () => {
 
     // Test back button (not visible by default)
     // The desktop back button is not in the DOM until switched
-    cy.get("#testing-headerBackButtonDesktop").should("not.exist");
+    cy.get("#testingHeaderBackButtonDesktop").should("not.exist");
     cy.get("#testingHeaderBackButtonMobile")
       .find("button")
       .should("not.be.visible");
 
     // Now toggle the back button
-    cy.get("#testing-footerBackButtonDesktopSwitch")
+    cy.get("#testingFooterBackButtonDesktopSwitch")
       .should("be.visible")
       .click();
 
     // Test the back button again (now visible)
-    cy.get("#testing-headerBackButtonDesktop")
+    cy.get("#testingHeaderBackButtonDesktop")
       .find("button")
       .should("be.visible");
     cy.get("#testingHeaderBackButtonMobile")
@@ -30,8 +30,8 @@ describe("Layout State Testing", () => {
       .should("not.be.visible");
 
     // Switch page to test state persistence
-    cy.get("#testing-headerBrowseLink").click();
-    cy.get("#testing-headerBackButtonDesktop")
+    cy.get("#testingHeaderBrowseLink").click();
+    cy.get("#testingHeaderBackButtonDesktop")
       .find("button")
       .should("be.visible");
     cy.get("#testingHeaderBackButtonMobile")
@@ -40,7 +40,7 @@ describe("Layout State Testing", () => {
 
     // Test the mobile back button (visible by default on mobile only)
     cy.viewport("iphone-x");
-    cy.get("#testing-headerBackButtonDesktop")
+    cy.get("#testingHeaderBackButtonDesktop")
       .find("button")
       .should("not.be.visible");
     cy.get("#testingHeaderBackButtonMobile")
@@ -49,16 +49,18 @@ describe("Layout State Testing", () => {
 
     // Now do the same tests using the Browse/Advanced Search button
     cy.viewport("macbook-15");
-    cy.go("back");
-    cy.get("#testing-headerSearchLink").should("not.exist");
-    cy.get("#testing-headerBrowseLink").should("be.visible");
-    cy.get("#testing-footerBrowseButtonSwitch").should("be.visible").click();
-    cy.get("#testing-headerSearchLink").should("be.visible");
-    cy.get("#testing-headerBrowseLink").should("not.exist");
-    cy.get("#testing-headerSearchLink").click();
-    cy.get("#testing-headerSearchLink").should("be.visible");
-    cy.get("#testing-headerBrowseLink").should("not.exist");
+    cy.visit("/menu");
+    cy.get("#testingHeaderSearchLink").should("not.exist");
+    cy.get("#testingHeaderBrowseLink").should("be.visible");
+    cy.get("#testingFooterAdvancedSearchLinkSwitch")
+      .should("be.visible")
+      .click();
+    cy.get("#testingHeaderSearchLink").should("be.visible");
+    cy.get("#testingHeaderBrowseLink").should("not.exist");
+    cy.get("#testingHeaderSearchLink").click();
+    cy.get("#testingHeaderSearchLink").should("be.visible");
+    cy.get("#testingHeaderBrowseLink").should("not.exist");
     cy.viewport("iphone-x");
-    cy.get("#testing-headerSearchLink").should("not.be.visible");
+    cy.get("#testingHeaderSearchLink").should("not.be.visible");
   });
 });
