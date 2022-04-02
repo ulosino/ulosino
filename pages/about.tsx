@@ -26,7 +26,6 @@ import {
   Icon,
   Flex,
   Spacer,
-  Divider,
   Badge,
 } from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
@@ -43,8 +42,6 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 import {
   HiOutlineArrowRight,
   HiOutlineInformationCircle,
-  HiOutlineXCircle,
-  HiOutlineDotsCircleHorizontal,
   HiCreditCard,
   HiTerminal,
   HiCog,
@@ -52,12 +49,10 @@ import {
   HiInformationCircle,
   HiPencil,
 } from "react-icons/hi";
-import { FiTwitter } from "react-icons/fi";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
-import { VercelLogo } from "components/VercelPromotion";
 import Window from "components/Window";
 
 // Begin page

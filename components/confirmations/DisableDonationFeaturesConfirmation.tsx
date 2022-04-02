@@ -24,13 +24,25 @@ export default function DisableDonationFeaturesConfirmation() {
   // Buttons to open the modal
   function FeaturesEnabled() {
     return (
-      <Button onClick={onOpen}>
-        Disable{" "}
-        <Badge variant="tempo" mx={2} pt={1}>
-          Tempo
-        </Badge>{" "}
-        Features
-      </Button>
+      <>
+        {isOpen ? (
+          <Button isActive>
+            Disable{" "}
+            <Badge variant="tempo" mx={2} pt={1}>
+              Tempo
+            </Badge>{" "}
+            Features
+          </Button>
+        ) : (
+          <Button onClick={onOpen}>
+            Disable{" "}
+            <Badge variant="tempo" mx={2} pt={1}>
+              Tempo
+            </Badge>{" "}
+            Features
+          </Button>
+        )}
+      </>
     );
   }
   function FeaturesDisabled() {

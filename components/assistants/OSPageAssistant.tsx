@@ -302,13 +302,19 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
   return (
     <>
       <DarkMode>
-        <Button
-          leftIcon={<HiOutlinePlus />}
-          onClick={onOpen}
-          id="testingCOPATrigger"
-        >
-          Get Started
-        </Button>
+        {isOpen ? (
+          <Button leftIcon={<HiOutlinePlus />} isActive>
+            Get Started
+          </Button>
+        ) : (
+          <Button
+            leftIcon={<HiOutlinePlus />}
+            onClick={onOpen}
+            id="testingCOPATrigger"
+          >
+            Get Started
+          </Button>
+        )}
       </DarkMode>
       <Overlay
         isOpen={isOpen}

@@ -14,16 +14,7 @@ These preferences change how ULOSINO looks.
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | Use Advanced Search Link           | Changes the Browse link on the navigation bar to go to Advanced Search instead                                                               |
 | Show Back Button for Large Windows | Shows a back button on the navigation bar for large windows                                                                                  |
-| Invert Colours for this Tab        | Sets the current tab to use the colour mode that is the opposite of the OS setting. This doesn't persist between different tabs or sessions. |
-
-### Integrations
-
-Integration preferences connect ULOSINO with other web services and other applications on your computer.
-
-| Preference                 | Required Field                   | Behaviour                                                                           |
-| -------------------------- | -------------------------------- | ----------------------------------------------------------------------------------- |
-| Contributor Username       | GitHub username (without an `@`) | Adds a watermark with your username to pages made with the Create OS Page Assistant |
-| Custom Editing Application | A supported app URL scheme       | Sets a custom app to be used instead of the GitHub Web Editor for file editing      |
+| Invert Colours for this Session    | Sets the current tab to use the colour mode that is the opposite of the OS setting. This doesn't persist between different tabs or sessions. |
 
 ### Application
 
@@ -44,9 +35,7 @@ Preferences are stored according to the table below:
 | ---------------------------------- | ------------------------------- | ----------------- |
 | Use Advanced Search Link           | `P3PrefAdvancedSearchLink`      | Boolean           |
 | Show Back Button for Large Windows | `P3PrefBackButtonLargeWindows`  | Boolean           |
-| Invert Colours for this Tab        | `chakra-ui-color-mode`          | "light" or "dark" |
-| Contributor Username               | `P3PrefContributor`             | Text              |
-| Custom Editing Application         | `P3PrefFileEditorURL`           | Text (URL)        |
+| Invert Colours for this Session    | `chakra-ui-color-mode`          | `light` or `dark` |
 | Minimise In-App Notifications      | `P3PrefMinimiseNotifications`   | Boolean           |
 | Disable Tempo Features             | `P3PrefDisableDonationFeatures` | Boolean           |
 

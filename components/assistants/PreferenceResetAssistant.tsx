@@ -63,7 +63,15 @@ export default function PreferenceResetAssistant() {
 
   // Buttons to open the modal
   function ModalOpener() {
-    return <Button onClick={onOpen}>Use Default Preferences</Button>;
+    return (
+      <>
+        {isOpen ? (
+          <Button isActive>Use Default Preferences</Button>
+        ) : (
+          <Button onClick={onOpen}>Use Default Preferences</Button>
+        )}
+      </>
+    );
   }
   function ModalDisabled() {
     return <Button isDisabled>Use Default Preferences</Button>;

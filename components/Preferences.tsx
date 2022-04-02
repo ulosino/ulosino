@@ -61,7 +61,11 @@ export function AppearancePreferences() {
   const { toggleColorMode } = useColorMode();
   return (
     <Stack direction="column" spacing={5}>
-      <Stack direction="column" spacing={1}>
+      <Stack
+        direction="column"
+        spacing={1}
+        display={{ base: "none", sm: "flex" }}
+      >
         <Button
           onClick={(_) =>
             writeStorage(
@@ -84,7 +88,11 @@ export function AppearancePreferences() {
           )}
         </Text>
       </Stack>
-      <Stack direction="column" spacing={1}>
+      <Stack
+        direction="column"
+        spacing={1}
+        display={{ base: "none", sm: "flex" }}
+      >
         <Button
           onClick={(_) =>
             writeStorage(
@@ -108,7 +116,9 @@ export function AppearancePreferences() {
         </Text>
       </Stack>
       <Stack direction="column" spacing={1}>
-        <Button onClick={toggleColorMode}>Invert Colours for this Tab</Button>
+        <Button onClick={toggleColorMode}>
+          Invert Colours for this Session
+        </Button>
         <Stack direction="column" spacing={1}>
           {isWindows ? (
             ""
@@ -334,9 +344,17 @@ export default function Preferences({ isLayout }: Props) {
           )}
         </Center>
       ) : (
-        <Button leftIcon={<HiOutlineCog />} onClick={onOpen}>
-          Preferences
-        </Button>
+        <>
+          {isOpen ? (
+            <Button leftIcon={<HiOutlineCog />} isActive>
+              Preferences
+            </Button>
+          ) : (
+            <Button leftIcon={<HiOutlineCog />} onClick={onOpen}>
+              Preferences
+            </Button>
+          )}
+        </>
       )}
       <Overlay
         isOpen={isOpen}
