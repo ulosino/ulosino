@@ -6,12 +6,11 @@ To improve the reliability of the ULOSINO web app, we've bundled in some common 
 
 | IAE                      | Description                                                                                                  |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `PageIsError`            | Page is `/error `                                                                                            |
-| `PageNotInCache`         | The page is not available locally and downloading it from a remote server failed                             |
 | `ErrorRegionCaught`      | A defined region of the page returned a React Error Boundary (`<ErrorFallback>`)                             |
 | `ErrorInUndefinedRegion` | A React Error Boundary was returned in a DOM region not wrapped in a fallback (`<ErrorFallbackApplication>`) |
 | `BrowserNotPermitted`    | The browser being used to access ULOSINO isn't supported                                                     |
 | `FeatureIsDisabled`      | The feature has been manually disabled by the user (non-default behaviour)                                   |
+| `UpdateDelayed`          | The user selected not to install the latest version (the update will occur later in the background)          |
 
 ## Other Errors
 

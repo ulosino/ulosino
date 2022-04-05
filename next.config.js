@@ -5,7 +5,6 @@
 // Because it is parsed, we need to stick to classic JS syntax
 
 const withPWA = require("next-pwa");
-const runtimeCaching = require("next-pwa/cache");
 const path = require("path");
 
 // Content security options
@@ -30,9 +29,8 @@ module.exports = withPWA({
   pwa: {
     dest: "public",
     dynamicStartUrl: "false",
-    register: true,
-    skipWaiting: true,
-    runtimeCaching,
+    register: false,
+    skipWaiting: false,
     disable: process.env.NODE_ENV === "development",
   },
   // Configuration for Next.js

@@ -8,6 +8,8 @@
 import { ReactElement } from "react";
 
 // Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
@@ -17,6 +19,9 @@ import UITheme from "providers/UIThemeProvider";
 // First party components
 import { ErrorFallbackApplication } from "components/ErrorFallback";
 import { BrowserNotPermitted } from "components/BrowserNotPermitted";
+const UpdateProvider = dynamic(() => import("providers/UpdateProvider"), {
+  suspense: true,
+});
 
 // Keybinding libraries
 import {
@@ -85,30 +90,33 @@ export default function ApplicationProvider({
     <ChakraProvider theme={UITheme}>
       <ErrorFallbackApplication>
         <KeybindingProvider manager={manager}>
-          {browserBypass ? (
-            children
-          ) : (
-            // Check if the browser is permitted
-            <>
-              {isIE ? (
-                <BrowserNotPermitted browser="Internet Explorer" />
-              ) : (
-                <>
-                  {isLegacyEdge ? (
-                    <BrowserNotPermitted browser="Microsoft Edge Legacy" />
-                  ) : (
-                    <>
-                      {isYandex ? (
-                        <BrowserNotPermitted browser="Yandex Browser" />
-                      ) : (
-                        children
-                      )}
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          )}
+          <>
+            <UpdateProvider />
+            {browserBypass ? (
+              children
+            ) : (
+              // Check if the browser is permitted
+              <>
+                {isIE ? (
+                  <BrowserNotPermitted browser="Internet Explorer" />
+                ) : (
+                  <>
+                    {isLegacyEdge ? (
+                      <BrowserNotPermitted browser="Microsoft Edge Legacy" />
+                    ) : (
+                      <>
+                        {isYandex ? (
+                          <BrowserNotPermitted browser="Yandex Browser" />
+                        ) : (
+                          children
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </>
         </KeybindingProvider>
       </ErrorFallbackApplication>
     </ChakraProvider>

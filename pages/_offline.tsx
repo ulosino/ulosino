@@ -17,9 +17,6 @@ import ErrorLayout from "components/layouts/ErrorLayout";
 
 // Begin page
 export default function OfflineFallback() {
-  console.warn(
-    "Integrated Application Error: PageNotInCache (Reference ULOSINO 3.x.x documentation)"
-  );
   return (
     <>
       <Head>
