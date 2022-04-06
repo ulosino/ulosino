@@ -8,6 +8,8 @@
 import { ReactElement } from "react";
 
 // Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
@@ -17,6 +19,9 @@ import UITheme from "providers/UIThemeProvider";
 // First party components
 import { ErrorFallbackApplication } from "components/ErrorFallback";
 import { BrowserNotPermitted } from "components/BrowserNotPermitted";
+const UpdateProvider = dynamic(() => import("providers/UpdateProvider"), {
+  suspense: true,
+});
 
 // Keybinding libraries
 import {
@@ -26,7 +31,13 @@ import {
 const manager = new KeybindingManager();
 
 import { useEffect } from "react";
-import { isWindows, isIE, isLegacyEdge, isYandex } from "react-device-detect";
+import {
+  isWindows,
+  isIE,
+  isLegacyEdge,
+  isYandex,
+  isChrome,
+} from "react-device-detect";
 
 // This function dumps deployment environment variables to the browser console
 function DumpDeploymentDetails() {
@@ -81,34 +92,55 @@ export default function ApplicationProvider({
         [manager, DumpDeploymentDetails];
     }
   });
+
+  // Test PWA API support
+  // This is only supported by Chromium-based browsers
+  if (isChrome) {
+    useEffect(() => {
+      // getInstalledRelatedApps() is not typed yet
+      // @ts-ignore
+      const isPWA = navigator.getInstalledRelatedApps();
+      // This will be replaced with a LocalStorage entry ("P3PWARuntime")
+      if (isPWA) {
+        console.debug(
+          "This is a test API response indicating that the PWA is installed"
+        );
+      }
+    });
+  }
+
   return (
     <ChakraProvider theme={UITheme}>
       <ErrorFallbackApplication>
         <KeybindingProvider manager={manager}>
-          {browserBypass ? (
-            children
-          ) : (
-            // Check if the browser is permitted
-            <>
-              {isIE ? (
-                <BrowserNotPermitted browser="Internet Explorer" />
-              ) : (
-                <>
-                  {isLegacyEdge ? (
-                    <BrowserNotPermitted browser="Microsoft Edge Legacy" />
-                  ) : (
-                    <>
-                      {isYandex ? (
-                        <BrowserNotPermitted browser="Yandex Browser" />
-                      ) : (
-                        children
-                      )}
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          )}
+          <>
+            {/* Excluding UpdateProvider will break PWA functionality */}
+            <UpdateProvider />
+            {browserBypass ? (
+              children
+            ) : (
+              // Check if the browser is permitted
+              <>
+                {isIE ? (
+                  <BrowserNotPermitted browser="Internet Explorer" />
+                ) : (
+                  <>
+                    {isLegacyEdge ? (
+                      <BrowserNotPermitted browser="Microsoft Edge Legacy" />
+                    ) : (
+                      <>
+                        {isYandex ? (
+                          <BrowserNotPermitted browser="Yandex Browser" />
+                        ) : (
+                          children
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </>
         </KeybindingProvider>
       </ErrorFallbackApplication>
     </ChakraProvider>

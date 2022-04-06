@@ -20,9 +20,6 @@ import ErrorLayout from "components/layouts/ErrorLayout";
 
 // Begin page
 export default function ErrorPage() {
-  console.warn(
-    "Integrated Application Error: PageIsError (Reference ULOSINO 3.x.x documentation)"
-  );
   return (
     <>
       <Head>

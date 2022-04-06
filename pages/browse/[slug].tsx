@@ -63,7 +63,6 @@ export default function OSPage({
 }: OSPageTypes) {
   // Get preferences
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
-  const [customEditor] = useLocalStorage("P3PrefFileEditorURL");
 
   // Keybindings
   const manager = useHotkeyManager();
@@ -103,30 +102,6 @@ export default function OSPage({
             callback: () =>
               window.open(source.frontmatter.repository, "_blank") ||
               window.location.replace(source.frontmatter.repository),
-          }),
-        [manager, window];
-    }
-  });
-  useEffect(() => {
-    {
-      source.frontmatter.donate && isWindows
-        ? manager.registerHotkey({
-            key: "D",
-            ctrl: false,
-            shift: false,
-            alt: true,
-            callback: () =>
-              window.open(source.frontmatter.donate, "_blank") ||
-              window.location.replace(source.frontmatter.donate),
-          })
-        : manager.registerHotkey({
-            key: "D",
-            ctrl: true,
-            shift: false,
-            alt: false,
-            callback: () =>
-              window.open(source.frontmatter.donate, "_blank") ||
-              window.location.replace(source.frontmatter.donate),
           }),
         [manager, window];
     }
@@ -295,24 +270,16 @@ export default function OSPage({
                   )}
                 </Tbody>
               </Table>
-              {customEditor ? (
-                <Link href={customEditor} passHref>
-                  <Button leftIcon={<HiOutlinePencil />} as="a" size="sm">
-                    Edit with Custom Editor
-                  </Button>
-                </Link>
-              ) : (
-                <Link href={contributionPath} passHref>
-                  <Button
-                    leftIcon={<HiOutlinePencil />}
-                    size="sm"
-                    as="a"
-                    id="testingOSPageEditLink"
-                  >
-                    View on GitHub
-                  </Button>
-                </Link>
-              )}
+              <Link href={contributionPath} passHref>
+                <Button
+                  leftIcon={<HiOutlinePencil />}
+                  size="sm"
+                  as="a"
+                  id="testingOSPageEditLink"
+                >
+                  View on GitHub
+                </Button>
+              </Link>
             </Stack>
           </ErrorFallback>
         </Stack>

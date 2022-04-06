@@ -7,6 +7,9 @@
 import type { ReactElement } from "react";
 
 // Suspense and performance
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { LoadingServer } from "components/Loading";
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Links and routing
@@ -29,11 +32,14 @@ import {
   DarkMode,
 } from "@chakra-ui/react";
 import { HiOutlineMenu } from "react-icons/hi";
+import { VercelLogo } from "components/VercelPromotion";
 
 // First-party components
 import Logo from "components/Logo";
 import HeaderBackButton from "components/HeaderBackButton";
-
+const Preferences = dynamic(() => import("components/Preferences"), {
+  suspense: true,
+});
 // Keybinding libraries
 import { useEffect } from "react";
 import { useHotkeyManager } from "providers/KeybindingProvider";
@@ -59,6 +65,7 @@ export default function Layout({
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
+  const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
 
   // Global keybindings
@@ -161,6 +168,7 @@ export default function Layout({
         [manager, window];
     }
   });
+
   // Session preference keybindings
   useEffect(() => {
     {
@@ -232,7 +240,7 @@ export default function Layout({
         [manager, backButton];
     }
   });
-
+  const vercelLogoColour = useColorModeValue("black", "white");
   return (
     <Flex
       display="flex"
@@ -240,153 +248,171 @@ export default function Layout({
       direction="column"
       bg={useColorModeValue("gray.50", "inherit")}
     >
-      {minimiseNotifications ? (
-        ""
-      ) : (
-        <>
-          {ukraineAidBanner ? (
-            ""
-          ) : (
-            <Flex
-              bg="secondary"
-              color="white"
-              py={2}
-              display={{ base: "none", md: "flex" }}
-            >
-              <DarkMode>
-                <Container maxW="container.lg">
-                  <Flex>
-                    <Stack direction="row" spacing={5}>
+      <Suspense fallback={<LoadingServer />}>
+        {minimiseNotifications ? (
+          ""
+        ) : (
+          <>
+            {ukraineAidBanner ? (
+              ""
+            ) : (
+              <Flex
+                bg="secondary"
+                color="white"
+                py={2}
+                mb={4}
+                display={{ base: "none", md: "flex" }}
+              >
+                <DarkMode>
+                  <Container maxW="container.lg">
+                    <Flex>
+                      <Stack direction="row" spacing={5}>
+                        <Center>
+                          <Stack direction="column" spacing={0}>
+                            <Flex bg="blue" w={8} h={2} roundedTop="sm" />
+                            <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
+                          </Stack>
+                        </Center>
+                        <Center>
+                          <Text textStyle="miniHeading" as="h6">
+                            Donate to UNICEF
+                          </Text>
+                        </Center>
+                        <Center>
+                          <Text fontSize="sm">Help children in Ukraine.</Text>
+                        </Center>
+                        <Center>
+                          <Link
+                            href="https://help.unicef.org/ukraine-emergency"
+                            passHref
+                          >
+                            <Button size="sm" as="a">
+                              Get Started
+                            </Button>
+                          </Link>
+                        </Center>
+                      </Stack>
+                      <Spacer />
                       <Center>
-                        <Stack direction="column" spacing={0}>
-                          <Flex bg="blue" w={8} h={2} roundedTop="sm" />
-                          <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
-                        </Stack>
+                        <Button size="sm" onClick={setUkraineAidBanner.toggle}>
+                          Not Now
+                        </Button>
                       </Center>
-                      <Center>
-                        <Text textStyle="miniHeading" as="h6">
-                          Donate to UNICEF
-                        </Text>
-                      </Center>
-                      <Center>
-                        <Text fontSize="sm">Help children in Ukraine.</Text>
-                      </Center>
-                      <Center>
-                        <Link
-                          href="https://help.unicef.org/ukraine-emergency"
-                          passHref
-                        >
-                          <Button size="sm" as="a">
-                            Get Started
-                          </Button>
-                        </Link>
-                      </Center>
-                    </Stack>
-                    <Spacer />
-                    <Center>
-                      <Button size="sm" onClick={setUkraineAidBanner.toggle}>
-                        Not Now
-                      </Button>
-                    </Center>
-                  </Flex>
-                </Container>
-              </DarkMode>
-            </Flex>
-          )}
-        </>
-      )}
-      <Container maxW="container.lg" as="header">
-        <Flex mt={4} mb={10}>
-          <Center
-            display={{ base: "flex", sm: "none" }}
-            id="testingHeaderBackButtonMobile"
-          >
-            <HeaderBackButton />
-          </Center>
-          {backButton ? (
+                    </Flex>
+                  </Container>
+                </DarkMode>
+              </Flex>
+            )}
+          </>
+        )}
+        <Container maxW="container.lg" as="header">
+          <Flex mt={4} mb={10}>
             <Center
-              display={{ base: "none", sm: "flex" }}
-              id="testing-headerBackButtonDesktop"
+              display={{ base: "flex", sm: "none" }}
+              id="testingHeaderBackButtonMobile"
             >
               <HeaderBackButton />
             </Center>
-          ) : (
-            ""
-          )}
-          <Link href="/" passHref>
-            <Center
-              bg="secondary"
-              rounded="2xl"
-              shadow="md"
-              p={3}
-              cursor="pointer"
-              as="a"
-              aria-label="Go Home"
-              title="Go Home"
-              id="testingHeaderLogoLink"
-            >
-              <Logo />
-            </Center>
-          </Link>
-          {useBasicLayout ? (
-            ""
-          ) : (
-            <Center
-              display={{ base: "none", sm: "flex" }}
-              as="nav"
-              id="testingHeaderLinks"
-            >
-              <Stack direction="row" spacing={2} mx={10}>
-                <Link href="/" passHref>
-                  <Button variant="ghost" as="a">
-                    Home
-                  </Button>
-                </Link>
-                {advancedSearch ? (
-                  <Link href="/search" passHref>
-                    <Button
-                      variant="ghost"
-                      as="a"
-                      id="testing-headerSearchLink"
-                    >
-                      Advanced Search
-                    </Button>
-                  </Link>
-                ) : (
-                  <Link href="/browse" passHref>
-                    <Button
-                      variant="ghost"
-                      as="a"
-                      id="testing-headerBrowseLink"
-                    >
-                      Browse
-                    </Button>
-                  </Link>
-                )}
-                <Link href="/about" passHref>
-                  <Button variant="ghost" as="a">
-                    About
-                  </Button>
-                </Link>
-              </Stack>
-            </Center>
-          )}
-
-          <Spacer />
-          <Center display={{ base: "flex", sm: "none" }}>
-            <Link href="/menu" passHref>
-              <IconButton
-                icon={<HiOutlineMenu />}
-                variant="ghost"
+            {backButton ? (
+              <Center
+                display={{ base: "none", sm: "flex" }}
+                id="testingHeaderBackButtonDesktop"
+              >
+                <HeaderBackButton />
+              </Center>
+            ) : (
+              ""
+            )}
+            <Link href="/" passHref>
+              <Center
+                bg="secondary"
+                rounded="2xl"
+                shadow="md"
+                p={3}
+                cursor="pointer"
                 as="a"
-                aria-label="Open Menu and preferences"
-                title="Open Menu"
-                id="testingHeaderMenuLink"
-              />
+                aria-label="Go Home"
+                title="Go Home"
+                id="testingHeaderLogoLink"
+              >
+                <Logo />
+              </Center>
             </Link>
-          </Center>
-        </Flex>
-      </Container>
+            {useBasicLayout ? (
+              ""
+            ) : (
+              <Center
+                display={{ base: "none", sm: "flex" }}
+                as="nav"
+                id="testingHeaderLinks"
+              >
+                <Stack direction="row" spacing={2} mx={10}>
+                  <Link href="/" passHref>
+                    <Button variant="ghost" as="a">
+                      Home
+                    </Button>
+                  </Link>
+                  {advancedSearch ? (
+                    <>
+                      <Link href="/search" passHref>
+                        <Button
+                          variant="ghost"
+                          as="a"
+                          id="testingHeaderSearchLink"
+                          display={{ base: "none", md: "flex" }}
+                        >
+                          Advanced Search
+                        </Button>
+                      </Link>
+                      <Link href="/search" passHref>
+                        <Button
+                          variant="ghost"
+                          as="a"
+                          id="testingHeaderSearchLink"
+                          display={{ base: "none", sm: "flex", md: "none" }}
+                        >
+                          Search
+                        </Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <Link href="/browse" passHref>
+                      <Button
+                        variant="ghost"
+                        as="a"
+                        id="testingHeaderBrowseLink"
+                      >
+                        Browse
+                      </Button>
+                    </Link>
+                  )}
+                  <Link href="/about" passHref>
+                    <Button variant="ghost" as="a">
+                      About
+                    </Button>
+                  </Link>
+                </Stack>
+              </Center>
+            )}
+            <Spacer />
+            <Suspense fallback={<LoadingServer />}>
+              <Preferences isLayout={true} />
+            </Suspense>
+            <Center display={{ base: "flex", sm: "none" }}>
+              <Link href="/menu" passHref>
+                <IconButton
+                  icon={<HiOutlineMenu />}
+                  variant="ghost"
+                  as="a"
+                  aria-label="Open Menu and preferences"
+                  title="Open Menu"
+                  id="testingHeaderMenuLink"
+                />
+              </Link>
+            </Center>
+          </Flex>
+        </Container>
+      </Suspense>
       <Container maxW="container.lg" flex={1} as="main">
         {children}
       </Container>
@@ -431,7 +457,7 @@ export default function Layout({
                     )
                   }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBackButtonDesktopSwitch"
+                  id="testingFooterBackButtonDesktopSwitch"
                 >
                   {backButton ? "Hide" : "Show"} Back
                 </Button>
@@ -444,7 +470,7 @@ export default function Layout({
                     )
                   }
                   display={{ base: "none", md: "inline-block" }}
-                  id="testing-footerBrowseButtonSwitch"
+                  id="testingFooterAdvancedSearchLinkSwitch"
                 >
                   Prefer {advancedSearch ? "Browse" : "Search"}
                 </Button>
@@ -455,6 +481,30 @@ export default function Layout({
           </Stack>
           <Spacer />
           <Stack direction="row" spacing={2} id="testingLegalLinks">
+            <Suspense fallback={<LoadingServer />}>
+              {dangerousRuntime ? (
+                ""
+              ) : (
+                <Center display={{ base: "block", sm: "none", md: "block" }}>
+                  <Link href="https://vercel.com/home" passHref>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      as="a"
+                      title="Powered by Vercel"
+                      aria-label="Powered by Vercel"
+                    >
+                      <Stack direction="row" spacing={2}>
+                        <Text>Powered by</Text>
+                        <Center>
+                          <VercelLogo fill={vercelLogoColour} />
+                        </Center>
+                      </Stack>
+                    </Button>
+                  </Link>
+                </Center>
+              )}
+            </Suspense>
             <Link href="/about/license" passHref>
               <Button variant="ghost" size="sm" as="a" id="testingLicenseLink">
                 License
