@@ -24,6 +24,8 @@ export function DeletePreferences() {
     "All preferences in LocalStorage have been cleared - using default settings"
   );
 }
+
+// Begin component
 export default function PreferenceResetAssistant() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = useRef();

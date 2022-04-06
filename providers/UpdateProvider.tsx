@@ -24,12 +24,15 @@ import {
 import Overlay from "components/Overlay";
 
 import { useEffect, useRef } from "react";
+import UpdateOnboarding from "components/confirmations/UpdateOnboarding";
 
+// Begin component
 export default function UpdateProvider() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = useRef();
 
-  const [updatePreference] = useLocalStorage("P3PrefUpdateNow");
+  const [updatePreference] = useLocalStorage("P3TriggerUpdate");
+  const [awaitOnboarding] = useLocalStorage("P3AwaitUpdateFinish");
   const [installing, setInstalling] = useBoolean();
 
   useEffect(() => {
@@ -62,13 +65,15 @@ export default function UpdateProvider() {
         onOpen();
         if (updatePreference) {
           setInstalling.on();
-          deleteFromStorage("P3PrefUpdateNow");
+          deleteFromStorage("P3TriggerUpdate");
 
           wb.addEventListener("controlling", (event: any) => {
             window.location.reload();
           });
 
           wb.messageSkipWaiting();
+
+          writeStorage("P3AwaitUpdateFinish", awaitOnboarding ? false : true);
         }
       };
 
@@ -78,6 +83,10 @@ export default function UpdateProvider() {
     }
   }),
     [updatePreference, onOpen];
+
+  if (awaitOnboarding) {
+    return <UpdateOnboarding />;
+  }
 
   function ModalBody() {
     return (
@@ -90,7 +99,7 @@ export default function UpdateProvider() {
   }
 
   function ModalClose() {
-    deleteFromStorage("P3PrefUpdateNow");
+    deleteFromStorage("P3TriggerUpdate");
     onClose();
   }
 
@@ -110,7 +119,7 @@ export default function UpdateProvider() {
             colorScheme="green"
             ms={2}
             onClick={(_) =>
-              writeStorage("P3PrefUpdateNow", updatePreference ? false : true)
+              writeStorage("P3TriggerUpdate", updatePreference ? false : true)
             }
           >
             Continue &amp; Update

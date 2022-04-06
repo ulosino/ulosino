@@ -14,6 +14,7 @@ import Overlay from "components/Overlay";
 
 import { useRef } from "react";
 
+// Begin component
 export default function DisableDonationFeaturesConfirmation() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = useRef();

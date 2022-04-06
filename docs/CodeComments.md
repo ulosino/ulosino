@@ -24,15 +24,15 @@ This document describes a standard collection of code comments.
 ### Next.js imports
 
 ```
+// Suspense and performance
+```
+
+```
 // Links and routing
 ```
 
 ```
 // Head and SEO
-```
-
-```
-// Dynamic loading
 ```
 
 ### Others
@@ -62,7 +62,7 @@ This document describes a standard collection of code comments.
 ### Pages
 
 ```
-// Begin component
+// Begin component(s)
 ```
 
 ```

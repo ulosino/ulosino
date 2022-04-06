@@ -30,7 +30,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
-interface OverlayProps {
+interface OverlayPropsDrawerOnly {
   header: string;
   body: ReactElement;
   footer: ReactElement;
@@ -39,7 +39,7 @@ interface OverlayProps {
   onClose: () => void;
 }
 
-interface OverlayPropsExtended {
+interface OverlayProps {
   header: string;
   body: ReactElement;
   footer: ReactElement;
@@ -49,7 +49,7 @@ interface OverlayPropsExtended {
   useAlertDialog: boolean;
 }
 
-// Begin components
+// Begin component
 export function OverlayModal({
   header,
   body,
@@ -58,7 +58,7 @@ export function OverlayModal({
   isOpen,
   onClose,
   useAlertDialog,
-}: OverlayPropsExtended): ReactElement {
+}: OverlayProps): ReactElement {
   return (
     <>
       {useAlertDialog ? (
@@ -105,7 +105,7 @@ export function OverlayDrawer({
   cancelRef,
   isOpen,
   onClose,
-}: OverlayProps): ReactElement {
+}: OverlayPropsDrawerOnly): ReactElement {
   return (
     <Drawer
       isOpen={isOpen}
@@ -131,7 +131,7 @@ export default function Overlay({
   isOpen,
   onClose,
   useAlertDialog,
-}: OverlayPropsExtended) {
+}: OverlayProps) {
   const overlayStyle = useBreakpointValue({
     base: (
       <OverlayDrawer

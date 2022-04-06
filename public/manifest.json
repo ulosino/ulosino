@@ -1,7 +1,7 @@
 {
   "short_name": "ULOSINO",
   "name": "ULOSINO",
-  "description": "Open source operating system information",
+  "description": "Open Source Operating System Information",
   "id": "/",
   "start_url": "/",
   "scope": "/",
@@ -32,6 +32,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://www.ulosino.com/manifest.json"
     }
   ]
 }

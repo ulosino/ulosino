@@ -32,7 +32,7 @@ const OSPageAssistant = dynamic(
   }
 );
 
-// Begin components
+// Begin component
 export function OSPageAssistantHero() {
   return (
     <Card variant="secondary">
