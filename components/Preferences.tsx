@@ -133,6 +133,29 @@ export function AppearancePreferences() {
   );
 }
 
+// Browse preferences
+export function BrowsePreferences() {
+  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
+  return (
+    <Stack direction="column" spacing={5}>
+      <Stack direction="column" spacing={2}>
+        <Button isDisabled>Sort by Date</Button>
+        <Text fontSize="xs" lineHeight="shorter">
+          Sort the Operating System List with the newest first.
+        </Text>
+      </Stack>
+      <Stack direction="column" spacing={2}>
+        <Suspense fallback={<LoadingServerButton />}>
+          <DisableDonationFeaturesConfirmation />
+        </Suspense>
+        <Text fontSize="xs" lineHeight="shorter">
+          {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo.
+        </Text>
+      </Stack>
+    </Stack>
+  );
+}
+
 // Application preferences
 export function ApplicationPreferences() {
   const [minimiseNotifications] = useLocalStorage(
@@ -158,19 +181,32 @@ export function ApplicationPreferences() {
         </Text>
       </Stack>
       <Stack direction="column" spacing={2}>
-        <Suspense fallback={<LoadingServerButton />}>
-          <DisableDonationFeaturesConfirmation />
-        </Suspense>
+        <Button isDisabled>Disable Background Update Services</Button>
         <Text fontSize="xs" lineHeight="shorter">
-          {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo.
+          Disable automatically checking for application updates in the
+          background.
         </Text>
       </Stack>
+    </Stack>
+  );
+}
+
+// Application preferences
+export function AboutApplication() {
+  return (
+    <Stack direction="column" spacing={5}>
       <Stack direction="column" spacing={2}>
         <Suspense fallback={<LoadingServerButton />}>
           <PreferenceResetAssistant />
         </Suspense>
         <Text fontSize="xs" lineHeight="shorter">
           Restore default preferences for all sessions.
+        </Text>
+      </Stack>
+      <Stack direction="column" spacing={2}>
+        <Button isDisabled>Open Troubleshooter</Button>
+        <Text fontSize="xs" lineHeight="shorter">
+          Let the app attempt to find solutions to common issues.
         </Text>
       </Stack>
     </Stack>
@@ -186,10 +222,22 @@ const tabData = [
     content: <AppearancePreferences />,
   },
   {
-    label: "Application",
+    label: "OSs & Editing",
+    description: "Change the app icon.",
+    icon: <HiOutlineTemplate />,
+    content: <BrowsePreferences />,
+  },
+  {
+    label: "Advanced",
     description: "Change application behaviours and settings.",
     icon: <HiOutlineCog />,
     content: <ApplicationPreferences />,
+  },
+  {
+    label: "About",
+    description: "Information about the ULOSINO app.",
+    icon: <HiOutlineCog />,
+    content: <AboutApplication />,
   },
 ];
 

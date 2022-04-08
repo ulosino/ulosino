@@ -32,6 +32,7 @@ export default function UpdateProvider() {
   const cancelRef: any = useRef();
 
   const [updatePreference] = useLocalStorage("P3TriggerUpdate");
+  const [delayUpdate] = useLocalStorage("P3DelayUpdate");
   const [awaitOnboarding] = useLocalStorage("P3AwaitUpdateFinish");
   const [installing, setInstalling] = useBoolean();
 
@@ -72,8 +73,6 @@ export default function UpdateProvider() {
           });
 
           wb.messageSkipWaiting();
-
-          writeStorage("P3AwaitUpdateFinish", awaitOnboarding ? false : true);
         }
       };
 
@@ -84,9 +83,9 @@ export default function UpdateProvider() {
   }),
     [updatePreference, onOpen];
 
-  if (awaitOnboarding) {
-    return <UpdateOnboarding />;
-  }
+  // if (awaitOnboarding) {
+  //   return <UpdateOnboarding />;
+  // }
 
   function ModalBody() {
     return (
@@ -99,7 +98,7 @@ export default function UpdateProvider() {
   }
 
   function ModalClose() {
-    deleteFromStorage("P3TriggerUpdate");
+    writeStorage("P3TriggerUpdate", false);
     onClose();
   }
 
