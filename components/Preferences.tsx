@@ -203,12 +203,6 @@ export function AboutApplication() {
           Restore default preferences for all sessions.
         </Text>
       </Stack>
-      <Stack direction="column" spacing={2}>
-        <Button isDisabled>Open Troubleshooter</Button>
-        <Text fontSize="xs" lineHeight="shorter">
-          Let the app attempt to find solutions to common issues.
-        </Text>
-      </Stack>
     </Stack>
   );
 }
@@ -259,7 +253,7 @@ export default function Preferences({ isLayout }: Props) {
   // It has a sidebar with the Button containing the label
   // It has a content area with the content of the tabData
   // The Buttons on the menu can be clicked to switch between content areas
-  const PreferencesBodySmallWindows = () => {
+  function PreferencesBodySmallWindows() {
     return (
       <>
         {preferenceView ? (
@@ -299,7 +293,7 @@ export default function Preferences({ isLayout }: Props) {
         )}
       </>
     );
-  };
+  }
 
   function PreferencesBodyLargeWindows() {
     return (

@@ -19,6 +19,7 @@ export function DeletePreferences() {
   deleteFromStorage("P3PrefBackButtonLargeWindows");
   deleteFromStorage("P3PrefMinimiseNotifications");
   deleteFromStorage("P3PrefDisableDonationFeatures");
+  deleteFromStorage("P3PrefDisableBackgroundUpdates");
   deleteFromStorage("P3PrefDangerousRuntime");
   console.info(
     "All preferences in LocalStorage have been cleared - using default settings"
@@ -37,6 +38,7 @@ export default function PreferenceResetAssistant() {
     "P3PrefMinimiseNotifications"
   );
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
+  const [backgroundUpdate] = useLocalStorage("P3PrefDisableBackgroundUpdates");
   const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
 
   // Here we check to see if all of the preferences equal null
@@ -52,6 +54,9 @@ export default function PreferenceResetAssistant() {
           return <ModalOpener />;
         } else {
           if (donationFeatures) {
+            return <ModalOpener />;
+          }
+          if (backgroundUpdate) {
             return <ModalOpener />;
           } else {
             if (dangerousRuntime) {

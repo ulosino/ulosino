@@ -31,7 +31,7 @@ import {
   useColorModeValue,
   DarkMode,
 } from "@chakra-ui/react";
-import { HiOutlineMenu } from "react-icons/hi";
+import { HiOutlineCog, HiOutlineMenu } from "react-icons/hi";
 import { VercelLogo } from "components/VercelPromotion";
 
 // First-party components
@@ -395,9 +395,13 @@ export default function Layout({
               </Center>
             )}
             <Spacer />
-            <Suspense fallback={<LoadingServer />}>
-              <Preferences isLayout={true} />
-            </Suspense>
+            <Link href="/preferences/appearance" passHref>
+              <IconButton
+                icon={<HiOutlineCog />}
+                aria-label="Preferences"
+                title="Preferences"
+              />
+            </Link>
             <Center display={{ base: "flex", sm: "none" }}>
               <Link href="/menu" passHref>
                 <IconButton
