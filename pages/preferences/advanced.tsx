@@ -31,6 +31,7 @@ import {
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
+import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 import { ErrorFallback } from "components/ErrorFallback";
 const DisableDonationFeaturesConfirmation = dynamic(
   () => import("components/confirmations/DisableDonationFeaturesConfirmation"),
@@ -85,6 +86,9 @@ export default function AdvancedPreferences() {
       <Stack direction="column" spacing={5}>
         <Heading size="xl">{pageName}</Heading>
         <Text>Change advanced application settings.</Text>
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
         <Stack direction="column" spacing={5}>
           <Stack direction="column" spacing={2}>
             <Suspense fallback={<LoadingServerButton />}>

@@ -1,8 +1,8 @@
 # The ULOSINO Architecture
 
-At ULOSINO, we value the speed, appearance, safety, and architectural integrity of our web app. At it's very core, ULOSINO is a Next.js application with a Progressive Web App implementation. The Next.js framework uses React under the hood and has been developed by the web's frontiers, including Vercel, Google, and Facebook. ULOSINO is powered by Vercel and their premium CDN and Edge solutions. The combination of Next.js and Vercel leads to great experiences for our international customer base.
+At ULOSINO, we value the speed, appearance, safety, and architectural integrity of our web app. At it's very core, ULOSINO is a Next.js application with a Progressive Web App implementation. The Next.js framework uses React under the hood and has been developed by the web's frontiers, including Vercel, Google, and Facebook. ULOSINO is powered by Vercel and is therefore on the Edge. The combination of Next.js and Vercel leads to great experiences for our customers across the world.
 
-This document is a low-level overview of the ULOSINO architecture.
+This document is an overview of the ULOSINO architecture.
 
 ## File Types
 

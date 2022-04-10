@@ -53,10 +53,15 @@ export default function PreferenceTransferAssistant() {
   const handleDisablesInputChange = (event: any) =>
     setImportDisablesNumber(event.target.value);
 
-  // Test if the user has entered the correct pin
   const [appearanceNumber, setAppearanceNumber] = useState("0");
   const [verbosityNumber, setVerbosityNumber] = useState("0");
   const [disablesNumber, setDisablesNumber] = useState("0");
+
+  function EraseInput() {
+    setImportAppearanceNumber("");
+    setImportVerbosityNumber("");
+    setImportDisablesNumber("");
+  }
 
   function Open() {
     // Generate the current preference code
@@ -132,9 +137,16 @@ export default function PreferenceTransferAssistant() {
       writeStorage("P3PrefDisableBackgroundUpdates", true);
     }
 
-    setImportAppearanceNumber("");
-    setImportVerbosityNumber("");
-    setImportDisablesNumber("");
+    // Erase the New Preference Code
+    EraseInput();
+
+    // Close the modal
+    onClose();
+  }
+
+  function Close() {
+    // Erase the New Preference Code
+    EraseInput();
 
     // Close the modal
     onClose();
@@ -203,7 +215,7 @@ export default function PreferenceTransferAssistant() {
         </Stack>
         <Spacer />
         <Stack direction="row" spacing={2}>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={Close}>Cancel</Button>
           {importAppearanceNumber ? (
             <Button onClick={Save}>Continue &amp; Save</Button>
           ) : (

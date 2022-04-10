@@ -17,6 +17,7 @@ import { HiOutlineTemplate, HiOutlineBell, HiOutlineCog } from "react-icons/hi";
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
+import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 
 // Begin page
 export default function PreferencesList() {
@@ -31,6 +32,9 @@ export default function PreferencesList() {
 
       <Stack direction="column" spacing={5}>
         <Heading size="xl">Preferences</Heading>
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
         <Stack direction="column" spacing={2}>
           <Link href="/preferences/appearance" passHref>
             <Button as="a" leftIcon={<HiOutlineTemplate />}>

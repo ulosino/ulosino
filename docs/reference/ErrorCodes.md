@@ -1,8 +1,8 @@
-# ULOSINO Error Handling
+# Error Reference
 
 ## Integrated Application Errors (IAEs)
 
-To improve the reliability of the ULOSINO web app, we've bundled in some common errors in the form of Integrated Application Errors. Some of these are only shown in the browser console.
+ULOSINO handles common errors using Integrated Application Errors. Some of these are only shown in the browser console.
 
 | IAE                      | Description                                                                                                  |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------ |
@@ -10,7 +10,6 @@ To improve the reliability of the ULOSINO web app, we've bundled in some common 
 | `ErrorInUndefinedRegion` | A React Error Boundary was returned in a DOM region not wrapped in a fallback (`<ErrorFallbackApplication>`) |
 | `BrowserNotPermitted`    | The browser being used to access ULOSINO isn't supported                                                     |
 | `FeatureIsDisabled`      | The feature has been manually disabled by the user (non-default behaviour)                                   |
-| `UpdateDelayed`          | The user selected not to install the latest version (the update will occur later in the background)          |
 
 ## Other Errors
 
@@ -21,6 +20,4 @@ We've built custom fallbacks for these HTTP error codes:
 | `HTTP 404`  | Not found    |
 | `HTTP 500`  | Server error |
 
-## For Developers
-
-We have included details how our error fallbacks work in the Architecture document of our documentation.
+We've also built a custom fallback when the browser is offline.

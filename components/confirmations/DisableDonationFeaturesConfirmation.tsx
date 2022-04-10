@@ -85,7 +85,7 @@ export default function DisableDonationFeaturesConfirmation() {
       <Stack direction="column" spacing={5}>
         <Text>
           All donation features, including links to external financial services,
-          won't work until you restore default preferences.
+          will be disabled.
         </Text>
       </Stack>
     );

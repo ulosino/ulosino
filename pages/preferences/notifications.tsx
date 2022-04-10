@@ -27,6 +27,7 @@ import {
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
+import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 
 // Begin page
 export default function NotificationPreferences() {
@@ -51,7 +52,9 @@ export default function NotificationPreferences() {
       <Stack direction="column" spacing={5}>
         <Heading size="xl">{pageName}</Heading>
         <Text>Manage notifications and application verbosity.</Text>
-
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
         <Stack direction="column" spacing={5}>
           <Stack direction="column" spacing={2}>
             <Button

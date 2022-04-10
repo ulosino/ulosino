@@ -27,6 +27,7 @@ import {
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
+import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 
 import { isWindows } from "react-device-detect";
 
@@ -57,6 +58,9 @@ export default function AppearancePreferences() {
       <Stack direction="column" spacing={5}>
         <Heading size="xl">{pageName}</Heading>
         <Text>Change the appearance of ULOSINO.</Text>
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
         <Stack direction="column" spacing={5}>
           <Stack
             direction="column"

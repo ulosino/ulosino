@@ -8,7 +8,6 @@ import type { ReactElement } from "react";
 
 // Suspense and performance
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import { LoadingServer } from "components/Loading";
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
@@ -419,6 +418,7 @@ export default function Layout({
                   icon={<HiOutlineCog />}
                   aria-label="Preferences"
                   title="Preferences"
+                  as="a"
                 />
               </Link>
             </Center>
