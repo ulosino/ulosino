@@ -12,8 +12,13 @@ import Link from "next/link";
 import { Stack, Heading, Text, Code } from "@chakra-ui/react";
 
 // Search libraries
-import SearchWrapper from "./SearchWrapper";
-import { AutoCompleteItem } from "@choc-ui/chakra-autocomplete";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
+import EmptyState from "components/search/EmptyState";
 
 interface DataTypes {
   data: any;
@@ -34,82 +39,100 @@ export default function AdvancedSearchGroup({ data }: DataTypes) {
   return (
     <>
       {/* Derived OS */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Derived OS..."
-        inputId="testingSearchInputDerivedOS"
-      >
-        {data.map(({ slug, name, descends }: AdvancedMetadataTypes) => (
-          <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-            <AutoCompleteItem
-              value={descends}
-              key={`option-${descends}`}
-              textDecoration="none"
-              p={4}
-              mb={2}
-              as="a"
-              id="testingSearchOutputItemDerivedOS"
-            >
-              <Stack direction="column" spacing={0}>
-                <Heading size="md">{name}</Heading>
-                <Text fontSize="xs">A derivative of {descends}</Text>
-              </Stack>
-            </AutoCompleteItem>
-          </Link>
-        ))}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Derived OS..."
+          id="testingSearchInputDerivedOS"
+        />
+        <AutoCompleteList>
+          {data.map(({ slug, name, descends }: AdvancedMetadataTypes) => (
+            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+              <AutoCompleteItem
+                value={descends}
+                key={`option-${descends}`}
+                textDecoration="none"
+                p={4}
+                mb={2}
+                as="a"
+                id="testingSearchOutputItemDerivedOS"
+              >
+                <Stack direction="column" spacing={0}>
+                  <Heading size="md">{name}</Heading>
+                  <Text fontSize="xs">A derivative of {descends}</Text>
+                </Stack>
+              </AutoCompleteItem>
+            </Link>
+          ))}
+        </AutoCompleteList>
+      </AutoComplete>
       {/* Region of Origin */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Region of Origin..."
-        inputId="testingSearchInputRegion"
-      >
-        {data.map(({ slug, name, origin }: AdvancedMetadataTypes) => (
-          <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-            <AutoCompleteItem
-              value={origin}
-              key={`option-${origin}`}
-              textDecoration="none"
-              p={4}
-              mb={2}
-              as="a"
-              id="testingSearchOutputItemRegion"
-            >
-              <Stack direction="column" spacing={0}>
-                <Heading size="md">{name}</Heading>
-                <Text fontSize="xs">Made in {origin}</Text>
-              </Stack>
-            </AutoCompleteItem>
-          </Link>
-        ))}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Region of Origin..."
+          id="testingSearchInputRegion"
+        />
+        <AutoCompleteList>
+          {data.map(({ slug, name, origin }: AdvancedMetadataTypes) => (
+            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+              <AutoCompleteItem
+                value={origin}
+                key={`option-${origin}`}
+                textDecoration="none"
+                p={4}
+                mb={2}
+                as="a"
+                id="testingSearchOutputItemRegion"
+              >
+                <Stack direction="column" spacing={0}>
+                  <Heading size="md">{name}</Heading>
+                  <Text fontSize="xs">Made in {origin}</Text>
+                </Stack>
+              </AutoCompleteItem>
+            </Link>
+          ))}
+        </AutoCompleteList>
+      </AutoComplete>
       {/* Shell */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Shell..."
-        inputId="testingSearchInputShell"
-      >
-        {data.map(({ slug, name, shell }: AdvancedMetadataTypes) => (
-          <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-            <AutoCompleteItem
-              value={shell}
-              key={`option-${shell}`}
-              textDecoration="none"
-              p={4}
-              mb={2}
-              as="a"
-              id="testingSearchOutputItemShell"
-            >
-              <Stack direction="column" spacing={0}>
-                <Heading size="md">{name}</Heading>
-                <Text fontSize="xs">
-                  Uses <Code>{shell}</Code>
-                </Text>
-              </Stack>
-            </AutoCompleteItem>
-          </Link>
-        ))}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Shell..."
+          id="testingSearchInputShell"
+        />
+        <AutoCompleteList>
+          {data.map(({ slug, name, shell }: AdvancedMetadataTypes) => (
+            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+              <AutoCompleteItem
+                value={shell}
+                key={`option-${shell}`}
+                textDecoration="none"
+                p={4}
+                mb={2}
+                as="a"
+                id="testingSearchOutputItemShell"
+              >
+                <Stack direction="column" spacing={0}>
+                  <Heading size="md">{name}</Heading>
+                  <Text fontSize="xs">
+                    Uses <Code>{shell}</Code>
+                  </Text>
+                </Stack>
+              </AutoCompleteItem>
+            </Link>
+          ))}
+        </AutoCompleteList>
+      </AutoComplete>
     </>
   );
 }

@@ -8,8 +8,13 @@
 import Link from "next/link";
 
 // Search libraries
-import SearchWrapper from "./SearchWrapper";
-import { AutoCompleteItem } from "@choc-ui/chakra-autocomplete";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
+import EmptyState from "components/search/EmptyState";
 import OSDataLayout from "components/OSDataLayout";
 
 interface DataTypes {
@@ -32,51 +37,57 @@ interface MetadataTypes {
 // Begin wrapping component
 export default function SearchName({ data, size }: DataTypes) {
   return (
-    <SearchWrapper
-      size={size}
-      placeholder="Find an Operating System..."
-      inputId="testingSearchInputName"
-    >
-      {data.map(
-        ({
-          slug,
-          name,
-          summary,
-          category,
-          donate,
-          platform,
-          desktop,
-          startup,
-          packagemgr,
-        }: MetadataTypes) => (
-          <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-            <AutoCompleteItem
-              value={name}
-              key={`option-${name}`}
-              textDecoration="none"
-              p={4}
-              mb={1}
-              as="a"
-            >
-              <OSDataLayout
-                name={name}
-                summary={summary}
-                category={category}
-                donate={donate}
-                platform={platform}
-                desktop={desktop}
-                startup={startup}
-                packagemgr={packagemgr}
-                usePlatform={false}
-                useDesktop={false}
-                useStartup={false}
-                usePackagemgr={false}
-                OSCardId="testingSearchOutputItemName"
-              />
-            </AutoCompleteItem>
-          </Link>
-        )
-      )}
-    </SearchWrapper>
+    <AutoComplete emptyState={EmptyState}>
+      <AutoCompleteInput
+        variant="outline"
+        size="lg"
+        borderRadius="xl"
+        shadow="inner"
+        placeholder="Find an Operating System..."
+        id="testingSearchInputName"
+      />
+      <AutoCompleteList>
+        {data.map(
+          ({
+            slug,
+            name,
+            summary,
+            category,
+            donate,
+            platform,
+            desktop,
+            startup,
+            packagemgr,
+          }: MetadataTypes) => (
+            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+              <AutoCompleteItem
+                value={name}
+                key={`option-${name}`}
+                textDecoration="none"
+                p={4}
+                mb={1}
+                as="a"
+              >
+                <OSDataLayout
+                  name={name}
+                  summary={summary}
+                  category={category}
+                  donate={donate}
+                  platform={platform}
+                  desktop={desktop}
+                  startup={startup}
+                  packagemgr={packagemgr}
+                  usePlatform={false}
+                  useDesktop={false}
+                  useStartup={false}
+                  usePackagemgr={false}
+                  OSCardId="testingSearchOutputItemName"
+                />
+              </AutoCompleteItem>
+            </Link>
+          )
+        )}
+      </AutoCompleteList>
+    </AutoComplete>
   );
 }

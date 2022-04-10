@@ -12,8 +12,13 @@ import Link from "next/link";
 import SearchName from "components/search/SearchName";
 
 // Search libraries
-import SearchWrapper from "./SearchWrapper";
-import { AutoCompleteItem } from "@choc-ui/chakra-autocomplete";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
+import EmptyState from "components/search/EmptyState";
 import OSDataLayout from "components/OSDataLayout";
 
 interface DataTypes {
@@ -39,193 +44,217 @@ export default function CoreSearchGroup({ data }: DataTypes) {
       {/* Name */}
       <SearchName data={data} size="md" />
       {/* Platform */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Platform..."
-        inputId="testingSearchInputPlatform"
-      >
-        {data.map(
-          ({
-            slug,
-            name,
-            summary,
-            category,
-            donate,
-            platform,
-            desktop,
-            startup,
-            packagemgr,
-          }: MetadataTypes) => (
-            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-              <AutoCompleteItem
-                value={platform}
-                key={`option-${platform}`}
-                textDecoration="none"
-                p={4}
-                mb={2}
-                as="a"
-              >
-                <OSDataLayout
-                  name={name}
-                  summary={summary}
-                  category={category}
-                  donate={donate}
-                  platform={platform}
-                  desktop={desktop}
-                  startup={startup}
-                  packagemgr={packagemgr}
-                  usePlatform={true}
-                  useDesktop={false}
-                  useStartup={false}
-                  usePackagemgr={false}
-                  OSCardId="testingSearchOutputItemPlatform"
-                />
-              </AutoCompleteItem>
-            </Link>
-          )
-        )}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Platform..."
+          id="testingSearchInputPlatform"
+        />
+        <AutoCompleteList>
+          {data.map(
+            ({
+              slug,
+              name,
+              summary,
+              category,
+              donate,
+              platform,
+              desktop,
+              startup,
+              packagemgr,
+            }: MetadataTypes) => (
+              <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+                <AutoCompleteItem
+                  value={platform}
+                  key={`option-${platform}`}
+                  textDecoration="none"
+                  p={4}
+                  mb={2}
+                  as="a"
+                >
+                  <OSDataLayout
+                    name={name}
+                    summary={summary}
+                    category={category}
+                    donate={donate}
+                    platform={platform}
+                    desktop={desktop}
+                    startup={startup}
+                    packagemgr={packagemgr}
+                    usePlatform={true}
+                    useDesktop={false}
+                    useStartup={false}
+                    usePackagemgr={false}
+                    OSCardId="testingSearchOutputItemPlatform"
+                  />
+                </AutoCompleteItem>
+              </Link>
+            )
+          )}
+        </AutoCompleteList>
+      </AutoComplete>
       {/* Desktop */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Desktop..."
-        inputId="testingSearchInputDesktop"
-      >
-        {data.map(
-          ({
-            slug,
-            name,
-            summary,
-            category,
-            donate,
-            platform,
-            desktop,
-            startup,
-            packagemgr,
-          }: MetadataTypes) => (
-            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-              <AutoCompleteItem
-                value={desktop}
-                key={`option-${desktop}`}
-                textDecoration="none"
-                p={4}
-                mb={2}
-                as="a"
-              >
-                <OSDataLayout
-                  name={name}
-                  summary={summary}
-                  category={category}
-                  donate={donate}
-                  platform={platform}
-                  desktop={desktop}
-                  startup={startup}
-                  packagemgr={packagemgr}
-                  usePlatform={false}
-                  useDesktop={true}
-                  useStartup={false}
-                  usePackagemgr={false}
-                  OSCardId="testingSearchOutputItemDesktop"
-                />
-              </AutoCompleteItem>
-            </Link>
-          )
-        )}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Desktop..."
+          id="testingSearchInputDesktop"
+        />
+        <AutoCompleteList>
+          {data.map(
+            ({
+              slug,
+              name,
+              summary,
+              category,
+              donate,
+              platform,
+              desktop,
+              startup,
+              packagemgr,
+            }: MetadataTypes) => (
+              <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+                <AutoCompleteItem
+                  value={desktop}
+                  key={`option-${desktop}`}
+                  textDecoration="none"
+                  p={4}
+                  mb={2}
+                  as="a"
+                >
+                  <OSDataLayout
+                    name={name}
+                    summary={summary}
+                    category={category}
+                    donate={donate}
+                    platform={platform}
+                    desktop={desktop}
+                    startup={startup}
+                    packagemgr={packagemgr}
+                    usePlatform={false}
+                    useDesktop={true}
+                    useStartup={false}
+                    usePackagemgr={false}
+                    OSCardId="testingSearchOutputItemDesktop"
+                  />
+                </AutoCompleteItem>
+              </Link>
+            )
+          )}
+        </AutoCompleteList>
+      </AutoComplete>
       {/* Startup manager */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Startup Manager..."
-        inputId="testingSearchInputStartupManager"
-      >
-        {data.map(
-          ({
-            slug,
-            name,
-            summary,
-            category,
-            donate,
-            platform,
-            desktop,
-            startup,
-            packagemgr,
-          }: MetadataTypes) => (
-            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-              <AutoCompleteItem
-                value={startup}
-                key={`option-${startup}`}
-                textDecoration="none"
-                p={4}
-                mb={2}
-                as="a"
-              >
-                <OSDataLayout
-                  name={name}
-                  summary={summary}
-                  category={category}
-                  donate={donate}
-                  platform={platform}
-                  desktop={desktop}
-                  startup={startup}
-                  packagemgr={packagemgr}
-                  usePlatform={false}
-                  useDesktop={false}
-                  useStartup={true}
-                  usePackagemgr={false}
-                  OSCardId="testingSearchOutputItemStartupManager"
-                />
-              </AutoCompleteItem>
-            </Link>
-          )
-        )}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Startup Manager..."
+          id="testingSearchInputStartupManager"
+        />
+        <AutoCompleteList>
+          {data.map(
+            ({
+              slug,
+              name,
+              summary,
+              category,
+              donate,
+              platform,
+              desktop,
+              startup,
+              packagemgr,
+            }: MetadataTypes) => (
+              <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+                <AutoCompleteItem
+                  value={startup}
+                  key={`option-${startup}`}
+                  textDecoration="none"
+                  p={4}
+                  mb={2}
+                  as="a"
+                >
+                  <OSDataLayout
+                    name={name}
+                    summary={summary}
+                    category={category}
+                    donate={donate}
+                    platform={platform}
+                    desktop={desktop}
+                    startup={startup}
+                    packagemgr={packagemgr}
+                    usePlatform={false}
+                    useDesktop={false}
+                    useStartup={true}
+                    usePackagemgr={false}
+                    OSCardId="testingSearchOutputItemStartupManager"
+                  />
+                </AutoCompleteItem>
+              </Link>
+            )
+          )}
+        </AutoCompleteList>
+      </AutoComplete>
       {/* Package manager */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Package Manager..."
-        inputId="testingSearchInputPackageManager"
-      >
-        {data.map(
-          ({
-            slug,
-            name,
-            summary,
-            category,
-            donate,
-            platform,
-            desktop,
-            startup,
-            packagemgr,
-          }: MetadataTypes) => (
-            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-              <AutoCompleteItem
-                value={packagemgr}
-                key={`option-${packagemgr}`}
-                textDecoration="none"
-                p={4}
-                mb={2}
-                as="a"
-              >
-                <OSDataLayout
-                  name={name}
-                  summary={summary}
-                  category={category}
-                  donate={donate}
-                  platform={platform}
-                  desktop={desktop}
-                  startup={startup}
-                  packagemgr={packagemgr}
-                  usePlatform={false}
-                  useDesktop={false}
-                  useStartup={false}
-                  usePackagemgr={true}
-                  OSCardId="testingSearchOutputItemPackageManager"
-                />
-              </AutoCompleteItem>
-            </Link>
-          )
-        )}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Package Manager..."
+          id="testingSearchInputPackageManager"
+        />
+        <AutoCompleteList>
+          {data.map(
+            ({
+              slug,
+              name,
+              summary,
+              category,
+              donate,
+              platform,
+              desktop,
+              startup,
+              packagemgr,
+            }: MetadataTypes) => (
+              <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+                <AutoCompleteItem
+                  value={packagemgr}
+                  key={`option-${packagemgr}`}
+                  textDecoration="none"
+                  p={4}
+                  mb={2}
+                  as="a"
+                >
+                  <OSDataLayout
+                    name={name}
+                    summary={summary}
+                    category={category}
+                    donate={donate}
+                    platform={platform}
+                    desktop={desktop}
+                    startup={startup}
+                    packagemgr={packagemgr}
+                    usePlatform={false}
+                    useDesktop={false}
+                    useStartup={false}
+                    usePackagemgr={true}
+                    OSCardId="testingSearchOutputItemPackageManager"
+                  />
+                </AutoCompleteItem>
+              </Link>
+            )
+          )}
+        </AutoCompleteList>
+      </AutoComplete>
     </>
   );
 }
