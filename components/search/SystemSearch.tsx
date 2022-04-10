@@ -12,8 +12,13 @@ import Link from "next/link";
 import { Stack, Heading, Text, Badge } from "@chakra-ui/react";
 
 // Search libraries
-import SearchWrapper from "./SearchWrapper";
-import { AutoCompleteItem } from "@choc-ui/chakra-autocomplete";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
+import EmptyState from "components/search/EmptyState";
 
 interface DataTypes {
   data: any;
@@ -31,55 +36,67 @@ export default function SystemSearch({ data }: DataTypes) {
   return (
     <>
       {/* Category */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Category..."
-        inputId="testingSearchInputCategory"
-      >
-        {data.map(({ slug, name, category }: SystemSearchMetadataTypes) => (
-          <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-            <AutoCompleteItem
-              value={category}
-              key={`option-${category}`}
-              textDecoration="none"
-              p={4}
-              mb={2}
-              as="a"
-              id="testingSearchOutputItemCategory"
-            >
-              <Stack direction="column" spacing={0}>
-                <Heading size="md">{name}</Heading>
-                <Badge>{category}</Badge>
-              </Stack>
-            </AutoCompleteItem>
-          </Link>
-        ))}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Category..."
+          id="testingSearchInputCategory"
+        />
+        <AutoCompleteList>
+          {data.map(({ slug, name, category }: SystemSearchMetadataTypes) => (
+            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+              <AutoCompleteItem
+                value={category}
+                key={`option-${category}`}
+                textDecoration="none"
+                p={4}
+                mb={2}
+                as="a"
+                id="testingSearchOutputItemCategory"
+              >
+                <Stack direction="column" spacing={0}>
+                  <Heading size="md">{name}</Heading>
+                  <Badge>{category}</Badge>
+                </Stack>
+              </AutoCompleteItem>
+            </Link>
+          ))}
+        </AutoCompleteList>
+      </AutoComplete>
       {/* Summary */}
-      <SearchWrapper
-        size="md"
-        placeholder="Search by Summary..."
-        inputId="testingSearchInputSummary"
-      >
-        {data.map(({ slug, name, summary }: SystemSearchMetadataTypes) => (
-          <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
-            <AutoCompleteItem
-              value={summary}
-              key={`option-${summary}`}
-              textDecoration="none"
-              p={4}
-              mb={2}
-              as="a"
-              id="testingSearchOutputItemSummary"
-            >
-              <Stack direction="column" spacing={0}>
-                <Heading size="md">{name}</Heading>
-                <Text fontSize="xs">"{summary}"</Text>
-              </Stack>
-            </AutoCompleteItem>
-          </Link>
-        ))}
-      </SearchWrapper>
+      <AutoComplete emptyState={EmptyState}>
+        <AutoCompleteInput
+          variant="outline"
+          size="md"
+          borderRadius="xl"
+          shadow="inner"
+          placeholder="Search by Summary..."
+          id="testingSearchInputSummary"
+        />
+        <AutoCompleteList>
+          {data.map(({ slug, name, summary }: SystemSearchMetadataTypes) => (
+            <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
+              <AutoCompleteItem
+                value={summary}
+                key={`option-${summary}`}
+                textDecoration="none"
+                p={4}
+                mb={2}
+                as="a"
+                id="testingSearchOutputItemSummary"
+              >
+                <Stack direction="column" spacing={0}>
+                  <Heading size="md">{name}</Heading>
+                  <Text fontSize="xs">"{summary}"</Text>
+                </Stack>
+              </AutoCompleteItem>
+            </Link>
+          ))}
+        </AutoCompleteList>
+      </AutoComplete>
     </>
   );
 }
