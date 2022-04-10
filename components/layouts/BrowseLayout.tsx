@@ -37,7 +37,10 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
             <Button as="a">Advanced Search</Button>
           </Link>
           <Link href="/matches" passHref>
-            <Button as="a">Matches</Button>
+            <Button as="a">ULOSINO Matches</Button>
+          </Link>
+          <Link href="/create" passHref>
+            <Button as="a">Create an OS Page</Button>
           </Link>
         </Stack>
       </ErrorFallback>

@@ -131,9 +131,9 @@ export default function PreferenceTransferAssistant() {
       writeStorage("P3PrefDisableBackgroundUpdates", true);
     }
 
-    setImportAppearanceNumber("0");
-    setImportVerbosityNumber("0");
-    setImportDisablesNumber("0");
+    setImportAppearanceNumber("");
+    setImportVerbosityNumber("");
+    setImportDisablesNumber("");
 
     // Close the modal
     onClose();
