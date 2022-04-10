@@ -20,6 +20,7 @@ import {
   Button,
   Kbd,
   useColorMode,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 // First party components
@@ -34,6 +35,10 @@ export default function AppearancePreferences() {
   const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
   const { toggleColorMode } = useColorMode();
+  const pageName = useBreakpointValue({
+    base: "Appearance",
+    sm: "Appearance Preferences",
+  });
   return (
     <>
       <Head>
@@ -50,7 +55,7 @@ export default function AppearancePreferences() {
       </Head>
 
       <Stack direction="column" spacing={5}>
-        <Heading size="xl">Appearance Preferences</Heading>
+        <Heading size="xl">{pageName}</Heading>
         <Text>Change the appearance of ULOSINO.</Text>
         <Stack direction="column" spacing={5}>
           <Stack

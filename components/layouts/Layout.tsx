@@ -37,9 +37,7 @@ import { VercelLogo } from "components/VercelPromotion";
 // First-party components
 import Logo from "components/Logo";
 import HeaderBackButton from "components/HeaderBackButton";
-const Preferences = dynamic(() => import("components/Preferences"), {
-  suspense: true,
-});
+
 // Keybinding libraries
 import { useEffect } from "react";
 import { useHotkeyManager } from "providers/KeybindingProvider";
@@ -130,6 +128,26 @@ export default function Layout({
             shift: false,
             alt: false,
             callback: () => router.push("/search"),
+          }),
+        [manager, router];
+    }
+  });
+  useEffect(() => {
+    {
+      isWindows
+        ? manager.registerHotkey({
+            key: ",",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () => router.push("/preferences/appearance"),
+          })
+        : manager.registerHotkey({
+            key: ",",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () => router.push("/preferences/appearance"),
           }),
         [manager, router];
     }
@@ -395,13 +413,15 @@ export default function Layout({
               </Center>
             )}
             <Spacer />
-            <Link href="/preferences/appearance" passHref>
-              <IconButton
-                icon={<HiOutlineCog />}
-                aria-label="Preferences"
-                title="Preferences"
-              />
-            </Link>
+            <Center display={{ base: "none", sm: "flex" }}>
+              <Link href="/preferences/appearance" passHref>
+                <IconButton
+                  icon={<HiOutlineCog />}
+                  aria-label="Preferences"
+                  title="Preferences"
+                />
+              </Link>
+            </Center>
             <Center display={{ base: "flex", sm: "none" }}>
               <Link href="/menu" passHref>
                 <IconButton

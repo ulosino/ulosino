@@ -19,7 +19,13 @@ import Link from "next/link";
 import Head from "next/head";
 
 // Chakra UI, icons, and other design imports
-import { Stack, Heading, Text, Button } from "@chakra-ui/react";
+import {
+  Stack,
+  Heading,
+  Text,
+  Button,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
@@ -55,6 +61,10 @@ const PreferenceResetAssistant = dynamic(
 export default function AdvancedPreferences() {
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
   const [backgroundUpdates] = useLocalStorage("P3PrefDisableBackgroundUpdates");
+  const pageName = useBreakpointValue({
+    base: "Advanced",
+    sm: "Advanced Preferences",
+  });
   return (
     <>
       <Head>
@@ -73,7 +83,7 @@ export default function AdvancedPreferences() {
         />
       </Head>
       <Stack direction="column" spacing={5}>
-        <Heading size="xl">Advanced Preferences</Heading>
+        <Heading size="xl">{pageName}</Heading>
         <Text>Change advanced application settings.</Text>
         <Stack direction="column" spacing={5}>
           <Stack direction="column" spacing={2}>

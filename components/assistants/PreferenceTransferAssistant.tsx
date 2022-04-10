@@ -1,7 +1,8 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// This
+// This Assistant allows the user to enter a code that is mapped to a preference combination
+// For example, if you changed preferences on another browser, enter the code here and it will be applied to this browser
 
 // Suspense and performance
 import {
@@ -178,7 +179,11 @@ export default function PreferenceTransferAssistant() {
   function ModalFooter() {
     return (
       <Flex w="full">
-        <Stack direction="column" spacing={0}>
+        <Stack
+          direction="column"
+          spacing={0}
+          display={{ base: "none", sm: "flex" }}
+        >
           <Stack direction="row" spacing={2} fontSize="xs">
             <Text>Current Preference Code:</Text>
             <Text>

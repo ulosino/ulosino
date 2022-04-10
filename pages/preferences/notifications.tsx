@@ -20,6 +20,7 @@ import {
   Button,
   Kbd,
   useColorMode,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 // First party components
@@ -32,6 +33,10 @@ export default function NotificationPreferences() {
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
+  const pageName = useBreakpointValue({
+    base: "Notifications",
+    sm: "Notification Preferences",
+  });
   return (
     <>
       <Head>
@@ -44,7 +49,7 @@ export default function NotificationPreferences() {
         <meta property="og:description" content="Manage notifications." />
       </Head>
       <Stack direction="column" spacing={5}>
-        <Heading size="xl">Notification Preferences</Heading>
+        <Heading size="xl">{pageName}</Heading>
         <Text>Manage notifications and application verbosity.</Text>
 
         <Stack direction="column" spacing={5}>

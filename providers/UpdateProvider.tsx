@@ -24,7 +24,6 @@ import {
 import Overlay from "components/Overlay";
 
 import { useEffect, useRef } from "react";
-import UpdateOnboarding from "components/confirmations/UpdateOnboarding";
 
 // Begin component
 export default function UpdateProvider() {
@@ -32,8 +31,6 @@ export default function UpdateProvider() {
   const cancelRef: any = useRef();
 
   const [updatePreference] = useLocalStorage("P3TriggerUpdate");
-  const [delayUpdate] = useLocalStorage("P3DelayUpdate");
-  const [awaitOnboarding] = useLocalStorage("P3AwaitUpdateFinish");
   const [installing, setInstalling] = useBoolean();
 
   useEffect(() => {
@@ -82,10 +79,6 @@ export default function UpdateProvider() {
     }
   }),
     [updatePreference, onOpen];
-
-  // if (awaitOnboarding) {
-  //   return <UpdateOnboarding />;
-  // }
 
   function ModalBody() {
     return (

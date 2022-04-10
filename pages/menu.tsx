@@ -4,11 +4,6 @@
 // Types
 import type { ReactElement } from "react";
 
-// Suspense and performance
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import { LoadingServerButton } from "components/Loading";
-
 // Head and SEO
 import Head from "next/head";
 
@@ -23,15 +18,13 @@ import {
   HiOutlineSearch,
   HiOutlineSparkles,
   HiOutlineInformationCircle,
+  HiOutlineCog,
 } from "react-icons/hi";
 import { FiTwitter, FiGithub } from "react-icons/fi";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
-const Preferences = dynamic(() => import("components/Preferences"), {
-  suspense: true,
-});
 
 // Begin page
 export default function Menu() {
@@ -76,9 +69,11 @@ export default function Menu() {
             About ULOSINO
           </Button>
         </Link>
-        <Suspense fallback={<LoadingServerButton />}>
-          <Preferences isLayout={false} />
-        </Suspense>
+        <Link href="/preferences" passHref>
+          <Button as="a" leftIcon={<HiOutlineCog />}>
+            Preferences
+          </Button>
+        </Link>
         <Link href="https://twitter.com/ulosino" passHref>
           <Button as="a" leftIcon={<FiTwitter />}>
             Twitter
