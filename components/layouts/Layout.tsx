@@ -462,9 +462,9 @@ export default function Layout({
                     Twitter
                   </Button>
                 </Link>
-                <Link href="/about/keybindings" passHref>
+                <Link href="https://docs.ulosino.com" passHref>
                   <Button variant="ghost" size="sm" as="a">
-                    Keyboard Shortcuts
+                    Documentation
                   </Button>
                 </Link>
               </>

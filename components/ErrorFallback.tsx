@@ -26,7 +26,7 @@ export class ErrorFallback extends React.Component {
   render() {
     if (this.state.hasError) {
       console.error(
-        "Integrated Application Error: ErrorRegionCaught (Reference ULOSINO 3.x.x documentation)"
+        "Integrated Application Error: ErrorRegionCaught https://docs.ulosino.com/docs/reference/errors"
       );
       return <Text>Something went wrong.</Text>;
     }
@@ -50,7 +50,7 @@ export class ErrorFallbackApplication extends React.Component {
   render() {
     if (this.state.hasError) {
       console.error(
-        "Integrated Application Error: ErrorInUndefinedRegion (Reference ULOSINO 3.x.x documentation)"
+        "Integrated Application Error: ErrorInUndefinedRegion https://docs.ulosino.com/docs/reference/errors"
       );
       return (
         <>
