@@ -7,7 +7,7 @@
 import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
-import { Stack, Button, Text, useDisclosure, Badge } from "@chakra-ui/react";
+import { Stack, Button, Text, useDisclosure } from "@chakra-ui/react";
 
 // First party components
 import Overlay from "components/Overlay";
@@ -15,33 +15,21 @@ import Overlay from "components/Overlay";
 import { useRef } from "react";
 
 // Begin component
-export default function DisableDonationFeaturesConfirmation() {
+export default function DisableUpdateFeaturesConfirmation() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = useRef();
 
   // Get preference
-  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
+  const [backgroundUpdates] = useLocalStorage("P3PrefDisableBackgroundUpdates");
 
   // Buttons to open the modal
   function FeaturesEnabled() {
     return (
       <>
         {isOpen ? (
-          <Button isActive>
-            Disable{" "}
-            <Badge variant="tempo" mx={2} pt={1}>
-              Tempo
-            </Badge>{" "}
-            Features
-          </Button>
+          <Button isActive>Disable Background Update Services</Button>
         ) : (
-          <Button onClick={onOpen}>
-            Disable{" "}
-            <Badge variant="tempo" mx={2} pt={1}>
-              Tempo
-            </Badge>{" "}
-            Features
-          </Button>
+          <Button onClick={onOpen}>Disable Background Update Services</Button>
         )}
       </>
     );
@@ -51,16 +39,12 @@ export default function DisableDonationFeaturesConfirmation() {
       <Button
         onClick={(_) =>
           writeStorage(
-            "P3PrefDisableDonationFeatures",
-            donationFeatures ? false : true
+            "P3PrefDisableBackgroundUpdates",
+            backgroundUpdates ? false : true
           )
         }
       >
-        Enable{" "}
-        <Badge variant="tempo" mx={2} pt={1}>
-          Tempo
-        </Badge>{" "}
-        Features
+        Enable Background Update Services
       </Button>
     );
   }
@@ -68,14 +52,14 @@ export default function DisableDonationFeaturesConfirmation() {
   // Gracefully close the modal once the deletion has completed
   function BeginDelete() {
     writeStorage(
-      "P3PrefDisableDonationFeatures",
-      donationFeatures ? false : true
+      "P3PrefDisableBackgroundUpdates",
+      backgroundUpdates ? false : true
     );
     onClose();
   }
 
   function ModalButton() {
-    if (donationFeatures) {
+    if (backgroundUpdates) {
       return <FeaturesDisabled />;
     } else return <FeaturesEnabled />;
   }
@@ -84,8 +68,8 @@ export default function DisableDonationFeaturesConfirmation() {
     return (
       <Stack direction="column" spacing={5}>
         <Text>
-          All donation features, including links to external financial services,
-          will be disabled.
+          The app will no longer check for updates in the background. You'll
+          miss out on the latest content and features.
         </Text>
       </Stack>
     );
@@ -108,7 +92,7 @@ export default function DisableDonationFeaturesConfirmation() {
     <>
       <ModalButton />
       <Overlay
-        header="Disable Tempo Features?"
+        header="Disable Update Services?"
         body={<ModalBody />}
         footer={<ModalFooter />}
         cancelRef={cancelRef}

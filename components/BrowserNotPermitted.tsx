@@ -16,7 +16,7 @@ interface UnsupportedBrowserTypes {
 // Begin component
 export function BrowserNotPermitted({ browser }: UnsupportedBrowserTypes) {
   console.error(
-    "Integrated Application Error: BrowserNotPermitted (Reference ULOSINO 3.x.x documentation)"
+    "Integrated Application Error: BrowserNotPermitted https://docs.ulosino.com/docs/reference/errors"
   );
   return (
     <>

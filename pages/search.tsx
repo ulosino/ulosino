@@ -67,35 +67,31 @@ export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
           <NoJSWarningFeaturesDisabled />
         </noscript>
         <Text>Take a search. Choose from 10 metadata categories.</Text>
-        <Stack direction="column" spacing={2}>
-          <Text textStyle="miniHeading" as="h6">
-            Core Metadata Search
-          </Text>
-          <Suspense fallback={<LoadingServer />}>
+        <Suspense fallback={<LoadingServer />}>
+          <Stack direction="column" spacing={2}>
+            <Text textStyle="miniHeading" as="h6">
+              Core Metadata Search
+            </Text>
             <CoreSearchGroup data={AZOSPageData} />
-          </Suspense>
-        </Stack>
-        <Stack direction="column" spacing={2}>
-          <Text textStyle="miniHeading" as="h6">
-            Advanced Metadata Search
-          </Text>
-          <Suspense fallback={<LoadingServer />}>
+          </Stack>
+          <Stack direction="column" spacing={2}>
+            <Text textStyle="miniHeading" as="h6">
+              Advanced Metadata Search
+            </Text>
             <AdvancedSearchGroup data={AZOSPageData} />
-          </Suspense>
-        </Stack>
-        <Stack direction="column" spacing={2}>
-          <Text textStyle="miniHeading" as="h6">
-            ULOSINO System Search
-          </Text>
-          <Suspense fallback={<LoadingServer />}>
+          </Stack>
+          <Stack direction="column" spacing={2}>
+            <Text textStyle="miniHeading" as="h6">
+              ULOSINO System Search
+            </Text>
             <SystemSearch data={AZOSPageData} />
-          </Suspense>
-        </Stack>
-        <Text fontSize="xs">
-          Get here quickly by pressing <Kbd>control</Kbd> + <Kbd>S</Kbd> or{" "}
-          <Kbd>alt</Kbd> + <Kbd>S</Kbd> on Windows. You can also open a new tab
-          here with <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>N</Kbd>.
-        </Text>
+          </Stack>
+          <Text fontSize="xs">
+            Get here quickly by pressing <Kbd>control</Kbd> + <Kbd>S</Kbd> or{" "}
+            <Kbd>alt</Kbd> + <Kbd>S</Kbd> on Windows. You can also open a new
+            tab here with <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>N</Kbd>.
+          </Text>
+        </Suspense>
       </Stack>
     </>
   );

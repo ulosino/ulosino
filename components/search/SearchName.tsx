@@ -40,7 +40,7 @@ export default function SearchName({ data, size }: DataTypes) {
     <AutoComplete emptyState={EmptyState}>
       <AutoCompleteInput
         variant="outline"
-        size="lg"
+        size="md"
         borderRadius="xl"
         shadow="inner"
         placeholder="Find an Operating System..."

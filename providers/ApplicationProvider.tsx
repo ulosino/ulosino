@@ -8,7 +8,6 @@
 import { ReactElement } from "react";
 
 // Suspense and performance
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useLocalStorage } from "@rehooks/local-storage";
 
