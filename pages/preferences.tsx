@@ -12,7 +12,12 @@ import Link from "next/link";
 
 // Chakra UI, icons, and other design imports
 import { Stack, Button, Heading } from "@chakra-ui/react";
-import { HiOutlineTemplate, HiOutlineBell, HiOutlineCog } from "react-icons/hi";
+import {
+  HiOutlineTemplate,
+  HiOutlineBell,
+  HiOutlineCog,
+  HiOutlineSupport,
+} from "react-icons/hi";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
@@ -52,6 +57,11 @@ export default function PreferencesList() {
             </Button>
           </Link>
         </Stack>
+        <Link href="https://docs.ulosino.com" passHref>
+          <Button as="a" leftIcon={<HiOutlineSupport />}>
+            ULOSINO Documentation
+          </Button>
+        </Link>
       </Stack>
     </>
   );

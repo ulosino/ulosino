@@ -118,14 +118,11 @@ export default function AdvancedPreferences() {
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>
-            <Link
-              href="https://github.com/ulosino/ulosino/tree/main/docs"
-              passHref
-            >
-              <Button as="a">Open Documentation on GitHub</Button>
+            <Link href="https://docs.ulosino.com" passHref>
+              <Button as="a">Open ULOSINO Documentation</Button>
             </Link>
             <Text fontSize="xs" lineHeight="shorter">
-              Browse through a selection of documentation resources on GitHub.
+              Browse through an assortment of documentation resources.
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>

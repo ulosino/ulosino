@@ -131,7 +131,7 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                 choose to create a new branch to open a pull request for your
                 changes.
               </Text>
-              <Stack direction="row" spacing={2}>
+              <Stack direction={{ base: "column", md: "row" }} spacing={2}>
                 <Button
                   leftIcon={<HiOutlinePencil />}
                   onClick={setFinalPage.off}
@@ -170,7 +170,7 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                       id="testingCOPAMetadataInput"
                     />
                   </ErrorFallback>
-                  <Stack direction="row" spacing={2}>
+                  <Stack direction={{ base: "column", md: "row" }} spacing={2}>
                     <Button onClick={setMetadataPage.off}>Go Back</Button>
                     <Button
                       leftIcon={<HiOutlineArrowRight />}
@@ -207,7 +207,7 @@ repository: "" # e.g. "https://github.com/ulosino/ulosino"
                       id="testingCOPADescriptionInput"
                     />
                   </ErrorFallback>
-                  <Stack direction="row" spacing={2}>
+                  <Stack direction={{ base: "column", md: "row" }} spacing={2}>
                     <Button onClick={setDescriptionPage.off}>Go Back</Button>
                     <Button
                       leftIcon={<HiOutlineArrowRight />}

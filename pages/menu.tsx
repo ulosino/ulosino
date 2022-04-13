@@ -19,6 +19,7 @@ import {
   HiOutlinePencil,
   HiOutlineInformationCircle,
   HiOutlineCog,
+  HiOutlineSparkles,
 } from "react-icons/hi";
 import { FiTwitter, FiGithub } from "react-icons/fi";
 
@@ -60,7 +61,7 @@ export default function Menu() {
           </Button>
         </Link>
         <Link href="/matches" passHref>
-          <Button as="a" leftIcon={<HiOutlinePencil />}>
+          <Button as="a" leftIcon={<HiOutlineSparkles />}>
             ULOSINO Matches
           </Button>
         </Link>

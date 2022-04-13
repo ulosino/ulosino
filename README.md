@@ -12,17 +12,18 @@ ULOSINO is The Friendly Flow. Go to [ULOSINO.com](https://ulosino.com) now.
 
 ## Feature Overview
 
-- Learn and discover in **speed and style**, optimised for both desktop and mobile
-- Browse at night with responsive **dark mode**
-- Take ULOSINO anywhere, even off-the-grid, with **offline compatibility**
-- **Search by name, platform, desktop, and more**, efficiently and quickly
+- Browse with **athletic speed**, on the Edge anywhere
+- And **browse in style** with responsive dark mode
+- Go anywhere, even off-the-grid, with **automatic offline**
+- **Take a search from 10 metadata options**, efficiently and quickly
 - **Make a donation** with ULOSINO Tempo donation options
+- Open the joy from a flow that's made around you with **persistent Preferences**
 - Community contributions, bringing **up-and-coming operating systems** on the same playing field
 
 ## How It Works
 
 1. Database Content is edited, in the easy-to-use Markdown format, as a part of a commit, and;
-2. Then the Database Content is processed by the Source Code and deployed using GitHub Actions and the Vercel platform to visitors across the world.
+2. Then the Database Content is processed by the Source Code and deployed on the Edge, powered by Vercel.
 
 ## Why?
 
@@ -50,13 +51,15 @@ You also need to read through the [Contribution Code of Conduct](https://github.
 
 ## Documentation
 
-If you're need help with the ULOSINO web app, you should check out our small but useful bank of resources stored under the `/docs` folder. It includes architectural overviews, reference documents, and miscellaneous philosophy... Regardless, we hope that it will be helpful whether you are a seasoned frontend expert or not.
+We've launched [ULOSINO Documentation](https://docs.ulosino.com)! It's complete with an assortment of tutorials and guides, ranging from ULOSINO basics to technical details.
+
+Or visit the [ULOSINO Docs repository](https://github.com/ulosino/docs) for more details.
 
 ## Changelogs
 
-This is the third major version of the ULOSINO web app.
+This is the third major version of ULOSINO.
 
-We use GitHub Releases and Git tags to manage changelogs. Read our [Versioning documentation](https://github.com/ulosino/ulosino/blob/main/docs/Versioning.md).
+We use GitHub Releases and Git tags to manage changelogs. Read our [versioning documentation](https://docs.ulosino.com/docs/reference/versioning) to learn more.
 
 ## License
 

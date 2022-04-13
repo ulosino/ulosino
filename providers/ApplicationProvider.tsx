@@ -8,9 +8,7 @@
 import { ReactElement } from "react";
 
 // Suspense and performance
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import { LoadingServer } from "components/Loading";
 import { useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
@@ -116,9 +114,7 @@ export default function ApplicationProvider({
         <KeybindingProvider manager={manager}>
           <>
             {/* Excluding UpdateProvider will break PWA functionality */}
-            <Suspense fallback={<LoadingServer />}>
-              <UpdateProvider />
-            </Suspense>
+            <UpdateProvider />
             {browserBypass ? (
               children
             ) : (

@@ -61,13 +61,13 @@ export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
         />
       </Head>
 
-      <Suspense fallback={<LoadingServer />}>
-        <Stack direction="column" spacing={5}>
-          <Heading size="xl">Advanced Search</Heading>
-          <noscript>
-            <NoJSWarningFeaturesDisabled />
-          </noscript>
-          <Text>Take a search. Choose from 10 metadata categories.</Text>
+      <Stack direction="column" spacing={5}>
+        <Heading size="xl">Advanced Search</Heading>
+        <noscript>
+          <NoJSWarningFeaturesDisabled />
+        </noscript>
+        <Text>Take a search. Choose from 10 metadata categories.</Text>
+        <Suspense fallback={<LoadingServer />}>
           <Stack direction="column" spacing={2}>
             <Text textStyle="miniHeading" as="h6">
               Core Metadata Search
@@ -91,8 +91,8 @@ export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
             <Kbd>alt</Kbd> + <Kbd>S</Kbd> on Windows. You can also open a new
             tab here with <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>N</Kbd>.
           </Text>
-        </Stack>
-      </Suspense>
+        </Suspense>
+      </Stack>
     </>
   );
 }
