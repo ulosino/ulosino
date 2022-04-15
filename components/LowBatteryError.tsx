@@ -23,7 +23,7 @@ export function LowBatteryError() {
     <Stack direction="column" spacing={5}>
       <Text>{isCharging ? "Continue charging." : "Connect to charger."}</Text>
       <Box>
-        <Code>IAE FeatureBlocked</Code>
+        <Code>IAE FeatureIsBlocked</Code>
       </Box>
     </Stack>
   );
@@ -33,7 +33,7 @@ export function LowBatteryErrorButton() {
   const [isCharging] = useLocalStorage("P3Charging");
 
   console.error(
-    "Integrated Application Error: FeatureBlocked https://docs.ulosino.com/reference/errors"
+    "Integrated Application Error: FeatureIsBlocked https://docs.ulosino.com/reference/errors"
   );
 
   return (
