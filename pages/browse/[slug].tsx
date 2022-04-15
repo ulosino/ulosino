@@ -42,6 +42,7 @@ import {
   HiOutlineCode,
   HiOutlineCreditCard,
   HiOutlinePencil,
+  HiOutlineUpload,
 } from "react-icons/hi";
 
 // Keybinding libraries
@@ -110,15 +111,20 @@ export default function OSPage({
   // Sharing features
   function Share() {
     if (navigator.share) {
-      let url = document.location.href;
+      const url = document.location.href;
       navigator
         .share({
           title: `${source.frontmatter.name}`,
           text: `Discover ${source.frontmatter.name} on ULOSINO`,
           url: url,
         })
-        .then(() => console.log("Successful share"))
-        .catch((error) => console.log("Error sharing", error));
+        .then(() => console.log("Shared successfully"))
+        .catch((error) =>
+          console.warn(
+            "Integrated Application Error: ShareErrorCaught https://docs.ulosino.com/docs/reference/errors",
+            error
+          )
+        );
     }
   }
 
@@ -205,8 +211,8 @@ export default function OSPage({
                     </Button>
                   </Link>
                 )}
-                <Button leftIcon={<HiOutlineCode />} onClick={Share}>
-                  Share {source.frontmatter.name}
+                <Button leftIcon={<HiOutlineUpload />} onClick={Share}>
+                  Share or Copy
                 </Button>
               </Stack>
               <Table>

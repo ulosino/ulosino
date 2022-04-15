@@ -9,6 +9,7 @@ import { GetStaticProps } from "next";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { LoadingServer } from "components/Loading";
+import { useLocalStorage } from "@rehooks/local-storage";
 
 // Head and SEO
 import Head from "next/head";
@@ -21,6 +22,7 @@ import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
+import { LowBatteryError } from "components/LowBatteryError";
 const CoreSearchGroup = dynamic(
   () => import("components/search/CoreSearchGroup"),
   {
@@ -46,6 +48,7 @@ interface OSDataPage {
 
 // Begin page
 export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
+  const [lowBatteryMode] = useLocalStorage("P3LowBatteryMode");
   return (
     <>
       <Head>
@@ -61,38 +64,43 @@ export default function AdvancedSearch({ AZOSPageData }: OSDataPage) {
         />
       </Head>
 
-      <Stack direction="column" spacing={5}>
-        <Heading size="xl">Advanced Search</Heading>
-        <noscript>
-          <NoJSWarningFeaturesDisabled />
-        </noscript>
-        <Text>Take a search. Choose from 10 metadata categories.</Text>
-        <Suspense fallback={<LoadingServer />}>
-          <Stack direction="column" spacing={2}>
-            <Text textStyle="miniHeading" as="h6">
-              Core Metadata Search
+      {lowBatteryMode ? (
+        <LowBatteryError />
+      ) : (
+        <Stack direction="column" spacing={5}>
+          <Heading size="xl">Advanced Search</Heading>
+          <noscript>
+            <NoJSWarningFeaturesDisabled />
+          </noscript>
+          <Text>Take a search. Choose from 10 metadata categories.</Text>
+          <Suspense fallback={<LoadingServer />}>
+            <Stack direction="column" spacing={2}>
+              <Text textStyle="miniHeading" as="h6">
+                Core Metadata Search
+              </Text>
+              <CoreSearchGroup data={AZOSPageData} />
+            </Stack>
+            <Stack direction="column" spacing={2}>
+              <Text textStyle="miniHeading" as="h6">
+                Advanced Metadata Search
+              </Text>
+              <AdvancedSearchGroup data={AZOSPageData} />
+            </Stack>
+            <Stack direction="column" spacing={2}>
+              <Text textStyle="miniHeading" as="h6">
+                ULOSINO System Search
+              </Text>
+              <SystemSearch data={AZOSPageData} />
+            </Stack>
+            <Text fontSize="xs">
+              Get here quickly by pressing <Kbd>control</Kbd> + <Kbd>S</Kbd> or{" "}
+              <Kbd>alt</Kbd> + <Kbd>S</Kbd> on Windows. You can also open a new
+              tab here with <Kbd>control</Kbd> + <Kbd>option</Kbd> +{" "}
+              <Kbd>N</Kbd>.
             </Text>
-            <CoreSearchGroup data={AZOSPageData} />
-          </Stack>
-          <Stack direction="column" spacing={2}>
-            <Text textStyle="miniHeading" as="h6">
-              Advanced Metadata Search
-            </Text>
-            <AdvancedSearchGroup data={AZOSPageData} />
-          </Stack>
-          <Stack direction="column" spacing={2}>
-            <Text textStyle="miniHeading" as="h6">
-              ULOSINO System Search
-            </Text>
-            <SystemSearch data={AZOSPageData} />
-          </Stack>
-          <Text fontSize="xs">
-            Get here quickly by pressing <Kbd>control</Kbd> + <Kbd>S</Kbd> or{" "}
-            <Kbd>alt</Kbd> + <Kbd>S</Kbd> on Windows. You can also open a new
-            tab here with <Kbd>control</Kbd> + <Kbd>option</Kbd> + <Kbd>N</Kbd>.
-          </Text>
-        </Suspense>
-      </Stack>
+          </Suspense>
+        </Stack>
+      )}
     </>
   );
 }

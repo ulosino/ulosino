@@ -21,6 +21,12 @@ import BrowserNotPermitted from "components/BrowserNotPermitted";
 const UpdateProvider = dynamic(() => import("providers/UpdateProvider"), {
   suspense: true,
 });
+const BatteryMonitoringProvider = dynamic(
+  () => import("providers/BatteryMonitoringProvider"),
+  {
+    suspense: true,
+  }
+);
 
 // Keybinding libraries
 import {
@@ -115,6 +121,7 @@ export default function ApplicationProvider({
           <>
             {/* Excluding UpdateProvider will break PWA functionality */}
             <UpdateProvider />
+            <BatteryMonitoringProvider />
             {dangerousRuntime ? (
               children
             ) : (
