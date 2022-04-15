@@ -86,21 +86,6 @@ export default function UpdateProvider() {
     }
   }
 
-  function ConfirmationToast() {
-    return (
-      <Card variant="secondary">
-        <DarkMode>
-          <Stack direction="row" spacing={2}>
-            <LoadingServer />
-            <Center>
-              <Text>Installing Updates</Text>
-            </Center>
-          </Stack>
-        </DarkMode>
-      </Card>
-    );
-  }
-
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
@@ -133,12 +118,6 @@ export default function UpdateProvider() {
         }
         if (updatePreference) {
           ClosePromptToast();
-
-          toast({
-            duration: 10000,
-            position: "bottom",
-            render: ConfirmationToast,
-          });
 
           deleteFromStorage("P3TriggerUpdate");
 
