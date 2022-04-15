@@ -44,6 +44,7 @@ import {
   HiOutlineCreditCard,
   HiOutlineChevronLeft,
   HiOutlineGlobe,
+  HiOutlineUpload,
 } from "react-icons/hi";
 
 // First party components
@@ -66,6 +67,26 @@ interface OSPageTypes {
 export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
   // Get preferences
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
+
+  function Share() {
+    if (navigator.share) {
+      const url = document.location.href;
+      navigator
+        .share({
+          title: `${source.frontmatter.name}`,
+          text: `Discover ${source.frontmatter.name} donation options on ULOSINO Tempo`,
+          url: url,
+        })
+        .then(() => console.log("Shared successfully"))
+        .catch((error) =>
+          console.warn(
+            "Integrated Application Error: ShareErrorCaught https://docs.ulosino.com/docs/reference/errors",
+            error
+          )
+        );
+    }
+  }
+
   return (
     <>
       <Head>
@@ -88,10 +109,7 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
 
       {donationFeatures ? (
         <>
-          <Text me={2}>
-            It appears that ULOSINO Tempo features are disabled. Try deleting
-            the ULOSINO cache.
-          </Text>
+          <Text me={2}>ULOSINO Tempo features are disabled.</Text>
           <Code fontSize="xs">IAE FeatureIsDisabled</Code>
         </>
       ) : (
@@ -113,11 +131,16 @@ export default function DonationPage({ source, descriptionPath }: OSPageTypes) {
                 title="Payment card"
               />
             </Center>
-            <Link href={descriptionPath} passHref>
-              <Button leftIcon={<HiOutlineChevronLeft />} as="a">
-                Go Back
+            <Stack direction="column" spacing={2}>
+              <Link href={descriptionPath} passHref>
+                <Button leftIcon={<HiOutlineChevronLeft />} as="a">
+                  Go Back
+                </Button>
+              </Link>
+              <Button leftIcon={<HiOutlineUpload />} onClick={Share}>
+                Share or Copy
               </Button>
-            </Link>
+            </Stack>
           </Stack>
           <Stack direction="column" spacing={10} flex={1} as="main">
             <Stack direction="column" spacing={5}>
