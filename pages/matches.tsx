@@ -13,7 +13,8 @@ import { LoadingServer } from "components/Loading";
 import Head from "next/head";
 
 // Chakra UI, icons, and other design imports
-import { Stack, Heading, Text } from "@chakra-ui/react";
+import { Stack, Heading, Text, Button, Center } from "@chakra-ui/react";
+import { HiOutlineUpload } from "react-icons/hi";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
@@ -30,6 +31,24 @@ const MatchesExperience = dynamic(
 
 // Begin page
 export default function Matches() {
+  function Share() {
+    if (navigator.share) {
+      const url = document.location.href;
+      navigator
+        .share({
+          title: "ULOSINO Matches",
+          text: "Find an OS that matches your preferences, quickly and easily.",
+          url: url,
+        })
+        .then(() => console.log("Shared successfully"))
+        .catch((error) =>
+          console.warn(
+            "Integrated Application Error: ShareErrorCaught https://docs.ulosino.com/docs/reference/errors",
+            error
+          )
+        );
+    }
+  }
   return (
     <>
       <Head>
@@ -58,6 +77,16 @@ export default function Matches() {
             <MatchesExperience />
           </ErrorFallback>
         </Suspense>
+        <Stack direction="row" spacing={5}>
+          <Center>
+            <Text textStyle="miniHeading" as="h6">
+              Help a Friend
+            </Text>
+          </Center>
+          <Button leftIcon={<HiOutlineUpload />} size="sm" onClick={Share}>
+            Share Matches
+          </Button>
+        </Stack>
       </Stack>
     </>
   );
