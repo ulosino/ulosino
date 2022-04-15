@@ -108,6 +108,9 @@ const ZorinCard = dynamic(() => import("components/matches/cards/Zorin"), {
 const UbuntuCard = dynamic(() => import("components/matches/cards/Ubuntu"), {
   suspense: true,
 });
+const FedoraCard = dynamic(() => import("components/matches/cards/Fedora"), {
+  suspense: true,
+});
 const LinuxMintCard = dynamic(
   () => import("components/matches/cards/LinuxMint"),
   {
@@ -384,6 +387,9 @@ export default function MatchesExperience() {
                               </Suspense>
                               <Suspense fallback={<LoadingServer />}>
                                 <UbuntuCard />
+                              </Suspense>
+                              <Suspense fallback={<LoadingServer />}>
+                                <FedoraCard />
                               </Suspense>
                             </Stack>
                           ) : (

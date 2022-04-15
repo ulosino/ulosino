@@ -5,6 +5,7 @@
 // It works in the background and is not visible to the user unless an update is pending, hence the provider classification
 
 // Suspense and performance
+import { LoadingServer } from "components/Loading";
 import {
   writeStorage,
   deleteFromStorage,
@@ -16,22 +17,74 @@ import {
   Stack,
   Button,
   Text,
-  useDisclosure,
-  useBoolean,
+  createStandaloneToast,
+  Box,
+  useStyleConfig,
+  Center,
+  DarkMode,
 } from "@chakra-ui/react";
+function Card(props: { [x: string]: any; variant: string; children: any }) {
+  const { variant, children, ...rest } = props;
 
-// First party components
-import Overlay from "components/Overlay";
+  const styles = useStyleConfig("Card", { variant });
+
+  return (
+    <Box __css={styles} {...rest}>
+      {children}
+    </Box>
+  );
+}
+import UITheme from "providers/UIThemeProvider";
 
 import { useEffect, useRef } from "react";
 
 // Begin component
 export default function UpdateProvider() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef: any = useRef();
+  const toast = createStandaloneToast({ theme: UITheme });
+  const id = "updateProviderUpdatePrompt";
+  const updatePromptRef: any = useRef();
 
   const [updatePreference] = useLocalStorage("P3TriggerUpdate");
-  const [installing, setInstalling] = useBoolean();
+
+  function PromptToast() {
+    return (
+      <Card variant="secondary">
+        <DarkMode>
+          <Stack direction="row" spacing={5}>
+            <Center>
+              <Text textStyle="miniHeading" as="h6">
+                Updates are Ready
+              </Text>
+            </Center>
+            <Button
+              onClick={(_) =>
+                writeStorage("P3TriggerUpdate", updatePreference ? false : true)
+              }
+              size="sm"
+              ms={2}
+            >
+              Continue &amp; Update
+            </Button>
+          </Stack>
+        </DarkMode>
+      </Card>
+    );
+  }
+
+  function AddPromptToast() {
+    updatePromptRef.current = toast({
+      id,
+      duration: 10000,
+      position: "bottom",
+      render: PromptToast,
+    });
+  }
+
+  function ClosePromptToast() {
+    if (updatePromptRef.current) {
+      toast.close(updatePromptRef.current);
+    }
+  }
 
   useEffect(() => {
     if (
@@ -60,9 +113,12 @@ export default function UpdateProvider() {
       });
 
       const promptNewVersionAvailable = (event: any) => {
-        onOpen();
+        if (!toast.isActive(id)) {
+          AddPromptToast();
+        }
         if (updatePreference) {
-          setInstalling.on();
+          ClosePromptToast();
+
           deleteFromStorage("P3TriggerUpdate");
 
           wb.addEventListener("controlling", (event: any) => {
@@ -78,58 +134,6 @@ export default function UpdateProvider() {
       wb.register();
     }
   }),
-    [updatePreference, onOpen];
-
-  function ModalBody() {
-    return (
-      <Stack direction="column" spacing={5}>
-        <Text>
-          Install the latest updates now to get the latest content and features.
-        </Text>
-      </Stack>
-    );
-  }
-
-  function ModalClose() {
-    writeStorage("P3TriggerUpdate", false);
-    onClose();
-  }
-
-  function ModalFooter() {
-    return (
-      <>
-        {installing ? (
-          <Button isDisabled>Not Now</Button>
-        ) : (
-          <Button onClick={ModalClose}>Not Now</Button>
-        )}
-        {installing ? (
-          <Button ms={2} isLoading loadingText="Updating" />
-        ) : (
-          <Button
-            ref={cancelRef}
-            colorScheme="green"
-            ms={2}
-            onClick={(_) =>
-              writeStorage("P3TriggerUpdate", updatePreference ? false : true)
-            }
-          >
-            Continue &amp; Update
-          </Button>
-        )}
-      </>
-    );
-  }
-
-  return (
-    <Overlay
-      header="Update ULOSINO?"
-      body={<ModalBody />}
-      footer={<ModalFooter />}
-      cancelRef={cancelRef}
-      isOpen={isOpen}
-      onClose={onClose}
-      useAlertDialog={true}
-    />
-  );
+    [updatePreference, toast];
+  return <></>;
 }
