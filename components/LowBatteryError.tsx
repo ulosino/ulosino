@@ -16,7 +16,7 @@ export function LowBatteryError() {
   const [isCharging] = useLocalStorage("P3Charging");
 
   console.error(
-    "Integrated Application Error: FeatureBlocked https://docs.ulosino.com/reference/errors"
+    "Integrated Application Error: FeatureIsBlocked https://docs.ulosino.com/reference/errors"
   );
 
   return (

@@ -55,7 +55,7 @@ export default function BatteryMonitoringProvider() {
             </Center>
             <Center>
               <Link
-                href="https://docs.ulosino.com/reference/limited-performance"
+                href="https://docs.ulosino.com/reference/low-battery"
                 passHref
               >
                 <Button size="sm" as="a">
