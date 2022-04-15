@@ -7,14 +7,14 @@
 // Chakra UI, icons, and other design imports
 import { Text, Code } from "@chakra-ui/react";
 
-import React from "react";
-
 interface UnsupportedBrowserTypes {
   browser: string;
 }
 
 // Begin component
-export function BrowserNotPermitted({ browser }: UnsupportedBrowserTypes) {
+export default function BrowserNotPermitted({
+  browser,
+}: UnsupportedBrowserTypes) {
   console.error(
     "Integrated Application Error: BrowserNotPermitted https://docs.ulosino.com/docs/reference/errors"
   );

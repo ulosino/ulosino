@@ -106,6 +106,22 @@ export default function OSPage({
         [manager, window];
     }
   });
+
+  // Sharing features
+  function Share() {
+    if (navigator.share) {
+      let url = document.location.href;
+      navigator
+        .share({
+          title: `${source.frontmatter.name}`,
+          text: `Discover ${source.frontmatter.name} on ULOSINO`,
+          url: url,
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) => console.log("Error sharing", error));
+    }
+  }
+
   return (
     <>
       <Head>
@@ -189,6 +205,9 @@ export default function OSPage({
                     </Button>
                   </Link>
                 )}
+                <Button leftIcon={<HiOutlineCode />} onClick={Share}>
+                  Share {source.frontmatter.name}
+                </Button>
               </Stack>
               <Table>
                 <Tbody>
@@ -270,6 +289,7 @@ export default function OSPage({
                   )}
                 </Tbody>
               </Table>
+
               <Link href={contributionPath} passHref>
                 <Button
                   leftIcon={<HiOutlinePencil />}

@@ -17,7 +17,7 @@ import UITheme from "providers/UIThemeProvider";
 
 // First party components
 import { ErrorFallbackApplication } from "components/ErrorFallback";
-import { BrowserNotPermitted } from "components/BrowserNotPermitted";
+import BrowserNotPermitted from "components/BrowserNotPermitted";
 const UpdateProvider = dynamic(() => import("providers/UpdateProvider"), {
   suspense: true,
 });
@@ -62,9 +62,9 @@ export default function ApplicationProvider({
 }) {
   // Developers can disable the browser check to test on browsers that are not supported
   // DANGER! You're on your own when if you enable this preference. Use as a last resort
-  const [browserBypass] = useLocalStorage("P3PrefDangerousRuntime");
-  // If browserBypass has any value, console.warn the user
-  if (browserBypass) {
+  const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
+  // If dangerousRuntime has any value, console.warn the user
+  if (dangerousRuntime) {
     console.warn(
       "You have enabled P3PrefDangerousRuntime. Disable it now to reinstate recommended security protections."
     );
@@ -115,7 +115,7 @@ export default function ApplicationProvider({
           <>
             {/* Excluding UpdateProvider will break PWA functionality */}
             <UpdateProvider />
-            {browserBypass ? (
+            {dangerousRuntime ? (
               children
             ) : (
               // Check if the browser is permitted
