@@ -31,7 +31,6 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
 }
 import UITheme from "providers/UIThemeProvider";
 
-import { isSafari, isIOS } from "react-device-detect";
 import { useEffect, useRef } from "react";
 
 // Begin component
@@ -116,7 +115,8 @@ export default function BatteryMonitoringProvider() {
   }
 
   useEffect(() => {
-    if (isSafari === false && isIOS === false) {
+    // @ts-expect-error
+    if (navigator.getBattery) {
       DetectBatteryLevel();
     }
   }, []);

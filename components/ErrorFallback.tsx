@@ -6,8 +6,11 @@
 // TypeScript is not supported
 // @ts-nocheck
 
+// Links and routing
+import Link from "next/link";
+
 // Chakra UI, icons, and other design imports
-import { Text, Code } from "@chakra-ui/react";
+import { Stack, Text, Code } from "@chakra-ui/react";
 
 import React from "react";
 
@@ -28,12 +31,19 @@ export class ErrorFallback extends React.Component {
       console.error(
         "Integrated Application Error: ErrorRegionCaught https://docs.ulosino.com/docs/reference/errors"
       );
-      return <Text>Something went wrong.</Text>;
+      return <Text>An error occurred.</Text>;
     }
 
     return this.props.children;
   }
 }
+
+export const environment = process.env.NEXT_PUBLIC_VERCEL_ENV;
+export const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
+export const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF;
+export const commitMessage = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE;
+export const commitAuthor =
+  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_AUTHOR_LOGIN;
 
 // This surrounds the whole app
 // Used if the page has no defined error fallbacks
@@ -53,14 +63,45 @@ export class ErrorFallbackApplication extends React.Component {
         "Integrated Application Error: ErrorInUndefinedRegion https://docs.ulosino.com/docs/reference/errors"
       );
       return (
-        <>
-          <Text mt={20} mx={20} mb={2}>
-            Something went wrong. Reference ULOSINO documentation.
-          </Text>
-          <Code fontSize="xs" mx={20}>
-            IAE ErrorInUndefinedRegion
-          </Code>
-        </>
+        <Stack direction="column" spacing={10} m={20}>
+          <Text>An error occurred.</Text>
+          <Stack direction="row" spacing={10} fontSize="xs">
+            <Stack direction="column" spacing={2}>
+              <Text>Error</Text>
+              <Text>Commit/Branch</Text>
+              <Text>Commit Details</Text>
+            </Stack>
+            <Stack direction="column" spacing={2}>
+              <Stack direction="row" spacing={2}>
+                <Code fontSize="xs">IAE ErrorInUndefinedRegion</Code>
+                <Link href="https://docs.ulosino.com/reference/errors">
+                  Learn More...
+                </Link>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                {commit ? (
+                  <Code fontSize="xs">{commit}</Code>
+                ) : (
+                  <Text>Undefined</Text>
+                )}
+                {branch ? (
+                  <Code fontSize="xs">{branch}</Code>
+                ) : (
+                  <Text>Undefined</Text>
+                )}
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                {commit ? (
+                  <Text>
+                    "{commitMessage}" by {commitAuthor}
+                  </Text>
+                ) : (
+                  <Text>Undefined</Text>
+                )}
+              </Stack>
+            </Stack>
+          </Stack>
+        </Stack>
       );
     }
 
