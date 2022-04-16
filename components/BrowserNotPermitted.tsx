@@ -48,8 +48,16 @@ export default function BrowserNotPermitted({
             </Link>
           </Stack>
           <Stack direction="row" spacing={2}>
-            {commit ? <Code>{commit}</Code> : <Text>Undefined</Text>}
-            {branch ? <Code>{branch}</Code> : <Text>Undefined</Text>}
+            {commit ? (
+              <Code fontSize="xs">{commit}</Code>
+            ) : (
+              <Text>Undefined</Text>
+            )}
+            {branch ? (
+              <Code fontSize="xs">{branch}</Code>
+            ) : (
+              <Text>Undefined</Text>
+            )}
           </Stack>
           <Stack direction="row" spacing={2}>
             {commit ? (
