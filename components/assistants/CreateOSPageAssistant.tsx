@@ -461,7 +461,7 @@ origin: ""`;
             <FormControl>
               <FormLabel>Enter the Project's Website URL</FormLabel>
               <InputGroup>
-                <InputLeftAddon children="https://" />
+                <InputLeftAddon>https://</InputLeftAddon>
                 <Input
                   value={website}
                   onChange={websiteInputChange}
@@ -473,7 +473,7 @@ origin: ""`;
             <FormControl>
               <FormLabel>Enter the Project's Source Repository URL</FormLabel>
               <InputGroup>
-                <InputLeftAddon children="https://" />
+                <InputLeftAddon>https://</InputLeftAddon>
                 <Input
                   value={repository}
                   onChange={repositoryInputChange}
