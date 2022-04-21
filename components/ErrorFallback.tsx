@@ -74,7 +74,7 @@ export class ErrorFallbackApplication extends React.Component {
             <Stack direction="column" spacing={2}>
               <Stack direction="row" spacing={2}>
                 <Code fontSize="xs">IAE ErrorInUndefinedRegion</Code>
-                <Link href="https://docs.ulosino.com/reference/errors">
+                <Link href="https://docs.ulosino.com/docs/reference/errors">
                   Learn More...
                 </Link>
               </Stack>
