@@ -21,8 +21,8 @@ import Layout from "components/layouts/Layout";
 import BrowseLayout from "components/layouts/BrowseLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 import { ErrorFallback } from "components/ErrorFallback";
-const OSPageAssistant = dynamic(
-  () => import("components/assistants/OSPageAssistant"),
+const CreateOSPageAssistant = dynamic(
+  () => import("components/assistants/CreateOSPageAssistant"),
   {
     suspense: true,
   }
@@ -52,7 +52,7 @@ export default function CreateOSPage() {
         </noscript>
         <Suspense fallback={<LoadingServer />}>
           <ErrorFallback>
-            <OSPageAssistant />
+            <CreateOSPageAssistant />
           </ErrorFallback>
         </Suspense>
       </Stack>
