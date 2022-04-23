@@ -140,7 +140,7 @@ origin: ""`;
 
   // Generated OS Page
   const combinedValue = `---
-# Generated with COPA (3.6.1)
+# Generated with COPA (updated 3.6.1)
 
 # Core metadata
 name: "${name}"
@@ -295,10 +295,9 @@ ${description}`;
                     </Text>
                     <Text>
                       At the top of the page, you'll need to name the new file
-                      as
-                      <Code>{name}.mdx</Code>. Underneath, paste the OS Page.
-                      Then choose to create a new branch to open a pull request
-                      for your changes.
+                      as <Code>{name.toLowerCase()}.mdx</Code>. Underneath,
+                      paste the OS Page. Then choose to create a new branch to
+                      open a pull request for your changes.
                     </Text>
                     <Link
                       href="https://github.com/ulosino/ulosino/new/main/public/markdown/browse"
