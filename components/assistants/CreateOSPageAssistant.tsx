@@ -85,14 +85,14 @@ export default function CreateOSPageAssistant() {
   const [website, setWebsiteValue] = useState("");
   const websiteInputChange = (e: { target: { value: string } }) => {
     let inputValue = e.target.value;
-    setNameValue(inputValue);
+    setWebsiteValue(inputValue);
   };
 
   // Project repository website
   const [repository, setRepositoryValue] = useState("");
   const repositoryInputChange = (e: { target: { value: string } }) => {
     let inputValue = e.target.value;
-    setNameValue(inputValue);
+    setRepositoryValue(inputValue);
   };
 
   // Description
@@ -133,10 +133,12 @@ origin: ""`;
 # donateOpenCollective: "" # Open Collective
 # donateGithub: ""
 # donateLiberapay: ""`;
-  const [donationMetadata, setDonationMetadataValue] = useState(metadataValue);
+  const [donationMetadata, setDonationMetadataValue] = useState(
+    donationMetadataValue
+  );
   const donationMetadataInputChange = (e: { target: { value: string } }) => {
     let inputValue = e.target.value;
-    setMetadataValue(inputValue);
+    setDonationMetadataValue(inputValue);
   };
 
   // Generated OS Page
@@ -148,8 +150,8 @@ origin: ""`;
   category: "${categoryArray[activeTab].label}"
   summary: "${summary}"
   ${metadata}
-  website: "${website}"
-  repository: "${repository}"
+  website: "https://${website}"
+  repository: "https://${repository}"
 
   # ULOSINO Tempo metadata
   ${donationMetadata}
@@ -294,9 +296,9 @@ origin: ""`;
                       environment.
                     </Text>
                     <Text>
-                      At the top of the page, you'll need to name the new file,
-                      using the <Code>name.mdx</Code> convention (for example,{" "}
-                      <Code>ubuntu.mdx</Code>). Underneath, paste the OS Page.
+                      At the top of the page, you'll need to name the new file
+                      as
+                      <Code>{name}.mdx</Code>. Underneath, paste the OS Page.
                       Then choose to create a new branch to open a pull request
                       for your changes.
                     </Text>
@@ -348,7 +350,7 @@ origin: ""`;
                           </FormLabel>
                           <ErrorFallback>
                             <Textarea
-                              value={donationMetadataValue}
+                              value={donationMetadata}
                               onChange={donationMetadataInputChange}
                               size="sm"
                               rounded="xl"
