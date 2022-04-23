@@ -155,7 +155,7 @@ repository: "${repository}"
 ${donationMetadata}
 ---
   
-  ${description}`;
+${description}`;
   const { hasCopied, onCopy } = useClipboard(combinedValue);
 
   // Share combined clipboard
