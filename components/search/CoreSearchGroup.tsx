@@ -42,7 +42,7 @@ export default function CoreSearchGroup({ data }: DataTypes) {
   return (
     <>
       {/* Name */}
-      <SearchName data={data} size="md" />
+      <SearchName data={data} />
       {/* Platform */}
       <AutoComplete emptyState={EmptyState}>
         <AutoCompleteInput

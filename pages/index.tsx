@@ -9,6 +9,7 @@ import { GetStaticProps } from "next";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { LoadingServer } from "components/Loading";
+import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
 
 // Head and SEO
 import Head from "next/head";
@@ -27,6 +28,8 @@ import {
   DarkMode,
   Box,
   useStyleConfig,
+  useDisclosure,
+  IconButton,
 } from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
@@ -40,17 +43,66 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
   );
 }
 import {
+  HiOutlineChip,
+  HiOutlineCube,
   HiOutlineDatabase,
+  HiOutlineDesktopComputer,
+  HiOutlineDocumentDuplicate,
+  HiOutlineDocumentText,
+  HiOutlineDotsVertical,
   HiOutlineInformationCircle,
+  HiOutlineKey,
   HiOutlineSparkles,
+  HiOutlineTag,
+  HiOutlineTerminal,
 } from "react-icons/hi";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
+import Overlay from "components/Overlay";
 import { NoJSWarningHome } from "components/NoJSWarning";
 import { ErrorFallback } from "components/ErrorFallback";
 const SearchName = dynamic(() => import("components/search/SearchName"), {
+  suspense: true,
+});
+const SearchPlatform = dynamic(
+  () => import("components/search/SearchPlatform"),
+  {
+    suspense: true,
+  }
+);
+const SearchDesktop = dynamic(() => import("components/search/SearchDesktop"), {
+  suspense: true,
+});
+const SearchShell = dynamic(() => import("components/search/SearchShell"), {
+  suspense: true,
+});
+const SearchPackageManager = dynamic(
+  () => import("components/search/SearchPackageManager"),
+  {
+    suspense: true,
+  }
+);
+const SearchStartupManager = dynamic(
+  () => import("components/search/SearchStartupManager"),
+  {
+    suspense: true,
+  }
+);
+const SearchDerivedOS = dynamic(
+  () => import("components/search/SearchDerivedOS"),
+  {
+    suspense: true,
+  }
+);
+const SearchCategory = dynamic(
+  () => import("components/search/SearchCategory"),
+  {
+    suspense: true,
+  }
+);
+const SearchSummary = dynamic(() => import("components/search/SearchSummary"), {
   suspense: true,
 });
 
@@ -61,14 +113,107 @@ interface OSDataPage {
   AZOSPageData: any;
 }
 
+import { useState, useRef } from "react";
+
 // Begin page
 export default function Home({ AZOSPageData }: OSDataPage) {
+  const [junctionPreview] = useLocalStorage("P3PrefJunctionPreview");
+
   const systemDate = new Date();
   const hours = systemDate.getHours();
   var timeGreeting;
   if (hours < 12) timeGreeting = "Good Morning";
   else if (hours >= 12 && hours <= 17) timeGreeting = "Good Afternoon";
   else if (hours >= 17 && hours <= 24) timeGreeting = "Good Evening";
+
+  // Begin search array
+  const searchArray = [
+    {
+      label: "Search by Name",
+      shortLabel: "Name",
+      icon: <HiOutlineDocumentText />,
+      content: <SearchName data={AZOSPageData} />,
+    },
+    {
+      label: "Search by Platform",
+      shortLabel: "Platform",
+      icon: <HiOutlineChip />,
+      content: <SearchPlatform data={AZOSPageData} />,
+    },
+    {
+      label: "Search by Desktop",
+      shortLabel: "Desktop",
+      icon: <HiOutlineDesktopComputer />,
+      content: <SearchDesktop data={AZOSPageData} />,
+    },
+    {
+      label: "Search by Package Manager",
+      shortLabel: "Package Manager",
+      icon: <HiOutlineCube />,
+      content: <SearchPackageManager data={AZOSPageData} />,
+    },
+    {
+      label: "Search by Startup Manager",
+      shortLabel: "Startup Manager",
+      icon: <HiOutlineKey />,
+      content: <SearchStartupManager data={AZOSPageData} />,
+    },
+    {
+      label: "Search by Shell",
+      shortLabel: "Shell",
+      icon: <HiOutlineTerminal />,
+      content: <SearchShell data={AZOSPageData} />,
+    },
+    {
+      label: "Search by Derived OS",
+      shortLabel: "Derived OS",
+      icon: <HiOutlineDocumentDuplicate />,
+      content: <SearchDerivedOS data={AZOSPageData} />,
+    },
+    {
+      label: "Search by Category",
+      shortLabel: "Category",
+      icon: <HiOutlineTag />,
+      content: <SearchCategory data={AZOSPageData} />,
+    },
+    {
+      label: "Search Summaries",
+      shortLabel: "Summaries",
+      icon: <HiOutlineInformationCircle />,
+      content: <SearchSummary data={AZOSPageData} />,
+    },
+  ];
+  const [activeTab, setActiveTab] = useState(0);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef: any = useRef();
+  function SearchOptionsOverlayBody() {
+    return (
+      <Stack direction="column" spacing={2}>
+        {searchArray.map((tab, index) => (
+          <Button
+            key={index}
+            onClick={(_) => {
+              setActiveTab(index);
+              onClose();
+            }}
+            isActive={index === activeTab}
+            leftIcon={tab.icon}
+          >
+            {tab.label}
+          </Button>
+        ))}
+      </Stack>
+    );
+  }
+  function SearchOptionsOverlayFooter() {
+    return (
+      <>
+        <Button ref={cancelRef} onClick={onClose}>
+          Cancel
+        </Button>
+      </>
+    );
+  }
 
   return (
     <>
@@ -95,19 +240,64 @@ export default function Home({ AZOSPageData }: OSDataPage) {
           </noscript>
         </ErrorFallback>
         <SimpleGrid minChildWidth="300px" spacing={10}>
-          <Suspense fallback={<LoadingServer />}>
-            <ErrorFallback>
+          <ErrorFallback>
+            <Stack direction="column" spacing={5}>
+              <Text textStyle="miniHeading" as="h6">
+                Start
+              </Text>
               <Stack direction="column" spacing={5}>
-                <Text textStyle="miniHeading" as="h6">
-                  Start
-                </Text>
-                <Stack direction="column" spacing={5}>
-                  <Heading size="xl">{timeGreeting}</Heading>
-                  <SearchName data={AZOSPageData} size="lg" />
-                </Stack>
+                <Heading size="xl">{timeGreeting}</Heading>
+                {junctionPreview ? (
+                  <Stack direction="row" spacing={2}>
+                    {/* Map buttons for the first 5 in searchArray */}
+                    {searchArray.slice(0, 4).map((tab, index) => (
+                      <Button
+                        key={index}
+                        onClick={(_) => {
+                          setActiveTab(index);
+                        }}
+                        isActive={index === activeTab}
+                        size="sm"
+                      >
+                        {tab.shortLabel}
+                      </Button>
+                    ))}
+                    {isOpen ? (
+                      <IconButton
+                        icon={<HiOutlineDotsVertical />}
+                        aria-label="Open Search Options Menu"
+                        title="Open Search Options Menu"
+                        size="sm"
+                        isActive
+                      />
+                    ) : (
+                      <IconButton
+                        icon={<HiOutlineDotsVertical />}
+                        aria-label="Open Search Options Menu"
+                        title="Open Search Options Menu"
+                        size="sm"
+                        onClick={onOpen}
+                      />
+                    )}
+                    <Overlay
+                      header="Search Options"
+                      body={<SearchOptionsOverlayBody />}
+                      footer={<SearchOptionsOverlayFooter />}
+                      cancelRef={cancelRef}
+                      isOpen={isOpen}
+                      onClose={onClose}
+                      useAlertDialog={false}
+                    />
+                  </Stack>
+                ) : (
+                  ""
+                )}
+                <Suspense fallback={<LoadingServer />}>
+                  <Box>{searchArray[activeTab].content}</Box>
+                </Suspense>
               </Stack>
-            </ErrorFallback>
-          </Suspense>
+            </Stack>
+          </ErrorFallback>
           <ErrorFallback>
             <Card variant="secondary">
               <DarkMode>

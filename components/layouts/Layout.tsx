@@ -62,6 +62,7 @@ export default function Layout({
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
+  const [junctionPreview] = useLocalStorage("P3PrefJunctionPreview");
   const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
 
@@ -358,58 +359,91 @@ export default function Layout({
             {useBasicLayout ? (
               ""
             ) : (
-              <Center
-                display={{ base: "none", sm: "flex" }}
-                as="nav"
-                id="testingHeaderLinks"
-              >
-                <Stack direction="row" spacing={2} mx={10}>
-                  <Link href="/" passHref>
-                    <Button variant="ghost" as="a">
-                      Home
-                    </Button>
-                  </Link>
-                  {advancedSearch ? (
-                    <>
-                      <Link href="/search" passHref>
-                        <Button
-                          variant="ghost"
-                          as="a"
-                          id="testingHeaderSearchLink"
-                          display={{ base: "none", md: "flex" }}
-                        >
-                          Advanced Search
+              <>
+                {junctionPreview ? (
+                  <Center
+                    display={{ base: "none", sm: "flex" }}
+                    as="nav"
+                    id="testingHeaderLinks"
+                  >
+                    <Stack direction="row" spacing={2} mx={10}>
+                      <Link href="/" passHref>
+                        <Button variant="ghost" as="a">
+                          Home
                         </Button>
                       </Link>
-                      <Link href="/search" passHref>
-                        <Button
-                          variant="ghost"
-                          as="a"
-                          id="testingHeaderSearchLink"
-                          display={{ base: "none", sm: "flex", md: "none" }}
-                        >
-                          Search
+                      <Link href="/matches" passHref>
+                        <Button variant="ghost" as="a">
+                          Matches
                         </Button>
                       </Link>
-                    </>
-                  ) : (
-                    <Link href="/browse" passHref>
-                      <Button
-                        variant="ghost"
-                        as="a"
-                        id="testingHeaderBrowseLink"
-                      >
-                        Browse
-                      </Button>
-                    </Link>
-                  )}
-                  <Link href="/about" passHref>
-                    <Button variant="ghost" as="a">
-                      About
-                    </Button>
-                  </Link>
-                </Stack>
-              </Center>
+                      <Link href="/create" passHref>
+                        <Button variant="ghost" as="a">
+                          Create
+                        </Button>
+                      </Link>
+                      <Link href="/about" passHref>
+                        <Button variant="ghost" as="a">
+                          About
+                        </Button>
+                      </Link>
+                    </Stack>
+                  </Center>
+                ) : (
+                  <Center
+                    display={{ base: "none", sm: "flex" }}
+                    as="nav"
+                    id="testingHeaderLinks"
+                  >
+                    <Stack direction="row" spacing={2} mx={10}>
+                      <Link href="/" passHref>
+                        <Button variant="ghost" as="a">
+                          Home
+                        </Button>
+                      </Link>
+                      {advancedSearch ? (
+                        <>
+                          <Link href="/search" passHref>
+                            <Button
+                              variant="ghost"
+                              as="a"
+                              id="testingHeaderSearchLink"
+                              display={{ base: "none", md: "flex" }}
+                            >
+                              Advanced Search
+                            </Button>
+                          </Link>
+                          <Link href="/search" passHref>
+                            <Button
+                              variant="ghost"
+                              as="a"
+                              id="testingHeaderSearchLink"
+                              display={{ base: "none", sm: "flex", md: "none" }}
+                            >
+                              Search
+                            </Button>
+                          </Link>
+                        </>
+                      ) : (
+                        <Link href="/browse" passHref>
+                          <Button
+                            variant="ghost"
+                            as="a"
+                            id="testingHeaderBrowseLink"
+                          >
+                            Browse
+                          </Button>
+                        </Link>
+                      )}
+                      <Link href="/about" passHref>
+                        <Button variant="ghost" as="a">
+                          About
+                        </Button>
+                      </Link>
+                    </Stack>
+                  </Center>
+                )}
+              </>
             )}
             <Spacer />
             <Center display={{ base: "none", sm: "flex" }}>
