@@ -24,8 +24,6 @@ import {
   Heading,
   Badge,
   FormHelperText,
-  InputGroup,
-  InputLeftAddon,
   Code,
 } from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
@@ -85,14 +83,14 @@ export default function CreateOSPageAssistant() {
   const [website, setWebsiteValue] = useState("");
   const websiteInputChange = (e: { target: { value: string } }) => {
     let inputValue = e.target.value;
-    setNameValue(inputValue);
+    setWebsiteValue(inputValue);
   };
 
   // Project repository website
   const [repository, setRepositoryValue] = useState("");
   const repositoryInputChange = (e: { target: { value: string } }) => {
     let inputValue = e.target.value;
-    setNameValue(inputValue);
+    setRepositoryValue(inputValue);
   };
 
   // Description
@@ -110,11 +108,10 @@ export default function CreateOSPageAssistant() {
   };
 
   // Core metadata
-  let metadataValue = String.raw`date: "" # Year-Month-Day
-version: "" # Version at writing
-platform: "" # Separate by commas
+  let metadataValue = String.raw`version: ""
+platform: ""
 descends: ""
-desktop: "" # Leave blank if not installed or default
+desktop: ""
 shell: "bash"
 packagemgr: ""
 startup: "systemd"
@@ -129,33 +126,36 @@ origin: ""`;
   };
 
   // ULOSINO Tempo metadata
-  let donationMetadataValue = String.raw`# donate: "" # Required to enable Quick Donation Options
-# donateOpenCollective: "" # Open Collective
+  let donationMetadataValue = String.raw`# donate: ""
+# donateOpenCollective: ""
 # donateGithub: ""
 # donateLiberapay: ""`;
-  const [donationMetadata, setDonationMetadataValue] = useState(metadataValue);
+  const [donationMetadata, setDonationMetadataValue] = useState(
+    donationMetadataValue
+  );
   const donationMetadataInputChange = (e: { target: { value: string } }) => {
     let inputValue = e.target.value;
-    setMetadataValue(inputValue);
+    setDonationMetadataValue(inputValue);
   };
 
   // Generated OS Page
   const combinedValue = `---
-  # Generated with Create OS Page Assistant (3.6.0)
+# Generated with COPA (updated 3.6.1)
 
-  # Core metadata
-  name: "${name}"
-  category: "${categoryArray[activeTab].label}"
-  summary: "${summary}"
-  ${metadata}
-  website: "${website}"
-  repository: "${repository}"
+# Core metadata
+name: "${name}"
+date: "${new Date().toISOString().slice(0, 10)}"
+category: "${categoryArray[activeTab].label}"
+summary: "${summary}"
+${metadata}
+website: "${website}"
+repository: "${repository}"
 
-  # ULOSINO Tempo metadata
-  ${donationMetadata}
-  ---
+# ULOSINO Tempo metadata
+${donationMetadata}
+---
   
-  ${description}`;
+${description}`;
   const { hasCopied, onCopy } = useClipboard(combinedValue);
 
   // Share combined clipboard
@@ -294,11 +294,10 @@ origin: ""`;
                       environment.
                     </Text>
                     <Text>
-                      At the top of the page, you'll need to name the new file,
-                      using the <Code>name.mdx</Code> convention (for example,{" "}
-                      <Code>ubuntu.mdx</Code>). Underneath, paste the OS Page.
-                      Then choose to create a new branch to open a pull request
-                      for your changes.
+                      At the top of the page, you'll need to name the new file
+                      as <Code>{name.toLowerCase()}.mdx</Code>. Underneath,
+                      paste the OS Page. Then choose to create a new branch to
+                      open a pull request for your changes.
                     </Text>
                     <Link
                       href="https://github.com/ulosino/ulosino/new/main/public/markdown/browse"
@@ -336,6 +335,13 @@ origin: ""`;
                           id="testingCOPAMetadataInput"
                         />
                       </ErrorFallback>
+                      <FormHelperText>
+                        Write between the <Code>"</Code> symbols. If a field is
+                        not known or not applicable, leave it blank.{" "}
+                        <Link href="https://docs.ulosino.com/docs/reference/embedded-metadata">
+                          Learn More...
+                        </Link>
+                      </FormHelperText>
                     </FormControl>
                     <Card variant="solid">
                       <Stack direction="column" spacing={2}>
@@ -348,7 +354,7 @@ origin: ""`;
                           </FormLabel>
                           <ErrorFallback>
                             <Textarea
-                              value={donationMetadataValue}
+                              value={donationMetadata}
                               onChange={donationMetadataInputChange}
                               size="sm"
                               rounded="xl"
@@ -460,30 +466,27 @@ origin: ""`;
             </FormControl>
             <FormControl>
               <FormLabel>Enter the Project's Website URL</FormLabel>
-              <InputGroup>
-                <InputLeftAddon>https://</InputLeftAddon>
-                <Input
-                  value={website}
-                  onChange={websiteInputChange}
-                  rounded="xl"
-                  shadow="inner"
-                />
-              </InputGroup>
+              <Input
+                value={website}
+                onChange={websiteInputChange}
+                rounded="xl"
+                shadow="inner"
+              />
+              <FormHelperText>
+                Enter the HTTPS URL to the project's website..
+              </FormHelperText>
             </FormControl>
             <FormControl>
               <FormLabel>Enter the Project's Source Repository URL</FormLabel>
-              <InputGroup>
-                <InputLeftAddon>https://</InputLeftAddon>
-                <Input
-                  value={repository}
-                  onChange={repositoryInputChange}
-                  rounded="xl"
-                  shadow="inner"
-                />
-              </InputGroup>
+              <Input
+                value={repository}
+                onChange={repositoryInputChange}
+                rounded="xl"
+                shadow="inner"
+              />
               <FormHelperText>
-                Enter the URL to the project's public source repository, if
-                available.
+                Enter the HTTPS URL to the project's public source repository,
+                if available.
               </FormHelperText>
             </FormControl>
           </>
