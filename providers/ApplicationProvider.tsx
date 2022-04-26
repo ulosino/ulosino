@@ -9,7 +9,7 @@ import { ReactElement } from "react";
 
 // Suspense and performance
 import dynamic from "next/dynamic";
-import { useLocalStorage } from "@rehooks/local-storage";
+import { useLocalStorage, writeStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
 import { ChakraProvider } from "@chakra-ui/react";
@@ -66,15 +66,7 @@ export default function ApplicationProvider({
 }: {
   children: ReactElement;
 }) {
-  // Developers can disable the browser check to test on browsers that are not supported
-  // DANGER! You're on your own when if you enable this preference. Use as a last resort
-  const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
-  // If dangerousRuntime has any value, console.warn the user
-  if (dangerousRuntime) {
-    console.warn(
-      "You have enabled P3PrefDangerousRuntime. Disable it now to reinstate recommended security protections."
-    );
-  }
+  const [runtimeLevel] = useLocalStorage("P3RuntimeLevel");
 
   // Global troubleshooting keybindings
   useEffect(() => {
@@ -114,6 +106,22 @@ export default function ApplicationProvider({
     });
   }
 
+  useEffect(() => {
+    if (isIE) {
+      writeStorage("P3RuntimeLevel", 0);
+    } else {
+      if (isLegacyEdge) {
+        writeStorage("P3RuntimeLevel", 0);
+      } else {
+        if (isYandex) {
+          writeStorage("P3RuntimeLevel", 0);
+        } else {
+          writeStorage("P3RuntimeLevel", 4);
+        }
+      }
+    }
+  });
+
   return (
     <ChakraProvider theme={UITheme}>
       <ErrorFallbackApplication>
@@ -122,29 +130,11 @@ export default function ApplicationProvider({
             {/* Excluding UpdateProvider will break PWA functionality */}
             <UpdateProvider />
             <BatteryMonitoringProvider />
-            {dangerousRuntime ? (
-              children
+            {/* If runtimeLevel = 0 render BrowserNotPermitted instead of children  */}
+            {runtimeLevel === "0" ? (
+              <BrowserNotPermitted browser="Unknown Browser" />
             ) : (
-              // Check if the browser is permitted
-              <>
-                {isIE ? (
-                  <BrowserNotPermitted browser="Internet Explorer" />
-                ) : (
-                  <>
-                    {isLegacyEdge ? (
-                      <BrowserNotPermitted browser="Microsoft Edge Legacy" />
-                    ) : (
-                      <>
-                        {isYandex ? (
-                          <BrowserNotPermitted browser="Yandex Browser" />
-                        ) : (
-                          children
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
-              </>
+              children
             )}
           </>
         </KeybindingProvider>

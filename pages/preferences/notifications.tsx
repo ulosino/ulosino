@@ -18,8 +18,6 @@ import {
   Heading,
   Text,
   Button,
-  Kbd,
-  useColorMode,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
