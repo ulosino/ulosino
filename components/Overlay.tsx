@@ -62,7 +62,7 @@ export function OverlayModal({
   onClose,
   useAlertDialog,
 }: OverlayProps): ReactElement {
-  const [disableMotion] = useLocalStorage("P3LowBatteryMode");
+  const [disableMotion] = useLocalStorage("P3PM");
   return (
     <>
       {useAlertDialog ? (

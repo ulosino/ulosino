@@ -33,7 +33,6 @@ import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 import { ErrorFallback } from "components/ErrorFallback";
-import { LowBatteryErrorButton } from "components/LowBatteryError";
 const DisableDonationFeaturesConfirmation = dynamic(
   () => import("components/confirmations/DisableDonationFeaturesConfirmation"),
   {
@@ -61,7 +60,6 @@ const PreferenceResetAssistant = dynamic(
 
 // Begin page
 export default function AdvancedPreferences() {
-  const [lowBatteryMode] = useLocalStorage("P3LowBatteryMode");
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
   const [backgroundUpdates] = useLocalStorage("P3PrefDisableBackgroundUpdates");
   const pageName = useBreakpointValue({
@@ -110,15 +108,11 @@ export default function AdvancedPreferences() {
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>
-            {lowBatteryMode ? (
-              <LowBatteryErrorButton />
-            ) : (
-              <ErrorFallback>
-                <Suspense fallback={<LoadingServerButton />}>
-                  <PreferenceTransferAssistant />
-                </Suspense>
-              </ErrorFallback>
-            )}
+            <ErrorFallback>
+              <Suspense fallback={<LoadingServerButton />}>
+                <PreferenceTransferAssistant />
+              </Suspense>
+            </ErrorFallback>
             <Text fontSize="xs" lineHeight="shorter">
               Manage ULOSINO preferences using a preference code.
             </Text>
@@ -132,13 +126,9 @@ export default function AdvancedPreferences() {
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>
-            {lowBatteryMode ? (
-              <LowBatteryErrorButton />
-            ) : (
-              <Suspense fallback={<LoadingServerButton />}>
-                <PreferenceResetAssistant />
-              </Suspense>
-            )}
+            <Suspense fallback={<LoadingServerButton />}>
+              <PreferenceResetAssistant />
+            </Suspense>
             <Text fontSize="xs" lineHeight="shorter">
               Restore default preferences for all sessions.
             </Text>
