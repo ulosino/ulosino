@@ -52,12 +52,6 @@ const EnableJunctionProjectPreview = dynamic(
     suspense: true,
   }
 );
-const PreferenceTransferAssistant = dynamic(
-  () => import("components/assistants/PreferenceTransferAssistant"),
-  {
-    suspense: true,
-  }
-);
 const PreferenceResetAssistant = dynamic(
   () => import("components/assistants/PreferenceResetAssistant"),
   {
@@ -123,20 +117,6 @@ export default function AdvancedPreferences() {
             <Text fontSize="xs" lineHeight="shorter">
               {junctionPreview ? "Disable" : "Enable"} the Junction Project
               Preview.
-            </Text>
-          </Stack>
-          <Stack direction="column" spacing={2}>
-            {lowBatteryMode ? (
-              <LowBatteryErrorButton />
-            ) : (
-              <ErrorFallback>
-                <Suspense fallback={<LoadingServerButton />}>
-                  <PreferenceTransferAssistant />
-                </Suspense>
-              </ErrorFallback>
-            )}
-            <Text fontSize="xs" lineHeight="shorter">
-              Manage ULOSINO preferences using a preference code.
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>

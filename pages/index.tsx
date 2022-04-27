@@ -43,18 +43,10 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
   );
 }
 import {
-  HiOutlineChip,
-  HiOutlineCube,
   HiOutlineDatabase,
-  HiOutlineDesktopComputer,
-  HiOutlineDocumentDuplicate,
-  HiOutlineDocumentText,
   HiOutlineDotsVertical,
   HiOutlineInformationCircle,
-  HiOutlineKey,
   HiOutlineSparkles,
-  HiOutlineTag,
-  HiOutlineTerminal,
 } from "react-icons/hi";
 
 // First party components
@@ -131,55 +123,46 @@ export default function Home({ AZOSPageData }: OSDataPage) {
     {
       label: "Search by Name",
       shortLabel: "Name",
-      icon: <HiOutlineDocumentText />,
       content: <SearchName data={AZOSPageData} />,
     },
     {
       label: "Search by Platform",
       shortLabel: "Platform",
-      icon: <HiOutlineChip />,
       content: <SearchPlatform data={AZOSPageData} />,
     },
     {
       label: "Search by Desktop",
       shortLabel: "Desktop",
-      icon: <HiOutlineDesktopComputer />,
       content: <SearchDesktop data={AZOSPageData} />,
     },
     {
       label: "Search by Package Manager",
       shortLabel: "Package Manager",
-      icon: <HiOutlineCube />,
       content: <SearchPackageManager data={AZOSPageData} />,
     },
     {
       label: "Search by Startup Manager",
       shortLabel: "Startup Manager",
-      icon: <HiOutlineKey />,
       content: <SearchStartupManager data={AZOSPageData} />,
     },
     {
       label: "Search by Shell",
       shortLabel: "Shell",
-      icon: <HiOutlineTerminal />,
       content: <SearchShell data={AZOSPageData} />,
     },
     {
       label: "Search by Derived OS",
       shortLabel: "Derived OS",
-      icon: <HiOutlineDocumentDuplicate />,
       content: <SearchDerivedOS data={AZOSPageData} />,
     },
     {
       label: "Search by Category",
       shortLabel: "Category",
-      icon: <HiOutlineTag />,
       content: <SearchCategory data={AZOSPageData} />,
     },
     {
       label: "Search Summaries",
       shortLabel: "Summaries",
-      icon: <HiOutlineInformationCircle />,
       content: <SearchSummary data={AZOSPageData} />,
     },
   ];
@@ -197,7 +180,6 @@ export default function Home({ AZOSPageData }: OSDataPage) {
               onClose();
             }}
             isActive={index === activeTab}
-            leftIcon={tab.icon}
           >
             {tab.label}
           </Button>
