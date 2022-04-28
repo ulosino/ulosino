@@ -44,12 +44,6 @@ const DisableUpdateFeaturesConfirmation = dynamic(
     suspense: true,
   }
 );
-const EnableJunctionProjectPreview = dynamic(
-  () => import("components/confirmations/EnableJunctionProjectPreview"),
-  {
-    suspense: true,
-  }
-);
 const PreferenceResetAssistant = dynamic(
   () => import("components/assistants/PreferenceResetAssistant"),
   {
@@ -105,15 +99,6 @@ export default function AdvancedPreferences() {
             <Text fontSize="xs" lineHeight="shorter">
               {backgroundUpdates ? "Enable" : "Disable"} automatic update
               checks.
-            </Text>
-          </Stack>
-          <Stack direction="column" spacing={2}>
-            <Suspense fallback={<LoadingServerButton />}>
-              <EnableJunctionProjectPreview />
-            </Suspense>
-            <Text fontSize="xs" lineHeight="shorter">
-              {junctionPreview ? "Disable" : "Enable"} the Junction Project
-              Preview.
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>
