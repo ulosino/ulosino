@@ -55,7 +55,6 @@ const PreferenceResetAssistant = dynamic(
 export default function AdvancedPreferences() {
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
   const [backgroundUpdates] = useLocalStorage("P3PrefDisableBackgroundUpdates");
-  const [junctionPreview] = useLocalStorage("P3PrefJunctionPreview");
   const pageName = useBreakpointValue({
     base: "Advanced",
     sm: "Advanced Preferences",
@@ -90,15 +89,6 @@ export default function AdvancedPreferences() {
             </Suspense>
             <Text fontSize="xs" lineHeight="shorter">
               {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo.
-            </Text>
-          </Stack>
-          <Stack direction="column" spacing={2}>
-            <Suspense fallback={<LoadingServerButton />}>
-              <DisableUpdateFeaturesConfirmation />
-            </Suspense>
-            <Text fontSize="xs" lineHeight="shorter">
-              {backgroundUpdates ? "Enable" : "Disable"} automatic update
-              checks.
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>

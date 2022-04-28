@@ -33,7 +33,6 @@ import { isWindows } from "react-device-detect";
 
 // Begin page
 export default function AppearancePreferences() {
-  const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
   const { toggleColorMode } = useColorMode();
   const pageName = useBreakpointValue({
@@ -62,33 +61,6 @@ export default function AppearancePreferences() {
           <NoJSWarningFeaturesDisabled />
         </noscript>
         <Stack direction="column" spacing={5}>
-          <Stack
-            direction="column"
-            spacing={1}
-            display={{ base: "none", sm: "flex" }}
-          >
-            <Button
-              onClick={(_) =>
-                writeStorage(
-                  "P3PrefAdvancedSearchLink",
-                  advancedSearch ? false : true
-                )
-              }
-            >
-              Use {advancedSearch ? "Browse" : "Advanced Search"} Link
-            </Button>
-            <Text fontSize="xs">
-              {isWindows ? (
-                <>
-                  <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
-                </>
-              ) : (
-                <>
-                  <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
-                </>
-              )}
-            </Text>
-          </Stack>
           <Stack
             direction="column"
             spacing={1}

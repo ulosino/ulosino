@@ -15,12 +15,9 @@ import Overlay from "components/Overlay";
 import { useRef } from "react";
 
 export function DeletePreferences() {
-  deleteFromStorage("P3PrefAdvancedSearchLink");
   deleteFromStorage("P3PrefBackButtonLargeWindows");
   deleteFromStorage("P3PrefMinimiseNotifications");
   deleteFromStorage("P3PrefDisableDonationFeatures");
-  deleteFromStorage("P3PrefDisableBackgroundUpdates");
-  deleteFromStorage("P3PrefJunctionPreview");
   deleteFromStorage("P3PrefDangerousRuntime");
   console.info(
     "All preferences in LocalStorage have been cleared - using default settings"
@@ -33,43 +30,28 @@ export default function PreferenceResetAssistant() {
   const cancelRef: any = useRef();
 
   // Get all preferences
-  const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
-  const [backgroundUpdate] = useLocalStorage("P3PrefDisableBackgroundUpdates");
-  const [junctionPreview] = useLocalStorage("P3PrefJunctionPreview");
   const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
 
   // Here we check to see if all of the preferences equal null
   // If so, that means they are in their default state and we can disable access to the modal
   function ModalButton() {
-    if (advancedSearch) {
+    if (backButton) {
       return <ModalOpener />;
     } else {
-      if (backButton) {
+      if (minimiseNotifications) {
         return <ModalOpener />;
       } else {
-        if (minimiseNotifications) {
+        if (donationFeatures) {
           return <ModalOpener />;
-        } else {
-          if (donationFeatures) {
-            return <ModalOpener />;
-          }
-          if (backgroundUpdate) {
-            return <ModalOpener />;
-          } else {
-            if (junctionPreview) {
-              return <ModalOpener />;
-            } else {
-              if (dangerousRuntime) {
-                return <ModalOpener />;
-              } else return <ModalDisabled />;
-            }
-          }
         }
+        if (dangerousRuntime) {
+          return <ModalOpener />;
+        } else return <ModalDisabled />;
       }
     }
   }
