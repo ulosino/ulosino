@@ -66,12 +66,21 @@ module.exports = withPWA({
       },
     ];
   },
-  // Add redirects for the privacy link found on guides.ulosino.com and matches.ulosino.com
   async redirects() {
     return [
       {
         source: "/privacy",
         destination: "/about/privacy",
+        permanent: true,
+      },
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/search",
+        destination: "/",
         permanent: true,
       },
     ];

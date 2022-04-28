@@ -31,10 +31,7 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
           id="testingBrowsePageSeriesSidebar"
         >
           <Link href="/browse" passHref>
-            <Button as="a">OS List &amp; Tempo</Button>
-          </Link>
-          <Link href="/search" passHref>
-            <Button as="a">Advanced Search</Button>
+            <Button as="a">Operating System List</Button>
           </Link>
           <Link href="/matches" passHref>
             <Button as="a">ULOSINO Matches</Button>

@@ -57,7 +57,6 @@ export default function Layout({
   showPreferences,
 }: LayoutProps) {
   // Global preferences
-  const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
@@ -172,20 +171,6 @@ export default function Layout({
         [manager, window];
     }
   });
-  useEffect(() => {
-    {
-      isWindows
-        ? ""
-        : manager.registerHotkey({
-            key: "N",
-            ctrl: true,
-            shift: false,
-            alt: true,
-            callback: () => window.open("/search", "_blank"),
-          }),
-        [manager, window];
-    }
-  });
 
   // Session preference keybindings
   useEffect(() => {
@@ -200,34 +185,6 @@ export default function Layout({
             callback: () => toggleColorMode(),
           }),
         [manager, toggleColorMode];
-    }
-  });
-  useEffect(() => {
-    {
-      isWindows
-        ? manager.registerHotkey({
-            key: "S",
-            ctrl: false,
-            shift: true,
-            alt: true,
-            callback: () =>
-              writeStorage(
-                "P3PrefAdvancedSearchLink",
-                advancedSearch ? false : true
-              ),
-          })
-        : manager.registerHotkey({
-            key: "S",
-            ctrl: true,
-            shift: true,
-            alt: false,
-            callback: () =>
-              writeStorage(
-                "P3PrefAdvancedSearchLink",
-                advancedSearch ? false : true
-              ),
-          }),
-        [manager, advancedSearch];
     }
   });
   useEffect(() => {
@@ -324,7 +281,7 @@ export default function Layout({
           </>
         )}
         <Container maxW="container.lg" as="header">
-          <Flex mt={4} mb={10}>
+          <Flex mt={5} mb={10}>
             <Center
               display={{ base: "flex", sm: "none" }}
               id="testingHeaderBackButtonMobile"
@@ -359,91 +316,34 @@ export default function Layout({
             {useBasicLayout ? (
               ""
             ) : (
-              <>
-                {junctionPreview ? (
-                  <Center
-                    display={{ base: "none", sm: "flex" }}
-                    as="nav"
-                    id="testingHeaderLinks"
-                  >
-                    <Stack direction="row" spacing={2} mx={10}>
-                      <Link href="/" passHref>
-                        <Button variant="ghost" as="a">
-                          Home
-                        </Button>
-                      </Link>
-                      <Link href="/matches" passHref>
-                        <Button variant="ghost" as="a">
-                          Matches
-                        </Button>
-                      </Link>
-                      <Link href="/create" passHref>
-                        <Button variant="ghost" as="a">
-                          Create
-                        </Button>
-                      </Link>
-                      <Link href="/about" passHref>
-                        <Button variant="ghost" as="a">
-                          About
-                        </Button>
-                      </Link>
-                    </Stack>
-                  </Center>
-                ) : (
-                  <Center
-                    display={{ base: "none", sm: "flex" }}
-                    as="nav"
-                    id="testingHeaderLinks"
-                  >
-                    <Stack direction="row" spacing={2} mx={10}>
-                      <Link href="/" passHref>
-                        <Button variant="ghost" as="a">
-                          Home
-                        </Button>
-                      </Link>
-                      {advancedSearch ? (
-                        <>
-                          <Link href="/search" passHref>
-                            <Button
-                              variant="ghost"
-                              as="a"
-                              id="testingHeaderSearchLink"
-                              display={{ base: "none", md: "flex" }}
-                            >
-                              Advanced Search
-                            </Button>
-                          </Link>
-                          <Link href="/search" passHref>
-                            <Button
-                              variant="ghost"
-                              as="a"
-                              id="testingHeaderSearchLink"
-                              display={{ base: "none", sm: "flex", md: "none" }}
-                            >
-                              Search
-                            </Button>
-                          </Link>
-                        </>
-                      ) : (
-                        <Link href="/browse" passHref>
-                          <Button
-                            variant="ghost"
-                            as="a"
-                            id="testingHeaderBrowseLink"
-                          >
-                            Browse
-                          </Button>
-                        </Link>
-                      )}
-                      <Link href="/about" passHref>
-                        <Button variant="ghost" as="a">
-                          About
-                        </Button>
-                      </Link>
-                    </Stack>
-                  </Center>
-                )}
-              </>
+              <Center
+                display={{ base: "none", sm: "flex" }}
+                as="nav"
+                id="testingHeaderLinks"
+              >
+                <Stack direction="row" spacing={2} mx={10}>
+                  <Link href="/" passHref>
+                    <Button variant="ghost" as="a">
+                      Home
+                    </Button>
+                  </Link>
+                  <Link href="/browse" passHref>
+                    <Button variant="ghost" as="a" id="testingHeaderBrowseLink">
+                      Browse
+                    </Button>
+                  </Link>
+                  <Link href="/matches" passHref>
+                    <Button variant="ghost" as="a">
+                      Matches
+                    </Button>
+                  </Link>
+                  <Link href="/create" passHref>
+                    <Button variant="ghost" as="a">
+                      Create
+                    </Button>
+                  </Link>
+                </Stack>
+              </Center>
             )}
             <Spacer />
             <Center display={{ base: "none", sm: "flex" }}>
@@ -491,11 +391,6 @@ export default function Layout({
                     GitHub
                   </Button>
                 </Link>
-                <Link href="https://twitter.com/ulosino" passHref>
-                  <Button variant="ghost" size="sm" as="a">
-                    Twitter
-                  </Button>
-                </Link>
                 <Link href="https://docs.ulosino.com" passHref>
                   <Button variant="ghost" size="sm" as="a">
                     Documentation
@@ -518,19 +413,6 @@ export default function Layout({
                   id="testingFooterBackButtonDesktopSwitch"
                 >
                   {backButton ? "Hide" : "Show"} Back
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={(_) =>
-                    writeStorage(
-                      "P3PrefAdvancedSearchLink",
-                      advancedSearch ? false : true
-                    )
-                  }
-                  display={{ base: "none", md: "inline-block" }}
-                  id="testingFooterAdvancedSearchLinkSwitch"
-                >
-                  Prefer {advancedSearch ? "Browse" : "Search"}
                 </Button>
               </>
             ) : (
