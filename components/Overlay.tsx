@@ -62,7 +62,6 @@ export function OverlayModal({
   onClose,
   useAlertDialog,
 }: OverlayProps): ReactElement {
-  const [disableMotion] = useLocalStorage("P3LowBatteryMode");
   return (
     <>
       {useAlertDialog ? (
@@ -72,7 +71,6 @@ export function OverlayModal({
           leastDestructiveRef={cancelRef}
           scrollBehavior="inside"
           size="sm"
-          motionPreset={disableMotion ? "none" : "scale"}
           isCentered
         >
           <AlertDialogOverlay />
@@ -89,7 +87,6 @@ export function OverlayModal({
           initialFocusRef={cancelRef}
           scrollBehavior="inside"
           size="xl"
-          motionPreset={disableMotion ? "none" : "scale"}
           isCentered
         >
           <ModalOverlay />
