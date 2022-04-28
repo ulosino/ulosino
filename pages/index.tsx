@@ -61,6 +61,7 @@ import {
   HiLibrary,
   HiChip,
   HiAcademicCap,
+  HiUpload,
 } from "react-icons/hi";
 
 // First party components
@@ -449,16 +450,11 @@ export default function Home({ AZOSPageData }: OSDataPage) {
           </Flex>
           <SimpleGrid minChildWidth="300px" spacing={10}>
             <Stack direction="column" spacing={5}>
-              <Icon
-                as={HiInformationCircle}
-                aria-label="Information circle"
-                w={10}
-                h={10}
-              />
+              <Icon as={HiUpload} aria-label="Share icon" w={10} h={10} />
               <Text>
-                Get complex information easily with simple information tables.
-                Plus, there's platform, desktop, and package manager information
-                within Search.
+                Look to Share or Copy points to bring your friends and apps into
+                ULOSINO. Culture build faster and share open source OS culture
+                with others.
               </Text>
             </Stack>
             <Stack
@@ -468,7 +464,7 @@ export default function Home({ AZOSPageData }: OSDataPage) {
             >
               <Icon as={HiTerminal} aria-label="Keyboard" w={10} h={10} />
               <Text>
-                Make moves faster with ULOSINO's keyboard shortcuts. Navigate
+                Discover ULOSINO's assortment of keyboard shortcuts. Navigate
                 quickly, change preferences, and uncover powerful functions.
               </Text>
             </Stack>

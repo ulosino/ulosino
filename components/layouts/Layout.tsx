@@ -396,6 +396,14 @@ export default function Layout({
                     Documentation
                   </Button>
                 </Link>
+                <Link
+                  href="https://docs.ulosino.com/docs/preferences/keybindings"
+                  passHref
+                >
+                  <Button variant="ghost" size="sm" as="a">
+                    Keyboard Shortcuts
+                  </Button>
+                </Link>
               </>
             )}
             {showPreferences ? (
