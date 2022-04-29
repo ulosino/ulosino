@@ -19,13 +19,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 // Chakra UI, icons, and other design imports
-import {
-  Stack,
-  Heading,
-  Text,
-  Button,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Stack, Heading, Text, useBreakpointValue } from "@chakra-ui/react";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
@@ -34,12 +28,6 @@ import PreferencesLayout from "components/layouts/PreferencesLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 const DisableDonationFeaturesConfirmation = dynamic(
   () => import("components/confirmations/DisableDonationFeaturesConfirmation"),
-  {
-    suspense: true,
-  }
-);
-const DisableUpdateFeaturesConfirmation = dynamic(
-  () => import("components/confirmations/DisableUpdateFeaturesConfirmation"),
   {
     suspense: true,
   }
@@ -54,11 +42,11 @@ const PreferenceResetAssistant = dynamic(
 // Begin page
 export default function AdvancedPreferences() {
   const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
-  const [backgroundUpdates] = useLocalStorage("P3PrefDisableBackgroundUpdates");
   const pageName = useBreakpointValue({
     base: "Advanced",
     sm: "Advanced Preferences",
   });
+
   return (
     <>
       <Head>
@@ -89,14 +77,6 @@ export default function AdvancedPreferences() {
             </Suspense>
             <Text fontSize="xs" lineHeight="shorter">
               {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo.
-            </Text>
-          </Stack>
-          <Stack direction="column" spacing={2}>
-            <Link href="https://docs.ulosino.com" passHref>
-              <Button as="a">Open ULOSINO Documentation</Button>
-            </Link>
-            <Text fontSize="xs" lineHeight="shorter">
-              Browse through an assortment of documentation resources.
             </Text>
           </Stack>
           <Stack direction="column" spacing={2}>

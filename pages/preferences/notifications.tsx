@@ -7,7 +7,12 @@
 import type { ReactElement } from "react";
 
 // Suspense and performance
+import { Suspense } from "react";
+import { LoadingServer } from "components/Loading";
 import useLocalStorage, { writeStorage } from "@rehooks/local-storage";
+
+// Links and routing
+import Link from "next/link";
 
 // Head and SEO
 import Head from "next/head";
@@ -18,8 +23,6 @@ import {
   Heading,
   Text,
   Button,
-  Kbd,
-  useColorMode,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
@@ -28,6 +31,8 @@ import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
+
+import { isMacOs, isIOS, isWindows } from "react-device-detect";
 
 // Begin page
 export default function NotificationPreferences() {
@@ -56,29 +61,44 @@ export default function NotificationPreferences() {
           <NoJSWarningFeaturesDisabled />
         </noscript>
         <Stack direction="column" spacing={5}>
-          <Stack direction="column" spacing={2}>
-            <Button
-              onClick={(_) =>
-                writeStorage(
-                  "P3PrefMinimiseNotifications",
-                  minimiseNotifications ? false : true
-                )
-              }
-            >
-              {minimiseNotifications ? "Enable" : "Minimise"} In-App
-              Notifications
-            </Button>
-            <Text fontSize="xs" lineHeight="shorter">
-              {minimiseNotifications ? "Allow" : "Hide"} non-critical
-              notifications and banners.
-            </Text>
-          </Stack>
-          <Stack direction="column" spacing={2}>
-            <Button isDisabled>Minimise Confirmations</Button>
-            <Text fontSize="xs" lineHeight="shorter">
-              Minimise prompts for confirmation of actions.
-            </Text>
-          </Stack>
+          <Suspense fallback={<LoadingServer />}>
+            <Stack direction="column" spacing={2}>
+              <Button
+                onClick={(_) =>
+                  writeStorage(
+                    "P3PrefMinimiseNotifications",
+                    minimiseNotifications ? false : true
+                  )
+                }
+              >
+                {minimiseNotifications ? "Enable" : "Minimise"} Notifications
+              </Button>
+              <Text fontSize="xs" lineHeight="shorter">
+                {minimiseNotifications ? "Allow" : "Hide"} notifications and
+                banners. This doesn't affect update notifications. To manage
+                notification settings that apply to all applications on your
+                system,{" "}
+                {isWindows ? (
+                  <Link href="ms-settings:privacy-notifications">
+                    open Windows settings
+                  </Link>
+                ) : (
+                  <>
+                    {isMacOs || isIOS ? (
+                      <Link href="x-apple.systempreferences:com.apple.preference.notifications">
+                        {isMacOs
+                          ? "open macOS or iPadOS preferences"
+                          : "open iOS settings"}
+                      </Link>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                )}
+                .
+              </Text>
+            </Stack>
+          </Suspense>
         </Stack>
       </Stack>
     </>

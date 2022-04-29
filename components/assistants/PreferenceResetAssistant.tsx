@@ -61,15 +61,15 @@ export default function PreferenceResetAssistant() {
     return (
       <>
         {isOpen ? (
-          <Button isActive>Use Default Preferences</Button>
+          <Button isActive>Restore Default Preferences</Button>
         ) : (
-          <Button onClick={onOpen}>Use Default Preferences</Button>
+          <Button onClick={onOpen}>Restore Default Preferences</Button>
         )}
       </>
     );
   }
   function ModalDisabled() {
-    return <Button isDisabled>Use Default Preferences</Button>;
+    return <Button isDisabled>Restore Default Preferences</Button>;
   }
 
   // Gracefully close the modal once the deletion has completed
@@ -81,7 +81,7 @@ export default function PreferenceResetAssistant() {
   function ModalBody() {
     return (
       <Stack direction="column" spacing={5}>
-        <Text>This will restore default preferences.</Text>
+        <Text>This will restore the default preferences.</Text>
       </Stack>
     );
   }
@@ -93,7 +93,7 @@ export default function PreferenceResetAssistant() {
           Cancel
         </Button>
         <Button colorScheme="red" ms={2} onClick={BeginDelete}>
-          Continue &amp; Reset
+          Continue &amp; Restore
         </Button>
       </>
     );
@@ -103,7 +103,7 @@ export default function PreferenceResetAssistant() {
     <>
       <ModalButton />
       <Overlay
-        header="Reset Preferences?"
+        header="Restore Preferences?"
         body={<ModalBody />}
         footer={<ModalFooter />}
         cancelRef={cancelRef}
