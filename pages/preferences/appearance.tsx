@@ -7,7 +7,12 @@
 import type { ReactElement } from "react";
 
 // Suspense and performance
+import { Suspense } from "react";
+import { LoadingServer } from "components/Loading";
 import useLocalStorage, { writeStorage } from "@rehooks/local-storage";
+
+// Links and routing
+import Link from "next/link";
 
 // Head and SEO
 import Head from "next/head";
@@ -29,7 +34,7 @@ import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
 
-import { isWindows } from "react-device-detect";
+import { isMacOs, isIOS, isWindows } from "react-device-detect";
 
 // Begin page
 export default function AppearancePreferences() {
@@ -102,6 +107,45 @@ export default function AppearancePreferences() {
               )}
             </Stack>
           </Stack>
+          <Suspense fallback={<LoadingServer />}>
+            <Text fontSize="xs">
+              To reduce animations,{" "}
+              {isWindows ? (
+                <Link href="ms-settings:easeofaccess-display">
+                  open Windows settings
+                </Link>
+              ) : (
+                <>
+                  {isMacOs ? (
+                    <Link href="x-apple.systempreferences:com.apple.preference.universalaccess">
+                      open macOS preferences
+                    </Link>
+                  ) : (
+                    <>
+                      {isIOS ? (
+                        <Link href="prefs:root=ACCESSIBILITY&path=MOTION_TITLE">
+                          open iOS preferences
+                        </Link>
+                      ) : (
+                        "open your operating system's settings"
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+              {isWindows ? (
+                ", and select Reduce Motion."
+              ) : (
+                <>
+                  {isMacOs ? (
+                    ", select Display, and then select Reduce Motion."
+                  ) : (
+                    <>{isIOS ? ", and select Reduce Motion." : "."}</>
+                  )}
+                </>
+              )}
+            </Text>
+          </Suspense>
         </Stack>
       </Stack>
     </>

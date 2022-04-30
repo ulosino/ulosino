@@ -79,19 +79,25 @@ export default function NotificationPreferences() {
                 notification settings that apply to all applications on your
                 system,{" "}
                 {isWindows ? (
-                  <Link href="ms-settings:privacy-notifications">
+                  <Link href="ms-settings:notifications">
                     open Windows settings
                   </Link>
                 ) : (
                   <>
-                    {isMacOs || isIOS ? (
+                    {isMacOs ? (
                       <Link href="x-apple.systempreferences:com.apple.preference.notifications">
-                        {isMacOs
-                          ? "open macOS or iPadOS preferences"
-                          : "open iOS settings"}
+                        open macOS preferences
                       </Link>
                     ) : (
-                      ""
+                      <>
+                        {isIOS ? (
+                          <Link href="prefs:root=NOTIFICATIONS_ID">
+                            open iOS preferences
+                          </Link>
+                        ) : (
+                          "open your operating system's settings"
+                        )}
+                      </>
                     )}
                   </>
                 )}

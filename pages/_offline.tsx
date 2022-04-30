@@ -59,16 +59,13 @@ export default function OfflineFallback() {
                   href="x-apple.systempreferences:com.apple.preference.network"
                   passHref
                 >
-                  <Button>Open macOS/iPadOS Networking Preferences</Button>
+                  <Button>Open macOS Networking Preferences</Button>
                 </Link>
               ) : (
                 <>
                   {isIOS ? (
-                    <Link
-                      href="x-apple.systempreferences:com.apple.preference.network"
-                      passHref
-                    >
-                      <Button>Open iOS Settings</Button>
+                    <Link href="prefs:root=WIFI" passHref>
+                      <Button>Open iOS WiFi Settings</Button>
                     </Link>
                   ) : (
                     ""

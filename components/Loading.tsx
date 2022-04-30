@@ -4,7 +4,13 @@
 // This is our standardised loading spinner
 
 // Chakra UI, icons, and other design imports
-import { Spinner, Center, Button } from "@chakra-ui/react";
+import {
+  Spinner,
+  Center,
+  Button,
+  Text,
+  usePrefersReducedMotion,
+} from "@chakra-ui/react";
 
 // Begin components
 // This a general loading spinner
@@ -18,10 +24,18 @@ export default function Loading() {
 
 // This spinner should be used for SSR communications (Suspense, dynamic loading)
 export function LoadingServer() {
+  // Honour system accessibility preferences
+  const animationSpeed = usePrefersReducedMotion();
   return (
-    <Center>
-      <Spinner title="Communicating with Server" />
-    </Center>
+    <>
+      {animationSpeed ? (
+        <Text>Communicating with Server...</Text>
+      ) : (
+        <Center>
+          <Spinner title="Communicating with Server" />
+        </Center>
+      )}
+    </>
   );
 }
 
