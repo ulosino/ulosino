@@ -65,9 +65,14 @@ export default function PreferencesLayout({
               Privacy Notice
             </Button>
           </Link>
+          <Link href="/about/terms" passHref>
+            <Button leftIcon={<HiOutlineExclamationCircle />} as="a">
+              Terms of Usage
+            </Button>
+          </Link>
           <Link href="/about/legal" passHref>
             <Button leftIcon={<HiOutlineExclamationCircle />} as="a">
-              License &amp; Legal
+              Copyright &amp; License
             </Button>
           </Link>
         </Stack>
