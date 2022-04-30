@@ -60,19 +60,14 @@ export default function PreferencesLayout({
           </Link>
         </Stack>
         <Stack direction="column" spacing={2}>
-          <Link href="/about/privacy" passHref>
+          <Link href="/about/legal/privacy" passHref>
             <Button leftIcon={<HiOutlineShieldExclamation />} as="a">
               Privacy Notice
             </Button>
           </Link>
-          <Link href="/about/terms" passHref>
-            <Button leftIcon={<HiOutlineExclamationCircle />} as="a">
-              Terms of Usage
-            </Button>
-          </Link>
           <Link href="/about/legal" passHref>
             <Button leftIcon={<HiOutlineExclamationCircle />} as="a">
-              Copyright &amp; License
+              Copyright &amp; Legal
             </Button>
           </Link>
         </Stack>

@@ -61,7 +61,6 @@ export default function Layout({
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
-  const [junctionPreview] = useLocalStorage("P3PrefJunctionPreview");
   const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
   const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
 
@@ -454,8 +453,8 @@ export default function Layout({
               )}
             </Suspense>
             <Link href="/about/legal" passHref>
-              <Button variant="ghost" size="sm" as="a" id="testingLicenseLink">
-                License
+              <Button variant="ghost" size="sm" as="a">
+                Legal
               </Button>
             </Link>
             <Link href="/about/privacy" passHref>
