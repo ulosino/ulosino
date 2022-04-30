@@ -8,7 +8,8 @@ import type { ReactElement } from "react";
 
 // Suspense and performance
 import { Suspense } from "react";
-import { LoadingServer } from "components/Loading";
+import dynamic from "next/dynamic";
+import { LoadingServer, LoadingServerButton } from "components/Loading";
 import useLocalStorage, { writeStorage } from "@rehooks/local-storage";
 
 // Links and routing
@@ -18,45 +19,51 @@ import Link from "next/link";
 import Head from "next/head";
 
 // Chakra UI, icons, and other design imports
-import {
-  Stack,
-  Heading,
-  Text,
-  Button,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Stack, Heading, Text, Button } from "@chakra-ui/react";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
+const DisableDonationFeaturesConfirmation = dynamic(
+  () => import("components/confirmations/DisableDonationFeaturesConfirmation"),
+  {
+    suspense: true,
+  }
+);
+const PreferenceResetAssistant = dynamic(
+  () => import("components/assistants/PreferenceResetAssistant"),
+  {
+    suspense: true,
+  }
+);
 
-import { isMacOs, isIOS, isWindows } from "react-device-detect";
+import { isWindows, isMacOs, isIOS } from "react-device-detect";
 
 // Begin page
-export default function NotificationPreferences() {
+export default function AdvancedPreferences() {
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
-  const pageName = useBreakpointValue({
-    base: "Notifications",
-    sm: "Notification Preferences",
-  });
+  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
+
   return (
     <>
       <Head>
-        <title>ULOSINO &mdash; Notification Preferences</title>
+        <title>ULOSINO &mdash; Preferences</title>
+        <meta property="og:title" content="ULOSINO &mdash; Preferences" />
         <meta
-          property="og:title"
-          content="ULOSINO &mdash; Notification Preferences"
+          name="description"
+          content="Change application behaviours and settings."
         />
-        <meta name="description" content="Manage notifications." />
-        <meta property="og:description" content="Manage notifications." />
+        <meta
+          property="og:description"
+          content="Change application settings."
+        />
       </Head>
       <Stack direction="column" spacing={5}>
-        <Heading size="xl">{pageName}</Heading>
-        <Text>Manage notifications and application verbosity.</Text>
+        <Heading size="xl">Preferences</Heading>
         <noscript>
           <NoJSWarningFeaturesDisabled />
         </noscript>
@@ -105,6 +112,22 @@ export default function NotificationPreferences() {
               </Text>
             </Stack>
           </Suspense>
+          <Stack direction="column" spacing={2}>
+            <Suspense fallback={<LoadingServerButton />}>
+              <DisableDonationFeaturesConfirmation />
+            </Suspense>
+            <Text fontSize="xs" lineHeight="shorter">
+              {donationFeatures ? "Enable" : "Disable"} ULOSINO Tempo.
+            </Text>
+          </Stack>
+          <Stack direction="column" spacing={2}>
+            <Suspense fallback={<LoadingServerButton />}>
+              <PreferenceResetAssistant />
+            </Suspense>
+            <Text fontSize="xs" lineHeight="shorter">
+              Restore default preferences for all sessions.
+            </Text>
+          </Stack>
         </Stack>
       </Stack>
     </>
@@ -112,7 +135,7 @@ export default function NotificationPreferences() {
 }
 
 // Apply persistent layout, wrapping page
-NotificationPreferences.getLayout = function getLayout(page: ReactElement) {
+AdvancedPreferences.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationProvider>
       <Layout

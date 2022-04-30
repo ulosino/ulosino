@@ -7,9 +7,9 @@ describe("Dynamic Page Path Testing", () => {
     cy.visit("/");
     cy.get("#testingLicenseLink")
       .should("have.attr", "href")
-      .and("include", "/about/license");
+      .and("include", "/about/lehal");
     cy.get("#testingLicenseLink").click();
-    cy.url().should("include", "/about/license");
+    cy.url().should("include", "/about/legal");
 
     // Try `/browse/[slug].tsx` (OS Pages)
     cy.visit("/browse");

@@ -11,6 +11,7 @@ import Head from "next/head";
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
+import PreferencesLayout from "components/layouts/PreferencesLayout";
 
 // Markdown processing libraries
 import fs from "fs";
@@ -62,7 +63,7 @@ AboutMarkdownPage.getLayout = function getLayout(page: ReactElement) {
         useAltBackground={false}
         showPreferences={false}
       >
-        {page}
+        <PreferencesLayout>{page}</PreferencesLayout>
       </Layout>
     </ApplicationProvider>
   );

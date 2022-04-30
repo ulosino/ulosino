@@ -28,7 +28,7 @@ export default function ErrorLayout({
         spacing={10}
         mb={10}
         me={{ base: "none", md: 10 }}
-        minW={{ base: "inherit", sm: 175 }}
+        w={{ base: "inherit", sm: 200 }}
         display={{ base: "none", md: "flex" }}
       >
         <Center>

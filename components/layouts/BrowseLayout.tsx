@@ -25,7 +25,7 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
           spacing={2}
           mb={10}
           me={{ base: "none", md: 10 }}
-          minW={{ base: "inherit", sm: 175 }}
+          w={{ base: "inherit", sm: 200 }}
           display={{ base: "none", sm: "flex" }}
           as="nav"
           id="testingBrowsePageSeriesSidebar"

@@ -25,7 +25,7 @@ import {
   Button,
   Kbd,
   useColorMode,
-  useBreakpointValue,
+  usePrefersReducedMotion,
 } from "@chakra-ui/react";
 
 // First party components
@@ -40,28 +40,27 @@ import { isMacOs, isIOS, isWindows } from "react-device-detect";
 export default function AppearancePreferences() {
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
   const { toggleColorMode } = useColorMode();
-  const pageName = useBreakpointValue({
-    base: "Appearance",
-    sm: "Appearance Preferences",
-  });
+
+  // Honour system accessibility preferences
+  const reducedMotion = usePrefersReducedMotion();
+
   return (
     <>
       <Head>
-        <title>ULOSINO &mdash; Appearance Preferences</title>
+        <title>ULOSINO &mdash; Accessibility Preferences</title>
         <meta
           property="og:title"
-          content="ULOSINO &mdash; Appearance Preferences"
+          content="ULOSINO &mdash; Accessibility Preferences"
         />
-        <meta name="description" content="Change the appearance of ULOSINO." />
+        <meta name="description" content="Make ULOSINO more accessible." />
         <meta
           property="og:description"
-          content="Change the appearance of ULOSINO."
+          content="Make ULOSINO more accessible."
         />
       </Head>
 
       <Stack direction="column" spacing={5}>
-        <Heading size="xl">{pageName}</Heading>
-        <Text>Change the appearance of ULOSINO.</Text>
+        <Heading size="xl">Accessibility Preferences</Heading>
         <noscript>
           <NoJSWarningFeaturesDisabled />
         </noscript>
@@ -109,7 +108,7 @@ export default function AppearancePreferences() {
           </Stack>
           <Suspense fallback={<LoadingServer />}>
             <Text fontSize="xs">
-              To reduce animations,{" "}
+              To {reducedMotion ? "enable" : "reduce"} animations,{" "}
               {isWindows ? (
                 <Link href="ms-settings:easeofaccess-display">
                   open Windows settings
@@ -123,7 +122,7 @@ export default function AppearancePreferences() {
                   ) : (
                     <>
                       {isIOS ? (
-                        <Link href="prefs:root=ACCESSIBILITY&path=MOTION_TITLE">
+                        <Link href="prefs:root=ACCESSIBILITY&path=MOTION_TITLE#REDUCE_MOTION_ID">
                           open iOS preferences
                         </Link>
                       ) : (
@@ -134,13 +133,23 @@ export default function AppearancePreferences() {
                 </>
               )}
               {isWindows ? (
-                ", and select Reduce Motion."
+                `, and ${
+                  reducedMotion ? "enable" : "disable"
+                } Show Animations in Windows.`
               ) : (
                 <>
                   {isMacOs ? (
-                    ", select Display, and then select Reduce Motion."
+                    `, select Display, and then ${
+                      reducedMotion ? "disable" : "enable"
+                    } Reduce Motion.`
                   ) : (
-                    <>{isIOS ? ", and select Reduce Motion." : "."}</>
+                    <>
+                      {isIOS
+                        ? `, and ${
+                            reducedMotion ? "disable" : "enable"
+                          } Reduce Motion.`
+                        : "."}
+                    </>
                   )}
                 </>
               )}

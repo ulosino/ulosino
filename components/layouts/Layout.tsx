@@ -347,7 +347,7 @@ export default function Layout({
             )}
             <Spacer />
             <Center display={{ base: "none", sm: "flex" }}>
-              <Link href="/preferences/appearance" passHref>
+              <Link href="/preferences/general" passHref>
                 <IconButton
                   icon={<HiOutlineCog />}
                   aria-label="Preferences"
@@ -371,7 +371,7 @@ export default function Layout({
           </Flex>
         </Container>
       </Suspense>
-      <Container maxW="container.lg" flex={1} as="main">
+      <Container maxW="container.lg" flex={1}>
         {children}
       </Container>
       <Container maxW="container.lg" as="footer">
@@ -453,7 +453,7 @@ export default function Layout({
                 </Center>
               )}
             </Suspense>
-            <Link href="/about/license" passHref>
+            <Link href="/about/legal" passHref>
               <Button variant="ghost" size="sm" as="a" id="testingLicenseLink">
                 License
               </Button>
