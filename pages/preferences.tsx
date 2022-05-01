@@ -13,8 +13,6 @@ import Link from "next/link";
 // Chakra UI, icons, and other design imports
 import { Stack, Button, Heading } from "@chakra-ui/react";
 import {
-  HiOutlineTemplate,
-  HiOutlineBell,
   HiOutlineCog,
   HiOutlineSupport,
   HiOutlineExclamationCircle,
@@ -56,14 +54,14 @@ export default function PreferencesList() {
           </Link>
         </Stack>
         <Stack direction="column" spacing={2}>
-          <Link href="/about/privacy" passHref>
+          <Link href="/about/legal/privacy" passHref>
             <Button leftIcon={<HiOutlineShieldExclamation />} as="a">
               Privacy Notice
             </Button>
           </Link>
           <Link href="/about/legal" passHref>
             <Button leftIcon={<HiOutlineExclamationCircle />} as="a">
-              License &amp; Legal
+              Copyright &amp; Legal
             </Button>
           </Link>
         </Stack>

@@ -1,8 +1,6 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// This implements appearance preferences
-
 // Types
 import type { ReactElement } from "react";
 
@@ -39,7 +37,13 @@ import { isMacOs, isIOS, isWindows } from "react-device-detect";
 // Begin page
 export default function AppearancePreferences() {
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
+  const [accessibleFonts] = useLocalStorage("P3PrefAccessibleFonts");
   const { toggleColorMode } = useColorMode();
+
+  function SetFontPreference() {
+    writeStorage("P3PrefAccessibleFonts", accessibleFonts ? false : true);
+    window.location.reload();
+  }
 
   // Honour system accessibility preferences
   const reducedMotion = usePrefersReducedMotion();
@@ -92,6 +96,21 @@ export default function AppearancePreferences() {
               )}
             </Text>
           </Stack>
+          <Stack
+            direction="column"
+            spacing={1}
+            display={{ base: "none", sm: "flex" }}
+          >
+            <Button onClick={SetFontPreference}>
+              {accessibleFonts ? "Disable" : "Enable"} Accessible Fonts
+            </Button>
+            <Text fontSize="xs">
+              Use{" "}
+              {accessibleFonts
+                ? "Public Sans, the default ULOSINO font."
+                : "Atkinson Hyperlegible, a font optimised for accessibility."}
+            </Text>
+          </Stack>
           <Stack direction="column" spacing={1}>
             <Button onClick={toggleColorMode}>
               Invert Colours for this Session
@@ -111,22 +130,22 @@ export default function AppearancePreferences() {
               To {reducedMotion ? "enable" : "reduce"} animations,{" "}
               {isWindows ? (
                 <Link href="ms-settings:easeofaccess-display">
-                  open Windows settings
+                  open Windows ease of access settings
                 </Link>
               ) : (
                 <>
                   {isMacOs ? (
                     <Link href="x-apple.systempreferences:com.apple.preference.universalaccess">
-                      open macOS preferences
+                      open macOS accessibility preferences
                     </Link>
                   ) : (
                     <>
                       {isIOS ? (
                         <Link href="prefs:root=ACCESSIBILITY&path=MOTION_TITLE#REDUCE_MOTION_ID">
-                          open iOS preferences
+                          open iOS settings
                         </Link>
                       ) : (
-                        "open your operating system's settings"
+                        "open your operating system's accessibility settings"
                       )}
                     </>
                   )}

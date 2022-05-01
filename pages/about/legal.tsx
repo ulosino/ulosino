@@ -1,8 +1,6 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// This implements appearance preferences
-
 // Types
 import type { ReactElement } from "react";
 
@@ -93,9 +91,7 @@ export default function LegalHub() {
           >
             <Card variant="button" as="a">
               <Heading size="md">Code of Conduct</Heading>
-              <Text fontSize="sm">
-                View the Code of Conduct for the ULOSINO project.
-              </Text>
+              <Text fontSize="sm">View our Code of Conduct on GitHub.</Text>
             </Card>
           </Link>
         </Stack>

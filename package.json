@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^1.8.8",
     "@choc-ui/chakra-autocomplete": "^4.21.1",
     "@emotion/react": "^11.9.0",
+    "@fontsource/atkinson-hyperlegible": "^4.5.7",
     "@fontsource/public-sans": "^4.5.2",
     "@rehooks/local-storage": "^2.4.4",
     "@splitbee/web": "^0.3.0",

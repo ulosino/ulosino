@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import "@fontsource/public-sans/variable.css";
 import "@fontsource/public-sans/400.css";
 import "@fontsource/public-sans/600.css";
+import "@fontsource/atkinson-hyperlegible";
 
 // Import Splitbee scripts
 import splitbee from "@splitbee/web";

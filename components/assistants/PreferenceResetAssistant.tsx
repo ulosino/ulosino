@@ -31,6 +31,7 @@ export default function PreferenceResetAssistant() {
 
   // Get all preferences
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
+  const [accessibleFonts] = useLocalStorage("P3PrefAccessibleFonts");
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
   );
@@ -43,15 +44,19 @@ export default function PreferenceResetAssistant() {
     if (backButton) {
       return <ModalOpener />;
     } else {
-      if (minimiseNotifications) {
+      if (accessibleFonts) {
         return <ModalOpener />;
       } else {
-        if (donationFeatures) {
+        if (minimiseNotifications) {
           return <ModalOpener />;
+        } else {
+          if (donationFeatures) {
+            return <ModalOpener />;
+          }
+          if (dangerousRuntime) {
+            return <ModalOpener />;
+          } else return <ModalDisabled />;
         }
-        if (dangerousRuntime) {
-          return <ModalOpener />;
-        } else return <ModalDisabled />;
       }
     }
   }

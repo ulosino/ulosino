@@ -15,7 +15,6 @@ import { Stack, Button } from "@chakra-ui/react";
 import {
   HiOutlineHome,
   HiOutlineDatabase,
-  HiOutlineSearch,
   HiOutlinePencil,
   HiOutlineInformationCircle,
   HiOutlineCog,

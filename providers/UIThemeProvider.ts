@@ -114,7 +114,13 @@ export const Table = {
   },
 };
 
+export const accessibleFont =
+  typeof window !== "undefined"
+    ? localStorage.getItem("P3PrefAccessibleFonts") === "true"
+    : "";
+
 const UITheme = extendTheme({
+  accessibleFont,
   config,
   colors: {
     // Main brand colours
@@ -161,8 +167,8 @@ const UITheme = extendTheme({
     },
   },
   fonts: {
-    heading: "Public Sans",
-    body: "Public Sans",
+    heading: accessibleFont ? "Atkinson Hyperlegible" : "Public Sans",
+    body: accessibleFont ? "Atkinson Hyperlegible" : "Public Sans",
   },
   textStyles: {
     miniHeading: {
