@@ -8,11 +8,12 @@
 import { ReactElement } from "react";
 
 // Suspense and performance
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useLocalStorage } from "@rehooks/local-storage";
 
 // Chakra UI, icons, and other design imports
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Text, VisuallyHidden } from "@chakra-ui/react";
 import UITheme from "providers/UIThemeProvider";
 
 // First party components
@@ -91,7 +92,15 @@ export default function ApplicationProvider({
       <ErrorFallbackApplication>
         <KeybindingProvider manager={manager}>
           {/* Excluding UpdateProvider will break PWA functionality */}
-          <UpdateProvider />
+          <Suspense
+            fallback={
+              <VisuallyHidden>
+                <Text>Communicating with Server</Text>
+              </VisuallyHidden>
+            }
+          >
+            <UpdateProvider />
+          </Suspense>
           {dangerousRuntime ? (
             children
           ) : (

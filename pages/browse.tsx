@@ -124,6 +124,11 @@ Browse.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
+// Disable the Edge Runtime
+export const config = {
+  runtime: "nodejs",
+};
+
 // Import AZOSPageData OS Page handling
 export const getStaticProps: GetStaticProps = async () => {
   const AZOSPageData = getOSPages();

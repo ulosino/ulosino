@@ -262,6 +262,11 @@ DonationPage.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
+// Disable the Edge Runtime
+export const config = {
+  runtime: "nodejs",
+};
+
 interface PathProps {
   params: {
     slug: string;

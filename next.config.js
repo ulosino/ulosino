@@ -37,7 +37,7 @@ module.exports = withPWA({
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   experimental: {
-    runtime: "nodejs",
+    runtime: "edge",
     serverComponents: false,
   },
   pageExtensions: ["tsx"],
