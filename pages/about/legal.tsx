@@ -50,9 +50,9 @@ export default function LegalHub() {
       <Stack direction="column" spacing={5}>
         <Heading size="xl">Copyright &amp; Legal Information</Heading>
         <Stack direction="column" spacing={2}>
-          <Link href="/about/legal/terms" passHref>
+          <Link href="/about/legal/usage" passHref>
             <Card variant="button" as="a">
-              <Heading size="md">Application Terms of Usage</Heading>
+              <Heading size="md">Application Usage Agreement</Heading>
               <Text fontSize="sm">
                 Policies keeping the ULOSINO application experience safe and
                 secure.
