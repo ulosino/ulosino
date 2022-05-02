@@ -20,10 +20,7 @@ import {
   Icon,
   Button,
 } from "@chakra-ui/react";
-import {
-  HiOutlineArrowRight,
-  HiOutlineExclamationCircle,
-} from "react-icons/hi";
+import { HiOutlineExclamationCircle, HiOutlinePlus } from "react-icons/hi";
 
 // Begin component
 export default function EmptyState() {
@@ -45,14 +42,14 @@ export default function EmptyState() {
         </Center>
       </Stack>
       <Spacer />
-      <Link href="https://github.com/ulosino/ulosino" passHref>
+      <Link href="/create" passHref>
         <Button
-          leftIcon={<HiOutlineArrowRight />}
+          leftIcon={<HiOutlinePlus />}
           size="sm"
           as="a"
           display={{ base: "none", lg: "flex" }}
         >
-          Contribute on GitHub
+          Create an OS Page
         </Button>
       </Link>
     </Flex>
