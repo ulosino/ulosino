@@ -6,7 +6,8 @@ import type { ReactElement } from "react";
 
 // Suspense and performance
 import { Suspense } from "react";
-import { LoadingServer } from "components/Loading";
+import dynamic from "next/dynamic";
+import { LoadingServer, LoadingServerButton } from "components/Loading";
 import useLocalStorage, { writeStorage } from "@rehooks/local-storage";
 
 // Links and routing
@@ -31,19 +32,19 @@ import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import PreferencesLayout from "components/layouts/PreferencesLayout";
 import { NoJSWarningFeaturesDisabled } from "components/NoJSWarning";
+const FontAssistant = dynamic(
+  () => import("components/assistants/FontAssistant"),
+  {
+    suspense: true,
+  }
+);
 
 import { isMacOs, isIOS, isWindows } from "react-device-detect";
 
 // Begin page
 export default function AppearancePreferences() {
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
-  const [accessibleFonts] = useLocalStorage("P3PrefAccessibleFonts");
-  const { toggleColorMode } = useColorMode();
-
-  function SetFontPreference() {
-    writeStorage("P3PrefAccessibleFonts", accessibleFonts ? false : true);
-    window.location.reload();
-  }
+  const { colorMode, toggleColorMode } = useColorMode();
 
   // Honour system accessibility preferences
   const reducedMotion = usePrefersReducedMotion();
@@ -71,7 +72,7 @@ export default function AppearancePreferences() {
         <Stack direction="column" spacing={5}>
           <Stack
             direction="column"
-            spacing={1}
+            spacing={2}
             display={{ base: "none", sm: "flex" }}
           >
             <Button
@@ -84,45 +85,68 @@ export default function AppearancePreferences() {
             >
               {backButton ? "Hide" : "Show"} Back Button on Large Windows
             </Button>
-            <Text fontSize="xs">
-              {isWindows ? (
-                <>
-                  <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
-                </>
-              ) : (
-                <>
-                  <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
-                </>
-              )}
-            </Text>
+            <Stack direction="row" spacing={2}>
+              <Text fontSize="xs" lineHeight="shorter">
+                {backButton
+                  ? "Hide the application back button on large windows."
+                  : "Always show a back button within the application viewport"}
+                .{" "}
+              </Text>
+              <Text fontSize="xs" lineHeight="shorter">
+                {isWindows ? (
+                  <>
+                    <Kbd>alt</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+                  </>
+                ) : (
+                  <>
+                    <Kbd>control</Kbd> + <Kbd>shift</Kbd> + <Kbd>B</Kbd>
+                  </>
+                )}
+              </Text>
+            </Stack>
           </Stack>
-          <Stack
-            direction="column"
-            spacing={1}
-            display={{ base: "none", sm: "flex" }}
-          >
-            <Button onClick={SetFontPreference}>
-              {accessibleFonts ? "Disable" : "Enable"} Accessible Fonts
-            </Button>
-            <Text fontSize="xs">
-              Use{" "}
-              {accessibleFonts
-                ? "Public Sans, the default ULOSINO font."
-                : "Atkinson Hyperlegible, a font optimised for accessibility."}
-            </Text>
+          <Stack direction="column" spacing={2}>
+            <Suspense fallback={<LoadingServerButton />}>
+              <FontAssistant />
+            </Suspense>
+            <Suspense fallback={<LoadingServer />}>
+              <Text fontSize="xs" lineHeight="shorter">
+                Change the font to make the app easier to read. To change
+                operating system font settings,{" "}
+                {isWindows ? (
+                  <Link href="ms-settings:easeofaccess-fonts">
+                    open Windows font settings
+                  </Link>
+                ) : (
+                  <>
+                    {isMacOs
+                      ? "open the macOS Font Book application"
+                      : "open your operating system's accessibility settings"}
+                  </>
+                )}
+                .
+              </Text>
+            </Suspense>
           </Stack>
-          <Stack direction="column" spacing={1}>
+          <Stack direction="column" spacing={2}>
             <Button onClick={toggleColorMode}>
               Invert Colours for this Session
             </Button>
-            <Stack direction="column" spacing={1}>
-              {isWindows ? (
-                ""
-              ) : (
-                <Text fontSize="xs">
-                  <Kbd>control</Kbd> + <Kbd>W</Kbd>
-                </Text>
-              )}
+            <Stack direction="row" spacing={2}>
+              <Text fontSize="xs" lineHeight="shorter">
+                Override your operating system settings and use a{" "}
+                {colorMode === "light" ? "dark" : "light"} colour scheme for
+                this session or tab only.
+              </Text>
+              <Text fontSize="xs" lineHeight="shorter">
+                {isWindows ? (
+                  ""
+                ) : (
+                  <Text fontSize="xs">
+                    <Kbd>control</Kbd> + <Kbd>W</Kbd>
+                  </Text>
+                )}
+              </Text>
             </Stack>
           </Stack>
           <Suspense fallback={<LoadingServer />}>
@@ -130,7 +154,7 @@ export default function AppearancePreferences() {
               To {reducedMotion ? "enable" : "reduce"} animations,{" "}
               {isWindows ? (
                 <Link href="ms-settings:easeofaccess-display">
-                  open Windows ease of access settings
+                  open Windows accessibility settings
                 </Link>
               ) : (
                 <>

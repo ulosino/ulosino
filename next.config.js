@@ -14,10 +14,6 @@ const securityHeaders = [
     value: "on",
   },
   {
-    key: "X-Content-Type-Options",
-    value: "nosniff",
-  },
-  {
     key: "Content-Security-Policy",
     value:
       "script-src 'self' 'unsafe-eval' 'unsafe-inline' ulosino.com *.ulosino.com *.vercel.app",

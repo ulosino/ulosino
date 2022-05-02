@@ -116,7 +116,12 @@ export const Table = {
 
 export const accessibleFont =
   typeof window !== "undefined"
-    ? localStorage.getItem("P3PrefAccessibleFonts") === "true"
+    ? localStorage.getItem("P3PrefAccessibleFonts")
+    : "";
+
+export const systemFont =
+  typeof window !== "undefined"
+    ? localStorage.getItem("P3PrefAccessibleFonts") === "system"
     : "";
 
 const UITheme = extendTheme({
@@ -167,8 +172,16 @@ const UITheme = extendTheme({
     },
   },
   fonts: {
-    heading: accessibleFont ? "Atkinson Hyperlegible" : "Public Sans",
-    body: accessibleFont ? "Atkinson Hyperlegible" : "Public Sans",
+    heading: accessibleFont
+      ? systemFont
+        ? "system-ui"
+        : "Atkinson Hyperlegible"
+      : "Public Sans",
+    body: accessibleFont
+      ? systemFont
+        ? "system-ui"
+        : "Atkinson Hyperlegible"
+      : "Public Sans",
   },
   textStyles: {
     miniHeading: {
