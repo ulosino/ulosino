@@ -7,9 +7,6 @@
 // Types
 import type { ReactElement } from "react";
 
-// Suspense and performance
-import { useLocalStorage } from "@rehooks/local-storage";
-
 // Chakra UI, icons, and other design imports
 import {
   Modal,
@@ -31,6 +28,7 @@ import {
   AlertDialogFooter,
   AlertDialogOverlay,
   useBreakpointValue,
+  usePrefersReducedMotion,
 } from "@chakra-ui/react";
 
 interface OverlayPropsDrawerOnly {
@@ -62,7 +60,9 @@ export function OverlayModal({
   onClose,
   useAlertDialog,
 }: OverlayProps): ReactElement {
-  const [disableMotion] = useLocalStorage("P3LowBatteryMode");
+  // Honour system accessibility preferences
+  const animationSpeed = usePrefersReducedMotion();
+
   return (
     <>
       {useAlertDialog ? (
@@ -70,9 +70,9 @@ export function OverlayModal({
           isOpen={isOpen}
           onClose={onClose}
           leastDestructiveRef={cancelRef}
+          motionPreset={animationSpeed ? "none" : "scale"}
           scrollBehavior="inside"
           size="sm"
-          motionPreset={disableMotion ? "none" : "scale"}
           isCentered
         >
           <AlertDialogOverlay />
@@ -87,9 +87,9 @@ export function OverlayModal({
           isOpen={isOpen}
           onClose={onClose}
           initialFocusRef={cancelRef}
+          motionPreset={animationSpeed ? "none" : "scale"}
           scrollBehavior="inside"
           size="xl"
-          motionPreset={disableMotion ? "none" : "scale"}
           isCentered
         >
           <ModalOverlay />

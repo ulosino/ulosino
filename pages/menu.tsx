@@ -15,7 +15,6 @@ import { Stack, Button } from "@chakra-ui/react";
 import {
   HiOutlineHome,
   HiOutlineDatabase,
-  HiOutlineSearch,
   HiOutlinePencil,
   HiOutlineInformationCircle,
   HiOutlineCog,
@@ -52,12 +51,7 @@ export default function Menu() {
         </Link>
         <Link href="/browse" passHref>
           <Button as="a" leftIcon={<HiOutlineDatabase />}>
-            OS List &amp; Tempo
-          </Button>
-        </Link>
-        <Link href="/search" passHref>
-          <Button as="a" leftIcon={<HiOutlineSearch />}>
-            Advanced Search
+            Operating System List
           </Button>
         </Link>
         <Link href="/matches" passHref>

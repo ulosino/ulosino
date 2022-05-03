@@ -57,7 +57,6 @@ export default function Layout({
   showPreferences,
 }: LayoutProps) {
   // Global preferences
-  const [advancedSearch] = useLocalStorage("P3PrefAdvancedSearchLink");
   const [backButton] = useLocalStorage("P3PrefBackButtonLargeWindows");
   const [minimiseNotifications] = useLocalStorage(
     "P3PrefMinimiseNotifications"
@@ -171,20 +170,6 @@ export default function Layout({
         [manager, window];
     }
   });
-  useEffect(() => {
-    {
-      isWindows
-        ? ""
-        : manager.registerHotkey({
-            key: "N",
-            ctrl: true,
-            shift: false,
-            alt: true,
-            callback: () => window.open("/search", "_blank"),
-          }),
-        [manager, window];
-    }
-  });
 
   // Session preference keybindings
   useEffect(() => {
@@ -199,34 +184,6 @@ export default function Layout({
             callback: () => toggleColorMode(),
           }),
         [manager, toggleColorMode];
-    }
-  });
-  useEffect(() => {
-    {
-      isWindows
-        ? manager.registerHotkey({
-            key: "S",
-            ctrl: false,
-            shift: true,
-            alt: true,
-            callback: () =>
-              writeStorage(
-                "P3PrefAdvancedSearchLink",
-                advancedSearch ? false : true
-              ),
-          })
-        : manager.registerHotkey({
-            key: "S",
-            ctrl: true,
-            shift: true,
-            alt: false,
-            callback: () =>
-              writeStorage(
-                "P3PrefAdvancedSearchLink",
-                advancedSearch ? false : true
-              ),
-          }),
-        [manager, advancedSearch];
     }
   });
   useEffect(() => {
@@ -323,7 +280,7 @@ export default function Layout({
           </>
         )}
         <Container maxW="container.lg" as="header">
-          <Flex mt={4} mb={10}>
+          <Flex mt={5} mb={10}>
             <Center
               display={{ base: "flex", sm: "none" }}
               id="testingHeaderBackButtonMobile"
@@ -369,43 +326,19 @@ export default function Layout({
                       Home
                     </Button>
                   </Link>
-                  {advancedSearch ? (
-                    <>
-                      <Link href="/search" passHref>
-                        <Button
-                          variant="ghost"
-                          as="a"
-                          id="testingHeaderSearchLink"
-                          display={{ base: "none", md: "flex" }}
-                        >
-                          Advanced Search
-                        </Button>
-                      </Link>
-                      <Link href="/search" passHref>
-                        <Button
-                          variant="ghost"
-                          as="a"
-                          id="testingHeaderSearchLink"
-                          display={{ base: "none", sm: "flex", md: "none" }}
-                        >
-                          Search
-                        </Button>
-                      </Link>
-                    </>
-                  ) : (
-                    <Link href="/browse" passHref>
-                      <Button
-                        variant="ghost"
-                        as="a"
-                        id="testingHeaderBrowseLink"
-                      >
-                        Browse
-                      </Button>
-                    </Link>
-                  )}
-                  <Link href="/about" passHref>
+                  <Link href="/browse" passHref>
+                    <Button variant="ghost" as="a" id="testingHeaderBrowseLink">
+                      Browse
+                    </Button>
+                  </Link>
+                  <Link href="/matches" passHref>
                     <Button variant="ghost" as="a">
-                      About
+                      Matches
+                    </Button>
+                  </Link>
+                  <Link href="/create" passHref>
+                    <Button variant="ghost" as="a">
+                      Create
                     </Button>
                   </Link>
                 </Stack>
@@ -413,7 +346,7 @@ export default function Layout({
             )}
             <Spacer />
             <Center display={{ base: "none", sm: "flex" }}>
-              <Link href="/preferences/appearance" passHref>
+              <Link href="/preferences/general" passHref>
                 <IconButton
                   icon={<HiOutlineCog />}
                   aria-label="Preferences"
@@ -437,7 +370,7 @@ export default function Layout({
           </Flex>
         </Container>
       </Suspense>
-      <Container maxW="container.lg" flex={1} as="main">
+      <Container maxW="container.lg" flex={1}>
         {children}
       </Container>
       <Container maxW="container.lg" as="footer">
@@ -457,14 +390,17 @@ export default function Layout({
                     GitHub
                   </Button>
                 </Link>
-                <Link href="https://twitter.com/ulosino" passHref>
-                  <Button variant="ghost" size="sm" as="a">
-                    Twitter
-                  </Button>
-                </Link>
                 <Link href="https://docs.ulosino.com" passHref>
                   <Button variant="ghost" size="sm" as="a">
                     Documentation
+                  </Button>
+                </Link>
+                <Link
+                  href="https://docs.ulosino.com/docs/preferences/keybindings"
+                  passHref
+                >
+                  <Button variant="ghost" size="sm" as="a">
+                    Keyboard Shortcuts
                   </Button>
                 </Link>
               </>
@@ -484,19 +420,6 @@ export default function Layout({
                   id="testingFooterBackButtonDesktopSwitch"
                 >
                   {backButton ? "Hide" : "Show"} Back
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={(_) =>
-                    writeStorage(
-                      "P3PrefAdvancedSearchLink",
-                      advancedSearch ? false : true
-                    )
-                  }
-                  display={{ base: "none", md: "inline-block" }}
-                  id="testingFooterAdvancedSearchLinkSwitch"
-                >
-                  Prefer {advancedSearch ? "Browse" : "Search"}
                 </Button>
               </>
             ) : (
@@ -529,9 +452,9 @@ export default function Layout({
                 </Center>
               )}
             </Suspense>
-            <Link href="/about/license" passHref>
-              <Button variant="ghost" size="sm" as="a" id="testingLicenseLink">
-                License
+            <Link href="/about/legal" passHref>
+              <Button variant="ghost" size="sm" as="a">
+                Legal
               </Button>
             </Link>
             <Link href="/about/privacy" passHref>

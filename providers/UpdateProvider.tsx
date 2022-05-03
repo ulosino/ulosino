@@ -5,7 +5,6 @@
 // It works in the background and is not visible to the user unless an update is pending, hence the provider classification
 
 // Suspense and performance
-import { LoadingServer } from "components/Loading";
 import {
   writeStorage,
   deleteFromStorage,

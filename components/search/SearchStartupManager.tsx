@@ -31,7 +31,7 @@ interface MetadataTypes {
 }
 
 // Begin wrapping component
-export default function SearchName({ data }: DataTypes) {
+export default function SearchStartupManager({ data }: DataTypes) {
   return (
     <AutoComplete emptyState={EmptyState}>
       <AutoCompleteInput
@@ -39,8 +39,8 @@ export default function SearchName({ data }: DataTypes) {
         size="md"
         borderRadius="xl"
         shadow="inner"
-        placeholder="Find an Operating System..."
-        id="testingSearchInputName"
+        placeholder="Search by Startup Manager..."
+        id="testingSearchInputStartupManager"
       />
       <AutoCompleteList>
         {data.map(
@@ -57,11 +57,11 @@ export default function SearchName({ data }: DataTypes) {
           }: MetadataTypes) => (
             <Link href={`/browse/${slug}`} key={`/browse/${slug}`} passHref>
               <AutoCompleteItem
-                value={name}
-                key={`option-${name}`}
+                value={startup}
+                key={`option-${startup}`}
                 textDecoration="none"
                 p={4}
-                mb={1}
+                mb={2}
                 as="a"
               >
                 <OSDataLayout
@@ -75,9 +75,9 @@ export default function SearchName({ data }: DataTypes) {
                   packagemgr={packagemgr}
                   usePlatform={false}
                   useDesktop={false}
-                  useStartup={false}
+                  useStartup={true}
                   usePackagemgr={false}
-                  OSCardId="testingSearchOutputItemName"
+                  OSCardId="testingSearchOutputItemStartupManager"
                 />
               </AutoCompleteItem>
             </Link>

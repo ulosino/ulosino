@@ -13,10 +13,11 @@ import Link from "next/link";
 // Chakra UI, icons, and other design imports
 import { Stack, Button, Heading } from "@chakra-ui/react";
 import {
-  HiOutlineTemplate,
-  HiOutlineBell,
   HiOutlineCog,
   HiOutlineSupport,
+  HiOutlineExclamationCircle,
+  HiOutlineShieldExclamation,
+  HiOutlineUser,
 } from "react-icons/hi";
 
 // First party components
@@ -41,25 +42,32 @@ export default function PreferencesList() {
           <NoJSWarningFeaturesDisabled />
         </noscript>
         <Stack direction="column" spacing={2}>
-          <Link href="/preferences/appearance" passHref>
-            <Button as="a" leftIcon={<HiOutlineTemplate />}>
-              Appearance
+          <Link href="/preferences/general" passHref>
+            <Button leftIcon={<HiOutlineCog />} as="a">
+              General
             </Button>
           </Link>
-          <Link href="/preferences/notifications" passHref>
-            <Button as="a" leftIcon={<HiOutlineBell />}>
-              Notifications
+          <Link href="/preferences/accessibility" passHref>
+            <Button leftIcon={<HiOutlineUser />} as="a">
+              Accessibility
             </Button>
           </Link>
-          <Link href="/preferences/advanced" passHref>
-            <Button as="a" leftIcon={<HiOutlineCog />}>
-              Advanced
+        </Stack>
+        <Stack direction="column" spacing={2}>
+          <Link href="/about/legal/privacy" passHref>
+            <Button leftIcon={<HiOutlineShieldExclamation />} as="a">
+              Privacy Notice
+            </Button>
+          </Link>
+          <Link href="/about/legal" passHref>
+            <Button leftIcon={<HiOutlineExclamationCircle />} as="a">
+              Copyright &amp; Legal
             </Button>
           </Link>
         </Stack>
         <Link href="https://docs.ulosino.com" passHref>
-          <Button as="a" leftIcon={<HiOutlineSupport />}>
-            ULOSINO Documentation
+          <Button leftIcon={<HiOutlineSupport />} as="a">
+            Documentation
           </Button>
         </Link>
       </Stack>

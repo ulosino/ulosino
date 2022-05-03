@@ -15,7 +15,11 @@ import {
   HiCog,
   HiOutlineBell,
   HiOutlineCog,
+  HiOutlineExclamationCircle,
+  HiOutlineShieldExclamation,
+  HiOutlineSupport,
   HiOutlineTemplate,
+  HiOutlineUser,
 } from "react-icons/hi";
 
 // Begin wrapping component
@@ -31,7 +35,7 @@ export default function PreferencesLayout({
         spacing={10}
         mb={10}
         me={{ base: "none", md: 10 }}
-        minW={{ base: "inherit", sm: 175 }}
+        w={{ base: "inherit", sm: 200 }}
         display={{ base: "none", md: "flex" }}
       >
         <Center>
@@ -44,26 +48,38 @@ export default function PreferencesLayout({
           />
         </Center>
         <Stack direction="column" spacing={2}>
-          <Link href="/preferences/appearance" passHref>
-            <Button leftIcon={<HiOutlineTemplate />} as="a">
-              Appearance
-            </Button>
-          </Link>
-          <Link href="/preferences/notifications" passHref>
-            <Button leftIcon={<HiOutlineBell />} as="a">
-              Notifications
-            </Button>
-          </Link>
-          <Link href="/preferences/advanced" passHref>
+          <Link href="/preferences/general" passHref>
             <Button leftIcon={<HiOutlineCog />} as="a">
-              Advanced
+              Preferences
+            </Button>
+          </Link>
+          <Link href="/preferences/accessibility" passHref>
+            <Button leftIcon={<HiOutlineUser />} as="a">
+              Accessibility
             </Button>
           </Link>
         </Stack>
+        <Stack direction="column" spacing={2}>
+          <Link href="/about/legal/privacy" passHref>
+            <Button leftIcon={<HiOutlineShieldExclamation />} as="a">
+              Privacy Notice
+            </Button>
+          </Link>
+          <Link href="/about/legal" passHref>
+            <Button leftIcon={<HiOutlineExclamationCircle />} as="a">
+              Copyright &amp; Legal
+            </Button>
+          </Link>
+        </Stack>
+        <Link href="https://docs.ulosino.com" passHref>
+          <Button leftIcon={<HiOutlineSupport />} as="a">
+            Documentation
+          </Button>
+        </Link>
       </Stack>
-      <Stack flex={1} spacing={10} as="main">
+      <Flex flex={1} direction="column" as="main">
         {children}
-      </Stack>
+      </Flex>
     </Flex>
   );
 }

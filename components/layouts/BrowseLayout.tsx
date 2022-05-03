@@ -25,16 +25,13 @@ export default function BrowseLayout({ children }: { children: ReactElement }) {
           spacing={2}
           mb={10}
           me={{ base: "none", md: 10 }}
-          minW={{ base: "inherit", sm: 175 }}
+          w={{ base: "inherit", sm: 200 }}
           display={{ base: "none", sm: "flex" }}
           as="nav"
           id="testingBrowsePageSeriesSidebar"
         >
           <Link href="/browse" passHref>
-            <Button as="a">OS List &amp; Tempo</Button>
-          </Link>
-          <Link href="/search" passHref>
-            <Button as="a">Advanced Search</Button>
+            <Button as="a">Operating System List</Button>
           </Link>
           <Link href="/matches" passHref>
             <Button as="a">ULOSINO Matches</Button>

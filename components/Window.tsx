@@ -54,7 +54,7 @@ export default function Window({
       aria-disabled
     >
       <Stack direction="column">
-        <Flex pb={2} px={4}>
+        <Flex pb={2} px={5}>
           <Icon as={HiOutlineDotsCircleHorizontal} aria-label="Minimise icon" />
           <Spacer />
           <Text fontSize="xs">ULOSINO &mdash; {windowName}</Text>
@@ -62,7 +62,7 @@ export default function Window({
           <Icon as={HiOutlineXCircle} aria-label="Close icon" />
         </Flex>
         <Divider m={0} />
-        <Box pt={2} px={4}>
+        <Box pt={2} px={5}>
           {children}
         </Box>
       </Stack>

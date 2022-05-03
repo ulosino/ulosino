@@ -30,7 +30,7 @@ export const Button = {
 
 export const Card = {
   baseStyle: {
-    padding: 4,
+    padding: 5,
     borderRadius: "xl",
     shadow: "md",
     textDecoration: "none",
@@ -41,6 +41,7 @@ export const Card = {
       color: "inherit",
     }),
     button: ({ colorMode }: { colorMode: string }) => ({
+      padding: 4,
       bg: "inherit",
       border: "solid",
       borderWidth: "0.5px",
@@ -56,7 +57,7 @@ export const Card = {
     }),
     brand: {
       bg: "brand",
-      color: "inherit",
+      color: "gray.800",
     },
     secondary: {
       bg: "secondary",
@@ -113,7 +114,13 @@ export const Table = {
   },
 };
 
+export const accessibleFont =
+  typeof window !== "undefined"
+    ? localStorage.getItem("P3PrefAccessibleFonts") === "true"
+    : "";
+
 const UITheme = extendTheme({
+  accessibleFont,
   config,
   colors: {
     // Main brand colours
@@ -160,8 +167,8 @@ const UITheme = extendTheme({
     },
   },
   fonts: {
-    heading: "Public Sans",
-    body: "Public Sans",
+    heading: accessibleFont ? "Atkinson Hyperlegible" : "Public Sans",
+    body: accessibleFont ? "Atkinson Hyperlegible" : "Public Sans",
   },
   textStyles: {
     miniHeading: {

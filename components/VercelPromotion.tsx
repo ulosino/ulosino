@@ -3,26 +3,6 @@
 
 // This is a promotion for Vercel that allows us to use OSS pricing
 
-// Suspense and performance
-import { useLocalStorage } from "@rehooks/local-storage";
-
-// Links and routing
-import Link from "next/link";
-
-// Chakra UI, icons, and other design imports
-import {
-  Box,
-  Container,
-  Flex,
-  Spacer,
-  Center,
-  Stack,
-  Text,
-  Button,
-  DarkMode,
-} from "@chakra-ui/react";
-import { HiArrowRight } from "react-icons/hi";
-
 // Begin components
 
 // Here the fill must be typed as any because we may need to pass a constant to enable colour mode switching
@@ -44,39 +24,5 @@ export function VercelLogo({ fill }: { fill: any }) {
         fill={fill}
       />
     </svg>
-  );
-}
-
-export default function VercelPromotion() {
-  const [hide] = useLocalStorage("P3PrefMarketingCapture");
-  return (
-    <>
-      {hide ? (
-        ""
-      ) : (
-        <Box bg="black" color="white" py={2}>
-          <Container maxW="container.lg">
-            <DarkMode>
-              <Flex>
-                <Stack direction="row" spacing={2}>
-                  <Center>
-                    <Text>Powered by</Text>
-                  </Center>
-                  <Center>
-                    <VercelLogo fill="white" />
-                  </Center>
-                </Stack>
-                <Spacer />
-                <Link href="https://vercel.com/home" passHref>
-                  <Button size="sm" leftIcon={<HiArrowRight />} as="a">
-                    <Text>Begin your Vercel Journey</Text>
-                  </Button>
-                </Link>
-              </Flex>
-            </DarkMode>
-          </Container>
-        </Box>
-      )}
-    </>
   );
 }

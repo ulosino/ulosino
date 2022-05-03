@@ -46,21 +46,5 @@ describe("Layout State Testing", () => {
     cy.get("#testingHeaderBackButtonMobile")
       .find("button")
       .should("be.visible");
-
-    // Now do the same tests using the Browse/Advanced Search button
-    cy.viewport("macbook-15");
-    cy.visit("/menu");
-    cy.get("#testingHeaderSearchLink").should("not.exist");
-    cy.get("#testingHeaderBrowseLink").should("be.visible");
-    cy.get("#testingFooterAdvancedSearchLinkSwitch")
-      .should("be.visible")
-      .click();
-    cy.get("#testingHeaderSearchLink").should("be.visible");
-    cy.get("#testingHeaderBrowseLink").should("not.exist");
-    cy.get("#testingHeaderSearchLink").click();
-    cy.get("#testingHeaderSearchLink").should("be.visible");
-    cy.get("#testingHeaderBrowseLink").should("not.exist");
-    cy.viewport("iphone-x");
-    cy.get("#testingHeaderSearchLink").should("not.be.visible");
   });
 });

@@ -1,6 +1,10 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// This page uses legacy Node.js Runtime delivery technology
+// Reason: Uses eval() to process MDX
+// https://nextjs.org/docs/api-reference/edge-runtime
+
 // Types
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
@@ -11,6 +15,7 @@ import Head from "next/head";
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
+import PreferencesLayout from "components/layouts/PreferencesLayout";
 
 // Markdown processing libraries
 import fs from "fs";
@@ -62,10 +67,15 @@ AboutMarkdownPage.getLayout = function getLayout(page: ReactElement) {
         useAltBackground={false}
         showPreferences={false}
       >
-        {page}
+        <PreferencesLayout>{page}</PreferencesLayout>
       </Layout>
     </ApplicationProvider>
   );
+};
+
+// Disable the Edge Runtime
+export const config = {
+  runtime: "nodejs",
 };
 
 interface PathProps {
@@ -79,7 +89,10 @@ interface PathProps {
 // @ts-expect-error
 export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
   // Find Markdown files
-  const filePath = path.join(`public/markdown/about`, `${params.slug}.mdx`);
+  const filePath = path.join(
+    `public/markdown/about/legal`,
+    `${params.slug}.mdx`
+  );
   const source = fs.readFileSync(filePath);
 
   // Use the files to parse MDX
@@ -97,7 +110,10 @@ export const getStaticProps: GetStaticProps = async ({ params }: PathProps) => {
 
 // Find MDX files in the /public/markdown/ folder to generate paths
 export const getStaticPaths = async () => {
-  const pageContentPath = path.join(process.cwd(), "public/markdown/about");
+  const pageContentPath = path.join(
+    process.cwd(),
+    "public/markdown/about/legal"
+  );
 
   const pageFilePaths = fs
     .readdirSync(pageContentPath)
