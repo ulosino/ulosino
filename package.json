@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.25",
-    "@types/react": "^17.0.43",
+    "@types/react": "^18.0.8",
     "cypress": "^9.5.4",
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.5",
