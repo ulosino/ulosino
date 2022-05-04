@@ -16,6 +16,7 @@ import { useRef } from "react";
 
 export function DeletePreferences() {
   deleteFromStorage("P3PrefBackButtonLargeWindows");
+  deleteFromStorage("P3PrefAccessibleFonts");
   deleteFromStorage("P3PrefMinimiseNotifications");
   deleteFromStorage("P3PrefDisableDonationFeatures");
   deleteFromStorage("P3PrefDangerousRuntime");
@@ -80,13 +81,18 @@ export default function PreferenceResetAssistant() {
   // Gracefully close the modal once the deletion has completed
   function BeginDelete() {
     DeletePreferences();
-    onClose();
+    if (accessibleFonts) {
+      window.location.reload();
+    } else onClose();
   }
 
   function ModalBody() {
     return (
       <Stack direction="column" spacing={5}>
-        <Text>This will restore the default preferences.</Text>
+        <Text>
+          This will restore the default preferences, including accessibility
+          options.
+        </Text>
       </Stack>
     );
   }

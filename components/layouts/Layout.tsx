@@ -138,14 +138,14 @@ export default function Layout({
             ctrl: false,
             shift: false,
             alt: true,
-            callback: () => router.push("/preferences/appearance"),
+            callback: () => router.push("/preferences/general"),
           })
         : manager.registerHotkey({
             key: ",",
             ctrl: true,
             shift: false,
             alt: false,
-            callback: () => router.push("/preferences/appearance"),
+            callback: () => router.push("/preferences/general"),
           }),
         [manager, router];
     }
@@ -345,8 +345,18 @@ export default function Layout({
               </Center>
             )}
             <Spacer />
-            <Center display={{ base: "none", sm: "flex" }}>
+            <Center display={{ base: "none", md: "flex" }}>
               <Link href="/preferences/general" passHref>
+                <IconButton
+                  icon={<HiOutlineCog />}
+                  aria-label="Preferences"
+                  title="Preferences"
+                  as="a"
+                />
+              </Link>
+            </Center>
+            <Center display={{ base: "none", sm: "flex", md: "none" }}>
+              <Link href="/preferences" passHref>
                 <IconButton
                   icon={<HiOutlineCog />}
                   aria-label="Preferences"
