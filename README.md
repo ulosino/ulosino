@@ -1,14 +1,12 @@
 # ULOSINO
 
-[![ULOSINO](./public/brand/flag.png)]()
+> **Notice:** ULOSINO is being sunset May 25th, 2022. ULOSINO will be superseded by Osopcloud in the future. Thank you for using ULOSINO.
 
-[![Cypress Testing](https://github.com/ulosino/ulosino/actions/workflows/testing.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/testing.yml)
-[![Last Release Lighthouse CI](https://github.com/ulosino/ulosino/actions/workflows/lighthouse-release.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/lighthouse-release.yml)
-[![Last Release Webhint](https://github.com/ulosino/ulosino/actions/workflows/webhint-release.yml/badge.svg)](https://github.com/ulosino/ulosino/actions/workflows/webhint-release.yml)
+[![ULOSINO](./public/brand/flag.png)]()
 
 ULOSINO is the modern setting for open source operating system information. Open to community contributions, ULOSINO aims to let you connect direct to culture.
 
-ULOSINO is The Friendly Flow. Go to [ULOSINO.com](https://ulosino.com) now.
+ULOSINO is The Friendly Flow.
 
 ## Feature Overview
 
@@ -51,7 +49,7 @@ You also need to read through the [Contribution Code of Conduct](https://github.
 
 ## Documentation
 
-We've launched [ULOSINO Documentation](https://docs.ulosino.com)! It's complete with an assortment of tutorials and guides, ranging from ULOSINO basics to technical details.
+We've launched ULOSINO Documentation! It's complete with an assortment of tutorials and guides, ranging from ULOSINO basics to technical details.
 
 Or visit the [ULOSINO Docs repository](https://github.com/ulosino/docs) for more details.
 

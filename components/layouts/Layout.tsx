@@ -28,7 +28,6 @@ import {
   useBoolean,
   useColorMode,
   useColorModeValue,
-  DarkMode,
 } from "@chakra-ui/react";
 import { HiOutlineCog, HiOutlineMenu } from "react-icons/hi";
 import { VercelLogo } from "components/VercelPromotion";
@@ -62,7 +61,7 @@ export default function Layout({
     "P3PrefMinimiseNotifications"
   );
   const [dangerousRuntime] = useLocalStorage("P3PrefDangerousRuntime");
-  const [ukraineAidBanner, setUkraineAidBanner] = useBoolean();
+  const [isClosureBannerExpanded, setClosureBannerExpanded] = useBoolean();
 
   // Global keybindings
   const manager = useHotkeyManager();
@@ -226,58 +225,29 @@ export default function Layout({
         {minimiseNotifications ? (
           ""
         ) : (
-          <>
-            {ukraineAidBanner ? (
-              ""
-            ) : (
-              <Flex
-                bg="secondary"
-                color="white"
-                py={2}
-                mb={4}
-                display={{ base: "none", md: "flex" }}
-              >
-                <DarkMode>
-                  <Container maxW="container.lg">
-                    <Flex>
-                      <Stack direction="row" spacing={5}>
-                        <Center>
-                          <Stack direction="column" spacing={0}>
-                            <Flex bg="blue" w={8} h={2} roundedTop="sm" />
-                            <Flex bg="yellow" w={8} h={2} roundedBottom="sm" />
-                          </Stack>
-                        </Center>
-                        <Center>
-                          <Text textStyle="miniHeading" as="h6">
-                            Donate to UNICEF
-                          </Text>
-                        </Center>
-                        <Center>
-                          <Text fontSize="sm">Help children in Ukraine.</Text>
-                        </Center>
-                        <Center>
-                          <Link
-                            href="https://help.unicef.org/ukraine-emergency"
-                            passHref
-                          >
-                            <Button size="sm" as="a">
-                              Get Started
-                            </Button>
-                          </Link>
-                        </Center>
-                      </Stack>
-                      <Spacer />
-                      <Center>
-                        <Button size="sm" onClick={setUkraineAidBanner.toggle}>
-                          Not Now
-                        </Button>
-                      </Center>
-                    </Flex>
-                  </Container>
-                </DarkMode>
-              </Flex>
-            )}
-          </>
+          <Flex bg="red.50" color="gray.900" py={5}>
+            <Container maxW="container.lg">
+              <Stack direction="column" spacing={5}>
+                <Text textStyle="miniHeading" as="h6">
+                  ULOSINO closes May 25th
+                </Text>
+                <Stack direction="column" spacing={5}>
+                  <Text fontSize="sm">
+                    Since launching in November 2021, we haven't been able to
+                    make this culture better in the ways we had hoped. We want
+                    to take the time to make ULOSINO the best it can be as a set
+                    of tools to build up open source operating system culture
+                    across the world.
+                  </Text>
+                  <Text fontSize="sm">
+                    We have made the choice to sunset ULOSINO by May 25th.
+                    Osopcloud will replace ULOSINO in September. Thank you for
+                    using ULOSINO.
+                  </Text>
+                </Stack>
+              </Stack>
+            </Container>
+          </Flex>
         )}
         <Container maxW="container.lg" as="header">
           <Flex mt={5} mb={10}>
