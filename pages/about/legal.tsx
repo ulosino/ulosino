@@ -48,15 +48,6 @@ export default function LegalHub() {
       <Stack direction="column" spacing={5}>
         <Heading size="xl">Copyright &amp; Legal Information</Heading>
         <Stack direction="column" spacing={2}>
-          <Link href="/about/legal/usage" passHref>
-            <Card variant="button" as="a">
-              <Heading size="md">Application Usage Agreement</Heading>
-              <Text fontSize="sm">
-                Policies keeping the ULOSINO application experience safe and
-                secure.
-              </Text>
-            </Card>
-          </Link>
           <Link href="/about/legal/license" passHref>
             <Card variant="button" as="a" id="testingLicenseLink">
               <Heading size="md">
@@ -83,15 +74,6 @@ export default function LegalHub() {
                 View disclaimers for brand control, opinion representation, and
                 financial advice.
               </Text>
-            </Card>
-          </Link>
-          <Link
-            href="https://github.com/ulosino/.github/blob/main/CODE_OF_CONDUCT.md"
-            passHref
-          >
-            <Card variant="button" as="a">
-              <Heading size="md">Code of Conduct</Heading>
-              <Text fontSize="sm">View our Code of Conduct on GitHub.</Text>
             </Card>
           </Link>
         </Stack>

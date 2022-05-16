@@ -300,16 +300,15 @@ export default function OSPage({
                 </Tbody>
               </Table>
 
-              <Link href={contributionPath} passHref>
-                <Button
-                  leftIcon={<HiOutlinePencil />}
-                  size="sm"
-                  as="a"
-                  id="testingOSPageEditLink"
-                >
-                  View on GitHub
-                </Button>
-              </Link>
+              <Button
+                leftIcon={<HiOutlinePencil />}
+                size="sm"
+                as="a"
+                id="testingOSPageEditLink"
+                isDisabled
+              >
+                View on GitHub
+              </Button>
             </Stack>
           </ErrorFallback>
         </Stack>

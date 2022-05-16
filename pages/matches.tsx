@@ -69,24 +69,7 @@ export default function Matches() {
         <noscript>
           <NoJSWarningFeaturesDisabled />
         </noscript>
-        <Text>
-          Find an OS that matches your preferences, quickly and easily.
-        </Text>
-        <Suspense fallback={<LoadingServer />}>
-          <ErrorFallback>
-            <MatchesExperience />
-          </ErrorFallback>
-        </Suspense>
-        <Stack direction="row" spacing={5}>
-          <Center>
-            <Text textStyle="miniHeading" as="h6">
-              Help a Friend
-            </Text>
-          </Center>
-          <Button leftIcon={<HiOutlineUpload />} size="sm" onClick={Share}>
-            Share Matches
-          </Button>
-        </Stack>
+        <Text>ULOSINO Matches services ended May 25, 2022.</Text>
       </Stack>
     </>
   );

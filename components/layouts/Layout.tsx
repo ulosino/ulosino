@@ -222,33 +222,6 @@ export default function Layout({
       bg={useColorModeValue("gray.50", "inherit")}
     >
       <Suspense fallback={<LoadingServer />}>
-        {minimiseNotifications ? (
-          ""
-        ) : (
-          <Flex bg="red.50" color="gray.900" py={5}>
-            <Container maxW="container.lg">
-              <Stack direction="column" spacing={5}>
-                <Text textStyle="miniHeading" as="h6">
-                  ULOSINO closes May 25th
-                </Text>
-                <Stack direction="column" spacing={5}>
-                  <Text fontSize="sm">
-                    Since launching in November 2021, we haven't been able to
-                    make this culture better in the ways we had hoped. We want
-                    to take the time to make ULOSINO the best it can be as a set
-                    of tools to build up open source operating system culture
-                    across the world.
-                  </Text>
-                  <Text fontSize="sm">
-                    We have made the choice to sunset ULOSINO by May 25th.
-                    Osopcloud will replace ULOSINO in September. Thank you for
-                    using ULOSINO.
-                  </Text>
-                </Stack>
-              </Stack>
-            </Container>
-          </Flex>
-        )}
         <Container maxW="container.lg" as="header">
           <Flex mt={5} mb={10}>
             <Center
@@ -267,21 +240,6 @@ export default function Layout({
             ) : (
               ""
             )}
-            <Link href="/" passHref>
-              <Center
-                bg="secondary"
-                rounded="2xl"
-                shadow="md"
-                p={3}
-                cursor="pointer"
-                as="a"
-                aria-label="Go Home"
-                title="Go Home"
-                id="testingHeaderLogoLink"
-              >
-                <Logo />
-              </Center>
-            </Link>
             {useBasicLayout ? (
               ""
             ) : (
@@ -370,19 +328,12 @@ export default function Layout({
                     GitHub
                   </Button>
                 </Link>
-                <Link href="https://docs.ulosino.com" passHref>
-                  <Button variant="ghost" size="sm" as="a">
-                    Documentation
-                  </Button>
-                </Link>
-                <Link
-                  href="https://docs.ulosino.com/docs/preferences/keybindings"
-                  passHref
-                >
-                  <Button variant="ghost" size="sm" as="a">
-                    Keyboard Shortcuts
-                  </Button>
-                </Link>
+                <Button variant="ghost" size="sm" isDisabled>
+                  Documentation
+                </Button>
+                <Button variant="ghost" size="sm" isDisabled>
+                  Keyboard Shortcuts
+                </Button>
               </>
             )}
             {showPreferences ? (
@@ -437,7 +388,7 @@ export default function Layout({
                 Legal
               </Button>
             </Link>
-            <Link href="/about/privacy" passHref>
+            <Link href="/about/legal/privacy" passHref>
               <Button variant="ghost" size="sm" as="a">
                 Privacy
               </Button>

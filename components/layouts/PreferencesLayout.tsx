@@ -71,11 +71,9 @@ export default function PreferencesLayout({
             </Button>
           </Link>
         </Stack>
-        <Link href="https://docs.ulosino.com" passHref>
-          <Button leftIcon={<HiOutlineSupport />} as="a">
-            Documentation
-          </Button>
-        </Link>
+        <Button leftIcon={<HiOutlineSupport />} isDisabled>
+          Documentation
+        </Button>
       </Stack>
       <Flex flex={1} direction="column" as="main">
         {children}

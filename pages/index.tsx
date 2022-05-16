@@ -23,21 +23,16 @@ import Link from "next/link";
 // Chakra UI, icons, and other design imports
 import {
   Stack,
-  SimpleGrid,
-  Heading,
   Text,
-  Badge,
   Button,
-  DarkMode,
   Box,
   useStyleConfig,
   useDisclosure,
   Container,
-  Center,
   Flex,
   Spacer,
-  Icon,
-  Divider,
+  UnorderedList,
+  ListItem,
 } from "@chakra-ui/react";
 function Card(props: { [x: string]: any; variant: string; children: any }) {
   const { variant, children, ...rest } = props;
@@ -50,24 +45,12 @@ function Card(props: { [x: string]: any; variant: string; children: any }) {
     </Box>
   );
 }
-import {
-  HiOutlineSearch,
-  HiOutlineSparkles,
-  HiCreditCard,
-  HiCog,
-  HiTerminal,
-  HiDesktopComputer,
-  HiLibrary,
-  HiChip,
-  HiAcademicCap,
-  HiUpload,
-} from "react-icons/hi";
+import { HiOutlineSearch } from "react-icons/hi";
 
 // First party components
 import ApplicationProvider from "providers/ApplicationProvider";
 import Layout from "components/layouts/Layout";
 import Overlay from "components/Overlay";
-import Window from "components/Window";
 import { NoJSWarningHome } from "components/NoJSWarning";
 import { ErrorFallback } from "components/ErrorFallback";
 const SearchName = dynamic(() => import("components/search/SearchName"), {
@@ -308,174 +291,28 @@ export default function Home({ AZOSPageData }: OSDataPage) {
                   </Box>
                 </Stack>
               </Stack>
+              <Card variant="solid">
+                <Stack direction="column" spacing={2}>
+                  <Text textStyle="miniHeading" as="h6">
+                    Platform 3 Technical Archive
+                  </Text>
+                  <UnorderedList fontSize="xs" ps={5}>
+                    <ListItem>
+                      Access to Database Content and ULOSINO Matches ended May
+                      25, 2022.
+                    </ListItem>
+                    <ListItem>
+                      Access to this archive via ULOSINO.com will end in
+                      November 2022.
+                    </ListItem>
+                    <ListItem>
+                      Osopcloud will launch in September 2022.
+                    </ListItem>
+                  </UnorderedList>
+                </Stack>
+              </Card>
             </Container>
           </Box>
-        </ErrorFallback>
-        <ErrorFallback>
-          <Flex display={{ base: "none", sm: "flex" }}>
-            <Divider pt="3.5" />
-            <Center w={1000}>
-              <Text textStyle="miniHeading" as="h6">
-                Culture Build with ULOSINO
-              </Text>
-            </Center>
-            <Divider pt="3.5" />
-          </Flex>
-          <Card variant="secondary">
-            <DarkMode>
-              <SimpleGrid minChildWidth="300px" spacing={10}>
-                <Stack direction="column" spacing={5}>
-                  <Text textStyle="miniHeading" as="h6">
-                    ULOSINO Matches
-                  </Text>
-                  <Heading size="xl">Find a Match.</Heading>
-                  <Text>
-                    With Matches, you can find an operating system that matches
-                    your needs, quickly and easily.
-                  </Text>
-                  <Link href="/matches" passHref>
-                    <Button leftIcon={<HiOutlineSparkles />} as="a">
-                      Get Started with Matches
-                    </Button>
-                  </Link>
-                </Stack>
-                <Window windowName="ULOSINO Matches">
-                  <Stack direction="column" spacing={2}>
-                    <Flex>
-                      <Stack direction="row" spacing={4}>
-                        <Icon as={HiLibrary} w={8} h={8} />
-                        <Text fontSize="sm" pt={1}>
-                          Using the Linux kernel
-                        </Text>
-                      </Stack>
-                      <Spacer />
-                      <Button size="xs" mt={1}>
-                        Switch to BSD
-                      </Button>
-                    </Flex>
-                    <Flex>
-                      <Stack direction="row" spacing={4}>
-                        <Icon as={HiDesktopComputer} w={8} h={8} />
-                        <Text fontSize="sm" pt={1}>
-                          Using graphical interfaces
-                        </Text>
-                      </Stack>
-                      <Spacer />
-                      <Button size="xs" mt={1}>
-                        Switch to a CLI
-                      </Button>
-                    </Flex>
-                    <Flex>
-                      <Stack direction="row" spacing={4}>
-                        <Icon as={HiChip} w={8} h={8} />
-                        <Text fontSize="sm" pt={1}>
-                          Using modern hardware
-                        </Text>
-                      </Stack>
-                      <Spacer />
-                      <Button size="xs" mt={1}>
-                        Switch to older hardware
-                      </Button>
-                    </Flex>
-                    <Flex>
-                      <Stack direction="row" spacing={4}>
-                        <Icon as={HiAcademicCap} w={8} h={8} />
-                        <Text fontSize="sm" pt={1}>
-                          Using managed systems
-                        </Text>
-                      </Stack>
-                      <Spacer />
-                      <Button size="xs" mt={1}>
-                        Switch to advanced systems
-                      </Button>
-                    </Flex>
-                  </Stack>
-                </Window>
-              </SimpleGrid>
-            </DarkMode>
-          </Card>
-          <Card variant="solid">
-            <SimpleGrid minChildWidth="300px" spacing={10}>
-              <Window windowName="Donate to Haiku with ULOSINO Tempo">
-                <Flex>
-                  <Center w="50%" display={{ base: "none", lg: "flex" }} m={5}>
-                    <Icon
-                      as={HiCreditCard}
-                      aria-label="Payment card"
-                      w={20}
-                      h={20}
-                    />
-                  </Center>
-                  <Spacer display={{ base: "none", lg: "flex" }} />
-                  <Stack direction="column" spacing={5} w="full">
-                    <Heading size="md">Donate to Haiku</Heading>
-                    <Box>
-                      <Badge variant="tempo">Powered by ULOSINO Tempo</Badge>
-                    </Box>
-                    <Stack direction="column" spacing={2}>
-                      <Button size="sm">Visit Project Website</Button>
-                      <Button size="sm">Donate with Open Collective</Button>
-                      <Button size="sm">Donate with Liberapay</Button>
-                      <Button size="sm">Donate with GitHub Sponsors</Button>
-                    </Stack>
-                  </Stack>
-                </Flex>
-              </Window>
-              <Stack direction="column" spacing={5}>
-                <Text textStyle="miniHeading" as="h6">
-                  ULOSINO Tempo
-                </Text>
-                <Heading size="xl">Donate.</Heading>
-                <Text>Open source projects need financial support.</Text>
-                <Text>
-                  ULOSINO Tempo makes it easy to give. Share your generosity
-                  with easy access across ULOSINO.
-                </Text>
-                <Text>
-                  Make donations faster with Quick Donation Options. They take
-                  you directly to a selection of donation services.
-                </Text>
-              </Stack>
-            </SimpleGrid>
-          </Card>
-          <Flex display={{ base: "none", sm: "flex" }}>
-            <Divider pt="3.5" />
-            <Center w={1000}>
-              <Text textStyle="miniHeading" as="h6">
-                Make Moves Faster
-              </Text>
-            </Center>
-            <Divider pt="3.5" />
-          </Flex>
-          <SimpleGrid minChildWidth="300px" spacing={10}>
-            <Stack direction="column" spacing={5}>
-              <Icon as={HiUpload} aria-label="Share icon" w={10} h={10} />
-              <Text>
-                Look to Share or Copy points to bring your friends and apps into
-                ULOSINO. Culture build faster and share open source OS culture
-                with others.
-              </Text>
-            </Stack>
-            <Stack
-              direction="column"
-              spacing={5}
-              display={{ base: "flex", md: "none", lg: "flex" }}
-            >
-              <Icon as={HiTerminal} aria-label="Keyboard" w={10} h={10} />
-              <Text>
-                Discover ULOSINO's assortment of keyboard shortcuts. Navigate
-                quickly, change preferences, and uncover powerful functions.
-              </Text>
-            </Stack>
-            <Stack direction="column" spacing={5}>
-              <Icon as={HiCog} aria-label="Preference gear" w={10} h={10} />
-              <Text>
-                Make ULOSINO your own. Customize your experience with
-                preferences that last across sessions, and open the joy from a
-                flow that's made around you.
-              </Text>
-            </Stack>
-          </SimpleGrid>
         </ErrorFallback>
       </Stack>
     </>
