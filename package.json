@@ -16,7 +16,7 @@
     "@fontsource/public-sans": "^4.5.2",
     "@rehooks/local-storage": "^2.4.4",
     "@splitbee/web": "^0.3.0",
-    "framer-motion": "^6.2.8",
+    "framer-motion": "^6.3.11",
     "gray-matter": "^4.0.3",
     "next": "^12.1.5",
     "next-mdx-remote": "4.0.1",
