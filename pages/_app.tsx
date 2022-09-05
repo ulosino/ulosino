@@ -19,7 +19,6 @@ import { useEffect } from "react";
 import "@fontsource/public-sans/variable.css";
 import "@fontsource/public-sans/400.css";
 import "@fontsource/public-sans/600.css";
-import "@fontsource/atkinson-hyperlegible";
 
 // Import Splitbee scripts
 import splitbee from "@splitbee/web";
@@ -35,13 +34,6 @@ export default function Application({
   Component,
   pageProps,
 }: AppPropsWithLayout) {
-  // Suppress default/browser PWA installation prompts
-  // There's a few PWA promotions sprinkled throughtout the app
-  useEffect(() => {
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-    });
-  });
   // Initilise Splitbee analytics tracking
   useEffect(() => {
     splitbee.init({

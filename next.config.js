@@ -4,9 +4,6 @@
 // This file configures Next.js
 // Because it is parsed, we need to stick to classic JS syntax
 
-const withPWA = require("next-pwa");
-const path = require("path");
-
 // Content security options
 const securityHeaders = [
   {
@@ -20,22 +17,10 @@ const securityHeaders = [
   },
 ];
 
-module.exports = withPWA({
-  // Configuration for the next-pwa plugin
-  pwa: {
-    dest: "public",
-    dynamicStartUrl: "false",
-    register: false,
-    skipWaiting: false,
-    disable: process.env.NODE_ENV === "development",
-  },
+module.exports = {
   // Configuration for Next.js
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
-  experimental: {
-    runtime: "edge",
-    serverComponents: false,
-  },
   pageExtensions: ["tsx"],
   images: {
     formats: ["image/avif", "image/webp"],
@@ -62,32 +47,4 @@ module.exports = withPWA({
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: "/privacy",
-        destination: "/about/privacy",
-        permanent: true,
-      },
-      {
-        source: "/about",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/search",
-        destination: "/",
-        permanent: true,
-      },
-    ];
-  },
-  // Add temporary webpack config to resolve Suspense issue known to occur in next-mdx-remote 4.0.0
-  // Refer to https://github.com/hashicorp/next-mdx-remote/issues/237
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      "react/jsx-runtime.js": path.resolve("node_modules/react/jsx-runtime"),
-    };
-    return config;
-  },
-});
+};
