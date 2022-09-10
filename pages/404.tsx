@@ -12,7 +12,7 @@ import ApplicationProvider from "providers/ApplicationProvider";
 import Promotion from "components/Promotion";
 
 // Begin page
-export default function Home() {
+export default function Custom404() {
   return (
     <>
       <Head>
@@ -34,7 +34,7 @@ export default function Home() {
 }
 
 // Apply persistent layout, wrapping page
-Home.getLayout = function getLayout(page: ReactElement) {
+Custom404.getLayout = function getLayout(page: ReactElement) {
   return (
     <ApplicationProvider>
       <>{page}</>
