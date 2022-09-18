@@ -20,9 +20,20 @@ import { FiArrowRight } from "react-icons/fi";
 import Logo from "./Logo";
 import OsopcloudLogo from "./OsopcloudLogo";
 
+import { useEffect, useState } from "react";
+
 // Begin component
 export default function Promotion() {
   const dynamicColour = useColorModeValue("gray.900", "white");
+
+  // Check if the URL exists on Osopcloud
+  const [isRedirectAvailable, setRedirectAvailable] = useState(false);
+  useEffect(() => {
+    if (window.location.pathname.includes("browse")) {
+      setRedirectAvailable(true);
+    }
+  });
+
   return (
     <Container maxW="container.sm" pt={200}>
       <Stack direction="column" spacing={20}>
@@ -34,8 +45,19 @@ export default function Promotion() {
             </Center>
             <OsopcloudLogo />
           </Stack>
-          <Text textAlign="center">Try Osopcloud, the new ULOSINO.</Text>
-          <Link href="https://www.osopcloud.com" passHref>
+          <Text textAlign="center">
+            {isRedirectAvailable
+              ? "This operating system could be on Osopcloud."
+              : "Try Osopcloud, the new ULOSINO."}
+          </Text>
+          <Link
+            href={
+              isRedirectAvailable
+                ? "https://www.osopcloud.com" + window.location.pathname
+                : "https://www.osopcloud.com"
+            }
+            passHref
+          >
             <Button as="a" leftIcon={<FiArrowRight />}>
               Visit Osopcloud
             </Button>
@@ -50,7 +72,7 @@ export default function Promotion() {
             </Text> */}
           </Stack>
           <Spacer />
-          <Link href="https://twitter.com/hikium" passHref>
+          <Link href="https://www.hikium.com" passHref>
             <Box
               width={100}
               height={21}
