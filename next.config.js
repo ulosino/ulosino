@@ -59,6 +59,11 @@ module.exports = {
         destination: "https://www.hikium.com/legal/privacy",
         permanent: true,
       },
+      {
+        source: "/marketplace/:slug",
+        destination: "/donate/:slug",
+        permanent: true,
+      },
     ];
   },
 };
