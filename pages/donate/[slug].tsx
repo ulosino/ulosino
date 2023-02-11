@@ -11,23 +11,8 @@ import Head from "next/head";
 import Link from "next/link";
 
 // Design
-import {
-  Button,
-  Card,
-  Dot,
-  Grid,
-  Note,
-  Table,
-  Tag,
-  Text,
-} from "@geist-ui/core";
-import {
-  Code as IconCode,
-  CreditCard,
-  Edit,
-  Globe,
-  Share,
-} from "@geist-ui/icons";
+import { Button, Card, Dot, Grid, Text } from "@geist-ui/core";
+import { Share } from "@geist-ui/icons";
 
 // First party components
 import { ErrorFallback } from "components/ErrorFallback";
@@ -38,7 +23,7 @@ import Footer from "components/Footer";
 // Markdown processing libraries
 import fs from "fs";
 import path from "path";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
 interface OSPageTypes {
@@ -99,112 +84,123 @@ export default function DonatePage({
         <Text h1>Donate to {source.frontmatter.name}</Text>
       </Grid>
 
-      {source.frontmatter.donate ? (
-        <>
-          <Grid>
-            <Grid.Container gap={5} direction="row">
-              <Grid>
-                <Card>
-                  <Grid.Container gap={0} direction="column">
-                    <Grid>
-                      <Grid.Container gap={1} direction="row">
-                        <Grid>
-                          <Text h2>{source.frontmatter.name}</Text>
-                        </Grid>
-                        <Grid>
-                          <Dot
-                            type={
-                              source.frontmatter.category === "Advanced" ||
-                              source.frontmatter.category === "Server" ||
-                              source.frontmatter.category === "Utility"
-                                ? "warning"
-                                : source.frontmatter.category === "Research"
-                                ? "error"
-                                : "success"
-                            }
-                          />
-                        </Grid>
-                      </Grid.Container>
-                    </Grid>
-                    <Grid>
-                      <Text>{source.frontmatter.summary}</Text>
-                    </Grid>
-                    <Grid>
-                      <Link href={contentPagePath} passHref>
-                        <Button>Learn More</Button>
-                      </Link>
-                    </Grid>
+      <ErrorFallback>
+        {source.frontmatter.donate ? (
+          <>
+            <Grid>
+              <Grid.Container gap={5} direction="row">
+                <Grid>
+                  <Card>
+                    <Grid.Container gap={0} direction="column">
+                      <Grid>
+                        <Grid.Container gap={1} direction="row">
+                          <Grid>
+                            <Text h2>{source.frontmatter.name}</Text>
+                          </Grid>
+                          <Grid>
+                            <Dot
+                              type={
+                                source.frontmatter.category === "Advanced" ||
+                                source.frontmatter.category === "Server" ||
+                                source.frontmatter.category === "Utility"
+                                  ? "warning"
+                                  : source.frontmatter.category === "Research"
+                                  ? "error"
+                                  : "success"
+                              }
+                            />
+                          </Grid>
+                        </Grid.Container>
+                      </Grid>
+                      <Grid>
+                        <Text>{source.frontmatter.summary}</Text>
+                      </Grid>
+                      <Grid>
+                        <Link href={contentPagePath} passHref>
+                          <Button>Learn More</Button>
+                        </Link>
+                      </Grid>
+                    </Grid.Container>
+                  </Card>
+                </Grid>
+                <Grid>
+                  <Grid.Container gap={1} direction="column">
+                    {source.frontmatter.donateGithub ? (
+                      <Grid>
+                        <Link href={source.frontmatter.donateGithub} passHref>
+                          <Button auto>Donate with GitHub Sponsors</Button>
+                        </Link>
+                      </Grid>
+                    ) : (
+                      <Grid>
+                        <Button auto disabled>
+                          Donate with GitHub Sponsors
+                        </Button>
+                      </Grid>
+                    )}
+                    {source.frontmatter.donateOpenCollective ? (
+                      <Grid>
+                        <Link
+                          href={source.frontmatter.donateOpenCollective}
+                          passHref
+                        >
+                          <Button auto>Donate with Open Collective</Button>
+                        </Link>
+                      </Grid>
+                    ) : (
+                      <Grid>
+                        <Button auto disabled>
+                          Donate with Open Collective
+                        </Button>
+                      </Grid>
+                    )}
+                    {source.frontmatter.donateLiberapay ? (
+                      <Grid>
+                        <Link
+                          href={source.frontmatter.donateLiberapay}
+                          passHref
+                        >
+                          <Button auto>Donate with Liberapay</Button>
+                        </Link>
+                      </Grid>
+                    ) : (
+                      <Grid>
+                        <Button auto disabled>
+                          Donate with Liberapay
+                        </Button>
+                      </Grid>
+                    )}
                   </Grid.Container>
-                </Card>
-              </Grid>
-              <Grid>
-                <Grid.Container gap={1} direction="column">
-                  {source.frontmatter.donateGithub ? (
-                    <Grid>
-                      <Link href={source.frontmatter.donateGithub} passHref>
-                        <Button auto>Donate with GitHub Sponsors</Button>
-                      </Link>
-                    </Grid>
-                  ) : (
-                    <Grid>
-                      <Button auto disabled>
-                        Donate with GitHub Sponsors
-                      </Button>
-                    </Grid>
-                  )}
-                  {source.frontmatter.donateOpenCollective ? (
-                    <Grid>
-                      <Link
-                        href={source.frontmatter.donateOpenCollective}
-                        passHref
-                      >
-                        <Button auto>Donate with Open Collective</Button>
-                      </Link>
-                    </Grid>
-                  ) : (
-                    <Grid>
-                      <Button auto disabled>
-                        Donate with Open Collective
-                      </Button>
-                    </Grid>
-                  )}
-                  {source.frontmatter.donateLiberapay ? (
-                    <Grid>
-                      <Link href={source.frontmatter.donateLiberapay} passHref>
-                        <Button auto>Donate with Liberapay</Button>
-                      </Link>
-                    </Grid>
-                  ) : (
-                    <Grid>
-                      <Button auto disabled>
-                        Donate with Liberapay
-                      </Button>
-                    </Grid>
-                  )}
-                </Grid.Container>
-              </Grid>
-            </Grid.Container>
-          </Grid>
+                </Grid>
+              </Grid.Container>
+            </Grid>
 
+            <Grid>
+              <Button icon={<Share />} auto onClick={ShareContent}>
+                Share/Copy
+              </Button>
+            </Grid>
+
+            <Grid>
+              <Text type="secondary" small>
+                Payments are handled by third-party financial services. General
+                advice only. You are responsible for donations or investments.
+              </Text>
+            </Grid>
+          </>
+        ) : (
           <Grid>
-            <Text type="secondary" small>
-              Payments are handled by third-party financial services. General
-              advice only. You are responsible for donations or investments.
-            </Text>
+            <Card>
+              <Text>
+                {source.frontmatter.name} doesn't have donation options.
+              </Text>
+              <Link href={contentPagePath} passHref>
+                <Button>Learn about {source.frontmatter.name}</Button>
+              </Link>
+            </Card>
           </Grid>
-        </>
-      ) : (
-        <Grid>
-          <Card>
-            <Text>
-              {source.frontmatter.name} doesn't have donation options.
-            </Text>
-            <Link href={contentPagePath} passHref>
-              <Button>Learn about {source.frontmatter.name}</Button>
-            </Link>
-          </Card>
-        </Grid>
-      )}
+        )}
+      </ErrorFallback>
 
       <Grid>
         <Footer />

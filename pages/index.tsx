@@ -11,7 +11,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 // Third party design
-import { Text, Note, Grid, Card, Button, Tag, Dot } from "@geist-ui/core";
+import { Text, Note, Grid, Card, Button, Dot } from "@geist-ui/core";
 
 // Layout
 import Footer from "components/Footer";
