@@ -257,7 +257,7 @@ export const getStaticProps: GetStaticProps<{
   const donationPagePath = path.join(`/marketplace/`, `${params.slug}`);
 
   const contributionPagePath = path.join(
-    `https://github.com/ulosino/ulosino/blob/main/public/markdown/browse`,
+    `https://github.com/noahlst/ulosino/blob/main/public/markdown/browse`,
     `${params.slug}.mdx`
   );
 
