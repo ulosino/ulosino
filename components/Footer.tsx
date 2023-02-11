@@ -20,7 +20,13 @@ export default function Footer() {
           </Grid>
           <Grid>
             <Text type="secondary" small>
-              <GeistLink icon>Terms</GeistLink>
+              <GeistLink
+                href="https://hikium.notion.site/ULOSINO-Archive-Terms-of-Service-592817d44d8f4352a09f2bec250fbc49"
+                target="_blank"
+                icon
+              >
+                Terms
+              </GeistLink>
             </Text>
           </Grid>
           <Grid>
