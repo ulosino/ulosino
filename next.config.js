@@ -47,4 +47,18 @@ module.exports = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/browse",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/about/privacy",
+        destination: "https://www.hikium.com/legal/privacy",
+        permanent: true,
+      },
+    ];
+  },
 };
