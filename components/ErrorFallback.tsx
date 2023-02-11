@@ -7,7 +7,7 @@
 // @ts-nocheck
 
 // Chakra UI, icons, and other design imports
-import { Text } from "@geist-ui/core";
+import { Button, Card, Text } from "@geist-ui/core";
 
 import React from "react";
 
@@ -28,7 +28,14 @@ export class ErrorFallback extends React.Component {
       console.error(
         "Integrated Application Error: ErrorRegionCaught https://docs.ulosino.com/docs/reference/errors"
       );
-      return <Text>An error occurred.</Text>;
+      return (
+        <Card>
+          <Text>Something went wrong.</Text>
+          <Button onClick={() => this.setState("hasError", true)}>
+            Try Again
+          </Button>
+        </Card>
+      );
     }
 
     return this.props.children;
@@ -59,7 +66,14 @@ export class ErrorFallbackApplication extends React.Component {
       console.error(
         "Integrated Application Error: ErrorInUndefinedRegion https://docs.ulosino.com/docs/reference/errors"
       );
-      return <Text>An error occurred.</Text>;
+      return (
+        <Card>
+          <Text>ULOSINO has crashed because something went wrong.</Text>
+          <Button onClick={() => this.setState("hasError", true)}>
+            Try Again
+          </Button>
+        </Card>
+      );
     }
 
     return this.props.children;
