@@ -3,6 +3,9 @@
 
 import { Html, Head, Main, NextScript } from "next/document";
 
+import { ColorModeScript } from "@chakra-ui/react";
+import UITheme from "providers/UIThemeProvider";
+
 export default function Document() {
   return (
     <Html lang="en">
@@ -11,7 +14,10 @@ export default function Document() {
 
         {/* General metadata */}
         <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en_AU" />
+        <meta property="og:locale" content="en_GB" />
+
+        {/* Verification tags */}
+        <meta name="saashub-verification" content="t23yhfcmm06a" />
 
         {/* PWA configuration and icon import */}
         <link rel="manifest" href="/manifest.json" />
@@ -220,6 +226,8 @@ export default function Document() {
       </Head>
 
       <body>
+        {/* Chakra UI colour mode applying script */}
+        <ColorModeScript initialColorMode={UITheme.config.initialColorMode} />
         {/* The DOM */}
         <Main />
         <NextScript />

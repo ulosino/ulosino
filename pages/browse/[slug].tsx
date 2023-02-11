@@ -1,8 +1,16 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// This page uses legacy Node.js Runtime delivery technology
+// Reason: Uses eval() to process MDX
+// https://nextjs.org/docs/api-reference/edge-runtime
+
 // Types
+import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
+
+// Suspense and performance
+import { useLocalStorage } from "@rehooks/local-storage";
 
 // Head and SEO
 import Head from "next/head";
@@ -10,27 +18,41 @@ import Head from "next/head";
 // Links and routing
 import Link from "next/link";
 
-// Design
-import { Button, Grid, Table, Tag, Text } from "@geist-ui/core";
+// Chakra UI, icons, and other design imports
 import {
-  Code as IconCode,
-  CreditCard,
-  Edit,
-  Globe,
-  Share,
-} from "@geist-ui/icons";
+  Flex,
+  Stack,
+  Heading,
+  Button,
+  Badge,
+  Table,
+  Tbody,
+  Td,
+  Tr,
+} from "@chakra-ui/react";
 
 // First party components
+import ApplicationProvider from "providers/ApplicationProvider";
+import Layout from "components/layouts/Layout";
 import { ErrorFallback } from "components/ErrorFallback";
-
-// Layout
-import Footer from "components/Footer";
 
 // Markdown processing libraries
 import fs from "fs";
 import path from "path";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import {
+  HiOutlineGlobe,
+  HiOutlineCode,
+  HiOutlineCreditCard,
+  HiOutlinePencil,
+  HiOutlineUpload,
+} from "react-icons/hi";
+
+// Keybinding libraries
+import { useEffect } from "react";
+import { useHotkeyManager } from "providers/KeybindingProvider";
+import { isWindows } from "react-device-detect";
 
 interface OSPageTypes {
   source: any;
@@ -44,8 +66,54 @@ export default function OSPage({
   donationPath,
   contributionPath,
 }: OSPageTypes) {
+  // Get preferences
+  const [donationFeatures] = useLocalStorage("P3PrefDisableDonationFeatures");
+
+  // Keybindings
+  const manager = useHotkeyManager();
+  useEffect(() => {
+    {
+      source.frontmatter.website && isWindows
+        ? manager.registerHotkey({
+            key: "O",
+            ctrl: false,
+            shift: false,
+            alt: true,
+            callback: () =>
+              window.open(source.frontmatter.website, "_blank") ||
+              window.location.replace(source.frontmatter.website),
+          })
+        : manager.registerHotkey({
+            key: "O",
+            ctrl: true,
+            shift: false,
+            alt: false,
+            callback: () =>
+              window.open(source.frontmatter.website, "_blank") ||
+              window.location.replace(source.frontmatter.website),
+          }),
+        [manager, window];
+    }
+  });
+  useEffect(() => {
+    {
+      source.frontmatter.repository && isWindows
+        ? ""
+        : manager.registerHotkey({
+            key: "O",
+            ctrl: true,
+            shift: false,
+            alt: true,
+            callback: () =>
+              window.open(source.frontmatter.repository, "_blank") ||
+              window.location.replace(source.frontmatter.repository),
+          }),
+        [manager, window];
+    }
+  });
+
   // Sharing features
-  function ShareContent() {
+  function Share() {
     if (navigator.share) {
       const url = document.location.href;
       navigator
@@ -63,84 +131,6 @@ export default function OSPage({
         );
     }
   }
-
-  // Metadata table
-  const data = [
-    {
-      metadata: "Category",
-      value: source.frontmatter.category ? (
-        <Tag
-          type={
-            source.frontmatter.category === "Advanced" ||
-            source.frontmatter.category === "Server" ||
-            source.frontmatter.category === "Utility"
-              ? "warning"
-              : source.frontmatter.category === "Research"
-              ? "error"
-              : "success"
-          }
-        >
-          {source.frontmatter.category}
-        </Tag>
-      ) : (
-        "Not categorised"
-      ),
-    },
-    {
-      metadata: "Based on",
-      value: source.frontmatter.descends
-        ? source.frontmatter.descends
-        : "No parent operating systems",
-    },
-    {
-      metadata: "Popular platforms",
-      value: source.frontmatter.platform
-        ? source.frontmatter.platform
-        : "Unknown",
-    },
-    {
-      metadata: "Preinstalled desktop environment",
-      value: source.frontmatter.desktop ? source.frontmatter.desktop : "None",
-    },
-    {
-      metadata: "Preinstalled web browser",
-      value: source.frontmatter.browser ? source.frontmatter.browser : "None",
-    },
-    {
-      metadata: "Preinstalled productivity software",
-      value: source.frontmatter.productivity
-        ? source.frontmatter.productivity
-        : "None",
-    },
-    {
-      metadata: "Shell",
-      value: source.frontmatter.shell ? source.frontmatter.shell : "Unknown",
-    },
-    {
-      metadata: "Package manager",
-      value: source.frontmatter.packagemgr
-        ? source.frontmatter.packagemgr
-        : "Unknown",
-    },
-    {
-      metadata: "Startup manager",
-      value: source.frontmatter.startup
-        ? source.frontmatter.startup
-        : "Unknown",
-    },
-    {
-      metadata: "License",
-      value: source.frontmatter.license
-        ? source.frontmatter.license
-        : "Contact contributors for details",
-    },
-    {
-      metadata: "Version at writing",
-      value: source.frontmatter.version
-        ? source.frontmatter.version
-        : "Not provided",
-    },
-  ];
 
   return (
     <>
@@ -163,74 +153,190 @@ export default function OSPage({
         />
       </Head>
 
-      <Grid>
-        <Text h1>{source.frontmatter.name}</Text>
-      </Grid>
-
-      <Grid>
+      <Stack direction="column" spacing={5}>
         <ErrorFallback>
-          <MDXRemote {...source} />
+          <Heading size="xl" id="testingOSPageName">
+            {source.frontmatter.name}
+          </Heading>
         </ErrorFallback>
-      </Grid>
+        <Stack direction={{ base: "column", md: "row" }} spacing={10}>
+          <ErrorFallback>
+            <Flex direction="column" as="main" id="testingOSPageDescription">
+              <MDXRemote {...source} />
+            </Flex>
+          </ErrorFallback>
+          <ErrorFallback>
+            <Stack
+              direction="column"
+              spacing={10}
+              as="section"
+              minW={{ base: "inherit", sm: 250 }}
+            >
+              <Stack direction="column" spacing={2}>
+                {donationFeatures ? (
+                  ""
+                ) : (
+                  <>
+                    {source.frontmatter.donate && (
+                      <Link href={donationPath} passHref>
+                        <Button
+                          leftIcon={<HiOutlineCreditCard />}
+                          as="a"
+                          id="testingDonationPageLink"
+                        >
+                          Donate{" "}
+                          <Badge ms={2} bg="brand" color="gray.800" pt={1}>
+                            Tempo
+                          </Badge>
+                        </Button>
+                      </Link>
+                    )}
+                  </>
+                )}
+                {source.frontmatter.website && (
+                  <Link href={source.frontmatter.website} passHref>
+                    <Button
+                      leftIcon={<HiOutlineGlobe />}
+                      as="a"
+                      id="testingOSPageProjectWebsiteLink"
+                    >
+                      Visit Project Website
+                    </Button>
+                  </Link>
+                )}
+                {source.frontmatter.repository && (
+                  <Link href={source.frontmatter.repository} passHref>
+                    <Button
+                      leftIcon={<HiOutlineCode />}
+                      as="a"
+                      id="testingOSPageProjectRepositoryLink"
+                    >
+                      Visit Source Repository
+                    </Button>
+                  </Link>
+                )}
+                <Button leftIcon={<HiOutlineUpload />} onClick={Share}>
+                  Share or Copy
+                </Button>
+              </Stack>
+              <Table>
+                <Tbody>
+                  {source.frontmatter.category && (
+                    <Tr>
+                      <Td>Category</Td>
+                      <Td>
+                        <Badge>{source.frontmatter.category}</Badge>
+                      </Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.descends && (
+                    <Tr>
+                      <Td>Based on</Td>
+                      <Td id="testingOSPageTableDescends">
+                        {source.frontmatter.descends}
+                      </Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.platform && (
+                    <Tr>
+                      <Td>Platforms</Td>
+                      <Td>{source.frontmatter.platform}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.desktop && (
+                    <Tr>
+                      <Td>Preinstalled Desktop</Td>
+                      <Td>{source.frontmatter.desktop}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.browser && (
+                    <Tr>
+                      <Td>Preinstalled Browser</Td>
+                      <Td>{source.frontmatter.browser}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.productivity && (
+                    <Tr>
+                      <Td>Preinstalled Productivity Software</Td>
+                      <Td>{source.frontmatter.productivity}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.shell && (
+                    <Tr>
+                      <Td>Shell</Td>
+                      <Td>{source.frontmatter.shell}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.packagemgr && (
+                    <Tr>
+                      <Td>Package Manager</Td>
+                      <Td>{source.frontmatter.packagemgr}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.startup && (
+                    <Tr>
+                      <Td>Startup Manager</Td>
+                      <Td>{source.frontmatter.startup}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.origin && (
+                    <Tr>
+                      <Td>Region of Origin</Td>
+                      <Td>{source.frontmatter.origin}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.license && (
+                    <Tr>
+                      <Td>License</Td>
+                      <Td>{source.frontmatter.license}</Td>
+                    </Tr>
+                  )}
+                  {source.frontmatter.version && (
+                    <Tr>
+                      <Td>Version at Writing</Td>
+                      <Td>{source.frontmatter.version}</Td>
+                    </Tr>
+                  )}
+                </Tbody>
+              </Table>
 
-      <Grid>
-        <Grid.Container gap={2} direction="row">
-          {source.frontmatter.donate && (
-            <Grid>
-              <Link href={donationPath} passHref>
-                <Button icon={<CreditCard />} auto>
-                  Donate
+              <Link href={contributionPath} passHref>
+                <Button
+                  leftIcon={<HiOutlinePencil />}
+                  size="sm"
+                  as="a"
+                  id="testingOSPageEditLink"
+                >
+                  View on GitHub
                 </Button>
               </Link>
-            </Grid>
-          )}
-          {source.frontmatter.website && (
-            <Grid>
-              <Link href={source.frontmatter.website} passHref>
-                <Button icon={<Globe />} auto>
-                  Project Website
-                </Button>
-              </Link>
-            </Grid>
-          )}
-          {source.frontmatter.repository && (
-            <Grid>
-              <Link href={source.frontmatter.repository} passHref>
-                <Button icon={<IconCode />} auto>
-                  Source Repository
-                </Button>
-              </Link>
-            </Grid>
-          )}
-          <Grid>
-            <Button icon={<Share />} auto onClick={ShareContent}>
-              Share/Copy
-            </Button>
-          </Grid>
-        </Grid.Container>
-      </Grid>
-
-      <Grid>
-        <Table data={data}>
-          <Table.Column prop="metadata" label="Metadata" />
-          <Table.Column prop="value" label={source.frontmatter.name} />
-        </Table>
-      </Grid>
-
-      <Grid>
-        <Link href={contributionPath} passHref>
-          <Button icon={<Edit />} auto>
-            Edit Content Source Code
-          </Button>
-        </Link>
-      </Grid>
-
-      <Grid>
-        <Footer />
-      </Grid>
+            </Stack>
+          </ErrorFallback>
+        </Stack>
+      </Stack>
     </>
   );
 }
+
+// Apply persistent layout, wrapping page
+OSPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <ApplicationProvider>
+      <Layout
+        useBasicLayout={false}
+        useAltBackground={false}
+        showPreferences={false}
+      >
+        {page}
+      </Layout>
+    </ApplicationProvider>
+  );
+};
+
+// Disable the Edge Runtime
+export const config = {
+  runtime: "nodejs",
+};
 
 interface PathProps {
   params: {
@@ -249,15 +355,16 @@ export const getStaticProps: GetStaticProps<{
   const source = fs.readFileSync(filePath);
 
   // Use the files to parse MDX
+  // @ts-expect-error
   const mdxSource = await serialize(source, {
     parseFrontmatter: true,
   });
 
   // This uses the OS name to get the donation page URL
-  const donationPagePath = path.join(`/donate/`, `${params.slug}`);
+  const donationPagePath = path.join(`/marketplace/`, `${params.slug}`);
 
   const contributionPagePath = path.join(
-    `https://github.com/noahlst/ulosino/blob/main/public/markdown/browse`,
+    `https://github.com/ulosino/ulosino/blob/main/public/markdown/browse`,
     `${params.slug}.mdx`
   );
 

@@ -6,8 +6,11 @@
 // TypeScript is not supported
 // @ts-nocheck
 
+// Links and routing
+import Link from "next/link";
+
 // Chakra UI, icons, and other design imports
-import { Button, Card, Text } from "@geist-ui/core";
+import { Stack, Text, Code } from "@chakra-ui/react";
 
 import React from "react";
 
@@ -28,14 +31,7 @@ export class ErrorFallback extends React.Component {
       console.error(
         "Integrated Application Error: ErrorRegionCaught https://docs.ulosino.com/docs/reference/errors"
       );
-      return (
-        <Card>
-          <Text>Something went wrong.</Text>
-          <Button onClick={() => this.setState("hasError", true)}>
-            Try Again
-          </Button>
-        </Card>
-      );
+      return <Text>An error occurred.</Text>;
     }
 
     return this.props.children;
@@ -67,12 +63,45 @@ export class ErrorFallbackApplication extends React.Component {
         "Integrated Application Error: ErrorInUndefinedRegion https://docs.ulosino.com/docs/reference/errors"
       );
       return (
-        <Card>
-          <Text>ULOSINO has crashed because something went wrong.</Text>
-          <Button onClick={() => this.setState("hasError", true)}>
-            Try Again
-          </Button>
-        </Card>
+        <Stack direction="column" spacing={10} m={20}>
+          <Text>An error occurred.</Text>
+          <Stack direction="row" spacing={10} fontSize="xs">
+            <Stack direction="column" spacing={2}>
+              <Text>Error</Text>
+              <Text>Commit/Branch</Text>
+              <Text>Commit Details</Text>
+            </Stack>
+            <Stack direction="column" spacing={2}>
+              <Stack direction="row" spacing={2}>
+                <Code fontSize="xs">IAE ErrorInUndefinedRegion</Code>
+                <Link href="https://docs.ulosino.com/docs/reference/errors">
+                  Learn More...
+                </Link>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                {commit ? (
+                  <Code fontSize="xs">{commit}</Code>
+                ) : (
+                  <Text>Undefined</Text>
+                )}
+                {branch ? (
+                  <Code fontSize="xs">{branch}</Code>
+                ) : (
+                  <Text>Undefined</Text>
+                )}
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                {commit ? (
+                  <Text>
+                    "{commitMessage}" by {commitAuthor}
+                  </Text>
+                ) : (
+                  <Text>Undefined</Text>
+                )}
+              </Stack>
+            </Stack>
+          </Stack>
+        </Stack>
       );
     }
 

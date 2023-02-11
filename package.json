@@ -1,30 +1,41 @@
 {
-  "version": "4.0.0",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress run",
+    "webhint": "hint http://localhost:3000"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.8",
+    "@choc-ui/chakra-autocomplete": "^4.21.1",
+    "@emotion/react": "^11.9.0",
+    "@fontsource/atkinson-hyperlegible": "^4.5.7",
     "@fontsource/public-sans": "^4.5.2",
-    "@geist-ui/core": "^2.3.8",
-    "@geist-ui/icons": "^1.0.2",
     "@rehooks/local-storage": "^2.4.4",
     "@splitbee/web": "^0.3.0",
+    "framer-motion": "^6.2.8",
     "gray-matter": "^4.0.3",
     "next": "^12.1.5",
-    "next-mdx-remote": "^4.3.0",
+    "next-mdx-remote": "4.0.1",
+    "next-pwa": "^5.5.2",
     "react": "^18.0.0",
+    "react-device-detect": "^2.2.2",
     "react-dom": "^18.0.0",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "to-vfile": "^7.2.3",
+    "vfile-matter": "^3.0.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.25",
     "@types/react": "^17.0.43",
+    "cypress": "^9.5.4",
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.5",
+    "hint": "^6.1.11",
+    "next-sitemap": "^2.5.20",
     "typescript": "^4.6.3"
   }
 }
