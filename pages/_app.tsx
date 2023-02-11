@@ -8,40 +8,35 @@ import type { AppProps } from "next/app";
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactElement;
 };
-
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-import { useEffect } from "react";
+// Routing
+import Link from "next/link";
 
-// Chakra UI, icons, and other design imports
-import "@fontsource/public-sans/variable.css";
-import "@fontsource/public-sans/400.css";
-import "@fontsource/public-sans/600.css";
-import "@fontsource/atkinson-hyperlegible";
+// Design
+import {
+  GeistProvider,
+  CssBaseline,
+  Button,
+  Page,
+  Text,
+  Grid,
+} from "@geist-ui/core";
+
+// Providers
+import { ErrorFallbackApplication } from "components/ErrorFallback";
 
 // Import Splitbee scripts
 import splitbee from "@splitbee/web";
-
-// There are two known technical limitations preventing _app.tsx from being expanded
-// Primarily, keyboard shortcuts must be wrapped with KeyboardProvider, generating errors when used on <Layout>
-// Plus, styling provided by ChakraProvider and UITheme may not be correct
-// Instead, providers are imported by the <ApplicationProvider> provider (/providers/ApplicationProvider)
-// It should be clear that this is not the preferred solution (note that changes would be breaking)
+import { useEffect } from "react";
 
 // Begin application
 export default function Application({
   Component,
   pageProps,
 }: AppPropsWithLayout) {
-  // Suppress default/browser PWA installation prompts
-  // There's a few PWA promotions sprinkled throughtout the app
-  useEffect(() => {
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-    });
-  });
   // Initilise Splitbee analytics tracking
   useEffect(() => {
     splitbee.init({
@@ -50,8 +45,31 @@ export default function Application({
       apiUrl: "/_oak",
     });
   }, []);
-  const getLayout = Component.getLayout ?? ((page) => page);
-  // Wrapping <Component> with other components works in theory (preferred approach)
-  // Using this function as a component in another function will generate errors
-  return getLayout(<Component {...pageProps} />);
+
+  return (
+    <GeistProvider>
+      <CssBaseline />
+      <ErrorFallbackApplication>
+        <Page paddingTop={5}>
+          <Page.Header>
+            <Grid.Container gap={5} direction="row">
+              <Grid>
+                <Text h3>ULOSINO</Text>
+              </Grid>
+              <Grid>
+                <Link href="/" passHref>
+                  <Button>Home</Button>
+                </Link>
+              </Grid>
+            </Grid.Container>
+          </Page.Header>
+          <Page.Content>
+            <Grid.Container gap={5} direction="column">
+              <Component {...pageProps} />
+            </Grid.Container>
+          </Page.Content>
+        </Page>
+      </ErrorFallbackApplication>
+    </GeistProvider>
+  );
 }
