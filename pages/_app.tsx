@@ -8,26 +8,30 @@ import type { AppProps } from "next/app";
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactElement;
 };
-
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-import { useEffect } from "react";
+// Routing
+import Link from "next/link";
 
-// Chakra UI, icons, and other design imports
-import "@fontsource/public-sans/variable.css";
-import "@fontsource/public-sans/400.css";
-import "@fontsource/public-sans/600.css";
+// Design
+import {
+  GeistProvider,
+  CssBaseline,
+  Button,
+  Page,
+  Text,
+  Grid,
+  Link as GeistLink,
+} from "@geist-ui/core";
+
+// Providers
+import { ErrorFallbackApplication } from "components/ErrorFallback";
 
 // Import Splitbee scripts
 import splitbee from "@splitbee/web";
-
-// There are two known technical limitations preventing _app.tsx from being expanded
-// Primarily, keyboard shortcuts must be wrapped with KeyboardProvider, generating errors when used on <Layout>
-// Plus, styling provided by ChakraProvider and UITheme may not be correct
-// Instead, providers are imported by the <ApplicationProvider> provider (/providers/ApplicationProvider)
-// It should be clear that this is not the preferred solution (note that changes would be breaking)
+import { useEffect } from "react";
 
 // Begin application
 export default function Application({
@@ -42,8 +46,76 @@ export default function Application({
       apiUrl: "/_oak",
     });
   }, []);
-  const getLayout = Component.getLayout ?? ((page) => page);
-  // Wrapping <Component> with other components works in theory (preferred approach)
-  // Using this function as a component in another function will generate errors
-  return getLayout(<Component {...pageProps} />);
+
+  return (
+    <GeistProvider>
+      <CssBaseline />
+      <ErrorFallbackApplication>
+        <Page paddingTop={5}>
+          <Page.Header>
+            <Grid.Container gap={5} direction="row">
+              <Grid>
+                <Text h3>ULOSINO</Text>
+              </Grid>
+              <Grid>
+                <Link href="/" passHref>
+                  <Button>Home</Button>
+                </Link>
+              </Grid>
+            </Grid.Container>
+          </Page.Header>
+          <Page.Content>
+            <Grid.Container gap={5} direction="column">
+              <Component {...pageProps} />
+            </Grid.Container>
+          </Page.Content>
+          <Page.Footer paddingBottom={5}>
+            <Grid.Container gap={1} direction="column">
+              <Grid>
+                <Text type="secondary" small>
+                  ULOSINO archives by Hikium (v. 4)
+                </Text>
+              </Grid>
+              <Grid>
+                <Grid.Container gap={2} direction="row">
+                  <Grid>
+                    <Text type="secondary" small>
+                      Copyright &copy; Hikium Project 2023.
+                    </Text>
+                  </Grid>
+                  <Grid>
+                    <Text type="secondary" small>
+                      <GeistLink icon>Terms</GeistLink>
+                    </Text>
+                  </Grid>
+                  <Grid>
+                    <Text type="secondary" small>
+                      <GeistLink
+                        href="https://www.hikium.com/legal/privacy"
+                        target="_blank"
+                        icon
+                      >
+                        Hikium Privacy Statement
+                      </GeistLink>
+                    </Text>
+                  </Grid>
+                  <Grid>
+                    <Text type="secondary" small>
+                      <GeistLink
+                        href="https://twitter.com/hikium"
+                        target="_blank"
+                        icon
+                      >
+                        @hikium
+                      </GeistLink>
+                    </Text>
+                  </Grid>
+                </Grid.Container>
+              </Grid>
+            </Grid.Container>
+          </Page.Footer>
+        </Page>
+      </ErrorFallbackApplication>
+    </GeistProvider>
+  );
 }

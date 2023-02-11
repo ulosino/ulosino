@@ -1,43 +1,27 @@
 // This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 // If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Types
-import type { ReactElement } from "react";
-
 // Head and SEO
 import Head from "next/head";
 
-// First party components
-import ApplicationProvider from "providers/ApplicationProvider";
-import Promotion from "components/Promotion";
+// Third party design
+import { Text } from "@geist-ui/core";
 
 // Begin page
 export default function Custom404() {
   return (
     <>
       <Head>
-        <title>ULOSINO is now Osopcloud</title>
+        <title>ULOSINO - Page not found</title>
         <meta
           property="og:title"
-          content="ULOSINO &mdash; Discover Open Source OSs"
+          content="ULOSINO &mdash; Discover open-source operating systems"
         />
-        <meta name="description" content="ULOSINO is now Osopcloud." />
-        <meta
-          property="og:description"
-          content="ULOSINO is is now Osopcloud."
-        />
+        <meta name="description" content="ULOSINO by Hikium" />
+        <meta property="og:description" content="Discover Open Source OSs." />
       </Head>
 
-      <Promotion />
+      <Text>Page not found. (404)</Text>
     </>
   );
 }
-
-// Apply persistent layout, wrapping page
-Custom404.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <ApplicationProvider>
-      <>{page}</>
-    </ApplicationProvider>
-  );
-};

@@ -3,13 +3,10 @@
 
 // This includes the ULOSINO logo
 
-// Chakra UI, icons, and other design imports
-import { Icon } from "@chakra-ui/react";
-
 // Begin component
 export default function Logo() {
   return (
-    <Icon w={16} h={16} rounded="2xl">
+    <div style={{ width: 64, height: 64 }}>
       <svg
         id="Layer_1"
         data-name="Layer 1"
@@ -23,6 +20,6 @@ export default function Logo() {
           transform="translate(0.42 -0.27)"
         />
       </svg>
-    </Icon>
+    </div>
   );
 }

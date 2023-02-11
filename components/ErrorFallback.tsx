@@ -6,11 +6,8 @@
 // TypeScript is not supported
 // @ts-nocheck
 
-// Links and routing
-import Link from "next/link";
-
 // Chakra UI, icons, and other design imports
-import { Stack, Text, Code } from "@chakra-ui/react";
+import { Text } from "@geist-ui/core";
 
 import React from "react";
 
@@ -62,47 +59,7 @@ export class ErrorFallbackApplication extends React.Component {
       console.error(
         "Integrated Application Error: ErrorInUndefinedRegion https://docs.ulosino.com/docs/reference/errors"
       );
-      return (
-        <Stack direction="column" spacing={10} m={20}>
-          <Text>An error occurred.</Text>
-          <Stack direction="row" spacing={10} fontSize="xs">
-            <Stack direction="column" spacing={2}>
-              <Text>Error</Text>
-              <Text>Commit/Branch</Text>
-              <Text>Commit Details</Text>
-            </Stack>
-            <Stack direction="column" spacing={2}>
-              <Stack direction="row" spacing={2}>
-                <Code fontSize="xs">IAE ErrorInUndefinedRegion</Code>
-                <Link href="https://docs.ulosino.com/docs/reference/errors">
-                  Learn More...
-                </Link>
-              </Stack>
-              <Stack direction="row" spacing={2}>
-                {commit ? (
-                  <Code fontSize="xs">{commit}</Code>
-                ) : (
-                  <Text>Undefined</Text>
-                )}
-                {branch ? (
-                  <Code fontSize="xs">{branch}</Code>
-                ) : (
-                  <Text>Undefined</Text>
-                )}
-              </Stack>
-              <Stack direction="row" spacing={2}>
-                {commit ? (
-                  <Text>
-                    "{commitMessage}" by {commitAuthor}
-                  </Text>
-                ) : (
-                  <Text>Undefined</Text>
-                )}
-              </Stack>
-            </Stack>
-          </Stack>
-        </Stack>
-      );
+      return <Text>An error occurred.</Text>;
     }
 
     return this.props.children;
