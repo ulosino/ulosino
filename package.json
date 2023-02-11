@@ -10,9 +10,12 @@
   "dependencies": {
     "@fontsource/public-sans": "^4.5.2",
     "@geist-ui/core": "^2.3.8",
+    "@geist-ui/icons": "^1.0.2",
     "@rehooks/local-storage": "^2.4.4",
     "@splitbee/web": "^0.3.0",
+    "gray-matter": "^4.0.3",
     "next": "^12.1.5",
+    "next-mdx-remote": "^4.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1"
