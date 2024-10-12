@@ -9,7 +9,7 @@
     "webhint": "hint http://localhost:3000"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.8.8",
+    "@chakra-ui/react": "^2.10.2",
     "@choc-ui/chakra-autocomplete": "^4.21.1",
     "@emotion/react": "^11.9.0",
     "@fontsource/atkinson-hyperlegible": "^4.5.7",
